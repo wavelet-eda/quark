@@ -3,11 +3,10 @@
 class FSM(object):
 
     def __init__(self, update, initial_state, inputs, outputs):
-        self._update = update
-        self._initial_state = initial_state
-        self._state_type = type(initial_state)
-        self._inputs = inputs
-        self._outputs = outputs
+        self.update = update
+        self.state = initial_state
+        self.inputs = inputs
+        self.outputs = outputs
 
     def __repr__(self):
         return ""
@@ -23,7 +22,9 @@ class Stream(object):
         pass
 
     def read_nb():
-        """Return None if no data, else return result of read()."""
+        """Return None if no data, else return result of read()
+            without affecting the state of stream.
+            This is similar to a peek() method."""
         pass
 
     def write():

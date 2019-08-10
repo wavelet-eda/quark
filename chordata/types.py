@@ -3,4 +3,27 @@
 class BitVector(object):
 
     def __init__(self, size=1):
-        pass
+        self._value = 0
+
+    @property
+    def value(self):
+        return self._val
+
+    @value.setter
+    def value(self, value):
+        self._value = value
+
+
+class Readable(object):
+    pass
+
+
+class Writeable(Readable):
+
+    @property
+    def foo(self):
+        return self._foo
+
+    @foo.setter
+    def foo(self, value):
+        self._foo = value
