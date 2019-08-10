@@ -1,20 +1,32 @@
+from chordata.utils import (
+    FSM,
+    Stream,
+    Streamable,
+)
+
+from chordata.types import (
+    BitVector,
+)
+
+## Scratch
+
 # Define state container
-class MyState(object):
+class MyState(Streamable):
 
     def __init__(self):
         self.count = 0
 
     def update()
 
+
 # Define input container
-class MyInput:
+class MyInput(Stream):
     pass
 
 
 # Define output container
 class MyOutput:
     pass
-
 
 # Define fsm
 def update(state, fsm):
@@ -27,12 +39,20 @@ def update(state, fsm):
     return state
 
 
-fsm0 = create_fsm(update1, MyState, (MyInput, MyInput), (MyOutput))
+fsm0 = FSM(
+    update=update1,
+    initial_state=MyState,
+    inputs=(MyInput, MyInput),
+    outputs=(MyOutput))
 
-fsm1 = create_fsm(update2, MyState, (MyOutput), (MyFinalOutput))
+fsm1 = FSM(update2, MyState, (MyOutput), (MyFinalOutput))
 
 
 fifo0 = create_fifo(MyOutput, 8)
 
 fifo0.input = fsm0.outputs[0]
 fsm1.inputs[0] = fifo0.output
+
+
+## End Scratch
+
