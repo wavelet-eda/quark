@@ -1,12 +1,17 @@
+from copy import deepcopy
 
 
 class FSM(object):
 
     def __init__(self, update, initial_state, inputs, outputs):
-        self.update = update
-        self.state = initial_state
-        self.inputs = inputs
-        self.outputs = outputs
+        self._update = update
+        self._state = initial_state
+        self._inputs = inputs
+        self._outputs = outputs
+
+    @property
+    def state(self):
+        return deepcopy(self._state)
 
     def __repr__(self):
         return ""

@@ -62,10 +62,73 @@ def output_switch_update(fsm):
     return next_state
 
 
+class InputSwitchState(Streamable):
+
+    def __init__(self):
+        self.ident = BitVector(size=5)  # Compile time how to know what size?
+        self.ident.value = 0
+
+
+def input_switch_update(fsm):
+    next_state = fsm.state
+    req = fsm.inputs[0].read()
+    req_with_id = MultiplyCommandID(req.a, req.b, fsm.state.ident)
+    for o in fsm.outputs:
+        res = o.write_nb(req_with_id)
+        if res:
+            next_state.ident.value += 1
+            break
+    return next_state
+
+
+class MultiplierState(Streamable):
+
+    def __init__(self, operand):
+        self.index = BitVector()
+        self.operand = operand
+        self.accumulator = BitVector()
+
+
+def multiplier_update(fsm):
+    next_state = fsm.state
+    data_input = fsm.inputs[0].read_nb()
+    if data_input is not None:
+        if data_input.b[fsm.state.index]:
+            next_state.accumulator += fsm.state.operand
+        next_state.operand <<= 1
+        next_state.index += 1
+        if fsm.state.index == len(fsm.state.operand) - 1:
+            fsm.inputs[0].read()
+            data_output = MultiplyResultID(
+                next_state.accumulator, data_input.ident)
+            fsm.outputs[0].write(data_output)
+            next_state = MultiplierState()
+    return next_state
+
+
+MULTIPLIER_COUNT = 5
+
+
+input_fsm = FSM(
+    update=input_switch_update,
+    initial_state=InputSwitchState(),
+    inputs=[MultiplyCommand],
+    outputs=[MultiplyCommandID]*MULTIPLIER_COUNT)
+
+
+multiplier_fsms = [
+    FSM(
+        update=multiplier_update,
+        initial_state=MultiplierState(),
+        inputs=[MultiplyCommandID],
+        outputs=[MultiplyResultID])
+    for i in range(MULTIPLIER_COUNT)]
+
+
 output_fsm = FSM(
     update=output_switch_update,
     initial_state=OutputSwitchState(),
-    inputs=[MultiplyResultID]*5,
+    inputs=[MultiplyResultID]*MULTIPLIER_COUNT,
     outputs=[MultiplyResult])
 
 

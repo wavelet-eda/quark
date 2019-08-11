@@ -3,7 +3,7 @@
 class BitVector(object):
 
     def __init__(self, size=1):
-        self._value = 0
+        self._value = [bool()]*size
 
     @property
     def value(self):
@@ -12,6 +12,9 @@ class BitVector(object):
     @value.setter
     def value(self, value):
         self._value = value
+
+    def __get__(self, index):
+        return self._value[index]
 
 
 class Readable(object):
