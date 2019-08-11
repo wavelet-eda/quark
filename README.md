@@ -15,3 +15,11 @@ pip install -e .
 This repository uses pytest
 
 To run tests, just run `pytest` from the root directory.
+
+
+## Useful References
+
+### Abstract syntax trees
+
+https://dev.to/sheldonnunes/exploring-the-abstract-syntax-tree-2ce8
+
