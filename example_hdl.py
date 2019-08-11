@@ -116,13 +116,11 @@ input_fsm = FSM(
     outputs=[MultiplyCommandID]*MULTIPLIER_COUNT)
 
 
-multiplier_fsms = [
-    FSM(
+multiplier_fsm = FSM(
         update=multiplier_update,
         initial_state=MultiplierState(),
         inputs=[MultiplyCommandID],
         outputs=[MultiplyResultID])
-    for i in range(MULTIPLIER_COUNT)]
 
 
 output_fsm = FSM(
@@ -132,3 +130,10 @@ output_fsm = FSM(
     outputs=[MultiplyResult])
 
 
+input_stream = [MultiplyCommand()]
+multiplier_inputs = input_fsm(inputs=input_stream)
+multiplier_outputs = [multiplier_fsm(inputs=i) for i in multiplier_inputs]
+output_stream = output_fsm(inputs=multiplier_outputs)
+
+output_stream.synthesize()
+### Synthesizes the full graph needed to generate output stream
