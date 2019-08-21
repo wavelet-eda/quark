@@ -32,6 +32,7 @@ setup(
     packages=['chordata'],
     scripts=[],
     install_requires=[
+        'astpretty',
     ],
     tests_require=[
         'pytest',

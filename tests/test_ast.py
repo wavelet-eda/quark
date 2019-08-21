@@ -17,4 +17,3 @@ def test_load_function():
         a = something_else(a, b)
         return b - a
     parse_and_print(something)
-    assert False

@@ -11,7 +11,7 @@ class VerilogConverterVisitor(ast.NodeVisitor):
 
     def generic_visit(self, node):
         # print(f"**{ast.dump(node)}")
-        raise TypeError(f"Unsupported node {ast.dump(node)}")
+        # raise TypeError(f"Unsupported node {ast.dump(node)}")
         ast.NodeVisitor.generic_visit(self, node)
 
     def visit_Call(self, node):
@@ -47,5 +47,5 @@ def parse_and_print(func):
     print(func.__globals__['something_else'])
     print(len(stmts))
     # astpretty.pprint(t)
-    visitor = VerilogConverterVisitor()
+    visitor = VerilogConverterVisitor(func.__globals__)
     [visitor.visit(stmt) for stmt in stmts]
