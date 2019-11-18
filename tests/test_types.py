@@ -1,4 +1,4 @@
-from chordata.types import (
+from wavelet.types import (
     BitVector,
 )
 

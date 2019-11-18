@@ -1,4 +1,4 @@
-# chordata
+# wavelet
 Python-based HLS for verilog
 
 ## Install dev tools
@@ -6,6 +6,7 @@ Python-based HLS for verilog
 ```
 python3 -m venv venv
 . venv/bin/activate
+pip install --upgrade -pip
 pip install wheel
 pip install -e .
 ```
