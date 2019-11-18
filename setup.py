@@ -24,12 +24,12 @@ class PyTest(TestCommand):
 
 
 setup(
-    name='chordata',
+    name='wavelet',
     version='0.1',
     description='Hardware Design Language in Python',
     author='Will Werst',
     author_email='werstiv@gmail.com',
-    packages=['chordata'],
+    packages=['wavelet'],
     scripts=[],
     install_requires=[
     ],

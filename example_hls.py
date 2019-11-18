@@ -1,10 +1,10 @@
-from chordata.utils import (
+from wavelet.utils import (
     FSM,
     Stream,
     Streamable,
 )
 
-from chordata.types import (
+from wavelet.types import (
     BitVector,
 )
 
