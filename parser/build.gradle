@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'antlr'
+}
+
+group 'org.quark.quark-compiler'
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir(new File(buildDir, 'antlr-src'))
+        }
+    }
+}
+
+dependencies {
+    antlr 'org.antlr:antlr4:4.7.2'
+}
+
+generateGrammarSource {
+    arguments += ['-visitor', '-package', 'io.github.spaceman1701.oxidizer.parser']
+    outputDirectory = new File(buildDir, 'antlr-src/io/github/spaceman1701/oxidizer/parser')
+}

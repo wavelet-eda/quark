@@ -1,0 +1,4 @@
+rootProject.name = 'quark-compiler'
+include 'compiler'
+include 'parser'
+
