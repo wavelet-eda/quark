@@ -84,6 +84,11 @@ parameterdef
     | KW_VALUE expr (COLON type)? #ValueParameter
     ;
 
+returnlist
+    : type #SingleReturn
+    | type VALUE_NAME (COMMA type VALUE_NAME)* #NamedReturn
+    ;
+
 argumentdef: VALUE_NAME (COLON type)?;
 
 argumentlist: LPAREN (argumentdef? (COMMA argumentdef)*)? RPAREN;
@@ -96,9 +101,9 @@ fielddecl: annotation* VALUE_NAME COLON type SEMI;
 
 traitimpl: annotation* KW_IMPLEMENTS TYPE_NAME KW_FOR TYPE_NAME LCURLY funcdecl* RCURLY;
 
-funcdecl: annotation* KW_DEF VALUE_NAME parameterlist? argumentlist? (COLON type)? LCURLY block RCURLY;
+funcdecl: annotation* KW_DEF VALUE_NAME parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
-moduledecl: annotation* KW_MODULE TYPE_NAME parameterlist? argumentlist? (COLON type)? LCURLY innermodule RCURLY;
+moduledecl: annotation* KW_MODULE TYPE_NAME parameterlist? argumentlist? (COLON returnlist)? LCURLY innermodule RCURLY;
 
 innermodule: structdecl* block;
 
