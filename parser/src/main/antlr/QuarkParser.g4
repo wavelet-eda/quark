@@ -37,17 +37,17 @@ vardef: VALUE_NAME (COLON type)?;
 
 typename
     : (VALUE_NAME | TYPE_NAME) (DOT (VALUE_NAME | TYPE_NAME))* DOT TYPE_NAME #QualifiedTypeName
-    | TYPE_NAME #TypeName
+    | TYPE_NAME #RealTypeName
     ;
 
 valuename
     : (VALUE_NAME | TYPE_NAME) (DOT (VALUE_NAME | TYPE_NAME))* DOT VALUE_NAME #QualifiedValueName
-    | VALUE_NAME #ValueName
+    | VALUE_NAME #RealValueName
     ;
 
 name
-    : typename
-    | valuename
+    : typename #TypeName
+    | valuename #ValueName
     ;
 
 expr
@@ -71,17 +71,17 @@ expr
     ;
 
 type
-    : typename
-    | valuename
-    | type LBRACE (type | expr) (COMMA (type | expr))* RBRACE
+    : typename #RealType
+    | valuename #AliasedType
+    | type LBRACE (type | expr) (COMMA (type | expr))* RBRACE #ParameterizedType
     ;
 
 parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;
 
 parameterdef
-    : KW_TYPE type (KW_IMPLEMENTS typename)?
-    | KW_TYPE type KW_IMPLEMENTS structdef
-    | KW_VALUE expr (COLON type)?
+    : KW_TYPE type (KW_IMPLEMENTS typename)? #TypeParameter
+    | KW_TYPE type KW_IMPLEMENTS structdef #AdhocTypeParameter
+    | KW_VALUE expr (COLON type)? #ValueParameter
     ;
 
 argumentdef: VALUE_NAME (COLON type)?;
