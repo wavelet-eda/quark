@@ -54,6 +54,8 @@ OP_ARITH_LEFT_SHIFT_ASSIGN: '<<<=';
 OP_ARITH_RIGHT_SHFIT: '>>>';
 OP_ARITH_RIGHT_SHIFT_ASSIGN: '>>>=';
 
+OP_COMPLIMENT: '~';
+
 OP_LAND: 'and';
 OP_LOR: 'or';
 OP_LNOT: 'not';
