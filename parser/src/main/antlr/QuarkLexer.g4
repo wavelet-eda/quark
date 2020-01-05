@@ -2,6 +2,7 @@ lexer grammar QuarkLexer;
 
 fragment UPPERCASE : [A-Z];
 fragment LOWERCASE : [a-z];
+fragment NAME_FRAGMENT: [A-Za-z0-9_];
 fragment DIGIT : [0-9];
 fragment TICK: '\'';
 fragment LITERAL_TYPE: ('h' | 'o' | 'd' | 'b');
@@ -9,6 +10,8 @@ fragment LITERAL_TYPE: ('h' | 'o' | 'd' | 'b');
 COLON: ':';
 SEMI: ';';
 COMMA: ',';
+DOT: '.';
+UNDERSCORE: '_';
 
 LPAREN: '(';
 RPAREN: ')';
@@ -18,6 +21,9 @@ RBRACE: ']';
 
 LCURLY: '{';
 RCURLY: '}';
+
+OP_ASSIGN: '=';
+OP_ARROW: '=>';
 
 OP_ADD: '+';
 OP_ADD_ASSIGN: '+=';
@@ -84,14 +90,23 @@ KW_MATCH: 'match';
 KW_CASE: 'case';
 KW_FUTURE: 'future';
 KW_LOGIC: 'logic';
+KW_LAMBDA: 'lambda';
 KW_CLOCK: 'clock';
 KW_RESET: 'reset';
 KW_REG: 'reg';
+KW_VAR: 'var';
+KW_NEW: 'new';
 
 COMMENT_START: '//';
 BLOCK_COMMENT_START: '/*';
 BLOCK_COMMENT_END: '*/';
 
-INTEGRAL: (DIGIT+)? TICK LITERAL_TYPE DIGIT+;
+INTEGRAL: ((DIGIT+)? LITERAL_TYPE TICK)? DIGIT+;
 
-WHITESPACE: '\n\t\r ' -> skip;
+TYPE_NAME: UPPERCASE (NAME_FRAGMENT*);
+
+VALUE_NAME: LOWERCASE (NAME_FRAGMENT*);
+
+ANNOTATION_NAME: '@' NAME_FRAGMENT+;
+
+WS : [ \t\r\n]+ -> skip ;
