@@ -1,0 +1,1 @@
+RM_COMMAND: powershell -command rd -r

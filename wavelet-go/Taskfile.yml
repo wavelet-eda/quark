@@ -1,0 +1,23 @@
+# https://taskfile.dev
+
+version: '2'
+silent: true
+
+vars:
+  GREETING: Hello, World!
+  BUILD_DIR: build
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  clean:
+    cmds:
+      - cmd: "{{.RM_COMMAND}} {{.BUILD_DIR}}"
+        ignore_error: true
+
+  build:
+    cmds:
+      - go build
