@@ -11,6 +11,6 @@ Here are the steps:
 1. Clone this repo 
 2. Install Go version 13 (https://golang.org/dl/)
 3. With the root directory of this repo as your working directory, run either `init.sh` or `init.bat` depending on your operating system. This will place either "task.exe" or "task" in your current directory.
-4. Run `$ ./task build` to build the project into `<PROJ_DIR>/build/exe/quarkc`
+4. Run `$ ./task build` to build the project into `<PROJ_DIR>/build/exe/quarkc` (if on Windows the executable will have the `.exe` file extension)
 
 To clean your build area, run `$ ./task clean`. The gitignore has been configured to ignore the task executable so there's no need to delete that file. 
