@@ -2,15 +2,17 @@
 GOCMD = go
 GOBUILD = $(GOCMD) build
 
-ANTLR = antlr4
+ANTLR = `java -Xmx500M -cp "/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 
 BUILD_DIR = .build
 EXE_NAME = $(BUILD_DIR)/exe/app
 
+testantlr:
+	which $(ANTLR)
+
 antlr:
-	cd antlr
-	$(ANTLR) -Dlanguage=Go QuarkLexer.g4 -o ../gen
-	$(ANTLR) -Dlanguage=Go QuarkParser.g4 -o ../gen
+	$(ANTLR) -Dlanguage=Go antlr/QuarkLexer.g4
+	$(ANTLR) -Dlanguage=Go antlr/QuarkParser.g4
 
 
 build:
@@ -22,3 +24,5 @@ run: build
 
 clean:
 	rm -rf $(BUILD_DIR)
+
+.PHONY: antlr build clean
