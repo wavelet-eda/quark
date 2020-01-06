@@ -1,1 +1,2 @@
 RM_COMMAND: powershell -command rd -r
+EXE_NAME: quarkc.exe

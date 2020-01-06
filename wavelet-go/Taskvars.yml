@@ -1,1 +1,4 @@
 RM_COMMAND: rm -rf
+EXE_NAME: quarkc
+BUILD_DIR: build
+EXE_DIR: "{{.BUILD_DIR}}/exe"

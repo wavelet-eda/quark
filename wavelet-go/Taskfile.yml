@@ -3,21 +3,29 @@
 version: '2'
 silent: true
 
+expansions: 3
+
 vars:
-  GREETING: Hello, World!
-  BUILD_DIR: build
+  EXE_FILE: "{{.EXE_DIR}}/{{.EXE_NAME}}"
 
 tasks:
-  default:
-    cmds:
-      - echo "{{.GREETING}}"
-    silent: true
-
   clean:
     cmds:
       - cmd: "{{.RM_COMMAND}} {{.BUILD_DIR}}"
         ignore_error: true
 
   build:
+    sources:
+      - src/**/*.go
+    generates:
+      - "{{.EXE_FILE}}"
+    method: checksum
     cmds:
-      - go build
+      - cmd: echo "building executable at {{.EXE_FILE}}"
+      - cmd: go build -o "{{.EXE_FILE}}" src/pkg/quarkc/main.go
+      - cmd: echo "done!"
+
+  run:
+    deps: [build]
+    cmds:
+      - "{{.EXE_FILE}}"
