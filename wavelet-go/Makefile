@@ -2,13 +2,12 @@
 GOCMD = go
 GOBUILD = $(GOCMD) build
 
+ANTLR_URL = https://www.antlr.org/download/antlr-4.7.2-complete.jar
 ANTLR = `java -Xmx500M -cp "/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 
 BUILD_DIR = .build
 EXE_NAME = $(BUILD_DIR)/exe/app
 
-testantlr:
-	which $(ANTLR)
 
 antlr:
 	$(ANTLR) -Dlanguage=Go antlr/QuarkLexer.g4
