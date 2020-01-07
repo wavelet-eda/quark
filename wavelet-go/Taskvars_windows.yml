@@ -1,2 +1,5 @@
-RM_COMMAND: powershell -command rd -r
+RM_RF: powershell -command rd -r
+RM: powershell -command rd
 EXE_NAME: quarkc.exe
+MKDIR: powershell -command md
+COPY: powershell -command copy

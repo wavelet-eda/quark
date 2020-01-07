@@ -2,4 +2,5 @@ build/
 .idea/
 task.exe
 task
-.task/L
+.task/
+**.gen.go
