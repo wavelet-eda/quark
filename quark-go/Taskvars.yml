@@ -1,0 +1,12 @@
+RM_RF: rm -rf
+RM: rm
+MKDIR: mkdir -p
+EXE_NAME: quarkc
+BUILD_DIR: build
+EXE_DIR: "{{.BUILD_DIR}}/exe"
+ANTLR_DIR: "{{.BUILD_DIR}}/antlr"
+ANTLR_GEN_DIR: "{{.BUILD_DIR}}/antlr-gen"
+ANTLR_JAR: "{{.ANTLR_DIR}}/antlr4.jar"
+ANTLR_VERSION: 4.7.2
+ANTLR: "java -jar {{.ANTLR_JAR}}"
+COPY: cp

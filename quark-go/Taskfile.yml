@@ -1,0 +1,73 @@
+# https://taskfile.dev
+
+version: '2'
+#silent: true
+
+expansions: 5
+
+vars:
+  EXE_FILE: "{{.EXE_DIR}}/{{.EXE_NAME}}"
+
+tasks:
+  clean:
+    cmds:
+      - cmd: "{{.RM_RF}} {{.BUILD_DIR}}"
+        ignore_error: true
+      - cmd: "{{.RM}} src/parser/*.gen.go"
+        ignore_error: true
+      - cmd: "{{.RM}} 'src/parser/*.gen.go'"
+        ignore error: true
+
+  download-antlr:
+    status:
+      - "test -f {{.ANTLR_JAR}}"
+    cmds:
+      - cmd: "{{.MKDIR}} \"{{.ANTLR_DIR}}\""
+      - cmd: "curl -o {{.ANTLR_JAR}} https://www.antlr.org/download/antlr-{{.ANTLR_VERSION}}-complete.jar"
+
+  generate-parser:
+    deps: [download-antlr]
+    sources:
+      - src/parser/QuarkLexer.g4
+      - src/parser/QuarkParser.g4
+    generates:
+      - "{{.ANTLR_GEN_DIR}}/*"
+    cmds:
+      - "{{.ANTLR}} -Xexact-output-dir -Dlanguage=Go -o {{.ANTLR_GEN_DIR}} src/parser/QuarkLexer.g4"
+      - "{{.ANTLR}} -Xexact-output-dir -lib {{.ANTLR_GEN_DIR}} -o {{.ANTLR_GEN_DIR}} -visitor -no-listener -Dlanguage=Go src/parser/QuarkParser.g4"
+
+  copy-gen-files:
+    deps: [generate-parser]
+    sources:
+      - "{{.ANTLR_GEN_DIR}}/quark_lexer.go"
+      - "{{.ANTLR_GEN_DIR}}/quark_parser.go"
+      - "{{.ANTLR_GEN_DIR}}/quarkparser_base_visitor.go"
+      - "{{.ANTLR_GEN_DIR}}/quarkparser_visitor.go"
+    generates:
+      - src/parser/quark_lexer.gen.go
+      - src/parser/quark_parser.gen.go
+      - src/parser/quarkparser_base_visitor.gen.go
+      - src/parser/quarkparser_visitor.gen.go
+    method: checksum
+    cmds:
+      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quark_lexer.go src/parser/quark_lexer.gen.go"
+      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quark_parser.go src/parser/quark_parser.gen.go"
+      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_base_visitor.go src/parser/quarkparser_base_visitor.gen.go"
+      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_visitor.go src/parser/quarkparser_visitor.gen.go"
+
+  build:
+    deps: [copy-gen-files]
+    sources:
+      - src/**/*.go
+    generates:
+      - "{{.EXE_FILE}}"
+    method: checksum
+    cmds:
+      - cmd: echo "building executable at {{.EXE_FILE}}"
+      - cmd: go build -o "{{.EXE_FILE}}" src/pkg/quarkc/main.go
+      - cmd: echo "done!"
+
+  run:
+    deps: [build]
+    cmds:
+      - "{{.EXE_FILE}}"
