@@ -102,6 +102,7 @@ KW_REG: 'reg';
 KW_VAR: 'var';
 KW_NEW: 'new';
 KW_MUT: 'mut';
+KW_SIGNAL: 'signal';
 
 COMMENT_START: '//';
 BLOCK_COMMENT_START: '/*';

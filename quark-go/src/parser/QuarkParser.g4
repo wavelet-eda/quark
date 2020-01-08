@@ -29,7 +29,7 @@ assignment
 
 stmt
     : assignable assignment expr SEMI #AssignStmt
-    | KW_REG assignable assignment expr SEMI #RegAssignStmt
+    | KW_REG LPAREN clk=clockexpr (COMMA rst=clockexpr)? RPAREN assignable assignment expr SEMI #RegAssignStmt
     | assignable SEMI #DeclarationStmt
     | branch #BranchStmt
     | KW_RETURN expr SEMI #ReturnStmt
@@ -43,14 +43,16 @@ assignable
     | assignable (COMMA assignable)+ #TupleDestructer
     ;
 
-foo: name RBRACE LBRACE;
-
-
 realname : REAL_NAME;
 
 name
     : realname # RealName
     | REAL_NAME (DOT REAL_NAME)+ #QualifiedName
+    ;
+
+
+clockexpr
+    : name #AtomicClock
     ;
 
 expr
@@ -74,6 +76,7 @@ expr
     | branch #BranchExpr
     | arrayslice #SliceExpr
     | LBRACE (expr (COMMA expr)*)? RBRACE #ArrayConstructorExpr
+    | KW_SIGNAL LPAREN clockexpr RPAREN #ClockToExpr
     ;
 
 arrayslice
@@ -104,7 +107,7 @@ parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;
 parameterdef
     : KW_TYPE typeexpr (KW_IMPLEMENTS name)? #TypeParameter
     | KW_TYPE typeexpr KW_IMPLEMENTS structdef #AdhocTypeParameter
-    | KW_VALUE expr (COLON typeexpr)? #ValueParameter
+    | typeexpr? expr #ValueParameter
     ;
 
 returnlist
@@ -112,7 +115,7 @@ returnlist
     | typeexpr realname (COMMA typeexpr realname)* #NamedReturn
     ;
 
-argumentdef: realname (COLON typeexpr)?;
+argumentdef: typeexpr? realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
