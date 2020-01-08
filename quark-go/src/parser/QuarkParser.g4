@@ -28,8 +28,10 @@ assignment
     ;
 
 stmt
-    : KW_VAR assignable assignment expr SEMI #AssignStmt
+    : assignable assignment expr SEMI #AssignStmt
     | KW_REG assignable assignment expr SEMI #RegAssignStmt
+    | assignable SEMI #DeclarationStmt
+    | branch #BranchStmt
     | KW_RETURN expr SEMI #ReturnStmt
     ;
 
@@ -73,6 +75,7 @@ expr
     | expr (OP_BAND | OP_BOR | OP_XOR | OP_BNAND | OP_BNOR | OP_XNOR) expr #BitwiseBinopExpr
     | expr (OP_LAND | OP_LOR | OP_IMPLICATION | OP_EQUIVALENCE) expr #LogicalBinopExpr
     | expr KW_IF expr KW_ELSE expr #TernaryExpr
+    | branch #BranchExpr
     ;
 
 typeexpr
@@ -83,7 +86,7 @@ typeexpr
 
 branch
     : KW_IF expr LCURLY block expr? RCURLY (KW_ELIF expr LCURLY block expr? RCURLY)* (KW_ELSE LCURLY block expr? RCURLY)? #IfBranch
-    | expr KW_MATCH LCURLY (KW_CASE pattern LCURLY block expr? RCURLY)+ RCURLY #MatchBranch
+    | KW_MATCH expr LCURLY (KW_CASE pattern LCURLY block expr? RCURLY)+ RCURLY #MatchBranch
     ;
 
 pattern
