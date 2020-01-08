@@ -36,33 +36,29 @@ stmt
     ;
 
 assignable
-    : KW_MUT? typeexpr VALUE_NAME #VariableDefinition
-    | valuename #ValueAssignment
+    : name LBRACE expr (COMMA expr)* RBRACE #ArrayIndexAssignment
+    | name LBRACE msb=expr? COLON lsb=expr? (COLON step=expr?)? BRACE #ArraySliceAssignment
+    | name #ValueAssignment
+    | KW_MUT? typeexpr realname #VariableDefinition
     | assignable (COMMA assignable)+ #TupleDestructer
-    //TODO: Array and Slice assignments
     ;
 
-typename
-    : (VALUE_NAME | TYPE_NAME) (DOT (VALUE_NAME | TYPE_NAME))* DOT TYPE_NAME #QualifiedTypeName
-    | TYPE_NAME #RealTypeName
-    ;
+foo: name RBRACE LBRACE;
 
-valuename
-    : (VALUE_NAME | TYPE_NAME) (DOT (VALUE_NAME | TYPE_NAME))* DOT VALUE_NAME #QualifiedValueName
-    | VALUE_NAME #RealValueName
-    ;
+
+realname : REAL_NAME;
 
 name
-    : typename #TypeName
-    | valuename #ValueName
+    : realname # RealName
+    | REAL_NAME (DOT REAL_NAME)+ #QualifiedName
     ;
 
 expr
     : INTEGRAL #LiteralExpr
-    | valuename #VarExpr
+    | name #VarExpr
     | LPAREN expr RPAREN #ParensExpr
     | LPAREN expr (COMMA expr)+ RPAREN #TupleExpr
-    | LCURLY (VALUE_NAME OP_ASSIGN expr COMMA?) RCURLY #ConstructorExpr
+    | LCURLY (realname OP_ASSIGN expr COMMA?) RCURLY #ConstructorExpr
     | KW_NEW typeexpr LPAREN (expr (COMMA expr)*)? RPAREN #NewModuleExpr
     | KW_LAMBDA argumentlist OP_ARROW LCURLY stmt* expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
@@ -76,11 +72,17 @@ expr
     | expr (OP_LAND | OP_LOR | OP_IMPLICATION | OP_EQUIVALENCE) expr #LogicalBinopExpr
     | expr KW_IF expr KW_ELSE expr #TernaryExpr
     | branch #BranchExpr
+    | arrayslice #SliceExpr
+    | LBRACE (expr (COMMA expr)*)? RBRACE #ArrayConstructorExpr
+    ;
+
+arrayslice
+    : name LBRACE msb=expr? COLON lsb=expr? (COLON? step=expr?) RBRACE
+    | name LBRACE expr (COMMA expr)* RBRACE
     ;
 
 typeexpr
-    : typename #RealType
-    | valuename #AliasedType
+    : name #CompleteType
     | typeexpr LBRACE (typeexpr | expr) (COMMA (typeexpr | expr))* RBRACE #ParameterizedType
     ;
 
@@ -90,38 +92,42 @@ branch
     ;
 
 pattern
-    : typeexpr
+    : realname # AtomicPattern
+    | realname LBRACE pattern (COMMA pattern)* RBRACE #ParamerterizedTypePattern
+    | LBRACE (pattern (COMMA pattern)*)? RBRACE #ArrayPattern
+    | INTEGRAL #LiteralPattern
+    | LCURLY (typeexpr? pattern) (COMMA typeexpr? pattern)* RCURLY #StructPattern
     ;
 
 parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;
 
 parameterdef
-    : KW_TYPE typeexpr (KW_IMPLEMENTS typename)? #TypeParameter
+    : KW_TYPE typeexpr (KW_IMPLEMENTS name)? #TypeParameter
     | KW_TYPE typeexpr KW_IMPLEMENTS structdef #AdhocTypeParameter
     | KW_VALUE expr (COLON typeexpr)? #ValueParameter
     ;
 
 returnlist
     : typeexpr #SingleReturn
-    | typeexpr VALUE_NAME (COMMA typeexpr VALUE_NAME)* #NamedReturn
+    | typeexpr realname (COMMA typeexpr realname)* #NamedReturn
     ;
 
-argumentdef: VALUE_NAME (COLON typeexpr)?;
+argumentdef: realname (COLON typeexpr)?;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
-structdecl: annotation* KW_STRUCT TYPE_NAME parameterlist? structdef;
+structdecl: annotation* KW_STRUCT realname parameterlist? structdef;
 
 structdef: LCURLY fielddecl* RCURLY;
 
-fielddecl: annotation* VALUE_NAME COLON typeexpr SEMI;
+fielddecl: annotation* realname COLON typeexpr SEMI;
 
 traitimpl: annotation* KW_IMPLEMENTS TYPE_NAME KW_FOR TYPE_NAME LCURLY funcdecl* RCURLY;
 
-funcdecl: annotation* KW_DEF VALUE_NAME parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
+funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
-moduledecl: annotation* KW_MODULE TYPE_NAME parameterlist? argumentlist? (COLON returnlist)? LCURLY innermodule RCURLY;
+moduledecl: annotation* KW_MODULE realname parameterlist? argumentlist? (COLON returnlist)? LCURLY innermodule RCURLY;
 
 innermodule: structdecl* block;
 
-annotation: ANNOTATION_NAME (LBRACE valuename (COMMA valuename)* RBRACE)?;
+annotation: ANNOTATION_NAME (LBRACE name (COMMA name)* RBRACE)?;

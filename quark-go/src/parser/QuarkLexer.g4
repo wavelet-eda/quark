@@ -19,6 +19,9 @@ RPAREN: ')';
 LBRACE: '[';
 RBRACE: ']';
 
+LANGLE: '<';
+RANGLE: '>';
+
 LCURLY: '{';
 RCURLY: '}';
 
@@ -106,10 +109,13 @@ BLOCK_COMMENT_END: '*/';
 
 INTEGRAL: ((DIGIT+)? LITERAL_TYPE TICK)? DIGIT+;
 
-TYPE_NAME: UPPERCASE (NAME_FRAGMENT*);
+REAL_NAME: NAME_FRAGMENT+;
+ANNOTATION_NAME: '@' NAME_FRAGMENT+; //Annotation names are @camelCase
+//Type names: CamelCase
+//Function names: camelCase
+//Param names SNAKE_CASE
+//value names: snake_case
+//annotation names: camelCase
 
-VALUE_NAME: LOWERCASE (NAME_FRAGMENT*);
-
-ANNOTATION_NAME: '@' NAME_FRAGMENT+;
 
 WS : [ \t\r\n]+ -> skip ;
