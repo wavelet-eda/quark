@@ -6,7 +6,7 @@ program: importdecl* (structdecl | funcdecl | traitimpl | moduledecl)* EOF;
 
 importdecl
     : KW_IMPORT name SEMI # SingleImport
-    | KW_IMPORT name DOT UNDERSCORE SEMI #WildcardImport
+    | KW_IMPORT name DOT OP_MUL SEMI #WildcardImport
     ;
 
 block: stmt*;
