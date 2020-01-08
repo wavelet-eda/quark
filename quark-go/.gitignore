@@ -4,3 +4,4 @@ task.exe
 task
 .task/
 **.gen.go
+*.tokens

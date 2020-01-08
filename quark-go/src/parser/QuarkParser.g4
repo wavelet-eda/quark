@@ -28,12 +28,17 @@ assignment
     ;
 
 stmt
-    : KW_VAR vardef (COMMA vardef)* assignment expr SEMI #AssignStmt
-    | KW_REG vardef (COMMA vardef)* assignment expr SEMI #RegAssignStmt
+    : KW_VAR assignable assignment expr SEMI #AssignStmt
+    | KW_REG assignable assignment expr SEMI #RegAssignStmt
     | KW_RETURN expr SEMI #ReturnStmt
     ;
 
-vardef: VALUE_NAME (COLON typeexpr)?;
+assignable
+    : KW_MUT? typeexpr VALUE_NAME #VariableDefinition
+    | valuename #ValueAssignment
+    | assignable (COMMA assignable)+ #TupleDestructer
+    //TODO: Array and Slice assignments
+    ;
 
 typename
     : (VALUE_NAME | TYPE_NAME) (DOT (VALUE_NAME | TYPE_NAME))* DOT TYPE_NAME #QualifiedTypeName
@@ -74,6 +79,15 @@ typeexpr
     : typename #RealType
     | valuename #AliasedType
     | typeexpr LBRACE (typeexpr | expr) (COMMA (typeexpr | expr))* RBRACE #ParameterizedType
+    ;
+
+branch
+    : KW_IF expr LCURLY block expr? RCURLY (KW_ELIF expr LCURLY block expr? RCURLY)* (KW_ELSE LCURLY block expr? RCURLY)? #IfBranch
+    | expr KW_MATCH LCURLY (KW_CASE pattern LCURLY block expr? RCURLY)+ RCURLY #MatchBranch
+    ;
+
+pattern
+    : typeexpr
     ;
 
 parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;

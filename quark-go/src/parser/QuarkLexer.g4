@@ -98,6 +98,7 @@ KW_RESET: 'reset';
 KW_REG: 'reg';
 KW_VAR: 'var';
 KW_NEW: 'new';
+KW_MUT: 'mut';
 
 COMMENT_START: '//';
 BLOCK_COMMENT_START: '/*';
