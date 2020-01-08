@@ -125,7 +125,7 @@ structdef: LCURLY fielddecl* RCURLY;
 
 fielddecl: annotation* realname COLON typeexpr SEMI;
 
-traitimpl: annotation* KW_IMPLEMENTS TYPE_NAME KW_FOR TYPE_NAME LCURLY funcdecl* RCURLY;
+traitimpl: annotation* KW_IMPLEMENTS name KW_FOR realname LCURLY funcdecl* RCURLY;
 
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
