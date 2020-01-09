@@ -66,8 +66,6 @@ OP_LNOT: 'not';
 OP_IMPLICATION: 'implies';
 OP_EQUIVALENCE: 'equates';
 
-OP_LT: '<';
-OP_GT: '>';
 OP_LTE: '<=';
 OP_GTE: '>=';
 

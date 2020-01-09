@@ -44,7 +44,7 @@ stmt
 
 assignable
     : expr LBRACE expr (COMMA expr)* RBRACE #ArrayIndexAssignment
-    | expr LBRACE msb=expr? COLON lsb=expr? (COLON step=expr?)? BRACE #ArraySliceAssignment
+    | expr LBRACE msb=expr? COLON lsb=expr? (COLON step=expr?)? RBRACE #ArraySliceAssignment
     | name #ValueAssignment
     | KW_MUT? typeexpr realname #VariableDefinition
     | assignable (COMMA assignable)+ #TupleDestructer
