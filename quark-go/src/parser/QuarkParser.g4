@@ -43,8 +43,8 @@ stmt
     ;
 
 assignable
-    : name LBRACE expr (COMMA expr)* RBRACE #ArrayIndexAssignment
-    | name LBRACE msb=expr? COLON lsb=expr? (COLON step=expr?)? BRACE #ArraySliceAssignment
+    : expr LBRACE expr (COMMA expr)* RBRACE #ArrayIndexAssignment
+    | expr LBRACE msb=expr? COLON lsb=expr? (COLON step=expr?)? BRACE #ArraySliceAssignment
     | name #ValueAssignment
     | KW_MUT? typeexpr realname #VariableDefinition
     | assignable (COMMA assignable)+ #TupleDestructer
@@ -65,6 +65,7 @@ clockexpr
 expr
     : literal #LiteralExpr
     | name #VarExpr
+    | expr DOT realname #FieldExpr
     | LPAREN expr RPAREN #ParensExpr
     | LPAREN expr (COMMA expr)+ RPAREN #TupleExpr
     | LCURLY (realname OP_ASSIGN expr COMMA?)* RCURLY #ConstructorExpr
@@ -81,14 +82,10 @@ expr
     | expr (OP_LAND | OP_LOR | OP_IMPLICATION | OP_EQUIVALENCE) expr #LogicalBinopExpr
     | expr KW_IF expr KW_ELSE expr #TernaryExpr
     | branch #BranchExpr
-    | arrayslice #SliceExpr
+    | expr LBRACE msb=expr? COLON lsb=expr? (COLON? step=expr?) RBRACE #SliceExpr
+    | expr LBRACE expr (COMMA expr)* RBRACE #ArrayIndexExpr
     | LBRACE (expr (COMMA expr)*)? RBRACE #ArrayConstructorExpr
     | KW_SIGNAL LPAREN clockexpr RPAREN #ClockToExpr
-    ;
-
-arrayslice
-    : name LBRACE msb=expr? COLON lsb=expr? (COLON? step=expr?) RBRACE
-    | name LBRACE expr (COMMA expr)* RBRACE
     ;
 
 typeexpr
