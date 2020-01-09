@@ -2,7 +2,14 @@ parser grammar QuarkParser;
 
 options {tokenVocab = QuarkLexer;}
 
-program: importdecl* (structdecl | funcdecl | traitimpl | moduledecl)* EOF;
+program: importdecl* decl* EOF;
+
+decl
+    : structdecl
+    | funcdecl
+    | traitimpl
+    | moduledecl
+    ;
 
 importdecl
     : KW_IMPORT name SEMI # SingleImport
@@ -56,7 +63,7 @@ clockexpr
     ;
 
 expr
-    : INTEGRAL #LiteralExpr
+    : literal #LiteralExpr
     | name #VarExpr
     | LPAREN expr RPAREN #ParensExpr
     | LPAREN expr (COMMA expr)+ RPAREN #TupleExpr
@@ -98,7 +105,7 @@ pattern
     : realname # AtomicPattern
     | realname LBRACE pattern (COMMA pattern)* RBRACE #ParamerterizedTypePattern
     | LBRACE (pattern (COMMA pattern)*)? RBRACE #ArrayPattern
-    | INTEGRAL #LiteralPattern
+    | literal #LiteralPattern
     | LCURLY (typeexpr? pattern) (COMMA typeexpr? pattern)* RCURLY #StructPattern
     ;
 
@@ -134,3 +141,5 @@ moduledecl: annotation* KW_MODULE realname parameterlist? argumentlist? (COLON r
 innermodule: structdecl* block;
 
 annotation: ANNOTATION_NAME (LBRACE name (COMMA name)* RBRACE)?;
+
+literal: INTEGRAL;
