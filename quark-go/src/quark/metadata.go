@@ -15,3 +15,13 @@ type ObjectPosition struct {
 	File *QuarkFile
 	Position FilePosition
 }
+
+func (o ObjectPosition) Next() ObjectPosition {
+	return ObjectPosition{
+		File:     o.File,
+		Position: FilePosition{
+			Line: o.Position.Line,
+			Character: o.Position.Character,
+		},
+	}
+}

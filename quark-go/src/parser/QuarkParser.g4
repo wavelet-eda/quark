@@ -67,7 +67,7 @@ expr
     | name #VarExpr
     | LPAREN expr RPAREN #ParensExpr
     | LPAREN expr (COMMA expr)+ RPAREN #TupleExpr
-    | LCURLY (realname OP_ASSIGN expr COMMA?) RCURLY #ConstructorExpr
+    | LCURLY (realname OP_ASSIGN expr COMMA?)* RCURLY #ConstructorExpr
     | KW_NEW typeexpr LPAREN (expr (COMMA expr)*)? RPAREN #NewModuleExpr
     | KW_LAMBDA argumentlist OP_ARROW LCURLY stmt* expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
