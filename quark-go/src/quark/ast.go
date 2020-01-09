@@ -110,6 +110,10 @@ type Literal interface {
 	literalNode()
 }
 
+type InnerConcat interface {
+	AST
+	innerConcatNode()
+}
 
 
 

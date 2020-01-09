@@ -73,8 +73,7 @@ expr
     | KW_LAMBDA argumentlist OP_ARROW LCURLY stmt* expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
     | OP_LNOT expr # NotExpr
-    | LCURLY expr (COMMA expr)+ RCURLY #ConcatExpr
-    | LCURLY expr LCURLY expr RCURLY RCURLY #ReplicateExpr
+    | concat #ConcatExpr
     | expr (OP_MUL | OP_DIV | OP_MOD) expr #MulDivModExpr
     | expr (OP_SUB | OP_ADD) expr #AddSubExpr
     | expr (OP_LEFT_SHIFT | OP_RIGHT_SHIFT | OP_ARITH_LEFT_SHIFT | OP_ARITH_RIGHT_SHFIT) expr #ShiftExpr
@@ -84,8 +83,15 @@ expr
     | branch #BranchExpr
     | expr LBRACE msb=expr? COLON lsb=expr? (COLON? step=expr?) RBRACE #SliceExpr
     | expr LBRACE expr (COMMA expr)* RBRACE #ArrayIndexExpr
-    | LBRACE (expr (COMMA expr)*)? RBRACE #ArrayConstructorExpr
+    | LBRACE (expr (COMMA expr)*)? RBRACE #ArrayLiteralExpr
     | KW_SIGNAL LPAREN clockexpr RPAREN #ClockToExpr
+    ;
+
+concat : LCURLY innerconcat (COMMA innerconcat)+ RCURLY;
+
+innerconcat
+    : expr LCURLY expr RCURLY
+    | expr
     ;
 
 typeexpr
