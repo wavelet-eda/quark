@@ -25,7 +25,7 @@ tasks:
       - cmd: "{{.MKDIR}} \"{{.ANTLR_DIR}}\""
       - cmd: "curl -o {{.ANTLR_JAR}} https://www.antlr.org/download/antlr-{{.ANTLR_VERSION}}-complete.jar"
 
-  generate-parser:
+  generate-parser-files:
     deps: [download-antlr]
     sources:
       - src/parser/QuarkLexer.g4
@@ -36,8 +36,8 @@ tasks:
       - "{{.ANTLR}} -Xexact-output-dir -Dlanguage=Go -o {{.ANTLR_GEN_DIR}} src/parser/QuarkLexer.g4"
       - "{{.ANTLR}} -Xexact-output-dir -lib {{.ANTLR_GEN_DIR}} -o {{.ANTLR_GEN_DIR}} -visitor -no-listener -Dlanguage=Go src/parser/QuarkParser.g4"
 
-  copy-gen-files:
-    deps: [generate-parser]
+  build-parser:
+    deps: [generate-parser-files]
     sources:
       - "{{.ANTLR_GEN_DIR}}/quark_lexer.go"
       - "{{.ANTLR_GEN_DIR}}/quark_parser.go"
@@ -56,7 +56,7 @@ tasks:
       - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_visitor.go src/parser/quarkparser_visitor.gen.go"
 
   build:
-    deps: [copy-gen-files]
+    deps: [build-parser]
     sources:
       - src/**/*.go
     generates:
