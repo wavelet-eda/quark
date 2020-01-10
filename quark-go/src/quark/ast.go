@@ -33,13 +33,13 @@ type (
 	//Stmt nodes are statements which implement some behavior.
 	Stmt interface {
 		AST
-		stmtDecl()
+		stmtNode()
 	}
 
-	//Assignment nodes are variable and expression assignments.
-	Assignment interface {
+	//Assignable nodes appear on the left hand side of assignments.
+	Assignable interface {
 		AST
-		assignmentNode()
+		assignableNode()
 	}
 
 	//Name nodes are symbol names (both qualified and unqualified).

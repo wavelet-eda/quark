@@ -12,3 +12,8 @@ type BinaryOp interface {
 
 	binaryOp()
 }
+
+//An assignment operator
+type AssignmentOp interface {
+	assignmentOp()
+}

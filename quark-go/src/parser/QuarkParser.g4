@@ -44,7 +44,7 @@ stmt
     ;
 
 future
-    : KW_FUTURE LPAREN typeexpr realname (COMMA typeexpr realname) RPAREN LBRACE stmt* RBRACE LPAREN realname assignment expr RPAREN
+    : KW_FUTURE LPAREN argumentdef (COMMA argumentdef) RPAREN LBRACE stmt* RBRACE LPAREN realname assignment expr RPAREN
     ;
 
 assignable
