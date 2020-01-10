@@ -44,7 +44,7 @@ stmt
     ;
 
 future
-    : KW_FUTURE LPAREN argumentdef (COMMA argumentdef) RPAREN LBRACE stmt* RBRACE LPAREN realname assignment expr RPAREN
+    : KW_FUTURE LPAREN argumentdef (COMMA argumentdef)* RPAREN LBRACE stmt* RBRACE LPAREN constructionassignment (COMMA constructionassignment)* RPAREN
     ;
 
 assignable
@@ -73,7 +73,7 @@ expr
     | expr DOT realname #FieldExpr
     | LPAREN expr RPAREN #ParensExpr
     | LPAREN expr (COMMA expr)+ RPAREN #TupleExpr
-    | LCURLY (realname OP_ASSIGN expr COMMA?)* RCURLY #ConstructorExpr
+    | LCURLY constructionassignment (COMMA constructionassignment)* RCURLY #ConstructorExpr
     | KW_NEW typeexpr LPAREN (expr (COMMA expr)*)? RPAREN #NewModuleExpr
     | KW_LAMBDA argumentlist OP_ARROW LCURLY stmt* expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
@@ -91,6 +91,8 @@ expr
     | LBRACE (expr (COMMA expr)*)? RBRACE #ArrayLiteralExpr
     | KW_SIGNAL LPAREN clockexpr RPAREN #ClockToExpr
     ;
+
+constructionassignment: realname OP_ASSIGN expr;
 
 concat : LCURLY innerconcat (COMMA innerconcat)+ RCURLY;
 
