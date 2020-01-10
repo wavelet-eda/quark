@@ -14,3 +14,12 @@ Here are the steps:
 4. Run `$ ./task build` to build the project into `<PROJ_DIR>/build/exe/quarkc` (if on Windows the executable will have the `.exe` file extension)
 
 To clean your build area, run `$ ./task clean`. The gitignore has been configured to ignore the task executable so there's no need to delete that file. 
+
+# Package Structure
+
+The compiler has 3 packages right now.
+
+- `pkg/quarkc` is where the application itself lives. This is the main package. Most code shouldn't live here.
+- `quark` is where front end language data structures are. This includes the AST and relevant metadata
+- `parser` is where the parser and lexer live. The go code is generated from the antlr g4 files. The parse_tree_converter
+module is for converting raw parse trees to proper `quark.AST`. 
