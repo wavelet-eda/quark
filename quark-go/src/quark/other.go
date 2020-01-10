@@ -1,29 +1,58 @@
 package quark
 
+type (
+		Field struct {
+			FieldType TypeExpr
+			FieldName Name
+		}
 
-type Field struct {
+		InterfaceField struct {
+			Direction InterfaceDirection
+			Field
 
+			directionKw ObjectPosition
+		}
+
+		RealName struct {
+			text string
+
+			firstChar ObjectPosition
+			lastChar ObjectPosition
+		}
+
+		ConstructorField struct {
+			name Name
+		}
+
+		InterfaceDirection = bool
+)
+
+const (
+	Forward InterfaceDirection = true
+	Reverse InterfaceDirection = false
+)
+
+
+func (n RealName) Start() *ObjectPosition {
+	return &n.firstChar
 }
 
-type InterfaceField struct {
-
+func (f *Field) Start() *ObjectPosition {
+	return f.FieldType.Start()
 }
 
-type RealName struct {
-	text string
-
-	firstChar ObjectPosition
-	lastChar ObjectPosition
+func (f *InterfaceField) Start() *ObjectPosition {
+	return &f.directionKw
 }
 
-func (n RealName) Start() ObjectPosition {
-	return n.firstChar
-}
 
-func (n RealName) End() ObjectPosition {
+
+func (n RealName) End() *ObjectPosition {
 	return n.lastChar.Next()
 }
 
-type ConstructorField struct {
-	name Name
+func (f *Field) End() *ObjectPosition {
+	return f.FieldName.End()
 }
+
+

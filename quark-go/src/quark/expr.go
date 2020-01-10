@@ -6,11 +6,11 @@ type LiteralExpr struct {
 
 func (e LiteralExpr) exprNode() {} //sentinel impl that ensures the types all work out. Wow it'd be cool if Go had proper traits
 
-func (e LiteralExpr) Start() ObjectPosition {
+func (e LiteralExpr) Start() *ObjectPosition {
 	return e.Value.Start()
 }
 
-func (e LiteralExpr) End() ObjectPosition {
+func (e LiteralExpr) End() *ObjectPosition {
 	return e.Value.End()
 }
 
@@ -21,11 +21,11 @@ type VarExpr struct {
 
 func (e VarExpr) exprNode() {}
 
-func (e VarExpr) Start() ObjectPosition {
+func (e VarExpr) Start() *ObjectPosition {
 	return e.VarName.Start()
 }
 
-func (e VarExpr) End() ObjectPosition {
+func (e VarExpr) End() *ObjectPosition {
 	return e.VarName.End()
 }
 
@@ -37,11 +37,11 @@ type FieldExpr struct {
 
 func (e FieldExpr) exprNode() {}
 
-func (e FieldExpr) Start() ObjectPosition {
+func (e FieldExpr) Start() *ObjectPosition {
 	return e.Selectable.Start()
 }
 
-func (e FieldExpr) End() ObjectPosition {
+func (e FieldExpr) End() *ObjectPosition {
 	return e.FieldName.End()
 }
 
@@ -55,11 +55,11 @@ type ParensExpr struct {
 
 func (e ParensExpr) exprNode() {}
 
-func (e ParensExpr) Start() ObjectPosition {
-	return e.openParen
+func (e ParensExpr) Start() *ObjectPosition {
+	return &e.openParen
 }
 
-func (e ParensExpr) End() ObjectPosition {
+func (e ParensExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
 }
 
@@ -73,11 +73,11 @@ type TupleExpr struct {
 
 func (e TupleExpr) exprNode() {}
 
-func (e TupleExpr) Start() ObjectPosition {
-	return e.openParen
+func (e TupleExpr) Start() *ObjectPosition {
+	return &e.openParen
 }
 
-func (e TupleExpr) End() ObjectPosition {
+func (e TupleExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
 }
 
@@ -91,11 +91,11 @@ type ConstructorExpr struct {
 
 func (e ConstructorExpr) exprNode() {}
 
-func (e ConstructorExpr) Start() ObjectPosition {
-	return e.openCurly
+func (e ConstructorExpr) Start() *ObjectPosition {
+	return &e.openCurly
 }
 
-func (e ConstructorExpr) End() ObjectPosition {
+func (e ConstructorExpr) End() *ObjectPosition {
 	return e.closeCurly.Next()
 }
 
@@ -110,11 +110,11 @@ type NewModuleExpr struct {
 
 func (e NewModuleExpr) exprNode() {}
 
-func (e NewModuleExpr) Start() ObjectPosition {
-	return e.newKw
+func (e NewModuleExpr) Start() *ObjectPosition {
+	return &e.newKw
 }
 
-func (e NewModuleExpr) End() ObjectPosition {
+func (e NewModuleExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
 }
 
@@ -131,11 +131,11 @@ type LambdaExpr struct {
 
 func (e LambdaExpr) exprNode() {}
 
-func (e LambdaExpr) Start() ObjectPosition {
-	return e.kwLambda
+func (e LambdaExpr) Start() *ObjectPosition {
+	return &e.kwLambda
 }
 
-func (e LambdaExpr) End() ObjectPosition {
+func (e LambdaExpr) End() *ObjectPosition {
 	return e.closeCurly.Next()
 }
 
@@ -149,11 +149,11 @@ type UnOp struct {
 
 func (e UnOp) exprNode() {}
 
-func (e UnOp) Start() ObjectPosition {
-	return e.opPosition
+func (e UnOp) Start() *ObjectPosition {
+	return &e.opPosition
 }
 
-func (e UnOp) End() ObjectPosition {
+func (e UnOp) End() *ObjectPosition {
 	return e.Expr.End()
 }
 
@@ -167,11 +167,11 @@ type ConcatExpr struct {
 
 func (e ConcatExpr) exprNode() {}
 
-func (e ConcatExpr) Start() ObjectPosition {
-	return e.lCurly
+func (e ConcatExpr) Start() *ObjectPosition {
+	return &e.lCurly
 }
 
-func (e ConcatExpr) End() ObjectPosition {
+func (e ConcatExpr) End() *ObjectPosition {
 	return e.rCurly.Next()
 }
 
@@ -185,11 +185,11 @@ type BinOp struct {
 
 func (e BinOp) exprNode() {}
 
-func (e BinOp) Start() ObjectPosition {
+func (e BinOp) Start() *ObjectPosition {
 	return e.Left.Start()
 }
 
-func (e BinOp) End() ObjectPosition {
+func (e BinOp) End() *ObjectPosition {
 	return e.Right.End()
 }
 
@@ -202,11 +202,11 @@ type TernaryExpr struct {
 
 func (e TernaryExpr) exprNode() {}
 
-func (e TernaryExpr) Start() ObjectPosition {
+func (e TernaryExpr) Start() *ObjectPosition {
 	return e.IfExpr.Start()
 }
 
-func (e TernaryExpr) End() ObjectPosition {
+func (e TernaryExpr) End() *ObjectPosition {
 	return e.ElseExpr.End()
 }
 
@@ -217,11 +217,11 @@ type BranchExpr struct {
 
 func (e BranchExpr) exprNode() {}
 
-func (e BranchExpr) Start() ObjectPosition {
+func (e BranchExpr) Start() *ObjectPosition {
 	return e.X.Start()
 }
 
-func (e BranchExpr) End() ObjectPosition {
+func (e BranchExpr) End() *ObjectPosition {
 	return e.X.End()
 }
 
@@ -238,11 +238,11 @@ type SliceExpr struct {
 
 func (e SliceExpr) exprNode() {}
 
-func (e SliceExpr) Start() ObjectPosition {
+func (e SliceExpr) Start() *ObjectPosition {
 	return e.X.Start()
 }
 
-func (e SliceExpr) End() ObjectPosition {
+func (e SliceExpr) End() *ObjectPosition {
 	return e.closeBrace.Next()
 }
 
@@ -256,11 +256,11 @@ type ArrayIndexExpr struct {
 
 func (e ArrayIndexExpr) exprNode() {}
 
-func (e ArrayIndexExpr) Start() ObjectPosition {
+func (e ArrayIndexExpr) Start() *ObjectPosition {
 	return e.X.Start()
 }
 
-func (e ArrayIndexExpr) End() ObjectPosition {
+func (e ArrayIndexExpr) End() *ObjectPosition {
 	return e.closeBrace.Next()
 }
 
@@ -274,11 +274,11 @@ type ArrayLiteralExpr struct {
 
 func (e ArrayLiteralExpr) exprNode() {}
 
-func (e ArrayLiteralExpr) Start() ObjectPosition {
-	return e.openBrace
+func (e ArrayLiteralExpr) Start() *ObjectPosition {
+	return &e.openBrace
 }
 
-func (e ArrayLiteralExpr) End() ObjectPosition {
+func (e ArrayLiteralExpr) End() *ObjectPosition {
 	return e.closeBrace.Next()
 }
 
@@ -292,10 +292,10 @@ type ClockToExpr struct {
 
 func (e ClockToExpr) exprNode() {}
 
-func (e ClockToExpr) Start() ObjectPosition {
-	return e.kwSignal
+func (e ClockToExpr) Start() *ObjectPosition {
+	return &e.kwSignal
 }
 
-func (e ClockToExpr) End() ObjectPosition {
+func (e ClockToExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
 }

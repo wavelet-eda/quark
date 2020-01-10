@@ -6,11 +6,11 @@ type AtomicInnerConcat struct {
 
 func (a AtomicInnerConcat) innerConcatNode() {}
 
-func (a AtomicInnerConcat) Start() ObjectPosition {
+func (a AtomicInnerConcat) Start() *ObjectPosition {
 	return a.X.Start()
 }
 
-func (a AtomicInnerConcat) End() ObjectPosition {
+func (a AtomicInnerConcat) End() *ObjectPosition {
 	return a.X.End()
 }
 
@@ -24,10 +24,10 @@ type ReplicateConcat struct {
 
 func (r ReplicateConcat) innerConcatNode() {}
 
-func (r ReplicateConcat) Start() ObjectPosition {
+func (r ReplicateConcat) Start() *ObjectPosition {
 	return r.ReplicateAmount.Start()
 }
 
-func (r ReplicateConcat) End() ObjectPosition {
+func (r ReplicateConcat) End() *ObjectPosition {
 	return r.rCurly.Next()
 }

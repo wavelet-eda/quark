@@ -16,8 +16,8 @@ type ObjectPosition struct {
 	Position FilePosition
 }
 
-func (o ObjectPosition) Next() ObjectPosition {
-	return ObjectPosition{
+func (o ObjectPosition) Next() *ObjectPosition {
+	return &ObjectPosition{
 		File:     o.File,
 		Position: FilePosition{
 			Line: o.Position.Line,
