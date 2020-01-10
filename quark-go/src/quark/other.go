@@ -1,11 +1,13 @@
 package quark
 
 type (
+		//A definition of a field inside a struct.
 		Field struct {
 			FieldType TypeExpr
 			FieldName Name
 		}
 
+		//A definition of a field inside an interface.
 		InterfaceField struct {
 			Direction InterfaceDirection
 			Field
@@ -13,6 +15,7 @@ type (
 			directionKw ObjectPosition
 		}
 
+		//An unqualified name.
 		RealName struct {
 			Text string
 
@@ -20,10 +23,12 @@ type (
 			lastChar  ObjectPosition
 		}
 
+		//A field as used in a struct constructor.
 		ConstructorField struct {
 			name Name
 		}
 
+		//The directionality of an interface field.
 		InterfaceDirection = bool
 )
 

@@ -1,5 +1,6 @@
 package quark
 
+//Expression of a literal value.
 type LiteralExpr struct {
 	Value Literal
 }
@@ -14,7 +15,7 @@ func (e LiteralExpr) End() *ObjectPosition {
 	return e.Value.End()
 }
 
-
+//Expression of a variable name.
 type VarExpr struct {
 	VarName Name
 }
@@ -29,7 +30,7 @@ func (e VarExpr) End() *ObjectPosition {
 	return e.VarName.End()
 }
 
-
+//Struct, enum, or interface field access expression.
 type FieldExpr struct {
 	Selectable Expr
 	FieldName  RealName
@@ -45,7 +46,7 @@ func (e FieldExpr) End() *ObjectPosition {
 	return e.FieldName.End()
 }
 
-
+//Expression enclosed in parens.
 type ParensExpr struct {
 	SubExpr Expr
 
@@ -64,6 +65,7 @@ func (e ParensExpr) End() *ObjectPosition {
 }
 
 
+//A tuple constructor.
 type TupleExpr struct {
 	Exprs      []Expr
 
@@ -82,6 +84,7 @@ func (e TupleExpr) End() *ObjectPosition {
 }
 
 
+//A struct constructor.
 type ConstructorExpr struct {
 	FieldAssignments []ConstructorField
 
@@ -100,6 +103,8 @@ func (e ConstructorExpr) End() *ObjectPosition {
 }
 
 
+
+//A module call.
 type NewModuleExpr struct {
 	ModuleType TypeExpr
 	Arguments  []Expr
@@ -119,8 +124,9 @@ func (e NewModuleExpr) End() *ObjectPosition {
 }
 
 
+//An in line lambda.
 type LambdaExpr struct {
-	Arguments ArgumentList
+	Arguments []ArgumentDef
 
 	Body      []Stmt
 	FinalExpr Expr
@@ -140,6 +146,7 @@ func (e LambdaExpr) End() *ObjectPosition {
 }
 
 
+//A unary operator usage.
 type UnOp struct {
 	Expr Expr
 	Op   UnaryOp
@@ -158,6 +165,7 @@ func (e UnOp) End() *ObjectPosition {
 }
 
 
+//A concatenation or replication expression.
 type ConcatExpr struct {
 	ConcatPieces []InnerConcat
 
@@ -175,6 +183,8 @@ func (e ConcatExpr) End() *ObjectPosition {
 	return e.rCurly.Next()
 }
 
+
+//A binary operator usage.
 type BinOp struct {
 	Left  Expr
 	Right Expr
@@ -194,6 +204,7 @@ func (e BinOp) End() *ObjectPosition {
 }
 
 
+//A ternary if expression.
 type TernaryExpr struct {
 	IfExpr   Expr
 	Cond     Expr
@@ -211,6 +222,7 @@ func (e TernaryExpr) End() *ObjectPosition {
 }
 
 
+//An expression usage of an if or match branch.
 type BranchExpr struct {
 	X Branch
 }
@@ -226,6 +238,7 @@ func (e BranchExpr) End() *ObjectPosition {
 }
 
 
+//An array or bit slice expression.
 type SliceExpr struct {
 	X Expr
 
@@ -247,6 +260,7 @@ func (e SliceExpr) End() *ObjectPosition {
 }
 
 
+//An array index expression.
 type ArrayIndexExpr struct {
 	X       Expr
 	Indices []Expr
@@ -265,6 +279,7 @@ func (e ArrayIndexExpr) End() *ObjectPosition {
 }
 
 
+//A literal array constructor usage.
 type ArrayLiteralExpr struct {
 	Values []Expr
 
@@ -283,6 +298,8 @@ func (e ArrayLiteralExpr) End() *ObjectPosition {
 }
 
 
+//A use of the clock to signal function which converts clock expressions
+//to signal expressions.
 type ClockToExpr struct {
 	Clock ClockExpr
 

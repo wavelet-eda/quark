@@ -1,5 +1,7 @@
 package quark
 
+//Atomic expression inside a concat context. This is just a normal
+//expression.
 type AtomicInnerConcat struct {
 	X Expr
 }
@@ -14,7 +16,8 @@ func (a AtomicInnerConcat) End() *ObjectPosition {
 	return a.X.End()
 }
 
-
+//Replication expression in a concat context. First expression is the
+//replication amount and the second expression is the replication value.
 type ReplicateConcat struct {
 	ReplicateAmount Expr
 	ReplicateExpr   Expr

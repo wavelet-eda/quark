@@ -88,6 +88,7 @@ type (
 		kwType ObjectPosition
 	}
 
+	//ArgumentDef nodes are functions or module argument declarations.
 	ArgumentDef struct {
 		ArgType TypeExpr
 		ArgName RealName

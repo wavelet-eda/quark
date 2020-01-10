@@ -1,7 +1,7 @@
 package quark
 
 type (
-	//Declaration of a Struct symbol
+	//Declaration of a Struct symbol.
 	StructDecl struct {
 		Annotations []Annotation
 		StructName RealName
@@ -14,6 +14,7 @@ type (
 		closeCurly ObjectPosition
 	}
 
+	//Declaration of a Function symbol.
 	FunctionDecl struct {
 		Annotations []Annotation
 
@@ -29,6 +30,7 @@ type (
 		closeCurly ObjectPosition
 	}
 
+	//Declaration of a module symbol.
 	ModuleDecl struct {
 		Annotations []Annotation
 

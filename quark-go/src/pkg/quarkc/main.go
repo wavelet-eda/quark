@@ -1,3 +1,5 @@
+//Main application package. The main function and application glue code
+//belong in this package. Most other logic should be in a specific package.
 package main
 
 func main() {
