@@ -39,7 +39,12 @@ stmt
     | KW_REG LPAREN clk=clockexpr (COMMA rst=clockexpr)? RPAREN assignable assignment expr SEMI #RegAssignStmt
     | assignable SEMI #DeclarationStmt
     | branch #BranchStmt
+    | future SEMI #FutureStmt
     | KW_RETURN expr SEMI #ReturnStmt
+    ;
+
+future
+    : KW_FUTURE LPAREN typeexpr realname (COMMA typeexpr realname) RPAREN LBRACE stmt* RBRACE LPAREN realname assignment expr RPAREN
     ;
 
 assignable

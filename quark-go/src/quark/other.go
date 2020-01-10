@@ -5,6 +5,10 @@ type Field struct {
 
 }
 
+type InterfaceField struct {
+
+}
+
 type RealName struct {
 	text string
 
