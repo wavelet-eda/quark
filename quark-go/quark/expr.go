@@ -32,7 +32,7 @@ func (e VarExpr) End() *ObjectPosition {
 
 type FieldExpr struct {
 	Selectable Expr
-	FieldName RealName
+	FieldName  RealName
 }
 
 func (e FieldExpr) exprNode() {}
@@ -47,7 +47,7 @@ func (e FieldExpr) End() *ObjectPosition {
 
 
 type ParensExpr struct {
-	SubExpr    Expr
+	SubExpr Expr
 
 	openParen  ObjectPosition
 	closeParen ObjectPosition
@@ -85,7 +85,7 @@ func (e TupleExpr) End() *ObjectPosition {
 type ConstructorExpr struct {
 	FieldAssignments []ConstructorField
 
-	openCurly ObjectPosition
+	openCurly  ObjectPosition
 	closeCurly ObjectPosition
 }
 
@@ -102,9 +102,9 @@ func (e ConstructorExpr) End() *ObjectPosition {
 
 type NewModuleExpr struct {
 	ModuleType TypeExpr
-	Arguments []Expr
+	Arguments  []Expr
 
-	newKw ObjectPosition
+	newKw      ObjectPosition
 	closeParen ObjectPosition
 }
 
@@ -122,10 +122,10 @@ func (e NewModuleExpr) End() *ObjectPosition {
 type LambdaExpr struct {
 	Arguments ArgumentList
 
-	Body []Stmt
+	Body      []Stmt
 	FinalExpr Expr
 
-	kwLambda ObjectPosition
+	kwLambda   ObjectPosition
 	closeCurly ObjectPosition
 }
 
@@ -142,7 +142,7 @@ func (e LambdaExpr) End() *ObjectPosition {
 
 type UnOp struct {
 	Expr Expr
-	Op UnaryOp
+	Op   UnaryOp
 
 	opPosition ObjectPosition
 }
@@ -176,9 +176,9 @@ func (e ConcatExpr) End() *ObjectPosition {
 }
 
 type BinOp struct {
-	Left Expr
+	Left  Expr
 	Right Expr
-	Op BinaryOp
+	Op    BinaryOp
 
 	opPosition ObjectPosition
 }
@@ -195,8 +195,8 @@ func (e BinOp) End() *ObjectPosition {
 
 
 type TernaryExpr struct {
-	IfExpr Expr
-	Cond Expr
+	IfExpr   Expr
+	Cond     Expr
 	ElseExpr Expr
 }
 
@@ -229,8 +229,8 @@ func (e BranchExpr) End() *ObjectPosition {
 type SliceExpr struct {
 	X Expr
 
-	Msb Expr
-	Lsb Expr
+	Msb  Expr
+	Lsb  Expr
 	Step Expr
 
 	closeBrace ObjectPosition
@@ -248,7 +248,7 @@ func (e SliceExpr) End() *ObjectPosition {
 
 
 type ArrayIndexExpr struct {
-	X Expr
+	X       Expr
 	Indices []Expr
 
 	closeBrace ObjectPosition
@@ -268,7 +268,7 @@ func (e ArrayIndexExpr) End() *ObjectPosition {
 type ArrayLiteralExpr struct {
 	Values []Expr
 
-	openBrace ObjectPosition
+	openBrace  ObjectPosition
 	closeBrace ObjectPosition
 }
 
@@ -286,7 +286,7 @@ func (e ArrayLiteralExpr) End() *ObjectPosition {
 type ClockToExpr struct {
 	Clock ClockExpr
 
-	kwSignal ObjectPosition
+	kwSignal   ObjectPosition
 	closeParen ObjectPosition
 }
 

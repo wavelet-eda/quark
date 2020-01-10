@@ -9,7 +9,7 @@ type (
 
 	//ParameterizedType is a quark type with type or value parameters.
 	ParameterizedType struct {
-		BaseType TypeExpr
+		BaseType   TypeExpr
 		Parameters []TypeParameter
 
 		closeBrace ObjectPosition

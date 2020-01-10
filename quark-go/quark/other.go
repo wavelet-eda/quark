@@ -17,7 +17,7 @@ type (
 			text string
 
 			firstChar ObjectPosition
-			lastChar ObjectPosition
+			lastChar  ObjectPosition
 		}
 
 		ConstructorField struct {

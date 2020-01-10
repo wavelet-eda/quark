@@ -17,7 +17,7 @@ func (a AtomicInnerConcat) End() *ObjectPosition {
 
 type ReplicateConcat struct {
 	ReplicateAmount Expr
-	ReplicateExpr Expr
+	ReplicateExpr   Expr
 
 	rCurly ObjectPosition
 }
