@@ -8,7 +8,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Generate GoDoc
-      uses: ktr0731/godoc-action@v0.1.0
+      uses: Spaceman1701/godoc-action
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Push changes
