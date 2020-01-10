@@ -1,4 +1,4 @@
-module wavelet-go
+module github.com/wwerst/wavelet/wavelet-go
 
 go 1.13
 

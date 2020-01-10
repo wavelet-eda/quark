@@ -2,7 +2,7 @@ parser grammar QuarkParser;
 
 options {tokenVocab = QuarkLexer;}
 
-package: importdecl* decl* EOF;
+quarkpackage: importdecl* decl* EOF;
 
 decl
     : structdecl
