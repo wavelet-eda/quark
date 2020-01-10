@@ -120,9 +120,8 @@ pattern
 parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;
 
 parameterdef
-    : KW_TYPE typeexpr (KW_IMPLEMENTS name)? #TypeParameter
-    | KW_TYPE typeexpr KW_IMPLEMENTS structdef #AdhocTypeParameter
-    | typeexpr? expr #ValueParameter
+    : KW_TYPE typeexpr #TypeParameter
+    | typeexpr expr #ValueParameter
     ;
 
 returnlist
@@ -130,7 +129,7 @@ returnlist
     | typeexpr realname (COMMA typeexpr realname)* #NamedReturn
     ;
 
-argumentdef: typeexpr? realname;
+argumentdef: typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 

@@ -79,10 +79,18 @@ type (
 	}
 
 	//ParameterDef nodes are param definitions in function, module, or type
-	//declarations.
-	ParameterDef interface {
-		AST
-		parameterDefNode()
+	//declarations. If IsType is true, ExprVal must be null.
+	ParameterDef struct {
+		IsType bool
+		TypeVal TypeExpr
+		ExprVal Expr
+
+		kwType ObjectPosition
+	}
+
+	ArgumentDef struct {
+		ArgType TypeExpr
+		ArgName RealName
 	}
 
 	//ReturnList nodes are single or multi returns from functions and modules.
@@ -91,34 +99,10 @@ type (
 		returnList()
 	}
 
-	//ArgumentList nodes are signal argument lists for functions and modules.
-	ArgumentList interface {
-		AST
-		argumentListNode()
-	}
-
-	//StructDef nodes are declarations which define struct types.
-	StructDef interface {
-		AST
-		structDefNode()
-	}
-
 	//TraitImpl nodes are declarations which define trait implementations.
 	TraitImpl interface {
 		AST
 		traitImplNode()
-	}
-
-	//FuncDecl nodes are declarations which define functions.
-	FuncDecl interface {
-		AST
-		funcDeclNode()
-	}
-
-	//ModuleDecl nodes are declarations which define modules.
-	ModuleDecl interface {
-		AST
-		moduleDeclNode()
 	}
 
 	//Annotation nodes are declarations which define annotations.
@@ -151,6 +135,18 @@ func (p *Package) Start() *ObjectPosition {
 	}
 }
 
+func (p *ParameterDef) Start() *ObjectPosition {
+	if p.IsType {
+		return &p.kwType
+	} else {
+		return p.TypeVal.Start()
+	}
+}
+
+func (a *ArgumentDef) Start() *ObjectPosition {
+	return a.ArgType.Start()
+}
+
 func (p *Package) End() *ObjectPosition {
 	if len(p.Symbols) > 0 {
 		return p.Symbols[len(p.Symbols) - 1].Start()
@@ -159,4 +155,16 @@ func (p *Package) End() *ObjectPosition {
 	} else {
 		return nil
 	}
+}
+
+func (p *ParameterDef) End() *ObjectPosition {
+	if p.IsType {
+		return p.TypeVal.End()
+	} else {
+		return p.ExprVal.End()
+	}
+}
+
+func (a *ArgumentDef) End() *ObjectPosition {
+	return a.ArgName.End()
 }

@@ -14,7 +14,7 @@ type (
 		}
 
 		RealName struct {
-			text string
+			Text string
 
 			firstChar ObjectPosition
 			lastChar  ObjectPosition
