@@ -7,15 +7,15 @@
 
   <title>quark - Go Documentation Server</title>
 
-<link type="text/css" rel="stylesheet" href="/github.com/wwerst/wavelet/wavelet-go/lib/godoc/style.css">
+<link type="text/css" rel="stylesheet" href="/lib/godoc/style.css">
 
 <script>window.initFuncs = [];</script>
-<script src="/github.com/wwerst/wavelet/wavelet-go/lib/godoc/jquery.js" defer></script>
+<script src="/lib/godoc/jquery.js" defer></script>
 
 
 
 <script>var goVersion = "go1.13.6";</script>
-<script src="/github.com/wwerst/wavelet/wavelet-go/lib/godoc/godocs.js" defer></script>
+<script src="/lib/godoc/godocs.js" defer></script>
 </head>
 <body>
 
@@ -109,6 +109,8 @@
 			<div id="manual-nav">
 			<dl>
 			
+				<dd><a href="#pkg-constants">Constants</a></dd>
+			
 			
 			
 			
@@ -125,6 +127,12 @@
 				
 				<dd><a href="#Annotation">type Annotation</a></dd>
 				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Annotation.End">func (a *Annotation) End() *ObjectPosition</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Annotation.Start">func (a *Annotation) Start() *ObjectPosition</a></dd>
 				
 			
 				
@@ -335,6 +343,12 @@
 				<dd><a href="#ConstructorField">type ConstructorField</a></dd>
 				
 				
+					
+					<dd>&nbsp; &nbsp; <a href="#ConstructorField.End">func (c *ConstructorField) End() *ObjectPosition</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ConstructorField.Start">func (c *ConstructorField) Start() *ObjectPosition</a></dd>
+				
 			
 				
 				<dd><a href="#Decl">type Decl</a></dd>
@@ -455,6 +469,12 @@
 				<dd><a href="#Literal">type Literal</a></dd>
 				
 				
+					
+					<dd>&nbsp; &nbsp; <a href="#Literal.End">func (l *Literal) End() *ObjectPosition</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Literal.Start">func (l *Literal) Start() *ObjectPosition</a></dd>
+				
 			
 				
 				<dd><a href="#LiteralExpr">type LiteralExpr</a></dd>
@@ -500,6 +520,17 @@
 				
 			
 				
+				<dd><a href="#NamedReturn">type NamedReturn</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NamedReturn.End">func (r *NamedReturn) End() *ObjectPosition</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NamedReturn.Start">func (r *NamedReturn) Start() *ObjectPosition</a></dd>
+				
+			
+				
 				<dd><a href="#NewModuleExpr">type NewModuleExpr</a></dd>
 				
 				
@@ -516,6 +547,11 @@
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#ObjectPosition.Next">func (o ObjectPosition) Next() *ObjectPosition</a></dd>
+				
+			
+				
+				<dd><a href="#OneNamedReturn">type OneNamedReturn</a></dd>
+				
 				
 			
 				
@@ -644,6 +680,17 @@
 				
 			
 				
+				<dd><a href="#SingleReturn">type SingleReturn</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SingleReturn.End">func (r *SingleReturn) End() *ObjectPosition</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SingleReturn.Start">func (r *SingleReturn) Start() *ObjectPosition</a></dd>
+				
+			
+				
 				<dd><a href="#SliceExpr">type SliceExpr</a></dd>
 				
 				
@@ -684,11 +731,6 @@
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#TernaryExpr.Start">func (e TernaryExpr) Start() *ObjectPosition</a></dd>
-				
-			
-				
-				<dd><a href="#TraitImpl">type TraitImpl</a></dd>
-				
 				
 			
 				
@@ -829,6 +871,8 @@
 			
 				<a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/pattern.go">pattern.go</a>
 			
+				<a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go">returnlist.go</a>
+			
 				<a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/stmt.go">stmt.go</a>
 			
 				<a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go">typeexpr.go</a>
@@ -843,6 +887,26 @@
 
 		
 
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				
+				<pre>const (
+    <span id="OpAssign">OpAssign</span> = <a href="/pkg/builtin/#iota">iota</a>
+    <span id="OpAddAssign">OpAddAssign</span>
+    <span id="OpSubAssign">OpSubAssign</span>
+    <span id="OpMulAssign">OpMulAssign</span>
+    <span id="OpDivAssign">OpDivAssign</span>
+    <span id="OpModAssign">OpModAssign</span>
+    <span id="OpBandAssign">OpBandAssign</span>
+    <span id="OpBorAssign">OpBorAssign</span>
+    <span id="OpXorAssign">OpXorAssign</span>
+    <span id="OpLeftShiftAssign">OpLeftShiftAssign</span>
+    <span id="OpRightShiftAssign">OpRightShiftAssign</span>
+    <span id="OpArithLeftShiftAssign">OpArithLeftShiftAssign</span>
+    <span id="OpArithRightShiftAssign">OpArithRightShiftAssign</span>
+)</pre>
+			
 		
 		
 		
@@ -908,7 +972,7 @@ Visitor which can visit AST nodes.
 		
 			
 			
-			<h2 id="Annotation">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2153:2203#L100">Annotation</a>
+			<h2 id="Annotation">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2034:2082#L94">Annotation</a>
 				<a class="permalink" href="#Annotation">&#xb6;</a>
 				
 				
@@ -917,10 +981,10 @@ Visitor which can visit AST nodes.
 Annotation nodes are declarations which define annotations.
 </p>
 
-			<pre>type Annotation interface {
-    <a href="#AST">AST</a>
-    <span class="comment">// contains filtered or unexported methods</span>
-}</pre>
+			<pre>type Annotation struct {
+<span id="Annotation.AnnotationName"></span>    AnnotationName <a href="#RealName">RealName</a>
+}
+</pre>
 
 			
 
@@ -932,6 +996,30 @@ Annotation nodes are declarations which define annotations.
 
 			
 
+			
+				
+				<h3 id="Annotation.End">func (*Annotation) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3320:3362#L162">End</a>
+					<a class="permalink" href="#Annotation.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="#Annotation">Annotation</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Annotation.Start">func (*Annotation) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2814:2858#L136">Start</a>
+					<a class="permalink" href="#Annotation.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (a *<a href="#Annotation">Annotation</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
 			
 		
 			
@@ -963,7 +1051,7 @@ ArgumentDef nodes are functions or module argument declarations.
 
 			
 				
-				<h3 id="ArgumentDef.End">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3242:3285#L159">End</a>
+				<h3 id="ArgumentDef.End">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3247:3290#L158">End</a>
 					<a class="permalink" href="#ArgumentDef.End">&#xb6;</a>
 					
 					
@@ -975,7 +1063,7 @@ ArgumentDef nodes are functions or module argument declarations.
 				
 			
 				
-				<h3 id="ArgumentDef.Start">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2815:2860#L137">Start</a>
+				<h3 id="ArgumentDef.Start">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2737:2782#L132">Start</a>
 					<a class="permalink" href="#ArgumentDef.Start">&#xb6;</a>
 					
 					
@@ -1315,7 +1403,7 @@ Assignable nodes appear on the left hand side of assignments.
 		
 			
 			
-			<h2 id="AssignmentOp">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/operators.go?s=164:211#L7">AssignmentOp</a>
+			<h2 id="AssignmentOp">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/operators.go?s=419:445#L25">AssignmentOp</a>
 				<a class="permalink" href="#AssignmentOp">&#xb6;</a>
 				
 				
@@ -1324,9 +1412,7 @@ Assignable nodes appear on the left hand side of assignments.
 An assignment operator
 </p>
 
-			<pre>type AssignmentOp interface {
-    <span class="comment">// contains filtered or unexported methods</span>
-}</pre>
+			<pre>type AssignmentOp = <a href="/pkg/builtin/#uint16">uint16</a></pre>
 
 			
 
@@ -1478,7 +1564,7 @@ A binary operator usage.
 		
 			
 			
-			<h2 id="BinaryOp">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/operators.go?s=97:137#L1">BinaryOp</a>
+			<h2 id="BinaryOp">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/operators.go?s=125:147#L2">BinaryOp</a>
 				<a class="permalink" href="#BinaryOp">&#xb6;</a>
 				
 				
@@ -1487,10 +1573,29 @@ A binary operator usage.
 A binary operator.
 </p>
 
-			<pre>type BinaryOp interface {
-    <span class="comment">// contains filtered or unexported methods</span>
-}</pre>
+			<pre>type BinaryOp = <a href="/pkg/builtin/#uint16">uint16</a></pre>
 
+			
+				
+				<pre>const (
+    <span id="OpMul">OpMul</span> <a href="#BinaryOp">BinaryOp</a> = <a href="/pkg/builtin/#iota">iota</a>
+    <span id="OpDiv">OpDiv</span>
+    <span id="OpMod">OpMod</span>
+    <span id="OpLeftShift">OpLeftShift</span>
+    <span id="OpRightShift">OpRightShift</span>
+    <span id="OpArithLeftShift">OpArithLeftShift</span>
+    <span id="OpArithRightShift">OpArithRightShift</span>
+    <span id="OpBinaryAnd">OpBinaryAnd</span>
+    <span id="OpBinaryOr">OpBinaryOr</span>
+    <span id="OpBinaryXor">OpBinaryXor</span>
+    <span id="OpBinaryNand">OpBinaryNand</span>
+    <span id="OpBinaryNor">OpBinaryNor</span>
+    <span id="OpBinaryXnor">OpBinaryXnor</span>
+    <span id="OpLogicAnd">OpLogicAnd</span>
+    <span id="OpLogicNor">OpLogicNor</span>
+    <span id="OpImplication">OpImplication</span>
+    <span id="OpEquivalence">OpEquivalence</span>
+)</pre>
 			
 
 			
@@ -1968,7 +2073,7 @@ A struct constructor.
 		
 			
 			
-			<h2 id="ConstructorField">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=328:370#L9">ConstructorField</a>
+			<h2 id="ConstructorField">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=328:393#L9">ConstructorField</a>
 				<a class="permalink" href="#ConstructorField">&#xb6;</a>
 				
 				
@@ -1978,7 +2083,8 @@ A field as used in a struct constructor.
 </p>
 
 			<pre>type ConstructorField struct {
-    <span class="comment">// contains filtered or unexported fields</span>
+<span id="ConstructorField.FieldName"></span>    FieldName <a href="#Name">Name</a>
+<span id="ConstructorField.ValueExpr"></span>    ValueExpr <a href="#Expr">Expr</a>
 }
 </pre>
 
@@ -1992,6 +2098,30 @@ A field as used in a struct constructor.
 
 			
 
+			
+				
+				<h3 id="ConstructorField.End">func (*ConstructorField) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=859:907#L41">End</a>
+					<a class="permalink" href="#ConstructorField.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="#ConstructorField">ConstructorField</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ConstructorField.Start">func (*ConstructorField) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=705:755#L32">Start</a>
+					<a class="permalink" href="#ConstructorField.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="#ConstructorField">ConstructorField</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
 			
 		
 			
@@ -2132,7 +2262,7 @@ A definition of a field inside a struct.
 
 			
 				
-				<h3 id="Field.End">func (*Field) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=684:721#L33">End</a>
+				<h3 id="Field.End">func (*Field) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=790:827#L37">End</a>
 					<a class="permalink" href="#Field.End">&#xb6;</a>
 					
 					
@@ -2144,7 +2274,7 @@ A definition of a field inside a struct.
 				
 			
 				
-				<h3 id="Field.Start">func (*Field) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=532:571#L23">Start</a>
+				<h3 id="Field.Start">func (*Field) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=555:594#L24">Start</a>
 					<a class="permalink" href="#Field.Start">&#xb6;</a>
 					
 					
@@ -2240,7 +2370,7 @@ A line and character position in a specific file.
 		
 			
 			
-			<h2 id="FunctionDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=271:493#L8">FunctionDecl</a>
+			<h2 id="FunctionDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=292:514#L10">FunctionDecl</a>
 				<a class="permalink" href="#FunctionDecl">&#xb6;</a>
 				
 				
@@ -2275,7 +2405,7 @@ Declaration of a Function symbol.
 
 			
 				
-				<h3 id="FunctionDecl.End">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1296:1340#L69">End</a>
+				<h3 id="FunctionDecl.End">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1317:1361#L71">End</a>
 					<a class="permalink" href="#FunctionDecl.End">&#xb6;</a>
 					
 					
@@ -2287,7 +2417,7 @@ Declaration of a Function symbol.
 				
 			
 				
-				<h3 id="FunctionDecl.Start">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=928:974#L49">Start</a>
+				<h3 id="FunctionDecl.Start">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=949:995#L51">Start</a>
 					<a class="permalink" href="#FunctionDecl.Start">&#xb6;</a>
 					
 					
@@ -2439,7 +2569,7 @@ ImportDecl nodes are package import declarations.
 		
 			
 			
-			<h2 id="InnerConcat">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2443:2495#L113">InnerConcat</a>
+			<h2 id="InnerConcat">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2365:2417#L108">InnerConcat</a>
 				<a class="permalink" href="#InnerConcat">&#xb6;</a>
 				
 				
@@ -2468,7 +2598,7 @@ contexts. Examples are bit concatenation and replication.
 		
 			
 			
-			<h2 id="InterfaceDirection">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=420:445#L14">InterfaceDirection</a>
+			<h2 id="InterfaceDirection">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=443:468#L15">InterfaceDirection</a>
 				<a class="permalink" href="#InterfaceDirection">&#xb6;</a>
 				
 				
@@ -2527,7 +2657,7 @@ A definition of a field inside an interface.
 
 			
 				
-				<h3 id="InterfaceField.Start">func (*InterfaceField) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=605:653#L27">Start</a>
+				<h3 id="InterfaceField.Start">func (*InterfaceField) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/other.go?s=628:676#L28">Start</a>
 					<a class="permalink" href="#InterfaceField.Start">&#xb6;</a>
 					
 					
@@ -2597,7 +2727,7 @@ An in line lambda.
 		
 			
 			
-			<h2 id="Literal">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2257:2301#L106">Literal</a>
+			<h2 id="Literal">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2136:2223#L99">Literal</a>
 				<a class="permalink" href="#Literal">&#xb6;</a>
 				
 				
@@ -2606,10 +2736,11 @@ An in line lambda.
 Literal nodes are literal values in quark code.
 </p>
 
-			<pre>type Literal interface {
-    <a href="#AST">AST</a>
-    <span class="comment">// contains filtered or unexported methods</span>
-}</pre>
+			<pre>type Literal struct {
+<span id="Literal.Text"></span>    Text <a href="/pkg/builtin/#string">string</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
 
 			
 
@@ -2621,6 +2752,30 @@ Literal nodes are literal values in quark code.
 
 			
 
+			
+				
+				<h3 id="Literal.End">func (*Literal) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3452:3491#L170">End</a>
+					<a class="permalink" href="#Literal.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="#Literal">Literal</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Literal.Start">func (*Literal) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3384:3425#L166">Start</a>
+					<a class="permalink" href="#Literal.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (l *<a href="#Literal">Literal</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
 			
 		
 			
@@ -2756,7 +2911,7 @@ A match statement or expression.
 		
 			
 			
-			<h2 id="ModuleDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=531:777#L24">ModuleDecl</a>
+			<h2 id="ModuleDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=552:798#L26">ModuleDecl</a>
 				<a class="permalink" href="#ModuleDecl">&#xb6;</a>
 				
 				
@@ -2792,7 +2947,7 @@ Declaration of a module symbol.
 
 			
 				
-				<h3 id="ModuleDecl.End">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1368:1410#L73">End</a>
+				<h3 id="ModuleDecl.End">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1389:1431#L75">End</a>
 					<a class="permalink" href="#ModuleDecl.End">&#xb6;</a>
 					
 					
@@ -2804,7 +2959,7 @@ Declaration of a module symbol.
 				
 			
 				
-				<h3 id="ModuleDecl.Start">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1079:1123#L57">Start</a>
+				<h3 id="ModuleDecl.Start">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1100:1144#L59">Start</a>
 					<a class="permalink" href="#ModuleDecl.Start">&#xb6;</a>
 					
 					
@@ -2842,6 +2997,56 @@ Name nodes are symbol names (both qualified and unqualified).
 
 			
 
+			
+		
+			
+			
+			<h2 id="NamedReturn">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go?s=72:182#L1">NamedReturn</a>
+				<a class="permalink" href="#NamedReturn">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type NamedReturn struct {
+<span id="NamedReturn.ReturnTypes"></span>    ReturnTypes []<a href="#OneNamedReturn">OneNamedReturn</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="NamedReturn.End">func (*NamedReturn) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go?s=489:532#L23">End</a>
+					<a class="permalink" href="#NamedReturn.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (r *<a href="#NamedReturn">NamedReturn</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="NamedReturn.Start">func (*NamedReturn) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go?s=340:385#L15">Start</a>
+					<a class="permalink" href="#NamedReturn.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (r *<a href="#NamedReturn">NamedReturn</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
 			
 		
 			
@@ -2942,6 +3147,32 @@ for this run of the compiler.
 		
 			
 			
+			<h2 id="OneNamedReturn">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go?s=185:255#L5">OneNamedReturn</a>
+				<a class="permalink" href="#OneNamedReturn">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type OneNamedReturn struct {
+<span id="OneNamedReturn.ReturnName"></span>    ReturnName <a href="#RealName">RealName</a>
+<span id="OneNamedReturn.ReturnType"></span>    ReturnType <a href="#TypeExpr">TypeExpr</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
 			<h2 id="Package">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=377:436#L6">Package</a>
 				<a class="permalink" href="#Package">&#xb6;</a>
 				
@@ -2969,7 +3200,7 @@ Package is a single Quark file.
 
 			
 				
-				<h3 id="Package.End">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2892:2931#L141">End</a>
+				<h3 id="Package.End">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2897:2936#L140">End</a>
 					<a class="permalink" href="#Package.End">&#xb6;</a>
 					
 					
@@ -2981,7 +3212,7 @@ Package is a single Quark file.
 				
 			
 				
-				<h3 id="Package.Start">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2499:2540#L119">Start</a>
+				<h3 id="Package.Start">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2421:2462#L114">Start</a>
 					<a class="permalink" href="#Package.Start">&#xb6;</a>
 					
 					
@@ -3025,7 +3256,7 @@ declarations. If IsType is true, ExprVal must be null.
 
 			
 				
-				<h3 id="ParameterDef.End">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3114:3158#L151">End</a>
+				<h3 id="ParameterDef.End">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3119:3163#L150">End</a>
 					<a class="permalink" href="#ParameterDef.End">&#xb6;</a>
 					
 					
@@ -3037,7 +3268,7 @@ declarations. If IsType is true, ExprVal must be null.
 				
 			
 				
-				<h3 id="ParameterDef.Start">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2689:2735#L129">Start</a>
+				<h3 id="ParameterDef.Start">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2611:2657#L124">Start</a>
 					<a class="permalink" href="#ParameterDef.Start">&#xb6;</a>
 					
 					
@@ -3430,7 +3661,7 @@ replication amount and the second expression is the replication value.
 		
 			
 			
-			<h2 id="ReturnList">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=1918:1964#L88">ReturnList</a>
+			<h2 id="ReturnList">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=1918:1968#L88">ReturnList</a>
 				<a class="permalink" href="#ReturnList">&#xb6;</a>
 				
 				
@@ -3560,6 +3791,55 @@ A function or module return statement.
 		
 			
 			
+			<h2 id="SingleReturn">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go?s=23:69#L1">SingleReturn</a>
+				<a class="permalink" href="#SingleReturn">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type SingleReturn struct {
+<span id="SingleReturn.ReturnType"></span>    ReturnType <a href="#TypeExpr">TypeExpr</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="SingleReturn.End">func (*SingleReturn) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go?s=412:456#L19">End</a>
+					<a class="permalink" href="#SingleReturn.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (r *<a href="#SingleReturn">SingleReturn</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SingleReturn.Start">func (*SingleReturn) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/returnlist.go?s=259:305#L11">Start</a>
+					<a class="permalink" href="#SingleReturn.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (r *<a href="#SingleReturn">SingleReturn</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
 			<h2 id="SliceExpr">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/expr.go?s=3982:4077#L232">SliceExpr</a>
 				<a class="permalink" href="#SliceExpr">&#xb6;</a>
 				
@@ -3645,7 +3925,7 @@ Stmt nodes are statements which implement some behavior.
 		
 			
 			
-			<h2 id="StructDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=58:231#L1">StructDecl</a>
+			<h2 id="StructDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=58:252#L1">StructDecl</a>
 				<a class="permalink" href="#StructDecl">&#xb6;</a>
 				
 				
@@ -3661,6 +3941,8 @@ Declaration of a Struct symbol.
 <span id="StructDecl.Parameters"></span>    Parameters []<a href="#ParameterDef">ParameterDef</a>
 
 <span id="StructDecl.Fields"></span>    Fields []<a href="#Field">Field</a>
+
+<span id="StructDecl.TraitImpls"></span>    TraitImpls []<a href="#Name">Name</a>
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -3677,7 +3959,7 @@ Declaration of a Struct symbol.
 
 			
 				
-				<h3 id="StructDecl.End">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1226:1268#L65">End</a>
+				<h3 id="StructDecl.End">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1247:1289#L67">End</a>
 					<a class="permalink" href="#StructDecl.End">&#xb6;</a>
 					
 					
@@ -3689,7 +3971,7 @@ Declaration of a Struct symbol.
 				
 			
 				
-				<h3 id="StructDecl.Start">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=781:825#L41">Start</a>
+				<h3 id="StructDecl.Start">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=802:846#L43">Start</a>
 					<a class="permalink" href="#StructDecl.Start">&#xb6;</a>
 					
 					
@@ -3777,34 +4059,6 @@ A ternary if expression.
 				
 				
 				
-			
-		
-			
-			
-			<h2 id="TraitImpl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2039:2087#L94">TraitImpl</a>
-				<a class="permalink" href="#TraitImpl">&#xb6;</a>
-				
-				
-			</h2>
-			<p>
-TraitImpl nodes are declarations which define trait implementations.
-</p>
-
-			<pre>type TraitImpl interface {
-    <a href="#AST">AST</a>
-    <span class="comment">// contains filtered or unexported methods</span>
-}</pre>
-
-			
-
-			
-
-			
-			
-			
-
-			
-
 			
 		
 			
@@ -4081,19 +4335,23 @@ A unary operator usage.
 		
 			
 			
-			<h2 id="UnaryOp">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/operators.go?s=36:74#L1">UnaryOp</a>
+			<h2 id="UnaryOp">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/operators.go?s=34:55#L1">UnaryOp</a>
 				<a class="permalink" href="#UnaryOp">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-A unary operator.
+A unary operator
 </p>
 
-			<pre>type UnaryOp interface {
-    <span class="comment">// contains filtered or unexported methods</span>
-}</pre>
+			<pre>type UnaryOp = <a href="/pkg/builtin/#uint16">uint16</a></pre>
 
+			
+				
+				<pre>const (
+    <span id="OpComplement">OpComplement</span> <a href="#UnaryOp">UnaryOp</a> = <a href="/pkg/builtin/#iota">iota</a>
+    <span id="OpNot">OpNot</span>
+)</pre>
 			
 
 			
