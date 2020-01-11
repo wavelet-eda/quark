@@ -3,8 +3,10 @@
 package main
 
 import (
+	"fmt"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/wwerst/wavelet/wavelet-go/src/parser"
+	"github.com/wwerst/wavelet/wavelet-go/src/quark"
 	"os"
 )
 
@@ -20,6 +22,7 @@ func main() {
 	p.BuildParseTrees = true
 
 	parseTreeConverter := parser.NewParseTreeConverter()
-	p.Quarkpackage()
-	parseTreeConverter.VisitQuarkpackage(p.Quarkpackage().(*parser.QuarkpackageContext))
+	quarkPackage := parseTreeConverter.VisitQuarkpackage(p.Quarkpackage().(*parser.QuarkpackageContext)).(quark.Package)
+
+	fmt.Printf("Wow, that file had %d imports!\n", len(quarkPackage.Imports))
 }

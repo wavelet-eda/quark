@@ -1,28 +1,28 @@
 package quark
 
 type (
-	genericImport struct {
+	GenericImport struct {
 		PackageName Name
 
 		kwImport ObjectPosition
 	}
 
 	SingleImport struct {
-		genericImport
+		GenericImport
 	}
 
 	WildcardImport struct {
-		genericImport
+		GenericImport
 
 		star ObjectPosition
 	}
 )
 
-func (i *genericImport) Start() *ObjectPosition {
+func (i *GenericImport) Start() *ObjectPosition {
 	return &i.kwImport
 }
 
-func (i *genericImport) End() *ObjectPosition {
+func (i *GenericImport) End() *ObjectPosition {
 	return i.PackageName.End()
 }
 
@@ -30,4 +30,4 @@ func (w *WildcardImport) End() *ObjectPosition {
 	return w.star.Next()
 }
 
-func (i *genericImport) importDeclNode() {}
+func (i *GenericImport) importDeclNode() {}
