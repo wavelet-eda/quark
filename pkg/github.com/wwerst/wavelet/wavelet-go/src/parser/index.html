@@ -114,9 +114,6 @@ Home of the parser and lexer implementations.
 			
 			
 			
-				
-				<dd><a href="#VisitLiteral">func (v *BaseQuarkParserVisitor) VisitLiteral(ctx *LiteralContext) interface{}</a></dd>
-			
 			
 				
 				<dd><a href="#ParseTreeConverter">type ParseTreeConverter</a></dd>
@@ -129,13 +126,16 @@ Home of the parser and lexer implementations.
 					<dd>&nbsp; &nbsp; <a href="#ParseTreeConverter.Visit">func (ptc *ParseTreeConverter) Visit(tree antlr.ParseTree) interface{}</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="#ParseTreeConverter.VisitLiteral">func (ptc *ParseTreeConverter) VisitLiteral(ctx *LiteralContext) interface{}</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="#ParseTreeConverter.VisitQualifiedName">func (ptc *ParseTreeConverter) VisitQualifiedName(ctx *QualifiedNameContext) interface{}</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#ParseTreeConverter.VisitQuarkpackage">func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) interface{}</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="#ParseTreeConverter.VisitRealName">func (ptc *ParseTreeConverter) VisitRealName(ctx *RealNameContext) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="#ParseTreeConverter.VisitRealname">func (ptc *ParseTreeConverter) VisitRealname(ctx *RealnameContext) interface{}</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#ParseTreeConverter.VisitSingleImport">func (ptc *ParseTreeConverter) VisitSingleImport(ctx *SingleImportContext) interface{}</a></dd>
@@ -167,19 +167,6 @@ Home of the parser and lexer implementations.
 
 		
 		
-		
-			
-			
-			<h2 id="VisitLiteral">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=2524:2602#L77">VisitLiteral</a>
-				<a class="permalink" href="#VisitLiteral">&#xb6;</a>
-				
-				
-			</h2>
-			<pre>func (v *<a href="#BaseQuarkParserVisitor">BaseQuarkParserVisitor</a>) VisitLiteral(ctx *<a href="#LiteralContext">LiteralContext</a>) interface{}</pre>
-			
-			
-			
-
 		
 		
 			
@@ -235,7 +222,19 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitQualifiedName">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=2020:2108#L64">VisitQualifiedName</a>
+				<h3 id="ParseTreeConverter.VisitLiteral">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=2547:2623#L76">VisitLiteral</a>
+					<a class="permalink" href="#ParseTreeConverter.VisitLiteral">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (ptc *<a href="#ParseTreeConverter">ParseTreeConverter</a>) VisitLiteral(ctx *<a href="#LiteralContext">LiteralContext</a>) interface{}</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ParseTreeConverter.VisitQualifiedName">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=2113:2201#L63">VisitQualifiedName</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitQualifiedName">&#xb6;</a>
 					
 					
@@ -259,12 +258,12 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitRealName">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=1871:1949#L58">VisitRealName</a>
-					<a class="permalink" href="#ParseTreeConverter.VisitRealName">&#xb6;</a>
+				<h3 id="ParseTreeConverter.VisitRealname">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=1871:1949#L58">VisitRealname</a>
+					<a class="permalink" href="#ParseTreeConverter.VisitRealname">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (ptc *<a href="#ParseTreeConverter">ParseTreeConverter</a>) VisitRealName(ctx *<a href="#RealNameContext">RealNameContext</a>) interface{}</pre>
+				<pre>func (ptc *<a href="#ParseTreeConverter">ParseTreeConverter</a>) VisitRealname(ctx *<a href="#RealnameContext">RealnameContext</a>) interface{}</pre>
 				
 				
 				

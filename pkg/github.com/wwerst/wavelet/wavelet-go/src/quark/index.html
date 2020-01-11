@@ -474,6 +474,9 @@
 				
 				<dd><a href="#Literal">type Literal</a></dd>
 				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewLiteral">func NewLiteral(text string, pos ObjectPosition) *Literal</a></dd>
+				
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#Literal.End">func (l *Literal) End() *ObjectPosition</a></dd>
@@ -632,7 +635,7 @@
 				<dd><a href="#RealName">type RealName</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="#NewRealName">func NewRealName(text string, firstChar ObjectPosition, lastChar ObjectPosition) RealName</a></dd>
+					<dd>&nbsp; &nbsp; <a href="#NewRealName">func NewRealName(text string, pos ObjectPosition) *RealName</a></dd>
 				
 				
 					
@@ -1001,7 +1004,7 @@ Annotation nodes are declarations which define annotations.
 
 			
 				
-				<h3 id="Annotation.End">func (*Annotation) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3320:3362#L162">End</a>
+				<h3 id="Annotation.End">func (*Annotation) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3290:3332#L161">End</a>
 					<a class="permalink" href="#Annotation.End">&#xb6;</a>
 					
 					
@@ -1013,7 +1016,7 @@ Annotation nodes are declarations which define annotations.
 				
 			
 				
-				<h3 id="Annotation.Start">func (*Annotation) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2814:2858#L136">Start</a>
+				<h3 id="Annotation.Start">func (*Annotation) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2784:2828#L135">Start</a>
 					<a class="permalink" href="#Annotation.Start">&#xb6;</a>
 					
 					
@@ -1054,7 +1057,7 @@ ArgumentDef nodes are functions or module argument declarations.
 
 			
 				
-				<h3 id="ArgumentDef.End">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3247:3290#L158">End</a>
+				<h3 id="ArgumentDef.End">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3217:3260#L157">End</a>
 					<a class="permalink" href="#ArgumentDef.End">&#xb6;</a>
 					
 					
@@ -1066,7 +1069,7 @@ ArgumentDef nodes are functions or module argument declarations.
 				
 			
 				
-				<h3 id="ArgumentDef.Start">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2737:2782#L132">Start</a>
+				<h3 id="ArgumentDef.Start">func (*ArgumentDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2707:2752#L131">Start</a>
 					<a class="permalink" href="#ArgumentDef.Start">&#xb6;</a>
 					
 					
@@ -2593,7 +2596,7 @@ ImportDecl nodes are package import declarations.
 		
 			
 			
-			<h2 id="InnerConcat">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2365:2417#L108">InnerConcat</a>
+			<h2 id="InnerConcat">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2335:2387#L107">InnerConcat</a>
 				<a class="permalink" href="#InnerConcat">&#xb6;</a>
 				
 				
@@ -2751,7 +2754,7 @@ An in line lambda.
 		
 			
 			
-			<h2 id="Literal">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2136:2223#L99">Literal</a>
+			<h2 id="Literal">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2136:2193#L99">Literal</a>
 				<a class="permalink" href="#Literal">&#xb6;</a>
 				
 				
@@ -2775,10 +2778,21 @@ Literal nodes are literal values in quark code.
 			
 
 			
+				
+				<h3 id="NewLiteral">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3486:3543#L173">NewLiteral</a>
+					<a class="permalink" href="#NewLiteral">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewLiteral(text <a href="/pkg/builtin/#string">string</a>, pos <a href="#ObjectPosition">ObjectPosition</a>) *<a href="#Literal">Literal</a></pre>
+				
+				
+				
+			
 
 			
 				
-				<h3 id="Literal.End">func (*Literal) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3452:3491#L170">End</a>
+				<h3 id="Literal.End">func (*Literal) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3418:3457#L169">End</a>
 					<a class="permalink" href="#Literal.End">&#xb6;</a>
 					
 					
@@ -2790,7 +2804,7 @@ Literal nodes are literal values in quark code.
 				
 			
 				
-				<h3 id="Literal.Start">func (*Literal) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3384:3425#L166">Start</a>
+				<h3 id="Literal.Start">func (*Literal) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3354:3395#L165">Start</a>
 					<a class="permalink" href="#Literal.Start">&#xb6;</a>
 					
 					
@@ -3129,7 +3143,7 @@ A module call.
 		
 			
 			
-			<h2 id="ObjectPosition">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=236:300#L2">ObjectPosition</a>
+			<h2 id="ObjectPosition">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=227:291#L1">ObjectPosition</a>
 				<a class="permalink" href="#ObjectPosition">&#xb6;</a>
 				
 				
@@ -3155,7 +3169,7 @@ for this run of the compiler.
 
 			
 				
-				<h3 id="NewObjectPosition">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=302:367#L7">NewObjectPosition</a>
+				<h3 id="NewObjectPosition">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=293:358#L5">NewObjectPosition</a>
 					<a class="permalink" href="#NewObjectPosition">&#xb6;</a>
 					
 					
@@ -3168,7 +3182,7 @@ for this run of the compiler.
 
 			
 				
-				<h3 id="ObjectPosition.Next">func (ObjectPosition) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=441:487#L14">Next</a>
+				<h3 id="ObjectPosition.Next">func (ObjectPosition) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=432:478#L12">Next</a>
 					<a class="permalink" href="#ObjectPosition.Next">&#xb6;</a>
 					
 					
@@ -3235,7 +3249,7 @@ Package is a single Quark file.
 
 			
 				
-				<h3 id="Package.End">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2897:2936#L140">End</a>
+				<h3 id="Package.End">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2867:2906#L139">End</a>
 					<a class="permalink" href="#Package.End">&#xb6;</a>
 					
 					
@@ -3247,7 +3261,7 @@ Package is a single Quark file.
 				
 			
 				
-				<h3 id="Package.Start">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2421:2462#L114">Start</a>
+				<h3 id="Package.Start">func (*Package) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2391:2432#L113">Start</a>
 					<a class="permalink" href="#Package.Start">&#xb6;</a>
 					
 					
@@ -3291,7 +3305,7 @@ declarations. If IsType is true, ExprVal must be null.
 
 			
 				
-				<h3 id="ParameterDef.End">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3119:3163#L150">End</a>
+				<h3 id="ParameterDef.End">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=3089:3133#L149">End</a>
 					<a class="permalink" href="#ParameterDef.End">&#xb6;</a>
 					
 					
@@ -3303,7 +3317,7 @@ declarations. If IsType is true, ExprVal must be null.
 				
 			
 				
-				<h3 id="ParameterDef.Start">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2611:2657#L124">Start</a>
+				<h3 id="ParameterDef.Start">func (*ParameterDef) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/ast.go?s=2581:2627#L123">Start</a>
 					<a class="permalink" href="#ParameterDef.Start">&#xb6;</a>
 					
 					
@@ -3452,7 +3466,7 @@ Pattern nodes are pattern symbols in match branches
 		
 			
 			
-			<h2 id="QualifiedName">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=160:204#L3">QualifiedName</a>
+			<h2 id="QualifiedName">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=127:172#L2">QualifiedName</a>
 				<a class="permalink" href="#QualifiedName">&#xb6;</a>
 				
 				
@@ -3462,7 +3476,7 @@ A qualified name.
 </p>
 
 			<pre>type QualifiedName struct {
-<span id="QualifiedName.Parts"></span>    Parts []<a href="#RealName">RealName</a>
+<span id="QualifiedName.Parts"></span>    Parts []*<a href="#RealName">RealName</a>
 }
 </pre>
 
@@ -3478,7 +3492,7 @@ A qualified name.
 
 			
 				
-				<h3 id="QualifiedName.End">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=607:652#L29">End</a>
+				<h3 id="QualifiedName.End">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=501:546#L27">End</a>
 					<a class="permalink" href="#QualifiedName.End">&#xb6;</a>
 					
 					
@@ -3490,7 +3504,7 @@ A qualified name.
 				
 			
 				
-				<h3 id="QualifiedName.Start">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=455:502#L21">Start</a>
+				<h3 id="QualifiedName.Start">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=354:401#L19">Start</a>
 					<a class="permalink" href="#QualifiedName.Start">&#xb6;</a>
 					
 					
@@ -3504,7 +3518,7 @@ A qualified name.
 		
 			
 			
-			<h2 id="QuarkFile">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=94:133#L1">QuarkFile</a>
+			<h2 id="QuarkFile">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=81:124#L1">QuarkFile</a>
 				<a class="permalink" href="#QuarkFile">&#xb6;</a>
 				
 				
@@ -3514,7 +3528,7 @@ Metadata about a file participating in this execution of quarkc
 </p>
 
 			<pre>type QuarkFile struct {
-<span id="QuarkFile.File"></span>    File <a href="/pkg/os/">os</a>.<a href="/pkg/os/#File">File</a>
+<span id="QuarkFile.FileName"></span>    FileName *<a href="/pkg/builtin/#string">string</a>
 }
 </pre>
 
@@ -3532,7 +3546,7 @@ Metadata about a file participating in this execution of quarkc
 		
 			
 			
-			<h2 id="RealName">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=47:136#L1">RealName</a>
+			<h2 id="RealName">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=47:103#L1">RealName</a>
 				<a class="permalink" href="#RealName">&#xb6;</a>
 				
 				
@@ -3557,12 +3571,12 @@ An unqualified name.
 
 			
 				
-				<h3 id="NewRealName">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=208:297#L8">NewRealName</a>
+				<h3 id="NewRealName">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=176:235#L7">NewRealName</a>
 					<a class="permalink" href="#NewRealName">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewRealName(text <a href="/pkg/builtin/#string">string</a>, firstChar <a href="#ObjectPosition">ObjectPosition</a>, lastChar <a href="#ObjectPosition">ObjectPosition</a>) <a href="#RealName">RealName</a></pre>
+				<pre>func NewRealName(text <a href="/pkg/builtin/#string">string</a>, pos <a href="#ObjectPosition">ObjectPosition</a>) *<a href="#RealName">RealName</a></pre>
 				
 				
 				
@@ -3570,7 +3584,7 @@ An unqualified name.
 
 			
 				
-				<h3 id="RealName.End">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=535:575#L25">End</a>
+				<h3 id="RealName.End">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=434:474#L23">End</a>
 					<a class="permalink" href="#RealName.End">&#xb6;</a>
 					
 					
@@ -3582,7 +3596,7 @@ An unqualified name.
 				
 			
 				
-				<h3 id="RealName.Start">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=386:428#L17">Start</a>
+				<h3 id="RealName.Start">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=291:333#L15">Start</a>
 					<a class="permalink" href="#RealName.Start">&#xb6;</a>
 					
 					
