@@ -119,6 +119,7 @@ pattern
     | LCURLY (typeexpr? pattern) (COMMA typeexpr? pattern)* RCURLY #StructPattern
     ;
 
+
 parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;
 
 parameterdef

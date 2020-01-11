@@ -15,14 +15,6 @@ type (
 			directionKw ObjectPosition
 		}
 
-		//An unqualified name.
-		RealName struct {
-			Text string
-
-			firstChar ObjectPosition
-			lastChar  ObjectPosition
-		}
-
 		//A field as used in a struct constructor.
 		ConstructorField struct {
 			name Name
@@ -38,10 +30,6 @@ const (
 )
 
 
-func (n RealName) Start() *ObjectPosition {
-	return &n.firstChar
-}
-
 func (f *Field) Start() *ObjectPosition {
 	return f.FieldType.Start()
 }
@@ -51,10 +39,6 @@ func (f *InterfaceField) Start() *ObjectPosition {
 }
 
 
-
-func (n RealName) End() *ObjectPosition {
-	return n.lastChar.Next()
-}
 
 func (f *Field) End() *ObjectPosition {
 	return f.FieldName.End()
