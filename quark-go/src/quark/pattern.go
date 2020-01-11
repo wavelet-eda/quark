@@ -6,6 +6,7 @@ type (
 		Atom RealName
 	}
 
+	//A pattern which matches a type
 	TypePattern struct {
 		TypeName Name
 		Params []Pattern
