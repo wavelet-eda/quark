@@ -10,6 +10,8 @@ type (
 
 		Fields []Field
 
+		TraitImpls []Name
+
 		kwStruct ObjectPosition
 		closeCurly ObjectPosition
 	}

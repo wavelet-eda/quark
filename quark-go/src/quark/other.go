@@ -17,7 +17,8 @@ type (
 
 		//A field as used in a struct constructor.
 		ConstructorField struct {
-			name Name
+			FieldName Name
+			ValueExpr Expr
 		}
 
 		//The directionality of an interface field.
@@ -38,10 +39,17 @@ func (f *InterfaceField) Start() *ObjectPosition {
 	return &f.directionKw
 }
 
+func (c *ConstructorField) Start() *ObjectPosition {
+	return c.FieldName.Start()
+}
 
 
 func (f *Field) End() *ObjectPosition {
 	return f.FieldName.End()
+}
+
+func (c *ConstructorField) End() *ObjectPosition {
+	return c.ValueExpr.End()
 }
 
 

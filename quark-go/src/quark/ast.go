@@ -97,25 +97,20 @@ type (
 	//ReturnList nodes are single or multi returns from functions and modules.
 	ReturnList interface {
 		AST
-		returnList()
-	}
-
-	//TraitImpl nodes are declarations which define trait implementations.
-	TraitImpl interface {
-		AST
-		traitImplNode()
+		returnListNode()
 	}
 
 	//Annotation nodes are declarations which define annotations.
-	Annotation interface {
-		AST
-		annotationNode()
+	Annotation struct {
+		AnnotationName RealName
 	}
 
 	//Literal nodes are literal values in quark code.
-	Literal interface {
-		AST
-		literalNode()
+	Literal struct {
+		Text string
+
+		firstChar ObjectPosition
+		lastChar ObjectPosition
 	}
 
 	//InnerConcat are concatenation and replication expressions in concatenation
@@ -148,6 +143,10 @@ func (a *ArgumentDef) Start() *ObjectPosition {
 	return a.ArgType.Start()
 }
 
+func (a *Annotation) Start() *ObjectPosition {
+	return a.AnnotationName.Start()
+}
+
 func (p *Package) End() *ObjectPosition {
 	if len(p.Symbols) > 0 {
 		return p.Symbols[len(p.Symbols) - 1].Start()
@@ -168,4 +167,16 @@ func (p *ParameterDef) End() *ObjectPosition {
 
 func (a *ArgumentDef) End() *ObjectPosition {
 	return a.ArgName.End()
+}
+
+func (a *Annotation) End() *ObjectPosition {
+	return a.End()
+}
+
+func (l *Literal) Start() *ObjectPosition {
+	return &l.firstChar
+}
+
+func (l *Literal) End() *ObjectPosition {
+	return l.lastChar.Next()
 }

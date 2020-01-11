@@ -1,19 +1,51 @@
 package quark
 
+//A unary operator
+type UnaryOp = uint16
 
-//A unary operator.
-type UnaryOp interface {
-
-	unaryOp()
-}
+const (
+	OpComplement UnaryOp = iota
+	OpNot
+)
 
 //A binary operator.
-type BinaryOp interface {
+type BinaryOp = uint16
 
-	binaryOp()
-}
+const (
+	OpMul BinaryOp = iota
+	OpDiv
+	OpMod
+	OpLeftShift
+	OpRightShift
+	OpArithLeftShift
+	OpArithRightShift
+	OpBinaryAnd
+	OpBinaryOr
+	OpBinaryXor
+	OpBinaryNand
+	OpBinaryNor
+	OpBinaryXnor
+	OpLogicAnd
+	OpLogicNor
+	OpImplication
+	OpEquivalence
+)
 
 //An assignment operator
-type AssignmentOp interface {
-	assignmentOp()
-}
+type AssignmentOp = uint16
+
+const (
+	OpAssign = iota
+	OpAddAssign
+	OpSubAssign
+	OpMulAssign
+	OpDivAssign
+	OpModAssign
+	OpBandAssign
+	OpBorAssign
+	OpXorAssign
+	OpLeftShiftAssign
+	OpRightShiftAssign
+	OpArithLeftShiftAssign
+	OpArithRightShiftAssign
+)

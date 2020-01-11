@@ -129,20 +129,18 @@ parameterdef
 
 returnlist
     : typeexpr #SingleReturn
-    | typeexpr realname (COMMA typeexpr realname)* #NamedReturn
+    | LPAREN typeexpr realname (COMMA typeexpr realname)* RPAREN #NamedReturn
     ;
 
 argumentdef: typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
-structdecl: annotation* KW_STRUCT realname parameterlist? structdef;
+structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? structdef;
 
 structdef: LCURLY fielddecl* RCURLY;
 
 fielddecl: annotation* realname COLON typeexpr SEMI;
-
-traitimpl: annotation* KW_IMPLEMENTS name KW_FOR realname LCURLY funcdecl* RCURLY;
 
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 

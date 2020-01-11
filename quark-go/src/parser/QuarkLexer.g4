@@ -79,7 +79,7 @@ KW_ELSE: 'else';
 KW_ELIF: 'elif';
 KW_FOR: 'for';
 KW_IN: 'in';
-KW_IMPLEMENTS: 'implements';
+KW_HAS: 'has';
 KW_STRUCT: 'struct';
 KW_ABSTRACT: 'abstract';
 KW_TYPE: 'type';
