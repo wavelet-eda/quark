@@ -14,8 +14,8 @@ type (
 
 	//Package is a single Quark file.
 	Package struct {
-		Imports []*ImportDecl
-		Symbols []*Decl
+		Imports []ImportDecl
+		Symbols []Decl
 	}
 
 	//Decl nodes are symbol declarations.

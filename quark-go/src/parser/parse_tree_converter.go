@@ -17,8 +17,8 @@ func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) inter
 	var rawImportDecls = ctx.AllImportdecl()
 	var rawDecls = ctx.AllDecl()
 
-	var importDecls = make([]*quark.ImportDecl, len(rawImportDecls))
-	var decls = make([]*quark.Decl, len(rawDecls))
+	var importDecls = make([]quark.ImportDecl, len(rawImportDecls))
+	var decls = make([]quark.Decl, len(rawDecls))
 
 	for index, importDecl := range rawImportDecls {
 		importDecls[index] = ptc.visitImportDecl(importDecl)
@@ -34,10 +34,10 @@ func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) inter
 	}
 }
 
-func (ptc *ParseTreeConverter) visitImportDecl(rawImportDecl IImportdeclContext) *quark.ImportDecl {
-	return ptc.Visit(rawImportDecl).(*quark.ImportDecl)
+func (ptc *ParseTreeConverter) visitImportDecl(rawImportDecl IImportdeclContext) quark.ImportDecl {
+	return ptc.Visit(rawImportDecl).(quark.ImportDecl)
 }
 
-func (ptc *ParseTreeConverter) visitDecl(rawDecl IDeclContext) *quark.Decl {
-	return ptc.Visit(rawDecl).(*quark.Decl)
+func (ptc *ParseTreeConverter) visitDecl(rawDecl IDeclContext) quark.Decl {
+	return ptc.Visit(rawDecl).(quark.Decl)
 }
