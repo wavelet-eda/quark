@@ -49,12 +49,16 @@ tasks:
       - src/parser/quark_parser.gen.go
       - src/parser/quarkparser_base_visitor.gen.go
       - src/parser/quarkparser_visitor.gen.go
+      - src/parser/quarkparser_base_listener.go
+      - src/parser/quarkparser_listen.go
     method: checksum
     cmds:
       - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quark_lexer.go src/parser/quark_lexer.gen.go"
       - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quark_parser.go src/parser/quark_parser.gen.go"
       - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_base_visitor.go src/parser/quarkparser_base_visitor.gen.go"
       - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_visitor.go src/parser/quarkparser_visitor.gen.go"
+      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_base_listener.go src/parser/quarkparser_base_listener.gen.go"
+      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_listener.go src/parser/quarkparser_listener.gen.go"
 
   build:
     deps: [build-parser]
