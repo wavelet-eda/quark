@@ -394,11 +394,6 @@
 				
 			
 				
-				<dd><a href="#FilePosition">type FilePosition</a></dd>
-				
-				
-			
-				
 				<dd><a href="#FunctionDecl">type FunctionDecl</a></dd>
 				
 				
@@ -555,6 +550,9 @@
 				
 				<dd><a href="#ObjectPosition">type ObjectPosition</a></dd>
 				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewObjectPosition">func NewObjectPosition(file *QuarkFile, index int) ObjectPosition</a></dd>
+				
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#ObjectPosition.Next">func (o ObjectPosition) Next() *ObjectPosition</a></dd>
@@ -632,6 +630,9 @@
 			
 				
 				<dd><a href="#RealName">type RealName</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewRealName">func NewRealName(text string, firstChar ObjectPosition, lastChar ObjectPosition) RealName</a></dd>
 				
 				
 					
@@ -2343,35 +2344,6 @@ Struct, enum, or interface field access expression.
 		
 			
 			
-			<h2 id="FilePosition">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=187:246#L1">FilePosition</a>
-				<a class="permalink" href="#FilePosition">&#xb6;</a>
-				
-				
-			</h2>
-			<p>
-A line and character position in a specific file.
-</p>
-
-			<pre>type FilePosition struct {
-<span id="FilePosition.Line"></span>    Line      <a href="/pkg/builtin/#uint32">uint32</a>
-<span id="FilePosition.Character"></span>    Character <a href="/pkg/builtin/#uint32">uint32</a>
-}
-</pre>
-
-			
-
-			
-
-			
-			
-			
-
-			
-
-			
-		
-			
-			
 			<h2 id="FunctionDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=292:514#L10">FunctionDecl</a>
 				<a class="permalink" href="#FunctionDecl">&#xb6;</a>
 				
@@ -3157,7 +3129,7 @@ A module call.
 		
 			
 			
-			<h2 id="ObjectPosition">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=350:420#L9">ObjectPosition</a>
+			<h2 id="ObjectPosition">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=236:300#L2">ObjectPosition</a>
 				<a class="permalink" href="#ObjectPosition">&#xb6;</a>
 				
 				
@@ -3168,8 +3140,8 @@ for this run of the compiler.
 </p>
 
 			<pre>type ObjectPosition struct {
-<span id="ObjectPosition.File"></span>    File     *<a href="#QuarkFile">QuarkFile</a>
-<span id="ObjectPosition.Position"></span>    Position <a href="#FilePosition">FilePosition</a>
+<span id="ObjectPosition.OriginFile"></span>    OriginFile *<a href="#QuarkFile">QuarkFile</a>
+<span id="ObjectPosition.Index"></span>    Index      <a href="/pkg/builtin/#int">int</a>
 }
 </pre>
 
@@ -3182,10 +3154,21 @@ for this run of the compiler.
 			
 
 			
+				
+				<h3 id="NewObjectPosition">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=302:367#L7">NewObjectPosition</a>
+					<a class="permalink" href="#NewObjectPosition">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewObjectPosition(file *<a href="#QuarkFile">QuarkFile</a>, index <a href="/pkg/builtin/#int">int</a>) <a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+			
 
 			
 				
-				<h3 id="ObjectPosition.Next">func (ObjectPosition) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=422:468#L14">Next</a>
+				<h3 id="ObjectPosition.Next">func (ObjectPosition) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/metadata.go?s=441:487#L14">Next</a>
 					<a class="permalink" href="#ObjectPosition.Next">&#xb6;</a>
 					
 					
@@ -3495,7 +3478,7 @@ A qualified name.
 
 			
 				
-				<h3 id="QualifiedName.End">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=430:475#L21">End</a>
+				<h3 id="QualifiedName.End">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=607:652#L29">End</a>
 					<a class="permalink" href="#QualifiedName.End">&#xb6;</a>
 					
 					
@@ -3507,7 +3490,7 @@ A qualified name.
 				
 			
 				
-				<h3 id="QualifiedName.Start">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=278:325#L13">Start</a>
+				<h3 id="QualifiedName.Start">func (*QualifiedName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=455:502#L21">Start</a>
 					<a class="permalink" href="#QualifiedName.Start">&#xb6;</a>
 					
 					
@@ -3573,10 +3556,21 @@ An unqualified name.
 			
 
 			
+				
+				<h3 id="NewRealName">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=208:297#L8">NewRealName</a>
+					<a class="permalink" href="#NewRealName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewRealName(text <a href="/pkg/builtin/#string">string</a>, firstChar <a href="#ObjectPosition">ObjectPosition</a>, lastChar <a href="#ObjectPosition">ObjectPosition</a>) <a href="#RealName">RealName</a></pre>
+				
+				
+				
+			
 
 			
 				
-				<h3 id="RealName.End">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=358:398#L17">End</a>
+				<h3 id="RealName.End">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=535:575#L25">End</a>
 					<a class="permalink" href="#RealName.End">&#xb6;</a>
 					
 					
@@ -3588,7 +3582,7 @@ An unqualified name.
 				
 			
 				
-				<h3 id="RealName.Start">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=209:251#L9">Start</a>
+				<h3 id="RealName.Start">func (*RealName) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/name.go?s=386:428#L17">Start</a>
 					<a class="permalink" href="#RealName.Start">&#xb6;</a>
 					
 					
