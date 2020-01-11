@@ -5,27 +5,25 @@ type (
 	RealName struct {
 		Text string
 
-		firstChar ObjectPosition
-		lastChar  ObjectPosition
+		pos ObjectPosition
 	}
 
 	//A qualified name.
 	QualifiedName struct {
-		Parts []RealName
+		Parts []*RealName
 	}
 )
 
-func NewRealName(text string, firstChar ObjectPosition, lastChar ObjectPosition) RealName {
-	return RealName {
+func NewRealName(text string, pos ObjectPosition) *RealName {
+	return &RealName {
 		Text: text,
-		firstChar: firstChar,
-		lastChar: lastChar,
+		pos: pos,
 	}
 }
 
 
 func (n *RealName) Start() *ObjectPosition {
-	return &n.firstChar
+	return &n.pos
 }
 
 func (n *QualifiedName) Start() *ObjectPosition {
@@ -33,7 +31,7 @@ func (n *QualifiedName) Start() *ObjectPosition {
 }
 
 func (n *RealName) End() *ObjectPosition {
-	return n.lastChar.Next()
+	return n.pos.Next()
 }
 
 func (n *QualifiedName) End() *ObjectPosition {

@@ -21,7 +21,7 @@ func main() {
 	p.AddErrorListener(antlr.NewDiagnosticErrorListener(true))
 	p.BuildParseTrees = true
 
-	parseTreeConverter := parser.NewParseTreeConverter()
+	parseTreeConverter := parser.NewParseTreeConverter(&quark.QuarkFile{&os.Args[1]})
 	quarkPackage := parseTreeConverter.VisitQuarkpackage(p.Quarkpackage().(*parser.QuarkpackageContext)).(quark.Package)
 
 	fmt.Printf("Wow, that file had %d imports!\n", len(quarkPackage.Imports))

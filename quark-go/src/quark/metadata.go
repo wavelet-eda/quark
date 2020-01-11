@@ -1,10 +1,8 @@
 package quark
 
-import "os"
-
 //Metadata about a file participating in this execution of quarkc
 type QuarkFile struct {
-	File os.File
+	FileName *string
 }
 
 //A position of a compiler object (AST Node or Lexer Token) globally

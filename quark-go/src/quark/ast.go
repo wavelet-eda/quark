@@ -109,8 +109,7 @@ type (
 	Literal struct {
 		Text string
 
-		firstChar ObjectPosition
-		lastChar ObjectPosition
+		token ObjectPosition
 	}
 
 	//InnerConcat are concatenation and replication expressions in concatenation
@@ -174,9 +173,13 @@ func (a *Annotation) End() *ObjectPosition {
 }
 
 func (l *Literal) Start() *ObjectPosition {
-	return &l.firstChar
+	return &l.token
 }
 
 func (l *Literal) End() *ObjectPosition {
-	return l.lastChar.Next()
+	return l.token.Next()
+}
+
+func NewLiteral(text string, pos ObjectPosition) *Literal {
+	return &Literal{text, pos}
 }

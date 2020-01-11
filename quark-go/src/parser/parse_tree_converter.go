@@ -65,25 +65,26 @@ func (ptc *ParseTreeConverter) VisitWildcardImport(ctx *WildcardImportContext) i
 	}
 }
 
-func (ptc *ParseTreeConverter) VisitRealName(ctx *RealNameContext) interface{} { //quark.Name
-	return &quark.RealName {
-		Text: ctx.GetText(),
-	}
+func (ptc *ParseTreeConverter) VisitRealname(ctx *RealnameContext) interface{} { //quark.Name
+	pos := quark.NewObjectPosition(ptc.file, ctx.REAL_NAME().GetSymbol().GetTokenIndex())
+	return quark.NewRealName(ctx.REAL_NAME().GetText(), pos)
 }
 
 func (ptc *ParseTreeConverter) VisitQualifiedName(ctx *QualifiedNameContext) interface{} { //quark.QualifiedName
 	text := ctx.AllREAL_NAME()
-	nameParts := make([]quark.RealName, len(text))
+	nameParts := make([]*quark.RealName, len(text))
 	for index, node := range text {
-		start := quark.NewObjectPosition(ptc.file, node.GetSymbol().GetTokenIndex())
-		end := quark.NewObjectPosition(ptc.file, node.GetSymbol().GetTokenIndex())
-		nameParts[index] = quark.NewRealName(node.GetText(), start, end)
+		pos := quark.NewObjectPosition(ptc.file, node.GetSymbol().GetTokenIndex())
+		text := node.GetText()
+		nameParts[index] = quark.NewRealName(text, pos)
 	}
 	return &quark.QualifiedName{
 		Parts: nameParts,
 	}
 }
 
-func (v *BaseQuarkParserVisitor) VisitLiteral(ctx *LiteralContext) interface{} {
-
+func (ptc *ParseTreeConverter) VisitLiteral(ctx *LiteralContext) interface{} {
+	pos := quark.NewObjectPosition(ptc.file, ctx.GetStart().GetTokenIndex())
+	text := ctx.INTEGRAL().GetText()
+	return quark.NewLiteral(text, pos)
 }

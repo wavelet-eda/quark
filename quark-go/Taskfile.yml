@@ -34,7 +34,8 @@ tasks:
       - "{{.ANTLR_GEN_DIR}}/*"
     cmds:
       - "{{.ANTLR}} -Xexact-output-dir -Dlanguage=Go -o {{.ANTLR_GEN_DIR}} src/parser/QuarkLexer.g4"
-      - "{{.ANTLR}} -Xexact-output-dir -lib {{.ANTLR_GEN_DIR}} -o {{.ANTLR_GEN_DIR}} -visitor -no-listener -Dlanguage=Go src/parser/QuarkParser.g4"
+      - "{{.ANTLR}} -Xexact-output-dir -lib {{.ANTLR_GEN_DIR}} -o {{.ANTLR_GEN_DIR}} -visitor -listener -Dlanguage=Go src/parser/QuarkParser.g4"
+      - "{{.ANTLR}} -Xexact-output-dir -lib {{.ANTLR_GEN_DIR}} -o {{.ANTLR_GEN_DIR}} -visitor -listener -Dlanguage=Go src/parser/QuarkParser.g4"
 
   build-parser:
     deps: [generate-parser-files]
