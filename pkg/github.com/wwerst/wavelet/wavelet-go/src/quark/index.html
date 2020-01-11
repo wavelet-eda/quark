@@ -421,6 +421,17 @@
 				
 			
 				
+				<dd><a href="#GenericImport">type GenericImport</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GenericImport.End">func (i *GenericImport) End() *ObjectPosition</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GenericImport.Start">func (i *GenericImport) Start() *ObjectPosition</a></dd>
+				
+			
+				
 				<dd><a href="#IfBranch">type IfBranch</a></dd>
 				
 				
@@ -672,12 +683,6 @@
 				<dd><a href="#SingleImport">type SingleImport</a></dd>
 				
 				
-					
-					<dd>&nbsp; &nbsp; <a href="#SingleImport.End">func (i *SingleImport) End() *ObjectPosition</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="#SingleImport.Start">func (i *SingleImport) Start() *ObjectPosition</a></dd>
-				
 			
 				
 				<dd><a href="#SingleReturn">type SingleReturn</a></dd>
@@ -831,9 +836,6 @@
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#WildcardImport.End">func (w *WildcardImport) End() *ObjectPosition</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="#WildcardImport.Start">func (i *WildcardImport) Start() *ObjectPosition</a></dd>
 				
 			
 			
@@ -2486,6 +2488,56 @@ A future block.
 		
 			
 			
+			<h2 id="GenericImport">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=23:94#L1">GenericImport</a>
+				<a class="permalink" href="#GenericImport">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type GenericImport struct {
+<span id="GenericImport.PackageName"></span>    PackageName <a href="#Name">Name</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="GenericImport.End">func (*GenericImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=282:327#L15">End</a>
+					<a class="permalink" href="#GenericImport.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="#GenericImport">GenericImport</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="GenericImport.Start">func (*GenericImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=209:256#L11">Start</a>
+					<a class="permalink" href="#GenericImport.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="#GenericImport">GenericImport</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
 			<h2 id="IfBranch">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/branch.go?s=60:206#L1">IfBranch</a>
 				<a class="permalink" href="#IfBranch">&#xb6;</a>
 				
@@ -3749,7 +3801,7 @@ A function or module return statement.
 			</h2>
 			
 			<pre>type SingleImport struct {
-    <span class="comment">// contains filtered or unexported fields</span>
+    <a href="#GenericImport">GenericImport</a>
 }
 </pre>
 
@@ -3763,30 +3815,6 @@ A function or module return statement.
 
 			
 
-			
-				
-				<h3 id="SingleImport.End">func (*SingleImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=282:327#L15">End</a>
-					<a class="permalink" href="#SingleImport.End">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (i *<a href="#SingleImport">SingleImport</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="SingleImport.Start">func (*SingleImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=209:256#L11">Start</a>
-					<a class="permalink" href="#SingleImport.Start">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (i *<a href="#SingleImport">SingleImport</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
-				
-				
-				
-				
 			
 		
 			
@@ -4532,6 +4560,7 @@ The left hand side of variable definitions
 			</h2>
 			
 			<pre>type WildcardImport struct {
+    <a href="#GenericImport">GenericImport</a>
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -4554,18 +4583,6 @@ The left hand side of variable definitions
 					
 				</h3>
 				<pre>func (w *<a href="#WildcardImport">WildcardImport</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="WildcardImport.Start">func (*WildcardImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=209:256#L11">Start</a>
-					<a class="permalink" href="#WildcardImport.Start">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (i *<a href="#WildcardImport">WildcardImport</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
 				
 				
 				
