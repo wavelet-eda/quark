@@ -15,6 +15,14 @@ type (
 	}
 )
 
+func NewRealName(text string, firstChar ObjectPosition, lastChar ObjectPosition) RealName {
+	return RealName {
+		Text: text,
+		firstChar: firstChar,
+		lastChar: lastChar,
+	}
+}
+
 
 func (n *RealName) Start() *ObjectPosition {
 	return &n.firstChar

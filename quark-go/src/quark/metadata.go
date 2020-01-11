@@ -7,26 +7,20 @@ type QuarkFile struct {
 	File os.File
 }
 
-//A line and character position in a specific file.
-type FilePosition struct {
-	Line uint32
-	Character uint32
-}
-
-
 //A position of a compiler object (AST Node or Lexer Token) globally
 //for this run of the compiler.
 type ObjectPosition struct {
-	File *QuarkFile
-	Position FilePosition
+	OriginFile *QuarkFile
+	Index int
+}
+
+func NewObjectPosition(file *QuarkFile, index int) ObjectPosition {
+	return ObjectPosition{
+		OriginFile: file,
+		Index:      index,
+	}
 }
 
 func (o ObjectPosition) Next() *ObjectPosition {
-	return &ObjectPosition{
-		File:     o.File,
-		Position: FilePosition{
-			Line: o.Position.Line,
-			Character: o.Position.Character,
-		},
-	}
+	return &ObjectPosition{o.OriginFile, o.Index + 1}
 }

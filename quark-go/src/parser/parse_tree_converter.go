@@ -10,10 +10,11 @@ import (
 //proper quark.AST.
 type ParseTreeConverter struct {
 	BaseQuarkParserVisitor
+	file *quark.QuarkFile
 }
 
-func NewParseTreeConverter() *ParseTreeConverter {
-	return &ParseTreeConverter{}
+func NewParseTreeConverter(file *quark.QuarkFile) *ParseTreeConverter {
+	return &ParseTreeConverter{file: file}
 }
 
 func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) interface{} {
@@ -74,11 +75,15 @@ func (ptc *ParseTreeConverter) VisitQualifiedName(ctx *QualifiedNameContext) int
 	text := ctx.AllREAL_NAME()
 	nameParts := make([]quark.RealName, len(text))
 	for index, node := range text {
-		nameParts[index] = quark.RealName {
-			Text: node.GetText(),
-		}
+		start := quark.NewObjectPosition(ptc.file, node.GetSymbol().GetTokenIndex())
+		end := quark.NewObjectPosition(ptc.file, node.GetSymbol().GetTokenIndex())
+		nameParts[index] = quark.NewRealName(node.GetText(), start, end)
 	}
 	return &quark.QualifiedName{
 		Parts: nameParts,
 	}
+}
+
+func (v *BaseQuarkParserVisitor) VisitLiteral(ctx *LiteralContext) interface{} {
+
 }
