@@ -7,7 +7,6 @@ quarkpackage: importdecl* decl* EOF;
 decl
     : structdecl
     | funcdecl
-    | traitimpl
     | moduledecl
     ;
 
