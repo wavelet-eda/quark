@@ -9,6 +9,10 @@ type ParseTreeConverter struct {
 	BaseQuarkParserVisitor
 }
 
+func NewParseTreeConverter() *ParseTreeConverter {
+	return &ParseTreeConverter{}
+}
+
 func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) interface{} {
 	var rawImportDecls = ctx.AllImportdecl()
 	var rawDecls = ctx.AllDecl()

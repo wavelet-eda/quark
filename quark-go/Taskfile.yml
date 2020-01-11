@@ -70,4 +70,4 @@ tasks:
   run:
     deps: [build]
     cmds:
-      - "{{.EXE_FILE}}"
+      - "{{.EXE_FILE}} {{.INFILE}}"

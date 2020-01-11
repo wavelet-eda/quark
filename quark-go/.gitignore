@@ -5,3 +5,4 @@ task
 .task/
 **.gen.go
 *.tokens
+example.qk

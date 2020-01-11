@@ -15,6 +15,16 @@ Here are the steps:
 
 To clean your build area, run `$ ./task clean`. The gitignore has been configured to ignore the task executable so there's no need to delete that file. 
 
+# How to Run
+
+No setup is required if Golang 1.13.5 is installed.
+
+1. `$ ./init.sh` (or `$ init.bat` on windows). You only have to do this once.
+2. `$ ./task run "INFILE=<file>"` where <file> is a valid quark file.
+
+That's it. The compiler will be appropriately rebuilt to reflect source changes
+between runs.
+
 # Package Structure
 
 The compiler has 3 packages right now.
