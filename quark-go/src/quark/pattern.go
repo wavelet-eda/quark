@@ -1,6 +1,7 @@
 package quark
 
 type (
+	//An atomic pattern of a single name
 	AtomicPattern struct {
 		Atom RealName
 	}
