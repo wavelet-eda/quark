@@ -289,47 +289,6 @@ func (e BranchExpr) End() *ObjectPosition {
 }
 
 
-//An array or bit slice expression.
-type SliceExpr struct {
-	X Expr
-
-	Msb  Expr
-	Lsb  Expr
-	Step Expr
-
-	closeBrace ObjectPosition
-}
-
-func (e SliceExpr) exprNode() {}
-
-func (e SliceExpr) Start() *ObjectPosition {
-	return e.X.Start()
-}
-
-func (e SliceExpr) End() *ObjectPosition {
-	return e.closeBrace.Next()
-}
-
-
-//An array index expression.
-type ArrayIndexExpr struct {
-	X       Expr
-	Indices []Expr
-
-	closeBrace ObjectPosition
-}
-
-func (e ArrayIndexExpr) exprNode() {}
-
-func (e ArrayIndexExpr) Start() *ObjectPosition {
-	return e.X.Start()
-}
-
-func (e ArrayIndexExpr) End() *ObjectPosition {
-	return e.closeBrace.Next()
-}
-
-
 //A literal array constructor usage.
 type ArrayLiteralExpr struct {
 	Values []Expr

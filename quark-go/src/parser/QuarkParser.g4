@@ -43,7 +43,7 @@ stmt
     ;
 
 future
-    : KW_FUTURE LPAREN argumentdef (COMMA argumentdef)* RPAREN LBRACE stmt* RBRACE LPAREN callarg (COMMA callarg)* RPAREN
+    : KW_FUTURE argumentlist RPAREN LBRACE block RBRACE LPAREN callarglist RPAREN
     ;
 
 assignable
@@ -57,7 +57,7 @@ assignable
 realname : REAL_NAME;
 
 name
-    : realname # RealName
+    : realname # UnqualifiedName
     | REAL_NAME (DOT REAL_NAME)+ #QualifiedName
     ;
 
@@ -77,7 +77,7 @@ expr
     | KW_OPEN typeexpr LPAREN callarglist RPAREN #OpenExpr
     | KW_CLOSE expr LPAREN callarglist RPAREN #CloseExpr
     | expr LPAREN callarglist RPAREN #FunctionCall
-    | KW_LAMBDA argumentlist OP_ARROW LCURLY stmt* expr? RCURLY #LambdaExpr
+    | KW_LAMBDA argumentlist OP_ARROW LCURLY block expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
     | OP_LNOT expr # NotExpr
     | concat #ConcatExpr
@@ -97,8 +97,8 @@ expr
 callarglist: callarg (COMMA callarg)*;
 
 callarg
-    : realname OP_ASSIGN expr
-    | expr
+    : realname OP_ASSIGN expr #NamedCallArg
+    | expr #UnamedCallArg
     ;
 
 concat : LCURLY innerconcat (COMMA innerconcat)+ RCURLY;

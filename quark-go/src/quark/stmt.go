@@ -15,7 +15,7 @@ type (
 		Clock ClockExpr
 		Reset ClockExpr
 
-		AssignStmt
+		*AssignStmt
 
 		kwReg ObjectPosition
 	}
@@ -29,14 +29,13 @@ type (
 	//A branch used in a statement context.
 	BranchStmt struct {
 		TheBranch Branch
-		semi ObjectPosition
 	}
 
 	//A future block.
 	FutureStmt struct {
-		Futures []ArgumentDef
+		Futures []*ArgumentDef
 		Body []Stmt
-		FutureAssignments []CallArgument
+		FutureAssignments []*CallArgument
 
 		kwFuture ObjectPosition
 		semi ObjectPosition
@@ -50,6 +49,50 @@ type (
 		semi ObjectPosition
 	}
 )
+
+func NewAssignStmt(assignTo Assignable, op AssignmentOp, expr Expr, semi ObjectPosition) *AssignStmt {
+	return &AssignStmt{
+		AssignTo:       assignTo,
+		AssignmentType: op,
+		TheExpr:        expr,
+		semi:           semi,
+	}
+}
+
+func NewRegAssignStmt(clock ClockExpr, reset ClockExpr, assignment *AssignStmt, regPos ObjectPosition) *RegAssignStmt {
+	return &RegAssignStmt{
+		Clock:      clock,
+		Reset:      reset,
+		AssignStmt: assignment,
+		kwReg:      regPos,
+	}
+}
+
+func NewDeclStmt(assignable Assignable, semiPos ObjectPosition) *DeclarationStmt {
+	return &DeclarationStmt{
+		Declaration: assignable,
+		semi:        semiPos,
+	}
+}
+
+func NewFutureStmt(futures []*ArgumentDef, body []Stmt, assignments []*CallArgument, kwFuturePos ObjectPosition, semiPos ObjectPosition) *FutureStmt {
+	return &FutureStmt{
+		Futures:           futures,
+		Body:              body,
+		FutureAssignments: assignments,
+		kwFuture:          kwFuturePos,
+		semi:              semiPos,
+	}
+}
+
+func NewReturnStmt(expr Expr, kwReturnPos ObjectPosition, semiPos ObjectPosition) *ReturnStmt {
+	return &ReturnStmt{
+		ReturnExpr: expr,
+		kwReturn:   kwReturnPos,
+		semi:       semiPos,
+	}
+}
+
 
 func (s *AssignStmt) Start() *ObjectPosition {
 	return s.AssignTo.Start()
@@ -81,7 +124,7 @@ func (s *DeclarationStmt) End() *ObjectPosition {
 	return s.semi.Next()
 }
 func (s *BranchStmt) End() *ObjectPosition {
-	return s.semi.Next()
+	return s.TheBranch.End()
 }
 func (s *FutureStmt) End() *ObjectPosition {
 	return s.semi.Next()
