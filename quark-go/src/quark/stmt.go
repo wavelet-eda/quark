@@ -36,7 +36,7 @@ type (
 	FutureStmt struct {
 		Futures []ArgumentDef
 		Body []Stmt
-		FutureAssignments []ConstructorField
+		FutureAssignments []CallArgument
 
 		kwFuture ObjectPosition
 		semi ObjectPosition

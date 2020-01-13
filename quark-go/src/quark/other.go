@@ -15,8 +15,10 @@ type (
 			directionKw ObjectPosition
 		}
 
-		//A field as used in a struct constructor.
-		ConstructorField struct {
+		//An argument to a module, function, interace, or constructor invocation. If the argument is named
+		//the FieldName and ValueExpr fields must both be non-nil. If the argument is by position, only
+		//the ValueExpr will be non-nil.
+		CallArgument struct {
 			FieldName Name
 			ValueExpr Expr
 		}
@@ -39,7 +41,7 @@ func (f *InterfaceField) Start() *ObjectPosition {
 	return &f.directionKw
 }
 
-func (c *ConstructorField) Start() *ObjectPosition {
+func (c *CallArgument) Start() *ObjectPosition {
 	return c.FieldName.Start()
 }
 
@@ -48,7 +50,7 @@ func (f *Field) End() *ObjectPosition {
 	return f.FieldName.End()
 }
 
-func (c *ConstructorField) End() *ObjectPosition {
+func (c *CallArgument) End() *ObjectPosition {
 	return c.ValueExpr.End()
 }
 

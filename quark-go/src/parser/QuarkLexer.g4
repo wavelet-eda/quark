@@ -99,6 +99,8 @@ KW_RESET: 'reset';
 KW_REG: 'reg';
 KW_VAR: 'var';
 KW_NEW: 'new';
+KW_OPEN: 'open';
+KW_CLOSE: 'close';
 KW_MUT: 'mut';
 KW_SIGNAL: 'signal';
 

@@ -86,7 +86,7 @@ func (e TupleExpr) End() *ObjectPosition {
 
 //A struct constructor.
 type ConstructorExpr struct {
-	FieldAssignments []ConstructorField
+	FieldAssignments []CallArgument
 
 	openCurly  ObjectPosition
 	closeCurly ObjectPosition
@@ -107,7 +107,7 @@ func (e ConstructorExpr) End() *ObjectPosition {
 //A module call.
 type NewModuleExpr struct {
 	ModuleType TypeExpr
-	Arguments  []Expr
+	Arguments  []*CallArgument
 
 	newKw      ObjectPosition
 	closeParen ObjectPosition
@@ -121,6 +121,57 @@ func (e NewModuleExpr) Start() *ObjectPosition {
 
 func (e NewModuleExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
+}
+
+//An expression where an interface is opened
+type OpenExpr struct {
+	InterfaceType TypeExpr
+	Arguments []*CallArgument
+
+	closeParen ObjectPosition
+}
+
+func (e *OpenExpr) exprNode() {}
+func (e *OpenExpr) Start() *ObjectPosition {
+	return e.InterfaceType.Start()
+}
+func (e *OpenExpr) End() *ObjectPosition {
+	return &e.closeParen
+}
+
+
+//An expression where an interface is closed
+type CloseExpr struct {
+	InterfaceExpr Expr
+	Arguments []*CallArgument
+
+	closeParen ObjectPosition
+}
+
+
+//A function invocation expression.
+func (e *CloseExpr) exprNode() {}
+func (e *CloseExpr) Start() *ObjectPosition {
+	return e.InterfaceExpr.Start()
+}
+func (e *CloseExpr) End() *ObjectPosition {
+	return &e.closeParen
+}
+
+
+type FunctionCall struct {
+	FunctionExpr Expr
+	Arguments []*CallArgument
+
+	closeParen ObjectPosition
+}
+
+func (e *FunctionCall) exprNode() {}
+func (e *FunctionCall) Start() *ObjectPosition {
+	return e.FunctionExpr.Start()
+}
+func (e *FunctionCall) End() *ObjectPosition {
+	return &e.closeParen
 }
 
 
