@@ -156,10 +156,8 @@ fielddecl: annotation* realname COLON typeexpr SEMI;
 
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
-moduledecl: annotation* KW_MODULE realname parameterlist? argumentlist? (COLON returnlist)? LCURLY innermodule RCURLY;
+moduledecl: annotation* KW_MODULE realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
-innermodule: structdecl* block;
-
-annotation: ANNOTATION_NAME (LBRACE name (COMMA name)* RBRACE)?;
+annotation: ANNOTATION_START realname;
 
 literal: INTEGRAL;

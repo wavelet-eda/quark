@@ -91,7 +91,7 @@ type (
 	//ArgumentDef nodes are functions or module argument declarations.
 	ArgumentDef struct {
 		ArgType TypeExpr
-		ArgName RealName
+		ArgName *RealName
 	}
 
 	//ReturnList nodes are single or multi returns from functions and modules.
@@ -102,7 +102,9 @@ type (
 
 	//Annotation nodes are declarations which define annotations.
 	Annotation struct {
-		AnnotationName RealName
+		AnnotationName *RealName
+
+		Pos ObjectPosition
 	}
 
 	//Literal nodes are literal values in quark code.

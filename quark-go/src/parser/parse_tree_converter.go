@@ -100,6 +100,18 @@ func (ptc *ParseTreeConverter) visitArgumentList(ctx IArgumentlistContext) []*qu
 	return ptc.Visit(ctx).([]*quark.ArgumentDef)
 }
 
+func (ptc *ParseTreeConverter) visitParameterList(ctx IParameterlistContext) []*quark.ParameterDef {
+	return ptc.Visit(ctx).([]*quark.ParameterDef)
+}
+
+func (ptc *ParseTreeConverter) visitParameterDef(ctx IParameterdefContext) *quark.ParameterDef {
+	return ptc.Visit(ctx).(*quark.ParameterDef)
+}
+
+func (ptc *ParseTreeConverter) visitReturnList(ctx IReturnlistContext) quark.ReturnList {
+	return ptc.Visit(ctx).(quark.ReturnList)
+}
+
 func (ptc *ParseTreeConverter) visitCallArgList(ctx ICallarglistContext) []*quark.CallArgument {
 	return ptc.Visit(ctx).([]*quark.CallArgument)
 }
@@ -633,7 +645,12 @@ func (ptc *ParseTreeConverter) VisitStructPattern(ctx *StructPatternContext) int
 }
 
 func (ptc *ParseTreeConverter) VisitParameterlist(ctx *ParameterlistContext) interface{} {
-	panic("unreachable")
+	params := make([]*quark.ParameterDef, len(ctx.AllParameterdef()))
+	for i, node := range ctx.AllParameterdef() {
+		params[i] = ptc.visitParameterDef(node)
+	}
+
+	return params
 }
 
 func (ptc *ParseTreeConverter) VisitTypeParameter(ctx *TypeParameterContext) interface{} {
@@ -660,47 +677,137 @@ func (ptc *ParseTreeConverter) VisitValueParameter(ctx *ValueParameterContext) i
 }
 
 func (ptc *ParseTreeConverter) VisitSingleReturn(ctx *SingleReturnContext) interface{} {
-	panic("implement me")
+	return &quark.SingleReturn{ReturnType:ptc.visitTypeExpr(ctx.Typeexpr())}
 }
 
 func (ptc *ParseTreeConverter) VisitNamedReturn(ctx *NamedReturnContext) interface{} {
-	panic("implement me")
+	returns := make([]quark.OneNamedReturn, len(ctx.AllTypeexpr()))
+
+	for i := 0; i < len(ctx.AllTypeexpr()); i++ {
+		types := ptc.visitTypeExpr(ctx.Typeexpr(i))
+		names := ptc.visitRealname(ctx.Realname(i))
+
+		returns[i] = quark.OneNamedReturn{
+			ReturnName: names,
+			ReturnType: types,
+		}
+	}
+
+	start := ptc.terminalPosition(ctx.LPAREN())
+	end := ptc.terminalPosition(ctx.RPAREN())
+
+	return quark.NewNamedReturn(returns, start, end)
 }
 
 func (ptc *ParseTreeConverter) VisitArgumentdef(ctx *ArgumentdefContext) interface{} {
-	panic("implement me")
+	return &quark.ArgumentDef{
+		ArgType: ptc.visitTypeExpr(ctx.Typeexpr()),
+		ArgName: ptc.visitRealname(ctx.Realname()),
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitArgumentlist(ctx *ArgumentlistContext) interface{} {
-	panic("implement me")
+	args := make([]*quark.ArgumentDef, len(ctx.AllArgumentdef()))
+	for i, node := range ctx.AllArgumentdef() {
+		args[i] = ptc.VisitArgumentdef(node.(*ArgumentdefContext)).(*quark.ArgumentDef)
+	}
+	return args
 }
 
 func (ptc *ParseTreeConverter) VisitStructdecl(ctx *StructdeclContext) interface{} {
-	panic("implement me")
+	kwStruct := ptc.terminalPosition(ctx.KW_STRUCT())
+
+	def := ctx.Structdef().(*StructdefContext) //Note: only option
+
+	rCurly := ptc.terminalPosition(def.RCURLY())
+
+	name := ptc.visitRealname(ctx.Realname())
+	params := ptc.visitParameterList(ctx.Parameterlist())
+
+	traits := make([]quark.Name, len(ctx.AllName()))
+	for i, node := range ctx.AllName() {
+		traits[i] = ptc.visitName(node)
+	}
+	
+	fields := make([]*quark.Field, len(def.AllFielddecl()))
+	for i, node := range def.AllFielddecl() {
+		fields[i] = ptc.VisitFielddecl(node.(*FielddeclContext)).(*quark.Field)
+	}
+
+	return &quark.StructDecl{
+		Annotations: nil,
+		StructName:  name,
+		Parameters:  params,
+		Fields:      fields,
+		TraitImpls:  traits,
+		KwStruct:    kwStruct,
+		CloseCurly:  rCurly,
+	}
+
 }
 
-func (ptc *ParseTreeConverter) VisitStructdef(ctx *StructdefContext) interface{} {
-	panic("implement me")
+func (ptc *ParseTreeConverter) VisitStructdef(_ *StructdefContext) interface{} {
+	panic("not reacable")
 }
 
 func (ptc *ParseTreeConverter) VisitFielddecl(ctx *FielddeclContext) interface{} {
-	panic("implement me")
+	fieldType := ptc.visitTypeExpr(ctx.Typeexpr())
+	fieldName := ptc.visitRealname(ctx.Realname())
+	return &quark.Field{
+		FieldType: fieldType,
+		FieldName: fieldName,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
-	panic("implement me")
+	name := ptc.visitRealname(ctx.Realname())
+	params := ptc.visitParameterList(ctx.Parameterlist())
+	args := ptc.visitArgumentList(ctx.Argumentlist())
+	returns := ptc.visitReturnList(ctx.Returnlist())
+	body := ptc.visitBlock(ctx.Block())
+
+	kwFunction := ptc.terminalPosition(ctx.KW_DEF())
+	end := ptc.terminalPosition(ctx.RCURLY())
+
+	return &quark.FunctionDecl{
+		Annotations: nil,
+		SymbolName:  name,
+		Parameters:  params,
+		Arguments:   args,
+		Returns:     returns,
+		Body:        body,
+		KwFunction:  kwFunction,
+		CloseCurly:  end,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitModuledecl(ctx *ModuledeclContext) interface{} {
-	panic("implement me")
-}
+	name := ptc.visitRealname(ctx.Realname())
+	params := ptc.visitParameterList(ctx.Parameterlist())
+	args := ptc.visitArgumentList(ctx.Argumentlist())
+	returns := ptc.visitReturnList(ctx.Returnlist())
+	body := ptc.visitBlock(ctx.Block())
 
-func (ptc *ParseTreeConverter) VisitInnermodule(ctx *InnermoduleContext) interface{} {
-	panic("implement me")
+	kwModule := ptc.terminalPosition(ctx.KW_MODULE())
+	end := ptc.terminalPosition(ctx.RCURLY())
+
+	return &quark.ModuleDecl{
+		Annotations: nil,
+		SymbolName:  name,
+		Parameters:  params,
+		Arguments:   args,
+		Returns:     returns,
+		Body:        body,
+		KwModule:  kwModule,
+		CloseCurly:  end,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitAnnotation(ctx *AnnotationContext) interface{} {
-	panic("implement me")
+	name := ptc.visitRealname(ctx.Realname())
+	start := ptc.terminalPosition(ctx.ANNOTATION_START())
+
+	return &quark.Annotation{AnnotationName: name, Pos: start}
 }
 
 func (ptc *ParseTreeConverter) VisitLiteral(ctx *LiteralContext) interface{} {

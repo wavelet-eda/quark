@@ -13,10 +13,18 @@ type (
 	}
 
 	OneNamedReturn struct {
-		ReturnName RealName
+		ReturnName *RealName
 		ReturnType TypeExpr
 	}
 )
+
+func NewNamedReturn(returns []OneNamedReturn, start ObjectPosition, end ObjectPosition) *NamedReturn {
+	return &NamedReturn{
+		ReturnTypes: returns,
+		openParen:   start,
+		closeParen:  end,
+	}
+}
 
 func (r *SingleReturn) Start() *ObjectPosition {
 	return r.ReturnType.Start()

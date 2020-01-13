@@ -111,7 +111,7 @@ BLOCK_COMMENT_END: '*/';
 INTEGRAL: ((DIGIT+)? LITERAL_TYPE TICK)? DIGIT+;
 
 REAL_NAME: NAME_FRAGMENT+;
-ANNOTATION_NAME: '@' NAME_FRAGMENT+; //Annotation names are @camelCase
+ANNOTATION_START: '@'; //Annotation names are @camelCase
 //Type names: CamelCase
 //Function names: camelCase
 //Param names SNAKE_CASE

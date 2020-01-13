@@ -4,49 +4,48 @@ type (
 	//Declaration of a Struct symbol.
 	StructDecl struct {
 		Annotations []Annotation
-		StructName RealName
+		StructName *RealName
 
-		Parameters []ParameterDef
+		Parameters []*ParameterDef
 
-		Fields []Field
+		Fields []*Field
 
 		TraitImpls []Name
 
-		kwStruct ObjectPosition
-		closeCurly ObjectPosition
+		KwStruct ObjectPosition
+		CloseCurly ObjectPosition
 	}
 
 	//Declaration of a Function symbol.
 	FunctionDecl struct {
 		Annotations []Annotation
 
-		SymbolName RealName
+		SymbolName *RealName
 
-		Parameters []ParameterDef
-		Arguments []ArgumentDef
+		Parameters []*ParameterDef
+		Arguments []*ArgumentDef
 		Returns ReturnList
 
 		Body []Stmt
 
-		kwFunction ObjectPosition
-		closeCurly ObjectPosition
+		KwFunction ObjectPosition
+		CloseCurly ObjectPosition
 	}
 
 	//Declaration of a module symbol.
 	ModuleDecl struct {
 		Annotations []Annotation
 
-		SymbolName RealName
+		SymbolName *RealName
 
-		Parameters []ParameterDef
-		Arguments []ArgumentDef
+		Parameters []*ParameterDef
+		Arguments []*ArgumentDef
 		Returns ReturnList
 
-		InnerStructs []StructDecl
 		Body []Stmt
 
-		kwModule ObjectPosition
-		closeCurly ObjectPosition
+		KwModule ObjectPosition
+		CloseCurly ObjectPosition
 	}
 )
 
@@ -54,7 +53,7 @@ func (s *StructDecl) Start() *ObjectPosition {
 	if len(s.Annotations) > 0 {
 		return s.Annotations[0].Start()
 	} else {
-		return &s.kwStruct
+		return &s.KwStruct
 	}
 }
 
@@ -62,7 +61,7 @@ func (s *FunctionDecl) Start() *ObjectPosition {
 	if len(s.Annotations) > 0 {
 		return s.Annotations[0].Start()
 	} else {
-		return &s.kwFunction
+		return &s.KwFunction
 	}
 }
 
@@ -70,20 +69,20 @@ func (s *ModuleDecl) Start() *ObjectPosition {
 	if len(s.Annotations) > 0 {
 		return s.Annotations[0].Start()
 	} else {
-		return &s.kwModule
+		return &s.KwModule
 	}
 }
 
 func (s *StructDecl) End() *ObjectPosition {
-	return &s.closeCurly
+	return &s.CloseCurly
 }
 
 func (s *FunctionDecl) End() *ObjectPosition {
-	return &s.closeCurly
+	return &s.CloseCurly
 }
 
 func (s *ModuleDecl) End() *ObjectPosition {
-	return &s.closeCurly
+	return &s.CloseCurly
 }
 
 func (s *StructDecl) declNode() {}
