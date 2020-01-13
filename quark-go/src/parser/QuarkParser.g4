@@ -152,7 +152,7 @@ structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA na
 
 structdef: LCURLY fielddecl* RCURLY;
 
-fielddecl: annotation* realname COLON typeexpr SEMI;
+fielddecl: annotation* typeexpr realname SEMI;
 
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 

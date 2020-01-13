@@ -154,9 +154,7 @@ func (ptc *ParseTreeConverter) visitImportDecl(rawImportDecl IImportdeclContext)
 }
 
 func (ptc *ParseTreeConverter) visitDecl(rawDecl IDeclContext) quark.Decl {
-	println(rawDecl.GetText())
-	println(rawDecl.GetStart().GetText())
-	return ptc.Visit(rawDecl).(quark.Decl)
+	return ptc.Visit(rawDecl.GetChild(0).(antlr.ParseTree)).(quark.Decl)
 }
 
 func (ptc *ParseTreeConverter) VisitSingleImport(ctx *SingleImportContext) interface{} {
@@ -724,7 +722,12 @@ func (ptc *ParseTreeConverter) VisitStructdecl(ctx *StructdeclContext) interface
 	rCurly := ptc.terminalPosition(def.RCURLY())
 
 	name := ptc.visitRealname(ctx.Realname())
-	params := ptc.visitParameterList(ctx.Parameterlist())
+	var params []*quark.ParameterDef
+	if ctx.Parameterlist() != nil {
+		params = ptc.visitParameterList(ctx.Parameterlist())
+	} else {
+		params = make([]*quark.ParameterDef, 0)
+	}
 
 	traits := make([]quark.Name, len(ctx.AllName()))
 	for i, node := range ctx.AllName() {
@@ -764,7 +767,12 @@ func (ptc *ParseTreeConverter) VisitFielddecl(ctx *FielddeclContext) interface{}
 func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
 	println("visiting funcdecl")
 	name := ptc.visitRealname(ctx.Realname())
-	params := ptc.visitParameterList(ctx.Parameterlist())
+	var params []*quark.ParameterDef
+	if ctx.Parameterlist() != nil {
+		params = ptc.visitParameterList(ctx.Parameterlist())
+	} else {
+		params = make([]*quark.ParameterDef, 0)
+	}
 	args := ptc.visitArgumentList(ctx.Argumentlist())
 	returns := ptc.visitReturnList(ctx.Returnlist())
 	body := ptc.visitBlock(ctx.Block())
@@ -786,7 +794,12 @@ func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
 
 func (ptc *ParseTreeConverter) VisitModuledecl(ctx *ModuledeclContext) interface{} {
 	name := ptc.visitRealname(ctx.Realname())
-	params := ptc.visitParameterList(ctx.Parameterlist())
+	var params []*quark.ParameterDef
+	if ctx.Parameterlist() != nil {
+		params = ptc.visitParameterList(ctx.Parameterlist())
+	} else {
+		params = make([]*quark.ParameterDef, 0)
+	}
 	args := ptc.visitArgumentList(ctx.Argumentlist())
 	returns := ptc.visitReturnList(ctx.Returnlist())
 	body := ptc.visitBlock(ctx.Block())

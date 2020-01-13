@@ -25,4 +25,5 @@ func main() {
 	quarkPackage := parseTreeConverter.VisitQuarkpackage(p.Quarkpackage().(*parser.QuarkpackageContext)).(quark.Package)
 
 	fmt.Printf("Wow, that file had %d imports!\n", len(quarkPackage.Imports))
+	fmt.Printf("And it had %d decls\n", len(quarkPackage.Symbols))
 }
