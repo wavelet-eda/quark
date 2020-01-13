@@ -633,15 +633,30 @@ func (ptc *ParseTreeConverter) VisitStructPattern(ctx *StructPatternContext) int
 }
 
 func (ptc *ParseTreeConverter) VisitParameterlist(ctx *ParameterlistContext) interface{} {
-	panic("implement me")
+	panic("unreachable")
 }
 
 func (ptc *ParseTreeConverter) VisitTypeParameter(ctx *TypeParameterContext) interface{} {
-	panic("implement me")
+	typeExpr := ptc.visitTypeExpr(ctx.Typeexpr())
+	typePos := ptc.terminalPosition(ctx.KW_TYPE())
+	
+	return &quark.ParameterDef{
+		IsType:  true,
+		TypeVal: typeExpr,
+		ExprVal: nil,
+		KwType:  typePos,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitValueParameter(ctx *ValueParameterContext) interface{} {
-	panic("implement me")
+	typeExpr := ptc.visitTypeExpr(ctx.Typeexpr())
+	expr := ptc.visitExpr(ctx.Expr())
+	return &quark.ParameterDef{
+		IsType:  false,
+		TypeVal: typeExpr,
+		ExprVal: expr,
+		KwType:  quark.ObjectPosition{},
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitSingleReturn(ctx *SingleReturnContext) interface{} {

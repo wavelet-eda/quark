@@ -85,7 +85,7 @@ type (
 		TypeVal TypeExpr
 		ExprVal Expr
 
-		kwType ObjectPosition
+		KwType ObjectPosition
 	}
 
 	//ArgumentDef nodes are functions or module argument declarations.
