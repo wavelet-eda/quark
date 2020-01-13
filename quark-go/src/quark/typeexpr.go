@@ -10,7 +10,7 @@ type (
 	//ParameterizedType is a quark type with type or value parameters.
 	ParameterizedType struct {
 		BaseType   TypeExpr
-		Parameters []TypeParameter
+		Parameters []*TypeParameter
 
 		closeBrace ObjectPosition
 	}
@@ -23,6 +23,14 @@ type (
 		XType TypeExpr
 	}
 )
+
+func NewParameterizedType(baseType TypeExpr, params []*TypeParameter, closeBrace ObjectPosition) *ParameterizedType {
+	return &ParameterizedType{
+		BaseType:   baseType,
+		Parameters: params,
+		closeBrace: closeBrace,
+	}
+}
 
 func (t *CompleteType) Start() *ObjectPosition {
 	return t.X.Start()

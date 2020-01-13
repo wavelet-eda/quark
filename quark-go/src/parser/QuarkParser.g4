@@ -81,11 +81,11 @@ expr
     | OP_COMPLIMENT expr # ComplimentExpr
     | OP_LNOT expr # NotExpr
     | concat #ConcatExpr
-    | expr (OP_MUL | OP_DIV | OP_MOD) expr #MulDivModExpr
-    | expr (OP_SUB | OP_ADD) expr #AddSubExpr
-    | expr (OP_LEFT_SHIFT | OP_RIGHT_SHIFT | OP_ARITH_LEFT_SHIFT | OP_ARITH_RIGHT_SHFIT) expr #ShiftExpr
-    | expr (OP_BAND | OP_BOR | OP_XOR | OP_BNAND | OP_BNOR | OP_XNOR) expr #BitwiseBinopExpr
-    | expr (OP_LAND | OP_LOR | OP_IMPLICATION | OP_EQUIVALENCE) expr #LogicalBinopExpr
+    | expr op=(OP_MUL | OP_DIV | OP_MOD) expr #MulDivModExpr
+    | expr op=(OP_SUB | OP_ADD) expr #AddSubExpr
+    | expr op=(OP_LEFT_SHIFT | OP_RIGHT_SHIFT | OP_ARITH_LEFT_SHIFT | OP_ARITH_RIGHT_SHFIT) expr #ShiftExpr
+    | expr op=(OP_BAND | OP_BOR | OP_XOR | OP_BNAND | OP_BNOR | OP_XNOR) expr #BitwiseBinopExpr
+    | expr op=(OP_LAND | OP_LOR | OP_IMPLICATION | OP_EQUIVALENCE) expr #LogicalBinopExpr
     | expr KW_IF expr KW_ELSE expr #TernaryExpr
     | branch #BranchExpr
     | expr LBRACE msb=expr? COLON lsb=expr? (COLON? step=expr?) RBRACE #SliceExpr
@@ -110,12 +110,17 @@ innerconcat
 
 typeexpr
     : name #CompleteType
-    | typeexpr LBRACE (typeexpr | expr) (COMMA (typeexpr | expr))* RBRACE #ParameterizedType
+    | typeexpr LBRACE typeparam (COMMA typeparam)* RBRACE #ParameterizedType
+    ;
+
+typeparam
+    : typeexpr
+    | expr
     ;
 
 branch
-    : KW_IF expr LCURLY block expr? RCURLY (KW_ELIF expr LCURLY block expr? RCURLY)* (KW_ELSE LCURLY block expr? RCURLY)? #IfBranch
-    | KW_MATCH expr LCURLY (KW_CASE pattern LCURLY block expr? RCURLY)+ RCURLY #MatchBranch
+    : KW_IF expr LCURLY block RCURLY (KW_ELIF expr LCURLY block RCURLY)* (KW_ELSE LCURLY block RCURLY)? #IfBranch
+    | KW_MATCH expr LCURLY (KW_CASE pattern LCURLY block RCURLY)+ RCURLY #MatchBranch
     ;
 
 pattern

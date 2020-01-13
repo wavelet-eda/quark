@@ -2,7 +2,7 @@ package quark
 
 //Expression of a literal value.
 type LiteralExpr struct {
-	Value Literal
+	Value *Literal
 }
 
 func (e LiteralExpr) exprNode() {} //sentinel impl that ensures the types all work out. Wow it'd be cool if Go had proper traits
@@ -33,7 +33,7 @@ func (e VarExpr) End() *ObjectPosition {
 //Struct, enum, or interface field access expression.
 type FieldExpr struct {
 	Selectable Expr
-	FieldName  RealName
+	FieldName  *RealName
 }
 
 func (e FieldExpr) exprNode() {}
@@ -52,6 +52,14 @@ type ParensExpr struct {
 
 	openParen  ObjectPosition
 	closeParen ObjectPosition
+}
+
+func NewParensExpr(expr Expr, openParen ObjectPosition, closeParen ObjectPosition) *ParensExpr {
+	return &ParensExpr{
+		SubExpr:    expr,
+		openParen:  openParen,
+		closeParen: closeParen,
+	}
 }
 
 func (e ParensExpr) exprNode() {}
@@ -73,6 +81,14 @@ type TupleExpr struct {
 	closeParen ObjectPosition
 }
 
+func NewTupleExpr(exprs []Expr, openParen ObjectPosition, closeParen ObjectPosition) *TupleExpr {
+	return &TupleExpr{
+		Exprs:    exprs,
+		openParen:  openParen,
+		closeParen: closeParen,
+	}
+}
+
 func (e TupleExpr) exprNode() {}
 
 func (e TupleExpr) Start() *ObjectPosition {
@@ -86,10 +102,18 @@ func (e TupleExpr) End() *ObjectPosition {
 
 //A struct constructor.
 type ConstructorExpr struct {
-	FieldAssignments []CallArgument
+	FieldAssignments []*CallArgument
 
 	openCurly  ObjectPosition
 	closeCurly ObjectPosition
+}
+
+func NewConstructorExpr(assignments []*CallArgument, openCurly ObjectPosition, closeCurly ObjectPosition) *ConstructorExpr {
+	return &ConstructorExpr{
+		FieldAssignments: assignments,
+		openCurly:        openCurly,
+		closeCurly:       closeCurly,
+	}
 }
 
 func (e ConstructorExpr) exprNode() {}
@@ -113,6 +137,15 @@ type NewModuleExpr struct {
 	closeParen ObjectPosition
 }
 
+func NewNewModuleExpr(moduleType TypeExpr, args []*CallArgument, newKw ObjectPosition, closeParen ObjectPosition) *NewModuleExpr {
+	return &NewModuleExpr{
+		ModuleType: moduleType,
+		Arguments:  args,
+		newKw:      newKw,
+		closeParen: closeParen,
+	}
+}
+
 func (e NewModuleExpr) exprNode() {}
 
 func (e NewModuleExpr) Start() *ObjectPosition {
@@ -129,6 +162,14 @@ type OpenExpr struct {
 	Arguments []*CallArgument
 
 	closeParen ObjectPosition
+}
+
+func NewOpenExpr(interfaceType TypeExpr, args []*CallArgument, closeParen ObjectPosition) *OpenExpr {
+	return &OpenExpr{
+		InterfaceType: interfaceType,
+		Arguments:     args,
+		closeParen:    closeParen,
+	}
 }
 
 func (e *OpenExpr) exprNode() {}
@@ -148,7 +189,13 @@ type CloseExpr struct {
 	closeParen ObjectPosition
 }
 
-
+func NewCloseExpr(expr Expr, args []*CallArgument, closeParens ObjectPosition) *CloseExpr {
+	return &CloseExpr{
+		InterfaceExpr: expr,
+		Arguments: args,
+		closeParen: closeParens,
+	}
+}
 //A function invocation expression.
 func (e *CloseExpr) exprNode() {}
 func (e *CloseExpr) Start() *ObjectPosition {
@@ -166,6 +213,14 @@ type FunctionCall struct {
 	closeParen ObjectPosition
 }
 
+func NewFunctionCall(expr Expr, args []*CallArgument, closeParen ObjectPosition) *FunctionCall {
+	return &FunctionCall{
+		FunctionExpr: expr,
+		Arguments:    args,
+		closeParen:   closeParen,
+	}
+}
+
 func (e *FunctionCall) exprNode() {}
 func (e *FunctionCall) Start() *ObjectPosition {
 	return e.FunctionExpr.Start()
@@ -177,13 +232,23 @@ func (e *FunctionCall) End() *ObjectPosition {
 
 //An in line lambda.
 type LambdaExpr struct {
-	Arguments []ArgumentDef
+	Arguments []*ArgumentDef
 
 	Body      []Stmt
 	FinalExpr Expr
 
 	kwLambda   ObjectPosition
 	closeCurly ObjectPosition
+}
+
+func NewLambdaExpr(arguments []*ArgumentDef, body []Stmt, finalExpr Expr, lambdaPos ObjectPosition, closeCurly ObjectPosition) *LambdaExpr {
+	return &LambdaExpr{
+		Arguments:  arguments,
+		Body:       body,
+		FinalExpr:  finalExpr,
+		kwLambda:   lambdaPos,
+		closeCurly: closeCurly,
+	}
 }
 
 func (e LambdaExpr) exprNode() {}
@@ -205,6 +270,14 @@ type UnOp struct {
 	opPosition ObjectPosition
 }
 
+func NewUnOp(expr Expr, op UnaryOp, opPos ObjectPosition) *UnOp {
+	return &UnOp{
+		Expr:       expr,
+		Op:         op,
+		opPosition: opPos,
+	}
+}
+
 func (e UnOp) exprNode() {}
 
 func (e UnOp) Start() *ObjectPosition {
@@ -222,6 +295,14 @@ type ConcatExpr struct {
 
 	lCurly ObjectPosition
 	rCurly ObjectPosition
+}
+
+func NewConcatExpr(inner []InnerConcat, lCurly ObjectPosition, rCurly ObjectPosition) *ConcatExpr {
+	return &ConcatExpr{
+		ConcatPieces: inner,
+		lCurly:       lCurly,
+		rCurly:       rCurly,
+	}
 }
 
 func (e ConcatExpr) exprNode() {}
@@ -242,6 +323,15 @@ type BinOp struct {
 	Op    BinaryOp
 
 	opPosition ObjectPosition
+}
+
+func NewBinOp(left Expr, right Expr, op BinaryOp, opPosition ObjectPosition) *BinOp {
+	return &BinOp{
+		Left:       left,
+		Right:      right,
+		Op:         op,
+		opPosition: opPosition,
+	}
 }
 
 func (e BinOp) exprNode() {}
@@ -297,6 +387,14 @@ type ArrayLiteralExpr struct {
 	closeBrace ObjectPosition
 }
 
+func NewArrayLiteralExpr(values []Expr, openBrace ObjectPosition, closeBrace ObjectPosition) *ArrayLiteralExpr {
+	return &ArrayLiteralExpr{
+		Values:     values,
+		openBrace:  openBrace,
+		closeBrace: closeBrace,
+	}
+}
+
 func (e ArrayLiteralExpr) exprNode() {}
 
 func (e ArrayLiteralExpr) Start() *ObjectPosition {
@@ -315,6 +413,14 @@ type ClockToExpr struct {
 
 	kwSignal   ObjectPosition
 	closeParen ObjectPosition
+}
+
+func NewClockToExpr(clk ClockExpr, kwSignal ObjectPosition, closeParen ObjectPosition) *ClockToExpr {
+	return &ClockToExpr{
+		Clock:      clk,
+		kwSignal:   kwSignal,
+		closeParen: closeParen,
+	}
 }
 
 func (e ClockToExpr) exprNode() {}

@@ -51,6 +51,31 @@ func (ptc *ParseTreeConverter) visitAssignment(ctx IAssignmentContext) quark.Ass
 	panic("bad assignment operator")
 }
 
+func (ptc *ParseTreeConverter) visitBinop(op antlr.Token) quark.BinaryOp {
+	switch op.GetTokenType() {
+	case QuarkLexerOP_MUL:					return quark.OpMul
+	case QuarkLexerOP_DIV:					return quark.OpDiv
+	case QuarkLexerOP_MOD:					return quark.OpMod
+	case QuarkLexerOP_SUB:					return quark.OpSub
+	case QuarkLexerOP_ADD:					return quark.OpAdd
+	case QuarkLexerOP_LEFT_SHIFT:			return quark.OpLeftShift
+	case QuarkLexerOP_RIGHT_SHIFT: 			return quark.OpRightShift
+	case QuarkLexerOP_ARITH_LEFT_SHIFT: 	return quark.OpArithLeftShift
+	case QuarkLexerOP_ARITH_RIGHT_SHFIT:	return quark.OpArithRightShift
+	case QuarkLexerOP_BAND:					return quark.OpBinaryAnd
+	case QuarkLexerOP_BOR:					return quark.OpBinaryOr
+	case QuarkLexerOP_XOR:					return quark.OpBinaryXor
+	case QuarkLexerOP_BNAND:				return quark.OpBinaryNand
+	case QuarkLexerOP_BNOR:					return quark.OpBinaryNor
+	case QuarkLexerOP_XNOR:					return quark.OpBinaryXnor
+	case QuarkLexerOP_LAND:					return quark.OpLogicalAnd
+	case QuarkLexerOP_LOR:					return quark.OpLogicalOr
+	case QuarkLexerOP_IMPLICATION:			return quark.OpImplication
+	case QuarkLexerOP_EQUIVALENCE:			return quark.OpEquivalence
+	}
+	panic("bad binary operator")
+}
+
 func (ptc *ParseTreeConverter) visitClockExpr(ctx IClockexprContext) quark.ClockExpr {
 	return ptc.Visit(ctx).(quark.ClockExpr)
 }
@@ -83,6 +108,10 @@ func (ptc *ParseTreeConverter) visitBlock(ctx IBlockContext) []quark.Stmt {
 	return ptc.Visit(ctx).([]quark.Stmt)
 }
 
+func (ptc *ParseTreeConverter) visitInnerConcat(ctx IInnerconcatContext) quark.InnerConcat {
+	return ptc.Visit(ctx).(quark.InnerConcat)
+}
+
 func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) interface{} {
 	var rawImportDecls = ctx.AllImportdecl()
 	var rawDecls = ctx.AllDecl()
@@ -104,7 +133,9 @@ func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) inter
 	}
 }
 
-
+func (ptc *ParseTreeConverter) visitPattern(pattern IPatternContext) quark.Pattern {
+	return ptc.Visit(pattern).(quark.Pattern)
+}
 
 func (ptc *ParseTreeConverter) visitImportDecl(rawImportDecl IImportdeclContext) quark.ImportDecl {
 	return ptc.Visit(rawImportDecl).(quark.ImportDecl)
@@ -296,55 +327,111 @@ func (ptc *ParseTreeConverter) VisitBranchExpr(ctx *BranchExprContext) interface
 }
 
 func (ptc *ParseTreeConverter) VisitLambdaExpr(ctx *LambdaExprContext) interface{} {
-	panic("implement me")
+	lambdaPos := ptc.terminalPosition(ctx.KW_LAMBDA())
+	args := ptc.visitArgumentList(ctx.Argumentlist())
+	body := ptc.visitBlock(ctx.Block())
+	var endExpr quark.Expr = nil
+	if ctx.Expr() != nil {
+		endExpr = ptc.visitExpr(ctx.Expr())
+	}
+	rCurly := ptc.terminalPosition(ctx.RCURLY())
+
+	return quark.NewLambdaExpr(args, body, endExpr, lambdaPos, rCurly)
 }
 
 func (ptc *ParseTreeConverter) VisitConstructorExpr(ctx *ConstructorExprContext) interface{} {
-	panic("implement me")
+	openCurly := ptc.terminalPosition(ctx.LCURLY())
+	closeCurly := ptc.terminalPosition(ctx.RCURLY())
+	args := ptc.visitCallArgList(ctx.Callarglist())
+
+	return quark.NewConstructorExpr(args, openCurly, closeCurly)
 }
 
 func (ptc *ParseTreeConverter) VisitTupleExpr(ctx *TupleExprContext) interface{} {
-	panic("implement me")
+	exprs := make([]quark.Expr, len(ctx.AllExpr()))
+	for index, node := range ctx.AllExpr() {
+		exprs[index] = ptc.visitExpr(node)
+	}
+	openParen := ptc.terminalPosition(ctx.LPAREN())
+	closeParen := ptc.terminalPosition(ctx.RPAREN())
+	return quark.NewTupleExpr(exprs, openParen, closeParen)
 }
 
 func (ptc *ParseTreeConverter) VisitLogicalBinopExpr(ctx *LogicalBinopExprContext) interface{} {
-	panic("implement me")
+	left := ptc.visitExpr(ctx.Expr(0))
+	right := ptc.visitExpr(ctx.Expr(1))
+	op := ptc.visitBinop(ctx.op)
+	opPos := ptc.tokenPosition(ctx.op)
+	return quark.NewBinOp(left, right, op, opPos)
 }
 
 func (ptc *ParseTreeConverter) VisitConcatExpr(ctx *ConcatExprContext) interface{} {
-	panic("implement me")
+	concat := ctx.Concat().(*ConcatContext) //Note: only option
+	inners := make([]quark.InnerConcat, len(concat.AllInnerconcat()))
+	for index, node := range concat.AllInnerconcat() {
+		inners[index] = ptc.visitInnerConcat(node)
+	}
+	lCurly := ptc.terminalPosition(concat.LCURLY())
+	rCurly := ptc.terminalPosition(concat.RCURLY())
+	return quark.NewConcatExpr(inners, lCurly, rCurly)
 }
 
 func (ptc *ParseTreeConverter) VisitMulDivModExpr(ctx *MulDivModExprContext) interface{} {
-	panic("implement me")
+	left := ptc.visitExpr(ctx.Expr(0))
+	right := ptc.visitExpr(ctx.Expr(1))
+	op := ptc.visitBinop(ctx.op)
+	opPos := ptc.tokenPosition(ctx.op)
+	return quark.NewBinOp(left, right, op, opPos)
 }
 
 func (ptc *ParseTreeConverter) VisitComplimentExpr(ctx *ComplimentExprContext) interface{} {
-	panic("implement me")
+	expr := ptc.visitExpr(ctx.Expr())
+	op := quark.OpComplement
+	opPos := ptc.terminalPosition(ctx.OP_COMPLIMENT())
+	return quark.NewUnOp(expr, op, opPos)
 }
 
 func (ptc *ParseTreeConverter) VisitArrayLiteralExpr(ctx *ArrayLiteralExprContext) interface{} {
-	panic("implement me")
+	rBrace := ptc.terminalPosition(ctx.RBRACE())
+	lBrace := ptc.terminalPosition(ctx.LBRACE())
+
+	exprs := make([]quark.Expr, len(ctx.AllExpr()))
+	for i, node := range ctx.AllExpr() {
+		exprs[i] = ptc.visitExpr(node)
+	}
+	return quark.NewArrayLiteralExpr(exprs, rBrace, lBrace)
 }
 
 func (ptc *ParseTreeConverter) VisitClockToExpr(ctx *ClockToExprContext) interface{} {
-	panic("implement me")
+	kwSignal := ptc.terminalPosition(ctx.KW_SIGNAL())
+	rParen := ptc.terminalPosition(ctx.RPAREN())
+	clockExpr := ptc.visitClockExpr(ctx.Clockexpr())
+	return quark.NewClockToExpr(clockExpr, kwSignal, rParen)
 }
 
 func (ptc *ParseTreeConverter) VisitLiteralExpr(ctx *LiteralExprContext) interface{} {
-	panic("implement me")
+	literal := ctx.Literal().(*LiteralContext) //only option
+	return &quark.LiteralExpr{Value:ptc.VisitLiteral(literal).(*quark.Literal)}
 }
 
 func (ptc *ParseTreeConverter) VisitVarExpr(ctx *VarExprContext) interface{} {
-	panic("implement me")
+	name := ptc.visitName(ctx.Name())
+	return &quark.VarExpr{VarName:name}
 }
 
 func (ptc *ParseTreeConverter) VisitParensExpr(ctx *ParensExprContext) interface{} {
-	panic("implement me")
+	expr := ptc.visitExpr(ctx)
+	start := ptc.terminalPosition(ctx.LPAREN())
+	end := ptc.terminalPosition(ctx.RPAREN())
+	return quark.NewParensExpr(expr, start, end)
 }
 
 func (ptc *ParseTreeConverter) VisitBitwiseBinopExpr(ctx *BitwiseBinopExprContext) interface{} {
-	panic("implement me")
+	left := ptc.visitExpr(ctx.Expr(0))
+	right := ptc.visitExpr(ctx.Expr(1))
+	op := ptc.visitBinop(ctx.op)
+	opPos := ptc.tokenPosition(ctx.op)
+	return quark.NewBinOp(left, right, op, opPos)
 }
 
 func (ptc *ParseTreeConverter) VisitSliceExpr(ctx *SliceExprContext) interface{} {
@@ -368,27 +455,55 @@ func (ptc *ParseTreeConverter) VisitSliceExpr(ctx *SliceExprContext) interface{}
 }
 
 func (ptc *ParseTreeConverter) VisitNotExpr(ctx *NotExprContext) interface{} {
-	panic("implement me")
+	expr := ptc.visitExpr(ctx.Expr())
+	op := quark.OpNot
+	opPos := ptc.terminalPosition(ctx.OP_LNOT())
+	return quark.NewUnOp(expr, op, opPos)
 }
 
 func (ptc *ParseTreeConverter) VisitFieldExpr(ctx *FieldExprContext) interface{} {
-	panic("implement me")
+	name := ptc.visitExpr(ctx.Expr())
+	fieldName := ptc.visitRealname(ctx.Realname())
+	return &quark.FieldExpr{
+		Selectable: name,
+		FieldName:  fieldName,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitAddSubExpr(ctx *AddSubExprContext) interface{} {
-	panic("implement me")
+	left := ptc.visitExpr(ctx.Expr(0))
+	right := ptc.visitExpr(ctx.Expr(1))
+	op := ptc.visitBinop(ctx.op)
+	opPos := ptc.tokenPosition(ctx.op)
+	return quark.NewBinOp(left, right, op, opPos)
 }
 
 func (ptc *ParseTreeConverter) VisitShiftExpr(ctx *ShiftExprContext) interface{} {
-	panic("implement me")
+	left := ptc.visitExpr(ctx.Expr(0))
+	right := ptc.visitExpr(ctx.Expr(1))
+	op := ptc.visitBinop(ctx.op)
+	opPos := ptc.tokenPosition(ctx.op)
+	return quark.NewBinOp(left, right, op, opPos)
 }
 
 func (ptc *ParseTreeConverter) VisitTernaryExpr(ctx *TernaryExprContext) interface{} {
-	panic("implement me")
+	valueExpr := ptc.visitExpr(ctx.Expr(0))
+	cond := ptc.visitExpr(ctx.Expr(1))
+	elseExpr := ptc.visitExpr(ctx.Expr(2))
+	
+	return &quark.TernaryExpr{
+		IfExpr:   valueExpr,
+		Cond:     cond,
+		ElseExpr: elseExpr,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitNewModuleExpr(ctx *NewModuleExprContext) interface{} {
-	panic("implement me")
+	moduleType := ptc.visitTypeExpr(ctx.Typeexpr())
+	args := ptc.visitCallArgList(ctx.Callarglist())
+	newKw := ptc.terminalPosition(ctx.KW_NEW())
+	closeParen := ptc.terminalPosition(ctx.RPAREN())
+	return quark.NewNewModuleExpr(moduleType, args, newKw, closeParen)
 }
 
 func (ptc *ParseTreeConverter) VisitNamedCallArg(ctx *NamedCallArgContext) interface{} {
@@ -410,28 +525,91 @@ func (ptc *ParseTreeConverter) VisitUnamedCallArg(ctx *UnamedCallArgContext) int
 	}
 }
 
-func (ptc *ParseTreeConverter) VisitConcat(ctx *ConcatContext) interface{} {
-	panic("implement me")
+func (ptc *ParseTreeConverter) VisitConcat(_ *ConcatContext) interface{} {
+	panic("not reachable")
 }
 
-func (ptc *ParseTreeConverter) VisitInnerconcat(ctx *InnerconcatContext) interface{} {
-	panic("implement me")
+func (ptc *ParseTreeConverter) VisitInnerconcat(_ *InnerconcatContext) interface{} {
+	panic("not reachable")
 }
 
 func (ptc *ParseTreeConverter) VisitParameterizedType(ctx *ParameterizedTypeContext) interface{} {
-	panic("implement me")
+	mainType := ptc.visitTypeExpr(ctx.Typeexpr())
+	typeParams := make([]*quark.TypeParameter, len(ctx.AllTypeparam()))
+	for i, node := range ctx.AllTypeparam() {
+		param := node.(*TypeparamContext)
+		var expr quark.Expr = nil
+		var typeExpr quark.TypeExpr = nil
+		if param.Expr() != nil {
+			expr = ptc.visitExpr(param.Expr())
+		} else {
+			typeExpr = ptc.visitTypeExpr(param.Typeexpr())
+		}
+		typeParams[i] = &quark.TypeParameter{
+			XExpr: expr,
+			XType: typeExpr,
+		}
+	}
+
+	closeBrace := ptc.terminalPosition(ctx.RBRACE())
+	return quark.NewParameterizedType(mainType, typeParams, closeBrace)
 }
 
 func (ptc *ParseTreeConverter) VisitCompleteType(ctx *CompleteTypeContext) interface{} {
-	panic("implement me")
+	name := ptc.visitName(ctx.Name())
+	return &quark.CompleteType{X:name}
 }
 
 func (ptc *ParseTreeConverter) VisitIfBranch(ctx *IfBranchContext) interface{} {
-	panic("implement me")
+	kwIf := ptc.terminalPosition(ctx.KW_IF())
+	closeCurly := ptc.terminalPosition(ctx.RCURLY(len(ctx.AllRCURLY()) - 1))
+
+	var ifPart quark.CondBranchPart
+	ifPart.Cond = ptc.visitExpr(ctx.Expr(0))
+	ifPart.Body = ptc.visitBlock(ctx.Block(0))
+
+	elifParts := make([]quark.CondBranchPart, len(ctx.AllKW_ELIF()))
+	for i := 0; i < len(ctx.AllKW_ELIF()); i++ {
+		part := quark.CondBranchPart{
+			Cond:       ptc.visitExpr(ctx.Expr(i + 1)),
+			BranchPart: quark.BranchPart {
+				Body: ptc.visitBlock(ctx.Block(i + 1)),
+			},
+		}
+		elifParts[i] = part
+	}
+
+	var elsePart *quark.BranchPart = nil
+	if ctx.KW_ELSE() != nil {
+		elsePart = &quark.BranchPart{
+			Body:       ptc.visitBlock(ctx.Block(len(ctx.AllBlock()) - 1)),
+			BodyReturn: nil,
+		}
+	}
+
+	return quark.NewIfBranch(ifPart, elifParts, elsePart, kwIf, closeCurly)
 }
 
 func (ptc *ParseTreeConverter) VisitMatchBranch(ctx *MatchBranchContext) interface{} {
-	panic("implement me")
+	match := ptc.terminalPosition(ctx.KW_MATCH())
+	end := ptc.terminalPosition(ctx.RCURLY(len(ctx.AllRCURLY()) - 1))
+
+	matchExpr := ptc.visitExpr(ctx.Expr())
+
+	var branchPart = make([]quark.CaseBranchPart, len(ctx.AllBlock()))
+	for i := 0; i < len(ctx.AllBlock()); i++ {
+		pat := ptc.visitPattern(ctx.Pattern(i))
+		body := ptc.visitBlock(ctx.Block(i))
+		branchPart[i] = quark.CaseBranchPart{
+			CasePattern: pat,
+			BranchPart:  quark.BranchPart{
+				Body:       body,
+				BodyReturn: nil,
+			},
+		}
+	}
+
+	return quark.NewMatchBranch(matchExpr, branchPart, match, end)
 }
 
 func (ptc *ParseTreeConverter) VisitAtomicPattern(ctx *AtomicPatternContext) interface{} {
@@ -519,6 +697,8 @@ func (ptc *ParseTreeConverter) VisitLiteral(ctx *LiteralContext) interface{} {
 func (ptc *ParseTreeConverter) Visit(tree antlr.ParseTree) interface{} {
 	return tree.Accept(ptc)
 }
+
+
 
 //func (ptc *ParseTreeConverter) VisitChildren(tree antlr.RuleNode) interface{} {
 //	return tree.Accept(ptc)

@@ -5,7 +5,7 @@ type (
 	IfBranch struct {
 		IfPart CondBranchPart
 		ElifParts []CondBranchPart
-		ElsePart BranchPart
+		ElsePart *BranchPart
 
 		kwIf ObjectPosition
 		closeCurly ObjectPosition
@@ -40,6 +40,26 @@ type (
 		BranchPart
 	}
 )
+
+func NewIfBranch(ifPart CondBranchPart, elifPart []CondBranchPart, elsePart *BranchPart, kwIf ObjectPosition, closeCurly ObjectPosition) *IfBranch {
+	return &IfBranch{
+		IfPart:     ifPart,
+		ElifParts:  elifPart,
+		ElsePart:   elsePart,
+		kwIf:       kwIf,
+		closeCurly: closeCurly,
+	}
+}
+
+func NewMatchBranch(expr Expr, cases []CaseBranchPart, kwMatch ObjectPosition, closeCurly ObjectPosition) *MatchBranch {
+	return &MatchBranch{
+		MatchExpr:  expr,
+		Cases:      cases,
+		kwMatch:    kwMatch,
+		closeCurly: closeCurly,
+	}
+}
+
 
 func (b *IfBranch) Start() *ObjectPosition {
 	return &b.kwIf

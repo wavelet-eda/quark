@@ -15,6 +15,8 @@ const (
 	OpMul BinaryOp = iota
 	OpDiv
 	OpMod
+	OpSub
+	OpAdd
 	OpLeftShift
 	OpRightShift
 	OpArithLeftShift
@@ -25,8 +27,9 @@ const (
 	OpBinaryNand
 	OpBinaryNor
 	OpBinaryXnor
-	OpLogicAnd
-	OpLogicNor
+	OpLogicalAnd
+	OpLogicalOr
+	OpLogicalNor
 	OpImplication
 	OpEquivalence
 )
