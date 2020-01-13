@@ -154,6 +154,8 @@ func (ptc *ParseTreeConverter) visitImportDecl(rawImportDecl IImportdeclContext)
 }
 
 func (ptc *ParseTreeConverter) visitDecl(rawDecl IDeclContext) quark.Decl {
+	println(rawDecl.GetText())
+	println(rawDecl.GetStart().GetText())
 	return ptc.Visit(rawDecl).(quark.Decl)
 }
 
@@ -760,6 +762,7 @@ func (ptc *ParseTreeConverter) VisitFielddecl(ctx *FielddeclContext) interface{}
 }
 
 func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
+	println("visiting funcdecl")
 	name := ptc.visitRealname(ctx.Realname())
 	params := ptc.visitParameterList(ctx.Parameterlist())
 	args := ptc.visitArgumentList(ctx.Argumentlist())

@@ -134,7 +134,7 @@ func (p *Package) Start() *ObjectPosition {
 
 func (p *ParameterDef) Start() *ObjectPosition {
 	if p.IsType {
-		return &p.kwType
+		return &p.KwType
 	} else {
 		return p.TypeVal.Start()
 	}
