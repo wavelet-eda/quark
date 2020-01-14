@@ -7,7 +7,9 @@ import (
 )
 
 //Visitor implementation which converts parse tree from Antlr into
-//proper quark.AST.
+//proper quark.AST. This class is hellish. Don't change it if you don't
+//know what you're doing. The private methods are mostly added to
+//consolidate type casting.
 type ParseTreeConverter struct {
 	BaseQuarkParserVisitor
 	file *quark.QuarkFile
