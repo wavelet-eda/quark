@@ -20,6 +20,83 @@ std::set<std::string> Quark::get_quark_keywords() {
     return keyword_lookup;
 }
 
+int Quark::get_operator_precedence(QuarkSymbol s) {
+    switch (s) {
+        case QuarkSymbol::MULTIPLICATION:
+        case QuarkSymbol::DIVISION:
+        case QuarkSymbol::MODULUS:
+            return 6;
+        case QuarkSymbol::ADDITION: 
+        case QuarkSymbol::SUBTRACTION:
+            return 7;
+        case QuarkSymbol::LSHIFT:
+        case QuarkSymbol::RSHIFT:
+            return 8;
+        case QuarkSymbol::LESS:
+        case QuarkSymbol::GREATER:
+        case QuarkSymbol::LESS_EQUAL:
+        case QuarkSymbol::GREATER_EQUAL:
+            return 9;
+        case QuarkSymbol::EQUAL:
+        case QuarkSymbol::NOT_EQUAL:
+            return 10;
+        case QuarkSymbol::BITWISE_AND: 
+        case QuarkSymbol::BITWISE_NAND:
+        case QuarkSymbol::BITWISE_OR:
+        case QuarkSymbol::BITWISE_NOR:
+        case QuarkSymbol::BITWISE_XOR: 
+        case QuarkSymbol::BITWISE_XNOR:
+            return 11;
+        case QuarkSymbol::COND_AND:
+        case QuarkSymbol::COND_OR:
+        case QuarkSymbol::COND_IMPLICATION:
+        case QuarkSymbol::COND_EQUIVALENCE:
+            return 12;
+        default:
+            return -1;
+    }
+}
+
+bool Quark::is_symbol_assignment(QuarkSymbol s) {
+    switch (s) {
+        case QuarkSymbol::ASSIGN:
+        case QuarkSymbol::ADDITION_ASSIGN:
+        case QuarkSymbol::SUBTRACTION_ASSIGN:
+        case QuarkSymbol::MULTIPLICATION_ASSIGN:
+        case QuarkSymbol::DIVISION_ASSIGN:
+        case QuarkSymbol::MODULUS_ASSIGN:
+        case QuarkSymbol::BITWISE_AND_ASSIGN:
+        case QuarkSymbol::BITWISE_OR_ASSIGN:
+        case QuarkSymbol::BITWISE_XOR_ASSIGN:
+        case QuarkSymbol::LSHIFT_ASSIGN:
+        case QuarkSymbol::RSHIFT_ASSIGN:
+        case QuarkSymbol::INCREMENT:
+        case QuarkSymbol::DECREMENT:
+            return true;
+        default:
+            return false;
+    }
+
+}
+
+bool Quark::is_operator_unary(QuarkSymbol s) {
+    switch (s) {
+        case QuarkSymbol::ADDITION: // + 
+        case QuarkSymbol::SUBTRACTION: // -
+        case QuarkSymbol::BITWISE_AND: // &
+        case QuarkSymbol::BITWISE_NAND: // ~&
+        case QuarkSymbol::BITWISE_OR: // |
+        case QuarkSymbol::BITWISE_NOR: // ~|
+        case QuarkSymbol::BITWISE_XOR: // ^
+        case QuarkSymbol::BITWISE_XNOR: // ~^
+        case QuarkSymbol::INVERT: // ~
+        case QuarkSymbol::BANG: // !
+            return true;
+        default:
+            return false;
+    }
+}
+
 char QuarkCharacter::get_escaped_char() {
     switch (c) {
         case 'a' : return '\a';

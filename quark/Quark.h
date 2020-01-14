@@ -15,6 +15,10 @@ namespace Quark {
 
     std::set<std::string> get_quark_keywords();
 
+    int get_operator_precedence(QuarkSymbol s);
+    bool is_symbol_assignment(QuarkSymbol s);
+    bool is_operator_unary(QuarkSymbol s);
+
     const char QUARK_ASCII_VT = 11;
     const char QUARK_ASCII_FF = 12;
     const char QUARK_ASCII_CR = 13;
@@ -69,7 +73,6 @@ namespace Quark {
         COLON = ':',
         DOT = '.',
         COMMA = ',',
-        DOUBLE_COLON = 150, // ::
         SEMICOLON = ';',
         // Unsupported/unused symbols
         DOLLAR = '$',
@@ -77,6 +80,7 @@ namespace Quark {
         TICK = '`',
         AT = '@',
         BACKSLASH = '\\',
+        DOUBLE_COLON = 150, // ::
         // Comment Symbols
         LINE_COMMENT = 151, // //
         BLOCK_COMMENT = 152, // /*
@@ -285,14 +289,6 @@ namespace Quark {
         QuarkToken(size_t line, size_t col, QuarkTokenType type, std::string str) :
                 line(line), col(col),
                 type(type), str(str) {}
-    };
-
-    enum class QuarkNodeType : uint8_t {
-        MODULE
-    };
-
-    class QuarkNode {
-
     };
 
 }
