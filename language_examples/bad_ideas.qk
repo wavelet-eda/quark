@@ -1,0 +1,43 @@
+
+// ???
+// You can use question marks in the declaration of constants, but the compiler
+// can/will assign the bit(s) either to a zero or a one. Aside from being used
+// in case statements, if you set a signal to an unknown and otherwise do not
+// assign to it in any branch of execution the compiler will throw an error.
+// ???
+
+// -------------- Struct Inheritance ---------------------
+
+// // Structs can inherit from other structs, but the inherited struct needs to be
+// // declared as abstract and this only supports single inheritance. Also, there
+// // are no public/private distinctions and fields cannot be overriden or masked.
+// // You can also use an abstract struct normally, there is no way to restrict
+// // this, in hardware that doesn't really make a lot of sense.
+
+// abstract struct my_abstract_t {
+//     bit [4] parent_stuff;    
+// }
+
+// struct my_concrete_t : my_abstract_t {
+//     bit [4] child_stuff;
+// }
+
+// my_abstract_t abs_st; // You can access parent_stuff only
+// my_concrete_t con_st; // You can access parent_stuff and child_stuff
+
+// I am really torn on these semantics, specifically how assignments
+// work with loss of generality or specificity. It probably needs a restricted
+// type parameter when it is used
+
+/*
+// Any abstract struct also has an implicit field 'meta' and associated 'meta_t'
+// type that contains all the child struct contents, assuming that the struct 
+// has been passed around
+
+// Find width manually
+parameter bit [32] W = width(abs_st.meta);
+bit [W] meta_data = abs_st.meta;
+
+// Rely on built in 
+abs_st.meta_t meta_data_def = abs_st.meta;
+*/

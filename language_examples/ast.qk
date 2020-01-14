@@ -1,0 +1,36 @@
+/*
+Quark Abstract Syntax Tree Documentation (*.qk):
+
+At the top level of the AST you have the FILE node which can then contain a list
+of the the following
+
+- quark(...);
+- import ... ;
+- module ... [] {}
+- interface ... [] {}
+- function ... [] () {}
+- typedef [] ... ;
+    - strict
+- struct ... [] {}
+- enum ... [] {}
+
+Valid Type qualifiers:
+
+ARRAY_SIZE := any number (including zero) of [SIZE]
+
+bit NAME
+bit : ARRAY_SIZE NAME
+bit [SIZE] : ARRAY_SIZE NAME
+bit [MSB:LSB] : ARRAY_SIZE NAME
+
+TYPE NAME
+TYPE [PARAMETERS] NAME
+TYPE : ARRAY_SIZE NAME
+TYPE [PARAMETERS] : ARRAY_SIZE NAME
+
+array [bit [32], 8, 256] TEST;
+bit [32] array [8] [256] TEST;
+
+Left
+
+*/
