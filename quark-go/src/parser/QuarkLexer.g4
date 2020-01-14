@@ -104,9 +104,8 @@ KW_CLOSE: 'close';
 KW_MUT: 'mut';
 KW_SIGNAL: 'signal';
 
-COMMENT_START: '//';
-BLOCK_COMMENT_START: '/*';
-BLOCK_COMMENT_END: '*/';
+COMMENT_START: '//' -> skip, mode(SINGLE_LINE_COMMENT);
+BLOCK_COMMENT_START: '/*' -> skip, mode(BLOCK_COMMENT);
 
 INTEGRAL: ((DIGIT+)? TICK) LITERAL_TYPE  DIGIT+;
 
@@ -120,3 +119,13 @@ ANNOTATION_START: '@'; //Annotation names are @camelCase
 
 
 WS : [ \t\r\n]+ -> skip ;
+
+mode SINGLE_LINE_COMMENT;
+
+NEW_LINE: [\n\r] -> skip, mode(DEFAULT_MODE);
+ANYCHAR: ~[\n\r] -> skip;
+
+mode BLOCK_COMMENT;
+
+BLOCK_COMMENT_END: '*/' -> skip, mode(DEFAULT_MODE);
+BLOCK_COMMENT_CHAR: . -> skip;

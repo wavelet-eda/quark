@@ -113,7 +113,14 @@ func (ptc *ParseTreeConverter) visitReturnList(ctx IReturnlistContext) quark.Ret
 }
 
 func (ptc *ParseTreeConverter) visitCallArgList(ctx ICallarglistContext) []*quark.CallArgument {
-	return ptc.Visit(ctx).([]*quark.CallArgument)
+	actualList := ctx.(*CallarglistContext) //this is the only option
+	callArgs := make([]*quark.CallArgument, len(actualList.AllCallarg()))
+
+	for i, node := range actualList.AllCallarg() {
+		callArg := ptc.Visit(node).(*quark.CallArgument)
+		callArgs[i] = callArg
+	}
+	return callArgs
 }
 
 func (ptc *ParseTreeConverter) visitBlock(ctx IBlockContext) []quark.Stmt {
