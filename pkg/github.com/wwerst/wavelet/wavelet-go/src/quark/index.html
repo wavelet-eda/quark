@@ -495,6 +495,17 @@
 				
 			
 				
+				<dd><a href="#InterfaceDecl">type InterfaceDecl</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#InterfaceDecl.End">func (i *InterfaceDecl) End() *ObjectPosition</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#InterfaceDecl.Start">func (i *InterfaceDecl) Start() *ObjectPosition</a></dd>
+				
+			
+				
 				<dd><a href="#InterfaceDirection">type InterfaceDirection</a></dd>
 				
 				
@@ -2608,7 +2619,7 @@ Struct, enum, or interface field access expression.
 		
 			
 			
-			<h2 id="FunctionDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=295:520#L10">FunctionDecl</a>
+			<h2 id="FunctionDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=549:774#L25">FunctionDecl</a>
 				<a class="permalink" href="#FunctionDecl">&#xb6;</a>
 				
 				
@@ -2645,7 +2656,7 @@ Declaration of a Function symbol.
 
 			
 				
-				<h3 id="FunctionDecl.End">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1298:1342#L70">End</a>
+				<h3 id="FunctionDecl.End">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1778:1822#L97">End</a>
 					<a class="permalink" href="#FunctionDecl.End">&#xb6;</a>
 					
 					
@@ -2657,7 +2668,7 @@ Declaration of a Function symbol.
 				
 			
 				
-				<h3 id="FunctionDecl.Start">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=930:976#L50">Start</a>
+				<h3 id="FunctionDecl.Start">func (*FunctionDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1337:1383#L73">Start</a>
 					<a class="permalink" href="#FunctionDecl.Start">&#xb6;</a>
 					
 					
@@ -2906,6 +2917,68 @@ contexts. Examples are bit concatenation and replication.
 
 			
 
+			
+		
+			
+			
+			<h2 id="InterfaceDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=297:509#L10">InterfaceDecl</a>
+				<a class="permalink" href="#InterfaceDecl">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Declaration of an Interface symbol.
+</p>
+
+			<pre>type InterfaceDecl struct {
+<span id="InterfaceDecl.Annotations"></span>    Annotations []<a href="#Annotation">Annotation</a>
+<span id="InterfaceDecl.StructName"></span>    StructName  *<a href="#RealName">RealName</a>
+
+<span id="InterfaceDecl.Parameters"></span>    Parameters []*<a href="#ParameterDef">ParameterDef</a>
+
+<span id="InterfaceDecl.Fields"></span>    Fields []*<a href="#InterfaceField">InterfaceField</a>
+
+<span id="InterfaceDecl.TraitImpls"></span>    TraitImpls []<a href="#Name">Name</a>
+
+<span id="InterfaceDecl.KwInterface"></span>    KwInterface <a href="#ObjectPosition">ObjectPosition</a>
+<span id="InterfaceDecl.CloseCurly"></span>    CloseCurly  <a href="#ObjectPosition">ObjectPosition</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="InterfaceDecl.End">func (*InterfaceDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1705:1750#L93">End</a>
+					<a class="permalink" href="#InterfaceDecl.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="#InterfaceDecl">InterfaceDecl</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="InterfaceDecl.Start">func (*InterfaceDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1184:1231#L65">Start</a>
+					<a class="permalink" href="#InterfaceDecl.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="#InterfaceDecl">InterfaceDecl</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
 			
 		
 			
@@ -3256,7 +3329,7 @@ A match statement or expression.
 		
 			
 			
-			<h2 id="ModuleDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=558:779#L26">ModuleDecl</a>
+			<h2 id="ModuleDecl">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=812:1033#L41">ModuleDecl</a>
 				<a class="permalink" href="#ModuleDecl">&#xb6;</a>
 				
 				
@@ -3293,7 +3366,7 @@ Declaration of a module symbol.
 
 			
 				
-				<h3 id="ModuleDecl.End">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1370:1412#L74">End</a>
+				<h3 id="ModuleDecl.End">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1850:1892#L101">End</a>
 					<a class="permalink" href="#ModuleDecl.End">&#xb6;</a>
 					
 					
@@ -3305,7 +3378,7 @@ Declaration of a module symbol.
 				
 			
 				
-				<h3 id="ModuleDecl.Start">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1081:1125#L58">Start</a>
+				<h3 id="ModuleDecl.Start">func (*ModuleDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1488:1532#L81">Start</a>
 					<a class="permalink" href="#ModuleDecl.Start">&#xb6;</a>
 					
 					
@@ -4448,7 +4521,7 @@ Declaration of a Struct symbol.
 
 			
 				
-				<h3 id="StructDecl.End">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1228:1270#L66">End</a>
+				<h3 id="StructDecl.End">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1635:1677#L89">End</a>
 					<a class="permalink" href="#StructDecl.End">&#xb6;</a>
 					
 					
@@ -4460,7 +4533,7 @@ Declaration of a Struct symbol.
 				
 			
 				
-				<h3 id="StructDecl.Start">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=783:827#L42">Start</a>
+				<h3 id="StructDecl.Start">func (*StructDecl) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/decl.go?s=1037:1081#L57">Start</a>
 					<a class="permalink" href="#StructDecl.Start">&#xb6;</a>
 					
 					
