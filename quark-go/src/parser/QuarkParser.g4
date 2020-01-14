@@ -154,6 +154,10 @@ structdef: LCURLY fielddecl* RCURLY;
 
 fielddecl: annotation* typeexpr realname SEMI;
 
+interfacedecl: annotation* KW_INTERFACE realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY interfacefield* RCURLY;
+
+interfacefield: annotation* (KW_FORWARD | KW_REVERSE) typeexpr realname SEMI;
+
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
 moduledecl: annotation* KW_MODULE realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;

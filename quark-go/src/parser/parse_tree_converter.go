@@ -762,6 +762,60 @@ func (ptc *ParseTreeConverter) VisitStructdef(_ *StructdefContext) interface{} {
 	panic("not reacable")
 }
 
+
+func (ptc *ParseTreeConverter) VisitInterfacedecl(ctx *InterfacedeclContext) interface{} {
+	kwInterface := ptc.terminalPosition(ctx.KW_INTERFACE())
+	rCurly := ptc.terminalPosition(ctx.RCURLY())
+
+	name := ptc.visitRealname(ctx.Realname())
+	var params []*quark.ParameterDef
+	if ctx.Parameterlist() != nil {
+		params = ptc.visitParameterList(ctx.Parameterlist())
+	} else {
+		params = make([]*quark.ParameterDef, 0)
+	}
+
+	traits := make([]quark.Name, len(ctx.AllName()))
+	for i, node := range ctx.AllName() {
+		traits[i] = ptc.visitName(node)
+	}
+
+	fields := make([]*quark.InterfaceField, len(ctx.AllInterfacefield()))
+	for i, node := range ctx.AllInterfacefield() {
+		fields[i] = ptc.VisitInterfacefield(node.(*InterfacefieldContext)).(*quark.InterfaceField)
+	}
+	
+	return &quark.InterfaceDecl{
+		Annotations: nil,
+		StructName:  name,
+		Parameters:  params,
+		Fields:      fields,
+		TraitImpls:  traits,
+		KwInterface: kwInterface,
+		CloseCurly:  rCurly,
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitInterfacefield(ctx *InterfacefieldContext) interface{} {
+	var direction quark.InterfaceDirection
+	if ctx.KW_FORWARD() != nil {
+		direction = quark.Forward
+	} else {
+		direction = quark.Reverse
+	}
+
+	fieldType := ptc.visitTypeExpr(ctx.Typeexpr())
+	fieldName := ptc.visitRealname(ctx.Realname())
+
+	return &quark.InterfaceField{
+		Direction: direction,
+		Field:     quark.Field{
+			FieldType: fieldType,
+			FieldName: fieldName,
+		},
+	}
+}
+
 func (ptc *ParseTreeConverter) VisitFielddecl(ctx *FielddeclContext) interface{} {
 	fieldType := ptc.visitTypeExpr(ctx.Typeexpr())
 	fieldName := ptc.visitRealname(ctx.Realname())
