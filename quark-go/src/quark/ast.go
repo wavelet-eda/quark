@@ -83,7 +83,7 @@ type (
 	ParameterDef struct {
 		IsType bool
 		TypeVal TypeExpr
-		ExprVal Expr
+		ParamName *RealName
 
 		KwType ObjectPosition
 	}
@@ -162,7 +162,7 @@ func (p *ParameterDef) End() *ObjectPosition {
 	if p.IsType {
 		return p.TypeVal.End()
 	} else {
-		return p.ExprVal.End()
+		return p.ParamName.End()
 	}
 }
 

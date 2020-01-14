@@ -667,18 +667,18 @@ func (ptc *ParseTreeConverter) VisitTypeParameter(ctx *TypeParameterContext) int
 	return &quark.ParameterDef{
 		IsType:  true,
 		TypeVal: typeExpr,
-		ExprVal: nil,
+		ParamName: nil,
 		KwType:  typePos,
 	}
 }
 
 func (ptc *ParseTreeConverter) VisitValueParameter(ctx *ValueParameterContext) interface{} {
 	typeExpr := ptc.visitTypeExpr(ctx.Typeexpr())
-	expr := ptc.visitExpr(ctx.Expr())
+	name := ptc.visitRealname(ctx.Realname())
 	return &quark.ParameterDef{
 		IsType:  false,
 		TypeVal: typeExpr,
-		ExprVal: expr,
+		ParamName: name,
 		KwType:  quark.ObjectPosition{},
 	}
 }
