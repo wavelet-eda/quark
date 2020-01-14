@@ -155,3 +155,188 @@ module stream_ownership_module [bit [32] W] {
     stream_custom = new stream_module [W] (stream_in);
 
 }
+
+interface Handshake {
+    output bit valid;
+    input bit ready;
+}
+
+interface Stream[type T] {
+    output Handshake handshake;
+    output T data;
+}
+
+module streamController {
+    struct Input {
+        Handshake hand_in;
+    }
+    struct Output {
+        Handshake hand_out;
+    }
+
+    // Anything that is an input or returned is borrowed
+    // Anything that is an output or declared is owned
+
+    MyStruct ms = {}; // How a struct takes on defaults
+    MyStruct ms = {
+        a = x
+    };
+
+    var ms = {};
+
+    MyStruct ms = {};
+
+    MyStruct[Bit] = {};
+
+    Handshake h;
+
+    future (Bit ready_out) {
+        close hand_in(ready_out); // If you pass nothing here it takes defaults
+        // You only get hierarchy access after the close
+        h = open Handshake(hand_in.valid);
+        // Likewise you only get hierarchy access after the open
+    } (h.ready);
+
+    a = ...
+    <mut> Type a = ...
+    array[...<, ...>] = ...
+    array[msb:<<lsb>:step>] = ...
+    assignment <, assigment> = (,)  
+    {a, b} = 32'hff;
+
+    // All unused values throw compiler errors
+    // but you can do _ = unused_value to ignore it
+
+    return h;
+}
+
+// Ethan needs to write a paper on how implicit parameters are resolved
+
+key_word Name[B, C] {
+    X[B] a;
+    X[C] a;
+}
+
+Name[32, 16] a = {
+    x = ...
+    y = ...
+}
+  
+
+// Handshake h;
+
+// ready_in = start h(valid_in);
+
+// // ...
+
+// ready_in = finish h(valid_out);
+
+// typeof(h) != typeof(Handshake)
+// typeof(h) == Handsake
+// typeof(Handshake) == func(Bit) => Handshake
+
+
+// typeof(h) == typeof(&Handsake) == func(Bit) => Bit
+
+// Handshake h = new Handshake[]();
+
+// Bit valid = start h(ready);
+
+// // ...
+
+// Bit ready = finish h(valid);
+
+
+
+// fn reduce[Size Q, Bit[32] C](B inital, B values) {
+//     for i in range()
+//     // fn(Bit): Bit E = fn(Bit a) => F(0, a)
+
+//     // bit [32] B = A;
+// }
+
+// reduce[Bit[32], Arrat[B]]
+
+// reduce[+](0, array);
+ 
+module streamStuff {
+    struct Input {
+        Stream[Bit[32]] stream_in;
+    }
+    struct Output {
+        Stream[Bit[32]] stream_out;
+    }
+
+    OwnedHandshake h_in, Bit[32] data = stream_in();
+
+    Bit valid_in = h_in(ready_in);
+
+    Handshake h_out = new streamController(h_in);
+
+    return {
+        stream_out = new Stream(data_out, h_out);
+    };
+}
+
+
+
+enum State {
+    On[fn(Bit, Bit): State next = Off](Bit a, Bit b) = 1;
+    Off = 0;
+}
+
+typeof(On) != State
+typeof(On) == fn(Bit, Bit): State
+typeof(Off) == fn(): State
+
+fn toValue(State s): Bit {
+    return match s {
+        case On[NEXT]:
+
+        case Off: 0
+    }
+}
+
+fn mmakeState(Bit s): State {
+    return match s {
+        case 1: On
+        case 
+    }
+}
+
+
+//traits
+
+trait Writable[T] {
+    fn toString(Bit, T): String
+    fn read(String): T
+}
+
+struct Int has Writable {
+    Bit[32] a;
+
+    fn toString(Int a): {
+        return IntToString(a);
+    }
+}
+
+fn IntToString(Int a): String {
+    
+}
+
+// struct Double {
+    
+// }
+
+// impl Writable[Double] {
+    
+// }
+
+// impl 
+
+
+fn writeToString(Writable[T] a): string {
+    toString(a)   
+}
+
+

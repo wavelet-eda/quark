@@ -5,13 +5,13 @@ Functions look just like they do in SV for the most part, but with the notable
 exception that you can parameterize functions.
 */
 
-// You write a function like this
-function bit [8] add(bit [8] a, b) {
+// You write a function like this, first list is arguments, second is returns
+function add(bit [8] a, b) : (bit [8]) {
     return a + b; // You just return like normal
 }
 
 // You can also parameterize a function
-function bit [W] add [bit [32] W](bit [W] a, b) {
+function add [bit [32] W] (bit [W] a, b) : (bit [W]) {
     return a + b;
 }
 
@@ -22,7 +22,7 @@ struct add_t {
     bit [8] a, b, c;
 }
 
-function bit [8] add(add_t add) {
+function add(add_t add) : (bit [8]) {
     add.c = add.a + add.b;
     return add.c;
 }
@@ -42,7 +42,7 @@ struct param_struct_t [bit [32] W] {
     bit [W] a;
 }
 
-function bit [W] implicit_params_func(param_struct_t[W] p) {
+function implicit_params_func(param_struct_t[W] p) : (bit [W]) {
     return p.a;
 }
 

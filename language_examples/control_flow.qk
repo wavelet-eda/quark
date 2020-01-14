@@ -80,6 +80,19 @@ unique case (data) { // data must be a bit-vector
     // default: test = 0; 
 }
 
+
+enum Fuck {
+    Foo(Int, Int)
+    Bar(Int)
+}
+
+match whatever {
+    
+    case Foo(1, _) => 
+    case 4'h0001,   => 
+    case 4'h000_
+
+}
 // If you have an enum with union fields then you can use a match statement to
 // extract their values, but you can only use a match statement on an enum and
 // multiple cases, ranges, or wildcards are not allowed like in case statements
@@ -99,16 +112,16 @@ enum uint8_t my_enum_union_t {
 my_enum_union_t my_enum = my_enum_union_t.ZERO{ data: 'h0 };
 
 match (my_enum) {
-    ZERO(uint32_t data): { // The types and their order must match but the names
+    ZERO(uint32_t data) { // The types and their order must match but the names
                            // of the values do not have to
         data = 'h0; // Modifications to the enum fields are not reflected
                     // to the actual enum, you instead need to reconstruct it
         my_enum = my_enum_union_t.ONE{'h1, 'h2};
     }
-    ONE(uint16_t smaller_data, uint8_t smallest_data): {
+    ONE(uint16_t smaller_data, uint8_t smallest_data) {
 
     }
-    default: { // You can provide default but it can't unpack the enum
+    ? { // You can provide default but it can't unpack the enum
 
     }
 }
