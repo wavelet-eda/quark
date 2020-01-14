@@ -136,7 +136,7 @@ parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;
 
 parameterdef
     : KW_TYPE typeexpr #TypeParameter
-    | typeexpr expr #ValueParameter
+    | typeexpr realname #ValueParameter
     ;
 
 returnlist

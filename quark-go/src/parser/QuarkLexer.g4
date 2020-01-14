@@ -2,6 +2,7 @@ lexer grammar QuarkLexer;
 
 fragment UPPERCASE : [A-Z];
 fragment LOWERCASE : [a-z];
+fragment CHARACTER: [A-Za-z];
 fragment NAME_FRAGMENT: [A-Za-z0-9_];
 fragment DIGIT : [0-9];
 fragment TICK: '\'';
@@ -107,9 +108,9 @@ KW_SIGNAL: 'signal';
 COMMENT_START: '//' -> skip, mode(SINGLE_LINE_COMMENT);
 BLOCK_COMMENT_START: '/*' -> skip, mode(BLOCK_COMMENT);
 
-INTEGRAL: ((DIGIT+)? TICK) LITERAL_TYPE  DIGIT+;
+INTEGRAL: ((DIGIT+)? TICK LITERAL_TYPE)?  DIGIT+;
 
-REAL_NAME: NAME_FRAGMENT+;
+REAL_NAME: CHARACTER NAME_FRAGMENT*;
 ANNOTATION_START: '@'; //Annotation names are @camelCase
 //Type names: CamelCase
 //Function names: camelCase
