@@ -439,7 +439,7 @@ func (ptc *ParseTreeConverter) VisitVarExpr(ctx *VarExprContext) interface{} {
 }
 
 func (ptc *ParseTreeConverter) VisitParensExpr(ctx *ParensExprContext) interface{} {
-	expr := ptc.visitExpr(ctx)
+	expr := ptc.visitExpr(ctx.Expr())
 	start := ptc.terminalPosition(ctx.LPAREN())
 	end := ptc.terminalPosition(ctx.RPAREN())
 	return quark.NewParensExpr(expr, start, end)
