@@ -8,6 +8,7 @@ decl
     : structdecl
     | funcdecl
     | moduledecl
+    | interfacedecl
     ;
 
 importdecl
@@ -153,6 +154,10 @@ structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA na
 structdef: LCURLY fielddecl* RCURLY;
 
 fielddecl: annotation* typeexpr realname SEMI;
+
+interfacedecl: annotation* KW_INTERFACE realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY interfacefield* RCURLY;
+
+interfacefield: annotation* (KW_FORWARD | KW_REVERSE) typeexpr realname SEMI;
 
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 

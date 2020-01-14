@@ -73,6 +73,7 @@ OP_GTE: '>=';
 OP_EQ: '==';
 OP_NEQ: '!=';
 
+//reserved keywords
 KW_MODULE: 'module';
 KW_DEF: 'def';
 KW_IF: 'if';
@@ -104,7 +105,11 @@ KW_OPEN: 'open';
 KW_CLOSE: 'close';
 KW_MUT: 'mut';
 KW_SIGNAL: 'signal';
+KW_INTERFACE: 'interface';
+KW_FORWARD: 'forward';
+KW_REVERSE: 'reverse';
 
+//user constructs
 COMMENT_START: '//' -> skip, mode(SINGLE_LINE_COMMENT);
 BLOCK_COMMENT_START: '/*' -> skip, mode(BLOCK_COMMENT);
 
