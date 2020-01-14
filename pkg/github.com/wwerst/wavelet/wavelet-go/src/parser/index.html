@@ -366,14 +366,16 @@ Home of the parser and lexer implementations.
 		
 			
 			
-			<h2 id="ParseTreeConverter">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=257:338#L1">ParseTreeConverter</a>
+			<h2 id="ParseTreeConverter">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=403:484#L3">ParseTreeConverter</a>
 				<a class="permalink" href="#ParseTreeConverter">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
 Visitor implementation which converts parse tree from Antlr into
-proper quark.AST.
+proper quark.AST. This class is hellish. Don&#39;t change it if you don&#39;t
+know what you&#39;re doing. The private methods are mostly added to
+consolidate type casting.
 </p>
 
 			<pre>type ParseTreeConverter struct {
@@ -392,7 +394,7 @@ proper quark.AST.
 
 			
 				
-				<h3 id="NewParseTreeConverter">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=340:409#L6">NewParseTreeConverter</a>
+				<h3 id="NewParseTreeConverter">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=486:555#L8">NewParseTreeConverter</a>
 					<a class="permalink" href="#NewParseTreeConverter">&#xb6;</a>
 					
 					
@@ -405,7 +407,7 @@ proper quark.AST.
 
 			
 				
-				<h3 id="ParseTreeConverter.Visit">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=28925:28995#L886">Visit</a>
+				<h3 id="ParseTreeConverter.Visit">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=29071:29141#L888">Visit</a>
 					<a class="permalink" href="#ParseTreeConverter.Visit">&#xb6;</a>
 					
 					
@@ -417,7 +419,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitAddSubExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=17223:17305#L482">VisitAddSubExpr</a>
+				<h3 id="ParseTreeConverter.VisitAddSubExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=17369:17451#L484">VisitAddSubExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitAddSubExpr">&#xb6;</a>
 					
 					
@@ -429,7 +431,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitAnnotation">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=28452:28534#L873">VisitAnnotation</a>
+				<h3 id="ParseTreeConverter.VisitAnnotation">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=28598:28680#L875">VisitAnnotation</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitAnnotation">&#xb6;</a>
 					
 					
@@ -441,7 +443,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitArgumentdef">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=23662:23746#L699">VisitArgumentdef</a>
+				<h3 id="ParseTreeConverter.VisitArgumentdef">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=23808:23892#L701">VisitArgumentdef</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitArgumentdef">&#xb6;</a>
 					
 					
@@ -453,7 +455,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitArgumentlist">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=23875:23961#L706">VisitArgumentlist</a>
+				<h3 id="ParseTreeConverter.VisitArgumentlist">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=24021:24107#L708">VisitArgumentlist</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitArgumentlist">&#xb6;</a>
 					
 					
@@ -465,7 +467,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitArrayIndexAssignment">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9832:9934#L264">VisitArrayIndexAssignment</a>
+				<h3 id="ParseTreeConverter.VisitArrayIndexAssignment">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9978:10080#L266">VisitArrayIndexAssignment</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitArrayIndexAssignment">&#xb6;</a>
 					
 					
@@ -477,7 +479,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitArrayIndexExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11729:11819#L322">VisitArrayIndexExpr</a>
+				<h3 id="ParseTreeConverter.VisitArrayIndexExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11875:11965#L324">VisitArrayIndexExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitArrayIndexExpr">&#xb6;</a>
 					
 					
@@ -489,7 +491,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitArrayLiteralExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=14678:14772#L403">VisitArrayLiteralExpr</a>
+				<h3 id="ParseTreeConverter.VisitArrayLiteralExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=14824:14918#L405">VisitArrayLiteralExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitArrayLiteralExpr">&#xb6;</a>
 					
 					
@@ -501,7 +503,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitArrayPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21743:21829#L632">VisitArrayPattern</a>
+				<h3 id="ParseTreeConverter.VisitArrayPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21889:21975#L634">VisitArrayPattern</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitArrayPattern">&#xb6;</a>
 					
 					
@@ -513,7 +515,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitArraySliceAssignment">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=10245:10347#L276">VisitArraySliceAssignment</a>
+				<h3 id="ParseTreeConverter.VisitArraySliceAssignment">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=10391:10493#L278">VisitArraySliceAssignment</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitArraySliceAssignment">&#xb6;</a>
 					
 					
@@ -525,7 +527,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitAssignStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=6788:6870#L183">VisitAssignStmt</a>
+				<h3 id="ParseTreeConverter.VisitAssignStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=6934:7016#L185">VisitAssignStmt</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitAssignStmt">&#xb6;</a>
 					
 					
@@ -537,7 +539,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitAtomicClock">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11574:11658#L318">VisitAtomicClock</a>
+				<h3 id="ParseTreeConverter.VisitAtomicClock">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11720:11804#L320">VisitAtomicClock</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitAtomicClock">&#xb6;</a>
 					
 					
@@ -549,7 +551,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitAtomicPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21485:21573#L624">VisitAtomicPattern</a>
+				<h3 id="ParseTreeConverter.VisitAtomicPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21631:21719#L626">VisitAtomicPattern</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitAtomicPattern">&#xb6;</a>
 					
 					
@@ -561,7 +563,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitBitwiseBinopExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15982:16076#L438">VisitBitwiseBinopExpr</a>
+				<h3 id="ParseTreeConverter.VisitBitwiseBinopExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=16128:16222#L440">VisitBitwiseBinopExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitBitwiseBinopExpr">&#xb6;</a>
 					
 					
@@ -573,7 +575,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitBlock">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=6499:6571#L172">VisitBlock</a>
+				<h3 id="ParseTreeConverter.VisitBlock">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=6645:6717#L174">VisitBlock</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitBlock">&#xb6;</a>
 					
 					
@@ -585,7 +587,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitBranchExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=12130:12212#L334">VisitBranchExpr</a>
+				<h3 id="ParseTreeConverter.VisitBranchExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=12276:12358#L336">VisitBranchExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitBranchExpr">&#xb6;</a>
 					
 					
@@ -597,7 +599,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitBranchStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=7970:8052#L214">VisitBranchStmt</a>
+				<h3 id="ParseTreeConverter.VisitBranchStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=8116:8198#L216">VisitBranchStmt</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitBranchStmt">&#xb6;</a>
 					
 					
@@ -609,7 +611,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitClockToExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15051:15135#L414">VisitClockToExpr</a>
+				<h3 id="ParseTreeConverter.VisitClockToExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15197:15281#L416">VisitClockToExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitClockToExpr">&#xb6;</a>
 					
 					
@@ -621,7 +623,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitCompleteType">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=19775:19861#L567">VisitCompleteType</a>
+				<h3 id="ParseTreeConverter.VisitCompleteType">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=19921:20007#L569">VisitCompleteType</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitCompleteType">&#xb6;</a>
 					
 					
@@ -633,7 +635,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitComplimentExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=14430:14520#L396">VisitComplimentExpr</a>
+				<h3 id="ParseTreeConverter.VisitComplimentExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=14576:14666#L398">VisitComplimentExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitComplimentExpr">&#xb6;</a>
 					
 					
@@ -645,7 +647,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitConcat">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18867:18939#L537">VisitConcat</a>
+				<h3 id="ParseTreeConverter.VisitConcat">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=19013:19085#L539">VisitConcat</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitConcat">&#xb6;</a>
 					
 					
@@ -657,7 +659,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitConcatExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=13684:13766#L377">VisitConcatExpr</a>
+				<h3 id="ParseTreeConverter.VisitConcatExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=13830:13912#L379">VisitConcatExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitConcatExpr">&#xb6;</a>
 					
 					
@@ -669,7 +671,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitConstructorExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=12716:12808#L351">VisitConstructorExpr</a>
+				<h3 id="ParseTreeConverter.VisitConstructorExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=12862:12954#L353">VisitConstructorExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitConstructorExpr">&#xb6;</a>
 					
 					
@@ -681,7 +683,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitDeclarationStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=7733:7825#L208">VisitDeclarationStmt</a>
+				<h3 id="ParseTreeConverter.VisitDeclarationStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=7879:7971#L210">VisitDeclarationStmt</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitDeclarationStmt">&#xb6;</a>
 					
 					
@@ -693,7 +695,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitFieldExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=16980:17060#L473">VisitFieldExpr</a>
+				<h3 id="ParseTreeConverter.VisitFieldExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=17126:17206#L475">VisitFieldExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitFieldExpr">&#xb6;</a>
 					
 					
@@ -705,7 +707,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitFielddecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=26676:26756#L809">VisitFielddecl</a>
+				<h3 id="ParseTreeConverter.VisitFielddecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=26822:26902#L811">VisitFielddecl</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitFielddecl">&#xb6;</a>
 					
 					
@@ -717,7 +719,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitFuncdecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=26931:27009#L818">VisitFuncdecl</a>
+				<h3 id="ParseTreeConverter.VisitFuncdecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=27077:27155#L820">VisitFuncdecl</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitFuncdecl">&#xb6;</a>
 					
 					
@@ -729,7 +731,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitFuture">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=8862:8934#L236">VisitFuture</a>
+				<h3 id="ParseTreeConverter.VisitFuture">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9008:9080#L238">VisitFuture</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitFuture">&#xb6;</a>
 					
 					
@@ -741,7 +743,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitFutureStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=8126:8208#L218">VisitFutureStmt</a>
+				<h3 id="ParseTreeConverter.VisitFutureStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=8272:8354#L220">VisitFutureStmt</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitFutureStmt">&#xb6;</a>
 					
 					
@@ -753,7 +755,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitIfBranch">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=19938:20016#L572">VisitIfBranch</a>
+				<h3 id="ParseTreeConverter.VisitIfBranch">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=20084:20162#L574">VisitIfBranch</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitIfBranch">&#xb6;</a>
 					
 					
@@ -765,7 +767,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitInnerconcat">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18969:19051#L541">VisitInnerconcat</a>
+				<h3 id="ParseTreeConverter.VisitInnerconcat">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=19115:19197#L543">VisitInnerconcat</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitInnerconcat">&#xb6;</a>
 					
 					
@@ -777,7 +779,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitInterfacedecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=25248:25336#L756">VisitInterfacedecl</a>
+				<h3 id="ParseTreeConverter.VisitInterfacedecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=25394:25482#L758">VisitInterfacedecl</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitInterfacedecl">&#xb6;</a>
 					
 					
@@ -789,7 +791,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitInterfacefield">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=26204:26294#L789">VisitInterfacefield</a>
+				<h3 id="ParseTreeConverter.VisitInterfacefield">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=26350:26440#L791">VisitInterfacefield</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitInterfacefield">&#xb6;</a>
 					
 					
@@ -801,7 +803,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitLambdaExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=12278:12360#L338">VisitLambdaExpr</a>
+				<h3 id="ParseTreeConverter.VisitLambdaExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=12424:12506#L340">VisitLambdaExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitLambdaExpr">&#xb6;</a>
 					
 					
@@ -813,7 +815,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitLiteral">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=28699:28775#L880">VisitLiteral</a>
+				<h3 id="ParseTreeConverter.VisitLiteral">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=28845:28921#L882">VisitLiteral</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitLiteral">&#xb6;</a>
 					
 					
@@ -825,7 +827,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitLiteralExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15346:15430#L421">VisitLiteralExpr</a>
+				<h3 id="ParseTreeConverter.VisitLiteralExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15492:15576#L423">VisitLiteralExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitLiteralExpr">&#xb6;</a>
 					
 					
@@ -837,7 +839,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitLiteralPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21858:21948#L636">VisitLiteralPattern</a>
+				<h3 id="ParseTreeConverter.VisitLiteralPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22004:22094#L638">VisitLiteralPattern</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitLiteralPattern">&#xb6;</a>
 					
 					
@@ -849,7 +851,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitLogicalBinopExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=13398:13492#L369">VisitLogicalBinopExpr</a>
+				<h3 id="ParseTreeConverter.VisitLogicalBinopExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=13544:13638#L371">VisitLogicalBinopExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitLogicalBinopExpr">&#xb6;</a>
 					
 					
@@ -861,7 +863,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitMatchBranch">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=20830:20914#L602">VisitMatchBranch</a>
+				<h3 id="ParseTreeConverter.VisitMatchBranch">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=20976:21060#L604">VisitMatchBranch</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitMatchBranch">&#xb6;</a>
 					
 					
@@ -873,7 +875,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitModuledecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=27707:27789#L846">VisitModuledecl</a>
+				<h3 id="ParseTreeConverter.VisitModuledecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=27853:27935#L848">VisitModuledecl</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitModuledecl">&#xb6;</a>
 					
 					
@@ -885,7 +887,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitMulDivModExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=14150:14238#L388">VisitMulDivModExpr</a>
+				<h3 id="ParseTreeConverter.VisitMulDivModExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=14296:14384#L390">VisitMulDivModExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitMulDivModExpr">&#xb6;</a>
 					
 					
@@ -897,7 +899,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitNamedCallArg">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18427:18513#L518">VisitNamedCallArg</a>
+				<h3 id="ParseTreeConverter.VisitNamedCallArg">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18573:18659#L520">VisitNamedCallArg</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitNamedCallArg">&#xb6;</a>
 					
 					
@@ -909,7 +911,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitNamedReturn">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=23138:23222#L680">VisitNamedReturn</a>
+				<h3 id="ParseTreeConverter.VisitNamedReturn">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=23284:23368#L682">VisitNamedReturn</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitNamedReturn">&#xb6;</a>
 					
 					
@@ -921,7 +923,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitNewModuleExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18072:18160#L510">VisitNewModuleExpr</a>
+				<h3 id="ParseTreeConverter.VisitNewModuleExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18218:18306#L512">VisitNewModuleExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitNewModuleExpr">&#xb6;</a>
 					
 					
@@ -933,7 +935,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitNotExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=16759:16835#L466">VisitNotExpr</a>
+				<h3 id="ParseTreeConverter.VisitNotExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=16905:16981#L468">VisitNotExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitNotExpr">&#xb6;</a>
 					
 					
@@ -945,7 +947,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitParamerterizedTypePattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21602:21714#L628">VisitParamerterizedTypePattern</a>
+				<h3 id="ParseTreeConverter.VisitParamerterizedTypePattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21748:21860#L630">VisitParamerterizedTypePattern</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitParamerterizedTypePattern">&#xb6;</a>
 					
 					
@@ -957,7 +959,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitParameterizedType">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=19081:19177#L545">VisitParameterizedType</a>
+				<h3 id="ParseTreeConverter.VisitParameterizedType">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=19227:19323#L547">VisitParameterizedType</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitParameterizedType">&#xb6;</a>
 					
 					
@@ -969,7 +971,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitParameterlist">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22094:22182#L644">VisitParameterlist</a>
+				<h3 id="ParseTreeConverter.VisitParameterlist">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22240:22328#L646">VisitParameterlist</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitParameterlist">&#xb6;</a>
 					
 					
@@ -981,7 +983,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitParensExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15725:15807#L431">VisitParensExpr</a>
+				<h3 id="ParseTreeConverter.VisitParensExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15871:15953#L433">VisitParensExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitParensExpr">&#xb6;</a>
 					
 					
@@ -993,7 +995,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitQualifiedName">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11140:11228#L305">VisitQualifiedName</a>
+				<h3 id="ParseTreeConverter.VisitQualifiedName">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11286:11374#L307">VisitQualifiedName</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitQualifiedName">&#xb6;</a>
 					
 					
@@ -1005,7 +1007,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitQuarkpackage">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=5023:5109#L124">VisitQuarkpackage</a>
+				<h3 id="ParseTreeConverter.VisitQuarkpackage">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=5169:5255#L126">VisitQuarkpackage</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitQuarkpackage">&#xb6;</a>
 					
 					
@@ -1017,7 +1019,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitRealname">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=10758:10836#L296">VisitRealname</a>
+				<h3 id="ParseTreeConverter.VisitRealname">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=10904:10982#L298">VisitRealname</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitRealname">&#xb6;</a>
 					
 					
@@ -1029,7 +1031,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitRegAssignStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=7109:7197#L190">VisitRegAssignStmt</a>
+				<h3 id="ParseTreeConverter.VisitRegAssignStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=7255:7343#L192">VisitRegAssignStmt</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitRegAssignStmt">&#xb6;</a>
 					
 					
@@ -1041,7 +1043,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitReturnStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=8588:8670#L229">VisitReturnStmt</a>
+				<h3 id="ParseTreeConverter.VisitReturnStmt">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=8734:8816#L231">VisitReturnStmt</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitReturnStmt">&#xb6;</a>
 					
 					
@@ -1053,7 +1055,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitShiftExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=17497:17577#L490">VisitShiftExpr</a>
+				<h3 id="ParseTreeConverter.VisitShiftExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=17643:17723#L492">VisitShiftExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitShiftExpr">&#xb6;</a>
 					
 					
@@ -1065,7 +1067,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitSingleImport">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=5990:6076#L157">VisitSingleImport</a>
+				<h3 id="ParseTreeConverter.VisitSingleImport">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=6136:6222#L159">VisitSingleImport</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitSingleImport">&#xb6;</a>
 					
 					
@@ -1077,7 +1079,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitSingleReturn">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22972:23058#L676">VisitSingleReturn</a>
+				<h3 id="ParseTreeConverter.VisitSingleReturn">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=23118:23204#L678">VisitSingleReturn</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitSingleReturn">&#xb6;</a>
 					
 					
@@ -1089,7 +1091,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitSliceExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=16268:16348#L446">VisitSliceExpr</a>
+				<h3 id="ParseTreeConverter.VisitSliceExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=16414:16494#L448">VisitSliceExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitSliceExpr">&#xb6;</a>
 					
 					
@@ -1101,7 +1103,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitStructPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=21977:22065#L640">VisitStructPattern</a>
+				<h3 id="ParseTreeConverter.VisitStructPattern">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22123:22211#L642">VisitStructPattern</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitStructPattern">&#xb6;</a>
 					
 					
@@ -1113,7 +1115,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitStructdecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=24173:24255#L714">VisitStructdecl</a>
+				<h3 id="ParseTreeConverter.VisitStructdecl">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=24319:24401#L716">VisitStructdecl</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitStructdecl">&#xb6;</a>
 					
 					
@@ -1125,7 +1127,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitStructdef">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=25140:25218#L751">VisitStructdef</a>
+				<h3 id="ParseTreeConverter.VisitStructdef">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=25286:25364#L753">VisitStructdef</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitStructdef">&#xb6;</a>
 					
 					
@@ -1137,7 +1139,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitTernaryExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=17769:17853#L498">VisitTernaryExpr</a>
+				<h3 id="ParseTreeConverter.VisitTernaryExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=17915:17999#L500">VisitTernaryExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitTernaryExpr">&#xb6;</a>
 					
 					
@@ -1149,7 +1151,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitTupleDestructer">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9500:9592#L256">VisitTupleDestructer</a>
+				<h3 id="ParseTreeConverter.VisitTupleDestructer">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9646:9738#L258">VisitTupleDestructer</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitTupleDestructer">&#xb6;</a>
 					
 					
@@ -1161,7 +1163,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitTupleExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=13025:13105#L359">VisitTupleExpr</a>
+				<h3 id="ParseTreeConverter.VisitTupleExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=13171:13251#L361">VisitTupleExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitTupleExpr">&#xb6;</a>
 					
 					
@@ -1173,7 +1175,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitTypeParameter">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22362:22450#L653">VisitTypeParameter</a>
+				<h3 id="ParseTreeConverter.VisitTypeParameter">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22508:22596#L655">VisitTypeParameter</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitTypeParameter">&#xb6;</a>
 					
 					
@@ -1185,7 +1187,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitUnamedCallArg">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18668:18756#L528">VisitUnamedCallArg</a>
+				<h3 id="ParseTreeConverter.VisitUnamedCallArg">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=18814:18902#L530">VisitUnamedCallArg</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitUnamedCallArg">&#xb6;</a>
 					
 					
@@ -1197,7 +1199,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitUnqualifiedName">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11000:11092#L301">VisitUnqualifiedName</a>
+				<h3 id="ParseTreeConverter.VisitUnqualifiedName">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=11146:11238#L303">VisitUnqualifiedName</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitUnqualifiedName">&#xb6;</a>
 					
 					
@@ -1209,7 +1211,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitValueAssignment">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=8967:9059#L240">VisitValueAssignment</a>
+				<h3 id="ParseTreeConverter.VisitValueAssignment">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9113:9205#L242">VisitValueAssignment</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitValueAssignment">&#xb6;</a>
 					
 					
@@ -1221,7 +1223,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitValueParameter">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22661:22751#L665">VisitValueParameter</a>
+				<h3 id="ParseTreeConverter.VisitValueParameter">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=22807:22897#L667">VisitValueParameter</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitValueParameter">&#xb6;</a>
 					
 					
@@ -1233,7 +1235,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitVarExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15571:15647#L426">VisitVarExpr</a>
+				<h3 id="ParseTreeConverter.VisitVarExpr">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=15717:15793#L428">VisitVarExpr</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitVarExpr">&#xb6;</a>
 					
 					
@@ -1245,7 +1247,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitVariableDefinition">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9099:9197#L244">VisitVariableDefinition</a>
+				<h3 id="ParseTreeConverter.VisitVariableDefinition">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=9245:9343#L246">VisitVariableDefinition</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitVariableDefinition">&#xb6;</a>
 					
 					
@@ -1257,7 +1259,7 @@ proper quark.AST.
 				
 			
 				
-				<h3 id="ParseTreeConverter.VisitWildcardImport">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=6259:6349#L165">VisitWildcardImport</a>
+				<h3 id="ParseTreeConverter.VisitWildcardImport">func (*ParseTreeConverter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/parser/parse_tree_converter.go?s=6405:6495#L167">VisitWildcardImport</a>
 					<a class="permalink" href="#ParseTreeConverter.VisitWildcardImport">&#xb6;</a>
 					
 					
