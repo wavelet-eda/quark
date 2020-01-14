@@ -104,7 +104,7 @@ KW_CLOSE: 'close';
 KW_MUT: 'mut';
 KW_SIGNAL: 'signal';
 
-COMMENT_START: '//';
+COMMENT_START: '//' -> skip, pushMode(SINGLE_LINE_COMMENT);
 BLOCK_COMMENT_START: '/*';
 BLOCK_COMMENT_END: '*/';
 
@@ -120,3 +120,8 @@ ANNOTATION_START: '@'; //Annotation names are @camelCase
 
 
 WS : [ \t\r\n]+ -> skip ;
+
+mode SINGLE_LINE_COMMENT;
+
+NEW_LINE: [\n\r] -> skip, popMode;
+ANYCHAR: ~[\n\r] -> skip;
