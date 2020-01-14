@@ -8,6 +8,7 @@ decl
     : structdecl
     | funcdecl
     | moduledecl
+    | interfacedecl
     ;
 
 importdecl
