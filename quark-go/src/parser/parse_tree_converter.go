@@ -169,15 +169,40 @@ func (ptc *ParseTreeConverter) visitDecl(rawDecl IDeclContext) quark.Decl {
 func (ptc *ParseTreeConverter) VisitSingleImport(ctx *SingleImportContext) interface{} {
 	println("visiting single import")
 	quarkName := ptc.Visit(ctx.Name()).(quark.Name)
+	kwImport := ptc.terminalPosition(ctx.KW_IMPORT())
 	return &quark.SingleImport{
-		GenericImport: quark.GenericImport{PackageName:quarkName},
+		GenericImport: quark.GenericImport{
+			PackageName:quarkName,
+			KwImport: kwImport,
+		},
 	}
 }
 
 func (ptc *ParseTreeConverter) VisitWildcardImport(ctx *WildcardImportContext) interface{} {
 	quarkName := ptc.Visit(ctx.Name()).(quark.Name)
+	kwImport := ptc.terminalPosition(ctx.KW_IMPORT())
 	return &quark.WildcardImport{
-		GenericImport: quark.GenericImport{PackageName:quarkName},
+		GenericImport: quark.GenericImport{
+			PackageName:quarkName,
+			KwImport: kwImport,
+		},
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitMultiImport(ctx *MultiImportContext) interface{} {
+	packageName := ptc.visitName(ctx.Name())
+	kwImport := ptc.terminalPosition(ctx.KW_IMPORT())
+	symbols := make([]*quark.RealName, len(ctx.AllRealname()))
+	for i, node := range ctx.AllRealname() {
+		symbols[i] = ptc.visitRealname(node)
+	}
+	return &quark.MultiImport{
+		GenericImport: quark.GenericImport{
+			PackageName:packageName,
+			KwImport: kwImport,
+		},
+		Symbols:       nil,
+		CloseParen:    quark.ObjectPosition{},
 	}
 }
 
