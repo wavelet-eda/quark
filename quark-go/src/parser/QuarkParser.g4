@@ -14,6 +14,7 @@ decl
 importdecl
     : KW_IMPORT name SEMI # SingleImport
     | KW_IMPORT name DOT OP_MUL SEMI #WildcardImport
+    | KW_IMPORT name DOT LPAREN realname (COMMA realname)+ RPAREN SEMI #MultiImport
     ;
 
 block: stmt*;
