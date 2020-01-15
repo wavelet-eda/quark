@@ -25,6 +25,10 @@ No setup is required if Golang 1.13.5 is installed.
 That's it. The compiler will be appropriately rebuilt to reflect source changes
 between runs.
 
+# Running Tests
+
+`$ ./task test` compiles and runs all tests. Do this before pushing please.
+
 # Viewing the Docs
 
 Just run `$godoc -http localhost:8080` and open that address in a browser.

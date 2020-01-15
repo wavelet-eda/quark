@@ -55,3 +55,13 @@ cases:
         return a;
       }
     expect: valid
+
+  - case: signed-literals
+    note: Tests explicit signed literals
+    quark: |
+      module MyModule[Bit[32] PARAM](Bit[32] stuff): (Bit[32] test) {
+          Bit[32] temp = test + 4'sh13; //signed
+          Bit[16] another = 4'h13; //unsigned
+          return temp;
+      }
+    expect: valid
