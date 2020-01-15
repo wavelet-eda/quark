@@ -1,0 +1,57 @@
+# for listing test cases for the parser
+# in the future, maybe place expected AST here.
+# I tried that tho and it was like 1 million lines of yaml so maybe not
+cases:
+  - name: simple-if-else
+    note: Tests the most basic branching case.
+    quark: |
+      def test[Bit[32] A](Bit[32] stuff): Bit[32] {
+          if A {
+              return stuff;
+          } else {
+              return 1;
+          }
+      }
+    expect: valid
+
+  - name: comments-not-doc
+    note: This snippit tests several common comment scenarios.
+    quark: |
+      import foo.bar;
+
+      //this is a single line comment. The next line can be code
+      def someFunction[Size WIDTH](Bit[WIDTH] a): Bit[16] {
+          //comments can appear anywhere, even in blocks
+          /* this comment ends when it reaches the terminator symbol.
+          that means it can go on multiple lines.
+          */
+         /*or be short */ Bit[32] q = 'b1;
+      }
+    expect: valid
+
+  - case: interface-decl
+    quark: |
+      interface Stream[type T] {
+          forward T   data;
+          forward Bit valid;
+          reverse Bit ready;
+      }
+    expect: valid
+
+  - case: type-param-check
+    note: This snippit should not parse as the param for a is not a type.
+    quark: |
+      def someFunction(Bit a): Bit {
+        Bit[type 1 + 1] a = 5;
+        return a;
+      }
+    expect: invalid
+
+  - case: type-param-check
+    note: This snippit should be fine since the type kw prevents ambigious params.
+    quark: |
+      def someFunction(Bit[32] a): Foo[type Bar] {
+        Foo[type Bar] a = 5;
+        return a;
+      }
+    expect: valid

@@ -148,7 +148,7 @@ func (ptc *ParseTreeConverter) VisitQuarkpackage(ctx *QuarkpackageContext) inter
 		decls[index] = ptc.visitDecl(decl)
 	}
 
-	return quark.Package{
+	return &quark.Package{
 		Imports: importDecls,
 		Symbols: decls,
 	}
@@ -561,14 +561,17 @@ func (ptc *ParseTreeConverter) VisitParameterizedType(ctx *ParameterizedTypeCont
 		param := node.(*TypeparamContext)
 		var expr quark.Expr = nil
 		var typeExpr quark.TypeExpr = nil
+		var kwType quark.ObjectPosition
 		if param.Expr() != nil {
 			expr = ptc.visitExpr(param.Expr())
 		} else {
+			kwType = ptc.terminalPosition(param.KW_TYPE())
 			typeExpr = ptc.visitTypeExpr(param.Typeexpr())
 		}
 		typeParams[i] = &quark.TypeParameter{
 			XExpr: expr,
 			XType: typeExpr,
+			KwType: kwType,
 		}
 	}
 

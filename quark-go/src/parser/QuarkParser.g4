@@ -115,7 +115,7 @@ typeexpr
     ;
 
 typeparam
-    : typeexpr
+    : KW_TYPE typeexpr
     | expr
     ;
 
