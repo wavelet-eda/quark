@@ -46,3 +46,12 @@ cases:
         return a;
       }
     expect: invalid
+
+  - case: type-param-check
+    note: This snippit should be fine since the type kw prevents ambigious params.
+    quark: |
+      def someFunction(Bit[32] a): Foo[type Bar] {
+        Foo[type Bar] a = 5;
+        return a;
+      }
+    expect: valid
