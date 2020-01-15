@@ -29,7 +29,7 @@ cases:
       }
     expect: valid
 
-  - case: interface-decl
+  - name: interface-decl
     quark: |
       interface Stream[type T] {
           forward T   data;
@@ -38,7 +38,7 @@ cases:
       }
     expect: valid
 
-  - case: type-param-check
+  - name: type-param-check
     note: This snippit should not parse as the param for a is not a type.
     quark: |
       def someFunction(Bit a): Bit {
@@ -47,7 +47,7 @@ cases:
       }
     expect: invalid
 
-  - case: type-param-check
+  - name: type-param-check
     note: This snippit should be fine since the type kw prevents ambigious params.
     quark: |
       def someFunction(Bit[32] a): Foo[type Bar] {
@@ -56,7 +56,7 @@ cases:
       }
     expect: valid
 
-  - case: signed-literals
+  - name: signed-literals
     note: Tests explicit signed literals
     quark: |
       module MyModule[Bit[32] PARAM](Bit[32] stuff): (Bit[32] test) {
@@ -66,7 +66,7 @@ cases:
       }
     expect: valid
 
-  - case: import-decls
+  - name: import-decls
     note: Tests the three different kinds of imports
     quark: |
       import foo.bar.*;
