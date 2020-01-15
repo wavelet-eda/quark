@@ -2147,7 +2147,7 @@ represents either a named type or a type parameter.
 
 			
 				
-				<h3 id="CompleteType.End">func (*CompleteType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=1137:1181#L42">End</a>
+				<h3 id="CompleteType.End">func (*CompleteType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=1155:1199#L43">End</a>
 					<a class="permalink" href="#CompleteType.End">&#xb6;</a>
 					
 					
@@ -2159,7 +2159,7 @@ represents either a named type or a type parameter.
 				
 			
 				
-				<h3 id="CompleteType.Start">func (*CompleteType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=843:889#L25">Start</a>
+				<h3 id="CompleteType.Start">func (*CompleteType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=867:913#L26">Start</a>
 					<a class="permalink" href="#CompleteType.Start">&#xb6;</a>
 					
 					
@@ -3826,7 +3826,7 @@ ParameterizedType is a quark type with type or value parameters.
 
 			
 				
-				<h3 id="NewParameterizedType">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=619:734#L17">NewParameterizedType</a>
+				<h3 id="NewParameterizedType">func <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=643:758#L18">NewParameterizedType</a>
 					<a class="permalink" href="#NewParameterizedType">&#xb6;</a>
 					
 					
@@ -3839,7 +3839,7 @@ ParameterizedType is a quark type with type or value parameters.
 
 			
 				
-				<h3 id="ParameterizedType.End">func (*ParameterizedType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=1205:1254#L46">End</a>
+				<h3 id="ParameterizedType.End">func (*ParameterizedType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=1223:1272#L47">End</a>
 					<a class="permalink" href="#ParameterizedType.End">&#xb6;</a>
 					
 					
@@ -3851,7 +3851,7 @@ ParameterizedType is a quark type with type or value parameters.
 				
 			
 				
-				<h3 id="ParameterizedType.Start">func (*ParameterizedType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=915:966#L29">Start</a>
+				<h3 id="ParameterizedType.Start">func (*ParameterizedType) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=939:990#L30">Start</a>
 					<a class="permalink" href="#ParameterizedType.Start">&#xb6;</a>
 					
 					
@@ -4769,7 +4769,7 @@ TypeExpr nodes are expressions which return types
 		
 			
 			
-			<h2 id="TypeParameter">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=560:615#L11">TypeParameter</a>
+			<h2 id="TypeParameter">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=560:639#L11">TypeParameter</a>
 				<a class="permalink" href="#TypeParameter">&#xb6;</a>
 				
 				
@@ -4781,8 +4781,9 @@ type fields of this struct to have a value or be nil
 </p>
 
 			<pre>type TypeParameter struct {
-<span id="TypeParameter.XExpr"></span>    XExpr <a href="#Expr">Expr</a>
-<span id="TypeParameter.XType"></span>    XType <a href="#TypeExpr">TypeExpr</a>
+<span id="TypeParameter.XExpr"></span>    XExpr  <a href="#Expr">Expr</a>
+<span id="TypeParameter.XType"></span>    XType  <a href="#TypeExpr">TypeExpr</a>
+<span id="TypeParameter.KwType"></span>    KwType <a href="#ObjectPosition">ObjectPosition</a>
 }
 </pre>
 
@@ -4798,7 +4799,7 @@ type fields of this struct to have a value or be nil
 
 			
 				
-				<h3 id="TypeParameter.End">func (*TypeParameter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=1282:1327#L50">End</a>
+				<h3 id="TypeParameter.End">func (*TypeParameter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=1300:1345#L51">End</a>
 					<a class="permalink" href="#TypeParameter.End">&#xb6;</a>
 					
 					
@@ -4810,7 +4811,7 @@ type fields of this struct to have a value or be nil
 				
 			
 				
-				<h3 id="TypeParameter.Start">func (*TypeParameter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=999:1046#L33">Start</a>
+				<h3 id="TypeParameter.Start">func (*TypeParameter) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/typeexpr.go?s=1023:1070#L34">Start</a>
 					<a class="permalink" href="#TypeParameter.Start">&#xb6;</a>
 					
 					
