@@ -588,6 +588,14 @@
 				
 			
 				
+				<dd><a href="#MultiImport">type MultiImport</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#MultiImport.End">func (m *MultiImport) End() *ObjectPosition</a></dd>
+				
+			
+				
 				<dd><a href="#Name">type Name</a></dd>
 				
 				
@@ -2756,7 +2764,8 @@ A future block.
 			
 			<pre>type GenericImport struct {
 <span id="GenericImport.PackageName"></span>    PackageName <a href="#Name">Name</a>
-    <span class="comment">// contains filtered or unexported fields</span>
+
+<span id="GenericImport.KwImport"></span>    KwImport <a href="#ObjectPosition">ObjectPosition</a>
 }
 </pre>
 
@@ -2772,7 +2781,7 @@ A future block.
 
 			
 				
-				<h3 id="GenericImport.End">func (*GenericImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=282:327#L15">End</a>
+				<h3 id="GenericImport.End">func (*GenericImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=374:419#L21">End</a>
 					<a class="permalink" href="#GenericImport.End">&#xb6;</a>
 					
 					
@@ -2784,7 +2793,7 @@ A future block.
 				
 			
 				
-				<h3 id="GenericImport.Start">func (*GenericImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=209:256#L11">Start</a>
+				<h3 id="GenericImport.Start">func (*GenericImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=301:348#L17">Start</a>
 					<a class="permalink" href="#GenericImport.Start">&#xb6;</a>
 					
 					
@@ -3384,6 +3393,45 @@ Declaration of a module symbol.
 					
 				</h3>
 				<pre>func (s *<a href="#ModuleDecl">ModuleDecl</a>) Start() *<a href="#ObjectPosition">ObjectPosition</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="MultiImport">type <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=208:297#L10">MultiImport</a>
+				<a class="permalink" href="#MultiImport">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type MultiImport struct {
+    <a href="#GenericImport">GenericImport</a>
+<span id="MultiImport.Symbols"></span>    Symbols    []*<a href="#RealName">RealName</a>
+<span id="MultiImport.CloseParen"></span>    CloseParen <a href="#ObjectPosition">ObjectPosition</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="MultiImport.End">func (*MultiImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=527:570#L29">End</a>
+					<a class="permalink" href="#MultiImport.End">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="#MultiImport">MultiImport</a>) End() *<a href="#ObjectPosition">ObjectPosition</a></pre>
 				
 				
 				
@@ -5145,7 +5193,7 @@ The left hand side of variable definitions
 
 			
 				
-				<h3 id="WildcardImport.End">func (*WildcardImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=361:407#L19">End</a>
+				<h3 id="WildcardImport.End">func (*WildcardImport) <a href="/src/github.com/wwerst/wavelet/wavelet-go/src/quark/importdecl.go?s=453:499#L25">End</a>
 					<a class="permalink" href="#WildcardImport.End">&#xb6;</a>
 					
 					
