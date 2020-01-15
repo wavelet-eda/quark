@@ -21,6 +21,7 @@ type (
 	TypeParameter struct {
 		XExpr Expr
 		XType TypeExpr
+		KwType ObjectPosition
 	}
 )
 
@@ -44,7 +45,7 @@ func (t* TypeParameter) Start() *ObjectPosition {
 	if t.XExpr != nil {
 		return t.XExpr.Start()
 	} else {
-		return t.XType.Start()
+		return &t.KwType
 	}
 }
 

@@ -1,0 +1,37 @@
+# for listing test cases for the parser
+# in the future, maybe place expected AST here.
+# I tried that tho and it was like 1 million lines of yaml so maybe not
+cases:
+  - name: simple-if-else
+    quark: |
+      def test[Bit[32] A](Bit[32] stuff): Bit[32] {
+          if A {
+              return stuff;
+          } else {
+              return 1;
+          }
+      }
+    expect: valid
+
+  - name: comments-not-doc
+    quark: |
+      import foo.bar;
+
+      //this is a single line comment. The next line can be code
+      def someFunction[Size WIDTH](Bit[WIDTH] a): Bit[16] {
+          //comments can appear anywhere, even in blocks
+          /* this comment ends when it reaches the terminator symbol.
+          that means it can go on multiple lines.
+          */
+         /*or be short */ Bit[32] q = 'b1;
+      }
+    expect: valid
+
+  - case: interface-decl
+    quark: |
+      interface Stream[type T] {
+          forward T   data;
+          forward Bit valid;
+          reverse Bit ready;
+      }
+    expect: valid
