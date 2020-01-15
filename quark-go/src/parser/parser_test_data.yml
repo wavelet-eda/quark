@@ -65,3 +65,11 @@ cases:
           return temp;
       }
     expect: valid
+
+  - case: import-decls
+    note: Tests the three different kinds of imports
+    quark: |
+      import foo.bar.*;
+      import another.thing;
+      import some.(more, things, i, guess);
+    expect: valid

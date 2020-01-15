@@ -4,7 +4,7 @@ type (
 	GenericImport struct {
 		PackageName Name
 
-		kwImport ObjectPosition
+		KwImport ObjectPosition
 	}
 
 	SingleImport struct {
@@ -16,10 +16,16 @@ type (
 
 		star ObjectPosition
 	}
+
+	MultiImport struct {
+		GenericImport
+		Symbols []*RealName
+		CloseParen ObjectPosition
+	}
 )
 
 func (i *GenericImport) Start() *ObjectPosition {
-	return &i.kwImport
+	return &i.KwImport
 }
 
 func (i *GenericImport) End() *ObjectPosition {
@@ -28,6 +34,10 @@ func (i *GenericImport) End() *ObjectPosition {
 
 func (w *WildcardImport) End() *ObjectPosition {
 	return w.star.Next()
+}
+
+func (m *MultiImport) End() *ObjectPosition {
+	return m.CloseParen.Next()
 }
 
 func (i *GenericImport) importDeclNode() {}
