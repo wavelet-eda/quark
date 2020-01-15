@@ -76,3 +76,8 @@ tasks:
     deps: [build]
     cmds:
       - "{{.EXE_FILE}} {{.INFILE}}"
+
+  test:
+    deps: [build]
+    cmds:
+      - go test ./...

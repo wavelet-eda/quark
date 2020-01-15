@@ -3,6 +3,7 @@
 # I tried that tho and it was like 1 million lines of yaml so maybe not
 cases:
   - name: simple-if-else
+    note: Tests the most basic branching case.
     quark: |
       def test[Bit[32] A](Bit[32] stuff): Bit[32] {
           if A {
@@ -14,6 +15,7 @@ cases:
     expect: valid
 
   - name: comments-not-doc
+    note: This snippit tests several common comment scenarios.
     quark: |
       import foo.bar;
 
@@ -35,3 +37,12 @@ cases:
           reverse Bit ready;
       }
     expect: valid
+
+  - case: type-param-check
+    note: This snippit should not parse as the param for a is not a type.
+    quark: |
+      def someFunction(Bit a): Bit {
+        Bit[type 1 + 1] a = 5;
+        return a;
+      }
+    expect: invalid

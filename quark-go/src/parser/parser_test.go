@@ -56,6 +56,11 @@ func TestParsePackage(t *testing.T) {
 	for _, testCase := range inputData.Cases {
 		testname := testCase.Name
 		t.Run(testname, func(t *testing.T) {
+			defer func() {
+				if r := recover(); r != nil && testCase.Expect == "valid" {
+					t.Errorf("expected no errors but got parser panic")
+				}
+			}()
 			parser := NewStringParser(testCase.Input)
 			testErrors := TestErrorListener{}
 			parser.AddErrorListener(&testErrors)
