@@ -73,3 +73,13 @@ cases:
       import another.thing;
       import some.(more, things, i, guess);
     expect: valid
+
+  - name: simple-parm-struct
+    note: Tests param syntax for struct declarations.
+    quark: |
+      import OtherTest.SubTest;
+
+      struct MyStruct[Bit[32] WIDTH] {
+          MyOtherStruct[WIDTH] internalStuff;
+      }
+    expect: valid

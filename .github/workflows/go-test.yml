@@ -6,22 +6,30 @@ jobs:
       matrix:
         go-version: [1.13.x]
         platform: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${ {matrix.platform }}
+    runs-on: ${{ matrix.platform }}
     steps:
     - name: Install Go
       uses: actions/setup-go@v1
       with:
         go-version: ${{ matrix.go-version }}
+    - name: Install Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 8.x
     - name: Checkout
       uses: actions/checkout@v1
     - name: Setup Builds (Unix)
-      if: matrix.os != 'windows-latest'
+      working-directory: ./quark-go
+      if: matrix.platform != 'windows-latest'
       run: |
         ./init.sh
         ./task build-parser
     - name: Setup Builds
+      working-directory: ./quark-go
+      if: matrix.platform == 'windows-latest'
       run: |
-        init.bat
-        task build-parser
+        ./init.bat
+        ./task build-parser
     - name: Test
+      working-directory: ./quark-go
       run: go test ./... #because task isn't cross platform enough :(
