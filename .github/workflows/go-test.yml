@@ -1,0 +1,27 @@
+on: [pull_request]
+name: Go Tests
+jobs:
+  test:
+    strategy:
+      matrix:
+        go-version: [1.13.x]
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${ {matrix.platform }}
+    steps:
+    - name: Install Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Setup Builds (Unix)
+      if: matrix.os != 'windows-latest'
+      run: |
+        ./init.sh
+        ./task build-parser
+    - name: Setup Builds
+      run: |
+        init.bat
+        task build-parser
+    - name: Test
+      run: go test ./... #because task isn't cross platform enough :(
