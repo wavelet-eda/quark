@@ -29,7 +29,7 @@ jobs:
       if: matrix.platform == 'windows-latest'
       run: |
         ./init.bat
-        task build-parser
+        ./task build-parser
     - name: Test
       working-directory: ./quark-go
       run: go test ./... #because task isn't cross platform enough :(
