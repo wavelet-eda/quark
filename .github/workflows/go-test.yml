@@ -12,6 +12,10 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: ${{ matrix.go-version }}
+    - name: Install Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 8.x
     - name: Checkout
       uses: actions/checkout@v1
     - name: Setup Builds (Unix)
