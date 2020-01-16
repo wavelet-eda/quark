@@ -1,6 +1,6 @@
 # Quark Go
 
-[![Actions Status](https://github.com/wavelet-eda/quark/workflows/go-test/badge.svg)](https://github.com/wavelet-eda/quark/actions)
+[![Actions Status](https://github.com/wavelet-eda/quark/workflows/Go%20Tests/badge.svg)](https://github.com/wavelet-eda/quark/actions)
 
 This is the Go implementation of Quark. Right now Antlr4 is used to generate the parser and the lexer. In the future, we will use a hand written parser for better error reporting.
 
