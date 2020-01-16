@@ -28,7 +28,7 @@ jobs:
       working-directory: ./quark-go
       if: matrix.platform == 'windows-latest'
       run: |
-        init.bat
+        ./init.bat
         task build-parser
     - name: Test
       working-directory: ./quark-go
