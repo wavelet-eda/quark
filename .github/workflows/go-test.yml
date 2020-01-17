@@ -19,17 +19,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Setup Builds (Unix)
-      working-directory: ./quark-go
       if: matrix.platform != 'windows-latest'
       run: |
         ./init.sh
         ./task build-parser
     - name: Setup Builds
-      working-directory: ./quark-go
       if: matrix.platform == 'windows-latest'
       run: |
         ./init.bat
         ./task build-parser
     - name: Test
-      working-directory: ./quark-go
       run: go test ./... #because task isn't cross platform enough :(

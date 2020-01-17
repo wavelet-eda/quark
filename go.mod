@@ -1,4 +1,4 @@
-module github.com/wwerst/wavelet/wavelet-go
+module github.com/wavelet-eda/quark/quark-go
 
 go 1.13
 

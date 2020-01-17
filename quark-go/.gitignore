@@ -1,8 +1,0 @@
-build/
-.idea/
-task.exe
-task
-.task/
-**.gen.go
-*.tokens
-example.qk

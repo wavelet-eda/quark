@@ -4,7 +4,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/wwerst/wavelet/wavelet-go/src/parser"
+	"github.com/wwerst/quark/quark-go/src/parser"
+	"github.com/wave"
 	"os"
 )
 
