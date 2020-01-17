@@ -4,8 +4,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/wwerst/quark/quark-go/src/parser"
-	"github.com/wave"
+	"github.com/wavelet-eda/quark/src/parser"
+	"github.com/wavelet-eda/quark/src/quark"
 	"os"
 )
 
@@ -14,7 +14,8 @@ func main() {
 		println("Usage: quarkc <file>")
 	}
 	quarkParser := parser.NewFileParser(os.Args[1])
-	quarkPackage := quarkParser.GetPackageAST()
+	var quarkPackage *quark.Package = quarkParser.GetPackageAST()
+
 
 	fmt.Printf("Wow, that file had %d imports!\n", len(quarkPackage.Imports))
 	fmt.Printf("And it had %d decls\n", len(quarkPackage.Symbols))
