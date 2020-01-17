@@ -2,7 +2,7 @@ package parser
 
 import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/wwerst/wavelet/wavelet-go/src/quark"
+	"github.com/wavelet-eda/quark/src/quark"
 )
 
 type Parser struct {
