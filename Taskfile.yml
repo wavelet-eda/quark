@@ -25,25 +25,11 @@ tasks:
       - cmd: "{{.MKDIR}} \"{{.ANTLR_DIR}}\""
       - cmd: "curl -o {{.ANTLR_JAR}} https://www.antlr.org/download/antlr-{{.ANTLR_VERSION}}-complete.jar"
 
-  generate-parser-files:
+  build-parser:
     deps: [download-antlr]
     sources:
       - src/parser/QuarkLexer.g4
       - src/parser/QuarkParser.g4
-    generates:
-      - "{{.ANTLR_GEN_DIR}}/*"
-    cmds:
-      - "{{.ANTLR}} -Xexact-output-dir -Dlanguage=Go -o {{.ANTLR_GEN_DIR}} src/parser/QuarkLexer.g4"
-      - "{{.ANTLR}} -Xexact-output-dir -lib {{.ANTLR_GEN_DIR}} -o {{.ANTLR_GEN_DIR}} -visitor -listener -Dlanguage=Go src/parser/QuarkParser.g4"
-      - "{{.ANTLR}} -Xexact-output-dir -lib {{.ANTLR_GEN_DIR}} -o {{.ANTLR_GEN_DIR}} -visitor -listener -Dlanguage=Go src/parser/QuarkParser.g4"
-
-  build-parser:
-    deps: [generate-parser-files]
-    sources:
-      - "{{.ANTLR_GEN_DIR}}/quark_lexer.go"
-      - "{{.ANTLR_GEN_DIR}}/quark_parser.go"
-      - "{{.ANTLR_GEN_DIR}}/quarkparser_base_visitor.go"
-      - "{{.ANTLR_GEN_DIR}}/quarkparser_visitor.go"
     generates:
       - src/parser/quark_lexer.gen.go
       - src/parser/quark_parser.gen.go
@@ -51,14 +37,9 @@ tasks:
       - src/parser/quarkparser_visitor.gen.go
       - src/parser/quarkparser_base_listener.go
       - src/parser/quarkparser_listen.go
-    method: checksum
     cmds:
-      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quark_lexer.go src/parser/quark_lexer.gen.go"
-      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quark_parser.go src/parser/quark_parser.gen.go"
-      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_base_visitor.go src/parser/quarkparser_base_visitor.gen.go"
-      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_visitor.go src/parser/quarkparser_visitor.gen.go"
-      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_base_listener.go src/parser/quarkparser_base_listener.gen.go"
-      - "{{.COPY}} {{.ANTLR_GEN_DIR}}/quarkparser_listener.go src/parser/quarkparser_listener.gen.go"
+      - "{{.ANTLR}} -Xexact-output-dir -Dlanguage=Go -o ./src/parser src/parser/QuarkLexer.g4"
+      - "{{.ANTLR}} -Xexact-output-dir -lib ./src/parser -o ./src/parser -visitor -listener -Dlanguage=Go src/parser/QuarkParser.g4"
 
   build:
     deps: [build-parser]

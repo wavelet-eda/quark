@@ -7,8 +7,7 @@ task.exe
 task
 .task/
 #generated files
-**.gen.go
-*.tokens
-
+**.tokens
+**.interp
 #easy example file b/c I'm lazy and in charge here
 example.qk
