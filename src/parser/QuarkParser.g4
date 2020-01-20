@@ -8,7 +8,6 @@ decl
     : structdecl
     | funcdecl
     | moduledecl
-    | interfacedecl
     ;
 
 importdecl
@@ -150,7 +149,7 @@ argumentdef: typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
-structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY fielddecl* RCURLY;;
+structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY fielddecl* RCURLY;
 
 fielddecl: annotation* KW_FUTURE typeexpr realname SEMI;
 

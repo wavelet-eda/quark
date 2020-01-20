@@ -253,14 +253,17 @@ func (ptc *ParseTreeConverter) VisitBranchStmt(ctx *BranchStmtContext) interface
 }
 
 func (ptc *ParseTreeConverter) VisitFutureStmt(ctx *FutureStmtContext) interface{} {
-	future := ctx.Future().(*FutureContext)
-	futures := ptc.visitArgumentList(future.Argumentlist())
-	body := ptc.visitBlock(future.Block())
-	assignments := ptc.visitCallArgList(future.Callarglist())
+	kwFuture := ptc.terminalPosition(ctx.KW_FUTURE())
+	semi := ptc.terminalPosition(ctx.SEMI())
+	typeExpr := ptc.visitTypeExpr(ctx.Typeexpr())
+	name := ptc.visitRealname(ctx.Realname())
 
-	futurePos := ptc.terminalPosition(future.KW_FUTURE())
-	semiPos := ptc.terminalPosition(ctx.SEMI())
-	return quark.NewFutureStmt(futures, body, assignments, futurePos, semiPos)
+	return &quark.FutureStmt{
+		FutureType: typeExpr,
+		FutureName: name,
+		KwFuture:   kwFuture,
+		Semi:       semi,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitReturnStmt(ctx *ReturnStmtContext) interface{} {
@@ -754,9 +757,7 @@ func (ptc *ParseTreeConverter) VisitArgumentlist(ctx *ArgumentlistContext) inter
 func (ptc *ParseTreeConverter) VisitStructdecl(ctx *StructdeclContext) interface{} {
 	kwStruct := ptc.terminalPosition(ctx.KW_STRUCT())
 
-	def := ctx.Structdef().(*StructdefContext) //Note: only option
-
-	rCurly := ptc.terminalPosition(def.RCURLY())
+	rCurly := ptc.terminalPosition(ctx.RCURLY())
 
 	name := ptc.visitRealname(ctx.Realname())
 	var params []*quark.ParameterDef
@@ -771,8 +772,8 @@ func (ptc *ParseTreeConverter) VisitStructdecl(ctx *StructdeclContext) interface
 		traits[i] = ptc.visitName(node)
 	}
 	
-	fields := make([]*quark.Field, len(def.AllFielddecl()))
-	for i, node := range def.AllFielddecl() {
+	fields := make([]*quark.Field, len(ctx.AllFielddecl()))
+	for i, node := range ctx.AllFielddecl() {
 		fields[i] = ptc.VisitFielddecl(node.(*FielddeclContext)).(*quark.Field)
 	}
 
@@ -788,70 +789,21 @@ func (ptc *ParseTreeConverter) VisitStructdecl(ctx *StructdeclContext) interface
 
 }
 
-func (ptc *ParseTreeConverter) VisitStructdef(_ *StructdefContext) interface{} {
-	panic("not reacable")
-}
-
-
-func (ptc *ParseTreeConverter) VisitInterfacedecl(ctx *InterfacedeclContext) interface{} {
-	kwInterface := ptc.terminalPosition(ctx.KW_INTERFACE())
-	rCurly := ptc.terminalPosition(ctx.RCURLY())
-
-	name := ptc.visitRealname(ctx.Realname())
-	var params []*quark.ParameterDef
-	if ctx.Parameterlist() != nil {
-		params = ptc.visitParameterList(ctx.Parameterlist())
-	} else {
-		params = make([]*quark.ParameterDef, 0)
-	}
-
-	traits := make([]quark.Name, len(ctx.AllName()))
-	for i, node := range ctx.AllName() {
-		traits[i] = ptc.visitName(node)
-	}
-
-	fields := make([]*quark.InterfaceField, len(ctx.AllInterfacefield()))
-	for i, node := range ctx.AllInterfacefield() {
-		fields[i] = ptc.VisitInterfacefield(node.(*InterfacefieldContext)).(*quark.InterfaceField)
-	}
-	
-	return &quark.InterfaceDecl{
-		Annotations: nil,
-		StructName:  name,
-		Parameters:  params,
-		Fields:      fields,
-		TraitImpls:  traits,
-		KwInterface: kwInterface,
-		CloseCurly:  rCurly,
-	}
-}
-
-func (ptc *ParseTreeConverter) VisitInterfacefield(ctx *InterfacefieldContext) interface{} {
-	var direction quark.InterfaceDirection
-	if ctx.KW_FORWARD() != nil {
-		direction = quark.Forward
-	} else {
-		direction = quark.Reverse
-	}
-
-	fieldType := ptc.visitTypeExpr(ctx.Typeexpr())
-	fieldName := ptc.visitRealname(ctx.Realname())
-
-	return &quark.InterfaceField{
-		Direction: direction,
-		Field:     quark.Field{
-			FieldType: fieldType,
-			FieldName: fieldName,
-		},
-	}
-}
-
 func (ptc *ParseTreeConverter) VisitFielddecl(ctx *FielddeclContext) interface{} {
 	fieldType := ptc.visitTypeExpr(ctx.Typeexpr())
 	fieldName := ptc.visitRealname(ctx.Realname())
+	var kwFuture quark.ObjectPosition
+	isFuture := false
+	if ctx.KW_FUTURE() != nil {
+		kwFuture = ptc.terminalPosition(ctx.KW_FUTURE())
+		isFuture = true
+	}
+
 	return &quark.Field{
 		FieldType: fieldType,
 		FieldName: fieldName,
+		IsFuture: isFuture,
+		KwFuture: kwFuture,
 	}
 }
 

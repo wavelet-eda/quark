@@ -35,14 +35,14 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#RegAssignStmt.
 	VisitRegAssignStmt(ctx *RegAssignStmtContext) interface{}
 
+	// Visit a parse tree produced by QuarkParser#FutureStmt.
+	VisitFutureStmt(ctx *FutureStmtContext) interface{}
+
 	// Visit a parse tree produced by QuarkParser#DeclarationStmt.
 	VisitDeclarationStmt(ctx *DeclarationStmtContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#BranchStmt.
 	VisitBranchStmt(ctx *BranchStmtContext) interface{}
-
-	// Visit a parse tree produced by QuarkParser#FutureStmt.
-	VisitFutureStmt(ctx *FutureStmtContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#ReturnStmt.
 	VisitReturnStmt(ctx *ReturnStmtContext) interface{}
@@ -221,17 +221,8 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#structdecl.
 	VisitStructdecl(ctx *StructdeclContext) interface{}
 
-	// Visit a parse tree produced by QuarkParser#structdef.
-	VisitStructdef(ctx *StructdefContext) interface{}
-
 	// Visit a parse tree produced by QuarkParser#fielddecl.
 	VisitFielddecl(ctx *FielddeclContext) interface{}
-
-	// Visit a parse tree produced by QuarkParser#interfacedecl.
-	VisitInterfacedecl(ctx *InterfacedeclContext) interface{}
-
-	// Visit a parse tree produced by QuarkParser#interfacefield.
-	VisitInterfacefield(ctx *InterfacefieldContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#funcdecl.
 	VisitFuncdecl(ctx *FuncdeclContext) interface{}

@@ -31,10 +31,10 @@ cases:
 
   - name: interface-decl
     quark: |
-      interface Stream[type T] {
-          forward T   data;
-          forward Bit valid;
-          reverse Bit ready;
+      struct Stream[type T] {
+          T   data;
+          Bit valid;
+          future Bit ready;
       }
     expect: valid
 

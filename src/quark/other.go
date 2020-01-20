@@ -5,6 +5,10 @@ type (
 		Field struct {
 			FieldType TypeExpr
 			FieldName Name
+
+			IsFuture bool
+
+			KwFuture ObjectPosition
 		}
 
 		//A definition of a field inside an interface.
@@ -34,7 +38,11 @@ const (
 
 
 func (f *Field) Start() *ObjectPosition {
-	return f.FieldType.Start()
+	if f.IsFuture {
+		return &f.KwFuture
+	} else {
+		return f.FieldType.Start()
+	}
 }
 
 func (f *InterfaceField) Start() *ObjectPosition {

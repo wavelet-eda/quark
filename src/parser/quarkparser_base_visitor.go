@@ -44,15 +44,15 @@ func (v *BaseQuarkParserVisitor) VisitRegAssignStmt(ctx *RegAssignStmtContext) i
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitFutureStmt(ctx *FutureStmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitDeclarationStmt(ctx *DeclarationStmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BaseQuarkParserVisitor) VisitBranchStmt(ctx *BranchStmtContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitFutureStmt(ctx *FutureStmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -292,19 +292,7 @@ func (v *BaseQuarkParserVisitor) VisitStructdecl(ctx *StructdeclContext) interfa
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitStructdef(ctx *StructdefContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseQuarkParserVisitor) VisitFielddecl(ctx *FielddeclContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitInterfacedecl(ctx *InterfacedeclContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitInterfacefield(ctx *InterfacefieldContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
