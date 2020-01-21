@@ -11,14 +11,6 @@ type (
 			KwFuture ObjectPosition
 		}
 
-		//A definition of a field inside an interface.
-		InterfaceField struct {
-			Direction InterfaceDirection
-			Field
-
-			directionKw ObjectPosition
-		}
-
 		//An argument to a module, function, interace, or constructor invocation. If the argument is named
 		//the FieldName and ValueExpr fields must both be non-nil. If the argument is by position, only
 		//the ValueExpr will be non-nil.
@@ -27,15 +19,7 @@ type (
 			ValueExpr Expr
 		}
 
-		//The directionality of an interface field.
-		InterfaceDirection = bool
 )
-
-const (
-	Forward InterfaceDirection = true
-	Reverse InterfaceDirection = false
-)
-
 
 func (f *Field) Start() *ObjectPosition {
 	if f.IsFuture {
@@ -43,10 +27,6 @@ func (f *Field) Start() *ObjectPosition {
 	} else {
 		return f.FieldType.Start()
 	}
-}
-
-func (f *InterfaceField) Start() *ObjectPosition {
-	return &f.directionKw
 }
 
 func (c *CallArgument) Start() *ObjectPosition {

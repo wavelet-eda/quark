@@ -151,11 +151,7 @@ argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
 structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY fielddecl* RCURLY;
 
-fielddecl: annotation* KW_FUTURE typeexpr realname SEMI;
-
-//interfacedecl: annotation* KW_INTERFACE realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY interfacefield* RCURLY;
-//
-//interfacefield: annotation* (KW_FORWARD | KW_REVERSE) typeexpr realname SEMI;
+fielddecl: annotation* KW_FUTURE? typeexpr realname SEMI;
 
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
