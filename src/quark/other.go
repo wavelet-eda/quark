@@ -43,3 +43,25 @@ func (c *CallArgument) End() *ObjectPosition {
 }
 
 
+//Accept impl
+func (f *Field) Accept(v Visitor) {
+	if v.Visit(f) == nil {
+		return
+	}
+
+	f.FieldType.Accept(v)
+	f.FieldName.Accept(v)
+}
+
+func (c *CallArgument) Accept(v Visitor) {
+	if v.Visit(c) == nil {
+		return
+	}
+
+	if c.FieldName != nil {
+		c.FieldName.Accept(v)
+	}
+
+	c.ValueExpr.Accept(v)
+}
+

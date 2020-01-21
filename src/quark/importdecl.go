@@ -41,3 +41,31 @@ func (m *MultiImport) End() *ObjectPosition {
 }
 
 func (i *GenericImport) importDeclNode() {}
+
+func (i *SingleImport) Accept(v Visitor) {
+	if v.Visit(i) == nil {
+		return
+	}
+
+	i.PackageName.Accept(v)
+}
+
+func (w *WildcardImport) Accept(v Visitor) {
+	if v.Visit(w) == nil {
+		return
+	}
+
+	w.PackageName.Accept(v)
+}
+
+func (m *MultiImport) Accept(v Visitor) {
+	if v.Visit(m) == nil {
+		return
+	}
+
+	m.PackageName.Accept(v)
+
+	for _, symbol := range m.Symbols {
+		symbol.Accept(v)
+	}
+}

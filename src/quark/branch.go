@@ -79,3 +79,21 @@ func (b *MatchBranch) End() *ObjectPosition {
 
 func (b *IfBranch) branchNode() {}
 func (b *MatchBranch) branchNode() {}
+
+
+//Accept impls
+
+func (b *IfBranch) Accept(v Visitor) { //TODO: Branch parts need to be proper AST nodes (see GH-40)
+	if v.Visit(b) == nil {
+		return
+	}
+}
+
+func (b *MatchBranch) Accept(v Visitor) { //TODO: GH-40
+	if v.Visit(b) == nil {
+		return
+	}
+
+	b.MatchExpr.Accept(v)
+
+}

@@ -13,3 +13,11 @@ func (c *AtomicClock) End() *ObjectPosition {
 }
 
 func (c *AtomicClock) clockExprNode() {}
+
+func (c *AtomicClock) Accept(v Visitor) {
+	if v.Visit(c) == nil {
+		return
+	}
+
+	c.ClockName.Accept(v)
+}

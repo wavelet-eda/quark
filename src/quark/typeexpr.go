@@ -1,4 +1,4 @@
-package quark
+ package quark
 
 type (
 	//CompleteType is a quark type with no type parameters. CompleteType

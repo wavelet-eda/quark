@@ -34,3 +34,22 @@ func (r ReplicateConcat) Start() *ObjectPosition {
 func (r ReplicateConcat) End() *ObjectPosition {
 	return r.rCurly.Next()
 }
+
+
+//Accept impls
+func (a *AtomicInnerConcat) Accept(v Visitor) {
+	if v.Visit(a) == nil {
+		return
+	}
+
+	a.X.Accept(v)
+}
+
+func (r *ReplicateConcat) Accept(v Visitor) {
+	if v.Visit(r) == nil {
+		return
+	}
+
+	r.ReplicateAmount.Accept(v)
+	r.ReplicateExpr.Accept(v)
+}

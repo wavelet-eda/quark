@@ -40,3 +40,18 @@ func (n *QualifiedName) End() *ObjectPosition {
 
 func (n *RealName) nameNode() {}
 func (n *QualifiedName) nameNode() {}
+
+//Accept impls
+func (n *RealName) Accept(v Visitor) {
+	v.Visit(n)
+}
+
+func (n *QualifiedName) Accept(v Visitor) {
+	if v.Visit(n) != nil {
+		return
+	}
+
+	for _, name := range n.Parts {
+		name.Accept(v)
+	}
+}

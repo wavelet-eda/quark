@@ -67,3 +67,31 @@ func (a *TupleDestructionAssignment) End() *ObjectPosition {
 func (a *ValueAssignment) assignableNode() {}
 func (a *VariableDefinitionAssignable) assignableNode() {}
 func (a *TupleDestructionAssignment) assignableNode() {}
+
+//Accept impls
+func (a *ValueAssignment) Accept(v Visitor) {
+	if v.Visit(a) == nil {
+		return
+	}
+
+	a.Variable.Accept(v)
+}
+
+func (a *VariableDefinitionAssignable) Accept(v Visitor) {
+	if v.Visit(a) == nil {
+		return
+	}
+
+	a.VarName.Accept(v)
+	a.VarType.Accept(v)
+}
+
+func (a *TupleDestructionAssignment) Accept(v Visitor) {
+	if v.Visit(a) == nil {
+		return
+	}
+
+	for _, assignable := range a.Assignables {
+		assignable.Accept(v)
+	}
+}
