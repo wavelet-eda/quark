@@ -35,20 +35,17 @@ type QuarkParserListener interface {
 	// EnterRegAssignStmt is called when entering the RegAssignStmt production.
 	EnterRegAssignStmt(c *RegAssignStmtContext)
 
+	// EnterFutureStmt is called when entering the FutureStmt production.
+	EnterFutureStmt(c *FutureStmtContext)
+
 	// EnterDeclarationStmt is called when entering the DeclarationStmt production.
 	EnterDeclarationStmt(c *DeclarationStmtContext)
 
 	// EnterBranchStmt is called when entering the BranchStmt production.
 	EnterBranchStmt(c *BranchStmtContext)
 
-	// EnterFutureStmt is called when entering the FutureStmt production.
-	EnterFutureStmt(c *FutureStmtContext)
-
 	// EnterReturnStmt is called when entering the ReturnStmt production.
 	EnterReturnStmt(c *ReturnStmtContext)
-
-	// EnterFuture is called when entering the future production.
-	EnterFuture(c *FutureContext)
 
 	// EnterValueAssignment is called when entering the ValueAssignment production.
 	EnterValueAssignment(c *ValueAssignmentContext)
@@ -221,17 +218,8 @@ type QuarkParserListener interface {
 	// EnterStructdecl is called when entering the structdecl production.
 	EnterStructdecl(c *StructdeclContext)
 
-	// EnterStructdef is called when entering the structdef production.
-	EnterStructdef(c *StructdefContext)
-
 	// EnterFielddecl is called when entering the fielddecl production.
 	EnterFielddecl(c *FielddeclContext)
-
-	// EnterInterfacedecl is called when entering the interfacedecl production.
-	EnterInterfacedecl(c *InterfacedeclContext)
-
-	// EnterInterfacefield is called when entering the interfacefield production.
-	EnterInterfacefield(c *InterfacefieldContext)
 
 	// EnterFuncdecl is called when entering the funcdecl production.
 	EnterFuncdecl(c *FuncdeclContext)
@@ -272,20 +260,17 @@ type QuarkParserListener interface {
 	// ExitRegAssignStmt is called when exiting the RegAssignStmt production.
 	ExitRegAssignStmt(c *RegAssignStmtContext)
 
+	// ExitFutureStmt is called when exiting the FutureStmt production.
+	ExitFutureStmt(c *FutureStmtContext)
+
 	// ExitDeclarationStmt is called when exiting the DeclarationStmt production.
 	ExitDeclarationStmt(c *DeclarationStmtContext)
 
 	// ExitBranchStmt is called when exiting the BranchStmt production.
 	ExitBranchStmt(c *BranchStmtContext)
 
-	// ExitFutureStmt is called when exiting the FutureStmt production.
-	ExitFutureStmt(c *FutureStmtContext)
-
 	// ExitReturnStmt is called when exiting the ReturnStmt production.
 	ExitReturnStmt(c *ReturnStmtContext)
-
-	// ExitFuture is called when exiting the future production.
-	ExitFuture(c *FutureContext)
 
 	// ExitValueAssignment is called when exiting the ValueAssignment production.
 	ExitValueAssignment(c *ValueAssignmentContext)
@@ -458,17 +443,8 @@ type QuarkParserListener interface {
 	// ExitStructdecl is called when exiting the structdecl production.
 	ExitStructdecl(c *StructdeclContext)
 
-	// ExitStructdef is called when exiting the structdef production.
-	ExitStructdef(c *StructdefContext)
-
 	// ExitFielddecl is called when exiting the fielddecl production.
 	ExitFielddecl(c *FielddeclContext)
-
-	// ExitInterfacedecl is called when exiting the interfacedecl production.
-	ExitInterfacedecl(c *InterfacedeclContext)
-
-	// ExitInterfacefield is called when exiting the interfacefield production.
-	ExitInterfacefield(c *InterfacefieldContext)
 
 	// ExitFuncdecl is called when exiting the funcdecl production.
 	ExitFuncdecl(c *FuncdeclContext)

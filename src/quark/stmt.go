@@ -33,12 +33,11 @@ type (
 
 	//A future block.
 	FutureStmt struct {
-		Futures []*ArgumentDef
-		Body []Stmt
-		FutureAssignments []*CallArgument
+		FutureType TypeExpr
+		FutureName *RealName
 
-		kwFuture ObjectPosition
-		semi ObjectPosition
+		KwFuture ObjectPosition
+		Semi ObjectPosition
 	}
 
 	//A function or module return statement.
@@ -75,16 +74,6 @@ func NewDeclStmt(assignable Assignable, semiPos ObjectPosition) *DeclarationStmt
 	}
 }
 
-func NewFutureStmt(futures []*ArgumentDef, body []Stmt, assignments []*CallArgument, kwFuturePos ObjectPosition, semiPos ObjectPosition) *FutureStmt {
-	return &FutureStmt{
-		Futures:           futures,
-		Body:              body,
-		FutureAssignments: assignments,
-		kwFuture:          kwFuturePos,
-		semi:              semiPos,
-	}
-}
-
 func NewReturnStmt(expr Expr, kwReturnPos ObjectPosition, semiPos ObjectPosition) *ReturnStmt {
 	return &ReturnStmt{
 		ReturnExpr: expr,
@@ -107,7 +96,7 @@ func (s *BranchStmt) Start() *ObjectPosition {
 	return s.TheBranch.Start()
 }
 func (s *FutureStmt) Start() *ObjectPosition {
-	return &s.kwFuture
+	return &s.KwFuture
 }
 func (s *ReturnStmt) Start() *ObjectPosition {
 	return &s.kwReturn
@@ -127,7 +116,7 @@ func (s *BranchStmt) End() *ObjectPosition {
 	return s.TheBranch.End()
 }
 func (s *FutureStmt) End() *ObjectPosition {
-	return s.semi.Next()
+	return s.Semi.Next()
 }
 func (s *ReturnStmt) End() *ObjectPosition {
 	return s.semi.Next()

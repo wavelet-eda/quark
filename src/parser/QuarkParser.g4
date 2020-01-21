@@ -8,7 +8,6 @@ decl
     : structdecl
     | funcdecl
     | moduledecl
-    | interfacedecl
     ;
 
 importdecl
@@ -38,14 +37,10 @@ assignment
 stmt
     : assignable assignment expr SEMI #AssignStmt
     | KW_REG LPAREN clk=clockexpr (COMMA rst=clockexpr)? RPAREN assignable assignment expr SEMI #RegAssignStmt
+    | KW_FUTURE typeexpr realname SEMI #FutureStmt
     | assignable SEMI #DeclarationStmt
     | branch #BranchStmt
-    | future SEMI #FutureStmt
     | KW_RETURN expr SEMI #ReturnStmt
-    ;
-
-future
-    : KW_FUTURE argumentlist RPAREN LBRACE block RBRACE LPAREN callarglist RPAREN
     ;
 
 assignable
@@ -150,15 +145,9 @@ argumentdef: typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
-structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? structdef;
+structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY fielddecl* RCURLY;
 
-structdef: LCURLY fielddecl* RCURLY;
-
-fielddecl: annotation* typeexpr realname SEMI;
-
-interfacedecl: annotation* KW_INTERFACE realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY interfacefield* RCURLY;
-
-interfacefield: annotation* (KW_FORWARD | KW_REVERSE) typeexpr realname SEMI;
+fielddecl: annotation* KW_FUTURE? typeexpr realname SEMI;
 
 funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 

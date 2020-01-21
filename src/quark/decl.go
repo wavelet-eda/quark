@@ -16,21 +16,6 @@ type (
 		CloseCurly ObjectPosition
 	}
 
-	//Declaration of an Interface symbol.
-	InterfaceDecl struct {
-		Annotations []Annotation
-		StructName *RealName
-
-		Parameters []*ParameterDef
-
-		Fields []*InterfaceField
-
-		TraitImpls []Name
-
-		KwInterface ObjectPosition
-		CloseCurly ObjectPosition
-	}
-
 	//Declaration of a Function symbol.
 	FunctionDecl struct {
 		Annotations []Annotation
@@ -72,14 +57,6 @@ func (s *StructDecl) Start() *ObjectPosition {
 	}
 }
 
-func (i *InterfaceDecl) Start() *ObjectPosition {
-	if len(i.Annotations) > 0 {
-		return i.Annotations[0].Start()
-	} else {
-		return &i.KwInterface
-	}
-}
-
 func (s *FunctionDecl) Start() *ObjectPosition {
 	if len(s.Annotations) > 0 {
 		return s.Annotations[0].Start()
@@ -100,10 +77,6 @@ func (s *StructDecl) End() *ObjectPosition {
 	return &s.CloseCurly
 }
 
-func (i *InterfaceDecl) End() *ObjectPosition {
-	return &i.CloseCurly
-}
-
 func (s *FunctionDecl) End() *ObjectPosition {
 	return &s.CloseCurly
 }
@@ -113,6 +86,5 @@ func (s *ModuleDecl) End() *ObjectPosition {
 }
 
 func (s *StructDecl) declNode() {}
-func (i *InterfaceDecl) declNode() {}
 func (s *FunctionDecl) declNode() {}
 func (s *ModuleDecl) declNode() {}

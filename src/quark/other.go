@@ -5,14 +5,10 @@ type (
 		Field struct {
 			FieldType TypeExpr
 			FieldName Name
-		}
 
-		//A definition of a field inside an interface.
-		InterfaceField struct {
-			Direction InterfaceDirection
-			Field
+			IsFuture bool
 
-			directionKw ObjectPosition
+			KwFuture ObjectPosition
 		}
 
 		//An argument to a module, function, interace, or constructor invocation. If the argument is named
@@ -23,22 +19,14 @@ type (
 			ValueExpr Expr
 		}
 
-		//The directionality of an interface field.
-		InterfaceDirection = bool
 )
-
-const (
-	Forward InterfaceDirection = true
-	Reverse InterfaceDirection = false
-)
-
 
 func (f *Field) Start() *ObjectPosition {
-	return f.FieldType.Start()
-}
-
-func (f *InterfaceField) Start() *ObjectPosition {
-	return &f.directionKw
+	if f.IsFuture {
+		return &f.KwFuture
+	} else {
+		return f.FieldType.Start()
+	}
 }
 
 func (c *CallArgument) Start() *ObjectPosition {

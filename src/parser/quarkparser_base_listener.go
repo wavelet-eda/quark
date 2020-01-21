@@ -75,6 +75,12 @@ func (s *BaseQuarkParserListener) EnterRegAssignStmt(ctx *RegAssignStmtContext) 
 // ExitRegAssignStmt is called when production RegAssignStmt is exited.
 func (s *BaseQuarkParserListener) ExitRegAssignStmt(ctx *RegAssignStmtContext) {}
 
+// EnterFutureStmt is called when production FutureStmt is entered.
+func (s *BaseQuarkParserListener) EnterFutureStmt(ctx *FutureStmtContext) {}
+
+// ExitFutureStmt is called when production FutureStmt is exited.
+func (s *BaseQuarkParserListener) ExitFutureStmt(ctx *FutureStmtContext) {}
+
 // EnterDeclarationStmt is called when production DeclarationStmt is entered.
 func (s *BaseQuarkParserListener) EnterDeclarationStmt(ctx *DeclarationStmtContext) {}
 
@@ -87,23 +93,11 @@ func (s *BaseQuarkParserListener) EnterBranchStmt(ctx *BranchStmtContext) {}
 // ExitBranchStmt is called when production BranchStmt is exited.
 func (s *BaseQuarkParserListener) ExitBranchStmt(ctx *BranchStmtContext) {}
 
-// EnterFutureStmt is called when production FutureStmt is entered.
-func (s *BaseQuarkParserListener) EnterFutureStmt(ctx *FutureStmtContext) {}
-
-// ExitFutureStmt is called when production FutureStmt is exited.
-func (s *BaseQuarkParserListener) ExitFutureStmt(ctx *FutureStmtContext) {}
-
 // EnterReturnStmt is called when production ReturnStmt is entered.
 func (s *BaseQuarkParserListener) EnterReturnStmt(ctx *ReturnStmtContext) {}
 
 // ExitReturnStmt is called when production ReturnStmt is exited.
 func (s *BaseQuarkParserListener) ExitReturnStmt(ctx *ReturnStmtContext) {}
-
-// EnterFuture is called when production future is entered.
-func (s *BaseQuarkParserListener) EnterFuture(ctx *FutureContext) {}
-
-// ExitFuture is called when production future is exited.
-func (s *BaseQuarkParserListener) ExitFuture(ctx *FutureContext) {}
 
 // EnterValueAssignment is called when production ValueAssignment is entered.
 func (s *BaseQuarkParserListener) EnterValueAssignment(ctx *ValueAssignmentContext) {}
@@ -449,29 +443,11 @@ func (s *BaseQuarkParserListener) EnterStructdecl(ctx *StructdeclContext) {}
 // ExitStructdecl is called when production structdecl is exited.
 func (s *BaseQuarkParserListener) ExitStructdecl(ctx *StructdeclContext) {}
 
-// EnterStructdef is called when production structdef is entered.
-func (s *BaseQuarkParserListener) EnterStructdef(ctx *StructdefContext) {}
-
-// ExitStructdef is called when production structdef is exited.
-func (s *BaseQuarkParserListener) ExitStructdef(ctx *StructdefContext) {}
-
 // EnterFielddecl is called when production fielddecl is entered.
 func (s *BaseQuarkParserListener) EnterFielddecl(ctx *FielddeclContext) {}
 
 // ExitFielddecl is called when production fielddecl is exited.
 func (s *BaseQuarkParserListener) ExitFielddecl(ctx *FielddeclContext) {}
-
-// EnterInterfacedecl is called when production interfacedecl is entered.
-func (s *BaseQuarkParserListener) EnterInterfacedecl(ctx *InterfacedeclContext) {}
-
-// ExitInterfacedecl is called when production interfacedecl is exited.
-func (s *BaseQuarkParserListener) ExitInterfacedecl(ctx *InterfacedeclContext) {}
-
-// EnterInterfacefield is called when production interfacefield is entered.
-func (s *BaseQuarkParserListener) EnterInterfacefield(ctx *InterfacefieldContext) {}
-
-// ExitInterfacefield is called when production interfacefield is exited.
-func (s *BaseQuarkParserListener) ExitInterfacefield(ctx *InterfacefieldContext) {}
 
 // EnterFuncdecl is called when production funcdecl is entered.
 func (s *BaseQuarkParserListener) EnterFuncdecl(ctx *FuncdeclContext) {}
