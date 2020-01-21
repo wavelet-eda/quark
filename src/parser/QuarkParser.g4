@@ -43,10 +43,6 @@ stmt
     | KW_RETURN expr SEMI #ReturnStmt
     ;
 
-future
-    : KW_FUTURE argumentlist RPAREN LBRACE block RBRACE LPAREN callarglist RPAREN
-    ;
-
 assignable
     : expr LBRACE expr (COMMA expr)* RBRACE #ArrayIndexAssignment
     | expr LBRACE msb=expr? COLON lsb=expr? (COLON step=expr?)? RBRACE #ArraySliceAssignment

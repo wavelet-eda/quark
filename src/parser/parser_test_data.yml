@@ -83,3 +83,14 @@ cases:
           MyOtherStruct[WIDTH] internalStuff;
       }
     expect: valid
+
+  - name: future-stmt
+    note: Tests param syntax for struct declarations.
+    quark: |
+      def something(): Bit {
+        future Bit a;
+        mut Bit b = a;
+        a = 1;
+        return b;
+      }
+    expect: valid

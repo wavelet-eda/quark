@@ -47,9 +47,6 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#ReturnStmt.
 	VisitReturnStmt(ctx *ReturnStmtContext) interface{}
 
-	// Visit a parse tree produced by QuarkParser#future.
-	VisitFuture(ctx *FutureContext) interface{}
-
 	// Visit a parse tree produced by QuarkParser#ValueAssignment.
 	VisitValueAssignment(ctx *ValueAssignmentContext) interface{}
 

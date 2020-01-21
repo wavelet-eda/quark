@@ -47,9 +47,6 @@ type QuarkParserListener interface {
 	// EnterReturnStmt is called when entering the ReturnStmt production.
 	EnterReturnStmt(c *ReturnStmtContext)
 
-	// EnterFuture is called when entering the future production.
-	EnterFuture(c *FutureContext)
-
 	// EnterValueAssignment is called when entering the ValueAssignment production.
 	EnterValueAssignment(c *ValueAssignmentContext)
 
@@ -274,9 +271,6 @@ type QuarkParserListener interface {
 
 	// ExitReturnStmt is called when exiting the ReturnStmt production.
 	ExitReturnStmt(c *ReturnStmtContext)
-
-	// ExitFuture is called when exiting the future production.
-	ExitFuture(c *FutureContext)
 
 	// ExitValueAssignment is called when exiting the ValueAssignment production.
 	ExitValueAssignment(c *ValueAssignmentContext)

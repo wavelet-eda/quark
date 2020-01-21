@@ -273,12 +273,8 @@ func (ptc *ParseTreeConverter) VisitReturnStmt(ctx *ReturnStmtContext) interface
 	return quark.NewReturnStmt(expr, returnPos, semiPos)
 }
 
-func (ptc *ParseTreeConverter) VisitFuture(_ *FutureContext) interface{} {
-	panic("unreachable code")
-}
-
 func (ptc *ParseTreeConverter) VisitValueAssignment(ctx *ValueAssignmentContext) interface{} {
-	return ptc.visitName(ctx.Name())
+	return &quark.ValueAssignment{Variable: ptc.visitName(ctx.Name())}
 }
 
 func (ptc *ParseTreeConverter) VisitVariableDefinition(ctx *VariableDefinitionContext) interface{} {

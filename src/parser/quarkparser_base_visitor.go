@@ -60,10 +60,6 @@ func (v *BaseQuarkParserVisitor) VisitReturnStmt(ctx *ReturnStmtContext) interfa
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitFuture(ctx *FutureContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseQuarkParserVisitor) VisitValueAssignment(ctx *ValueAssignmentContext) interface{} {
 	return v.VisitChildren(ctx)
 }

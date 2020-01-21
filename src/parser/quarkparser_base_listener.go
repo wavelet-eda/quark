@@ -99,12 +99,6 @@ func (s *BaseQuarkParserListener) EnterReturnStmt(ctx *ReturnStmtContext) {}
 // ExitReturnStmt is called when production ReturnStmt is exited.
 func (s *BaseQuarkParserListener) ExitReturnStmt(ctx *ReturnStmtContext) {}
 
-// EnterFuture is called when production future is entered.
-func (s *BaseQuarkParserListener) EnterFuture(ctx *FutureContext) {}
-
-// ExitFuture is called when production future is exited.
-func (s *BaseQuarkParserListener) ExitFuture(ctx *FutureContext) {}
-
 // EnterValueAssignment is called when production ValueAssignment is entered.
 func (s *BaseQuarkParserListener) EnterValueAssignment(ctx *ValueAssignmentContext) {}
 
