@@ -156,55 +156,6 @@ func (e NewModuleExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
 }
 
-//An expression where an interface is opened
-type OpenExpr struct {
-	InterfaceType TypeExpr
-	Arguments []*CallArgument
-
-	closeParen ObjectPosition
-}
-
-func NewOpenExpr(interfaceType TypeExpr, args []*CallArgument, closeParen ObjectPosition) *OpenExpr {
-	return &OpenExpr{
-		InterfaceType: interfaceType,
-		Arguments:     args,
-		closeParen:    closeParen,
-	}
-}
-
-func (e *OpenExpr) exprNode() {}
-func (e *OpenExpr) Start() *ObjectPosition {
-	return e.InterfaceType.Start()
-}
-func (e *OpenExpr) End() *ObjectPosition {
-	return &e.closeParen
-}
-
-
-//An expression where an interface is closed
-type CloseExpr struct {
-	InterfaceExpr Expr
-	Arguments []*CallArgument
-
-	closeParen ObjectPosition
-}
-
-func NewCloseExpr(expr Expr, args []*CallArgument, closeParens ObjectPosition) *CloseExpr {
-	return &CloseExpr{
-		InterfaceExpr: expr,
-		Arguments: args,
-		closeParen: closeParens,
-	}
-}
-//A function invocation expression.
-func (e *CloseExpr) exprNode() {}
-func (e *CloseExpr) Start() *ObjectPosition {
-	return e.InterfaceExpr.Start()
-}
-func (e *CloseExpr) End() *ObjectPosition {
-	return &e.closeParen
-}
-
 
 type FunctionCall struct {
 	FunctionExpr Expr
