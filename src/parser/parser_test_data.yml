@@ -107,6 +107,16 @@ cases:
     note: Tests in-line function lambdas
     quark: |
       def foobar() {
-        a = lambda <Bit A> (Bit<32> b) {a + b}
+        a = lambda <Bit A> (Bit<32> b) => {a + b};
       }
-    expected: valid
+    expect: valid
+
+  - name: array-types
+    note: Tests array types
+    quark: |
+      def foobar() {
+        Bit[32] array_1d;
+        Bit[32, 16] array_2d;
+        Stream<type Bit>[32] param_array;
+      }
+    expect: valid

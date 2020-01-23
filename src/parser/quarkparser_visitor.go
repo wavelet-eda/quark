@@ -164,6 +164,9 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#ParameterizedType.
 	VisitParameterizedType(ctx *ParameterizedTypeContext) interface{}
 
+	// Visit a parse tree produced by QuarkParser#ArrayType.
+	VisitArrayType(ctx *ArrayTypeContext) interface{}
+
 	// Visit a parse tree produced by QuarkParser#CompleteType.
 	VisitCompleteType(ctx *CompleteTypeContext) interface{}
 

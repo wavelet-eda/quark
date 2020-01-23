@@ -72,7 +72,7 @@ expr
     | typeexpr LCURLY callarglist RCURLY #ConstructorExpr
     | KW_NEW typeexpr LPAREN callarglist RPAREN #NewModuleExpr
     | expr paramarglist? LPAREN callarglist RPAREN #FunctionCall
-    | KW_LAMBDA paramarglist? argumentlist OP_ARROW LCURLY block expr? RCURLY #LambdaExpr
+    | KW_LAMBDA parameterlist? argumentlist OP_ARROW LCURLY block expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
     | OP_LNOT expr # NotExpr
     | concat #ConcatExpr
@@ -108,6 +108,7 @@ innerconcat
 typeexpr
     : name #CompleteType
     | typeexpr paramarglist #ParameterizedType
+    | typeexpr LBRACE (expr (COMMA expr)*)? RBRACE #ArrayType
     ;
 
 paramarg

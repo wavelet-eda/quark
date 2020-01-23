@@ -409,11 +409,11 @@ func (ptc *ParseTreeConverter) VisitBranchExpr(ctx *BranchExprContext) interface
 func (ptc *ParseTreeConverter) VisitLambdaExpr(ctx *LambdaExprContext) interface{} {
 	lambdaPos := ptc.terminalPosition(ctx.KW_LAMBDA())
 	args := ptc.visitArgumentList(ctx.Argumentlist())
-	var params []*quark.ParamArgument
-	if ctx.Paramarglist() != nil {
-		params = ptc.visitParamArgList(ctx.Paramarglist())
+	var params []*quark.ParameterDef
+	if ctx.Parameterlist() != nil {
+		params = ptc.visitParameterList(ctx.Parameterlist())
 	} else {
-		params = make([]*quark.ParamArgument, 0)
+		params = make([]*quark.ParameterDef, 0)
 	}
 	body := ptc.visitBlock(ctx.Block())
 	var endExpr quark.Expr = nil
@@ -657,6 +657,19 @@ func (ptc *ParseTreeConverter) VisitCompleteType(ctx *CompleteTypeContext) inter
 	return &quark.CompleteType{X:name}
 }
 
+func (ptc *ParseTreeConverter) VisitArrayType(ctx *ArrayTypeContext) interface{} {
+	baseType := ptc.visitTypeExpr(ctx.Typeexpr())
+	sizes := make([]quark.Expr, len(ctx.AllExpr()))
+	for i, sizeExpr := range ctx.AllExpr() {
+		sizes[i] = ptc.visitExpr(sizeExpr)
+	}
+	return &quark.ArrayType{
+		BaseType:   baseType,
+		Sizes:      sizes,
+		CloseBrace: ptc.terminalPosition(ctx.RBRACE()),
+	}
+}
+
 func (ptc *ParseTreeConverter) VisitIfBranch(ctx *IfBranchContext) interface{} {
 	kwIf := ptc.terminalPosition(ctx.KW_IF())
 	closeCurly := ptc.terminalPosition(ctx.RCURLY(len(ctx.AllRCURLY()) - 1))
@@ -862,7 +875,11 @@ func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
 		params = make([]*quark.ParameterDef, 0)
 	}
 	args := ptc.visitArgumentList(ctx.Argumentlist())
-	returns := ptc.visitReturnList(ctx.Returnlist())
+
+	var returns quark.ReturnList = nil
+	if ctx.Returnlist() != nil {
+		returns = ptc.visitReturnList(ctx.Returnlist())
+	}
 	body := ptc.visitBlock(ctx.Block())
 
 	kwFunction := ptc.terminalPosition(ctx.KW_DEF())

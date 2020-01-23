@@ -216,6 +216,10 @@ func (v *BaseQuarkParserVisitor) VisitParameterizedType(ctx *ParameterizedTypeCo
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitArrayType(ctx *ArrayTypeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitCompleteType(ctx *CompleteTypeContext) interface{} {
 	return v.VisitChildren(ctx)
 }

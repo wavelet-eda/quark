@@ -164,6 +164,9 @@ type QuarkParserListener interface {
 	// EnterParameterizedType is called when entering the ParameterizedType production.
 	EnterParameterizedType(c *ParameterizedTypeContext)
 
+	// EnterArrayType is called when entering the ArrayType production.
+	EnterArrayType(c *ArrayTypeContext)
+
 	// EnterCompleteType is called when entering the CompleteType production.
 	EnterCompleteType(c *CompleteTypeContext)
 
@@ -385,6 +388,9 @@ type QuarkParserListener interface {
 
 	// ExitParameterizedType is called when exiting the ParameterizedType production.
 	ExitParameterizedType(c *ParameterizedTypeContext)
+
+	// ExitArrayType is called when exiting the ArrayType production.
+	ExitArrayType(c *ArrayTypeContext)
 
 	// ExitCompleteType is called when exiting the CompleteType production.
 	ExitCompleteType(c *CompleteTypeContext)

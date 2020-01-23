@@ -333,6 +333,12 @@ func (s *BaseQuarkParserListener) EnterParameterizedType(ctx *ParameterizedTypeC
 // ExitParameterizedType is called when production ParameterizedType is exited.
 func (s *BaseQuarkParserListener) ExitParameterizedType(ctx *ParameterizedTypeContext) {}
 
+// EnterArrayType is called when production ArrayType is entered.
+func (s *BaseQuarkParserListener) EnterArrayType(ctx *ArrayTypeContext) {}
+
+// ExitArrayType is called when production ArrayType is exited.
+func (s *BaseQuarkParserListener) ExitArrayType(ctx *ArrayTypeContext) {}
+
 // EnterCompleteType is called when production CompleteType is entered.
 func (s *BaseQuarkParserListener) EnterCompleteType(ctx *CompleteTypeContext) {}
 

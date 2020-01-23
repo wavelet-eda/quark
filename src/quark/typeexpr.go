@@ -15,6 +15,13 @@ type (
 		closeBrace ObjectPosition
 	}
 
+	//An array of given base type.
+	ArrayType struct {
+		BaseType TypeExpr
+		Sizes []Expr
+		CloseBrace ObjectPosition
+	}
+
 	//ParamArgument is a single parameter of a quark type. It is either
 	//an expression or a type. It is invalid for both the expression and
 	//type fields of this struct to have a value or be nil
@@ -42,6 +49,10 @@ func (t *ParameterizedType) Start() *ObjectPosition {
 	return t.BaseType.Start()
 }
 
+func (t *ArrayType) Start() *ObjectPosition {
+	return t.BaseType.Start()
+}
+
 func (t*ParamArgument) Start() *ObjectPosition {
 	if t.ParamName != nil {
 		return t.ParamName.Start()
@@ -61,6 +72,10 @@ func (t *ParameterizedType) End() *ObjectPosition {
 	return &t.closeBrace
 }
 
+func (t *ArrayType) End() *ObjectPosition {
+	return &t.CloseBrace
+}
+
 func (t *ParamArgument) End() *ObjectPosition {
 	if t.XExpr != nil {
 		return t.XExpr.End()
@@ -72,6 +87,7 @@ func (t *ParamArgument) End() *ObjectPosition {
 
 func (t *CompleteType) typeExprNode() {}
 func (t *ParameterizedType) typeExprNode() {}
+func (t *ArrayType) typeExprNode() {}
 func (t *ParamArgument) typeExprNode()     {}
 
 func (t *CompleteType) Accept(v Visitor) {
@@ -90,6 +106,17 @@ func (t *ParameterizedType) Accept(v Visitor) {
 	t.BaseType.Accept(v)
 	for _, param := range t.Parameters {
 		param.Accept(v)
+	}
+}
+
+func (t *ArrayType) Accept(v Visitor) {
+	if v.Visit(t) == nil {
+		return
+	}
+
+	t.BaseType.Accept(v)
+	for _, size := range t.Sizes {
+		size.Accept(v)
 	}
 }
 

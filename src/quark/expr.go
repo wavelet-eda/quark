@@ -176,7 +176,7 @@ func (e *FunctionCall) End() *ObjectPosition {
 
 //An in line lambda.
 type LambdaExpr struct {
-	ParamArgs []*ParamArgument
+	Parameters []*ParameterDef
 	Arguments []*ArgumentDef
 
 	Body      []Stmt
@@ -186,9 +186,9 @@ type LambdaExpr struct {
 	closeCurly ObjectPosition
 }
 
-func NewLambdaExpr(paramArgs []*ParamArgument, arguments []*ArgumentDef, body []Stmt, finalExpr Expr, lambdaPos ObjectPosition, closeCurly ObjectPosition) *LambdaExpr {
+func NewLambdaExpr(paramArgs []*ParameterDef, arguments []*ArgumentDef, body []Stmt, finalExpr Expr, lambdaPos ObjectPosition, closeCurly ObjectPosition) *LambdaExpr {
 	return &LambdaExpr{
-		ParamArgs: paramArgs,
+		Parameters: paramArgs,
 		Arguments:  arguments,
 		Body:       body,
 		FinalExpr:  finalExpr,
@@ -465,7 +465,7 @@ func (e *LambdaExpr) Accept(v Visitor) {
 		return
 	}
 
-	for _, arg := range e.ParamArgs {
+	for _, arg := range e.Parameters {
 		arg.Accept(v)
 	}
 
