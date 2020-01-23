@@ -432,3 +432,40 @@ func (e ClockToExpr) Start() *ObjectPosition {
 func (e ClockToExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
 }
+
+//Accept impl
+func (e *LiteralExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+}
+
+func (e *VarExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+}
+
+func (e *FieldExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+}
+
+func (e *ParensExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+}
+
+func (e *TupleExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+}
+
+func (e *LiteralExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+}

@@ -71,3 +71,34 @@ func (t *CompleteType) typeExprNode() {}
 func (t *ParameterizedType) typeExprNode() {}
 func (t *TypeParameter) typeExprNode() {}
 
+func (t *CompleteType) Accept(v Visitor) {
+	if v.Visit(t) == nil {
+		return
+	}
+
+	t.X.Accept(v)
+}
+
+func (t *ParameterizedType) Accept(v Visitor) {
+	if v.Visit(t) == nil {
+		return
+	}
+
+	t.BaseType.Accept(v)
+	for _, param := range t.Parameters {
+		param.Accept(v)
+	}
+}
+
+func (t *TypeParameter) Accept(v Visitor) {
+	if v.Visit(t) == nil {
+		return
+	}
+
+	if t.XType != nil {
+		t.XType.Accept(v)
+	}
+	if t.XExpr != nil {
+		t.XExpr.Accept(v)
+	}
+}

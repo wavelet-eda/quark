@@ -129,3 +129,59 @@ func (s *DeclarationStmt) stmtNode() {}
 func (s *BranchStmt) stmtNode() {}
 func (s *FutureStmt) stmtNode() {}
 func (s *ReturnStmt) stmtNode() {}
+
+func (s *AssignStmt) Accept(v Visitor) {
+	if v.Visit(s) == nil {
+		return
+	}
+
+	s.AssignTo.Accept(v)
+	s.TheExpr.Accept(v)
+}
+
+func (s *RegAssignStmt) Accept(v Visitor) {
+	if v.Visit(s) == nil {
+		return
+	}
+
+	s.Clock.Accept(v)
+	if s.Reset != nil {
+		s.Reset.Accept(v)
+	}
+
+	s.AssignTo.Accept(v)
+	s.TheExpr.Accept(v)
+}
+
+func (s *DeclarationStmt) Accept(v Visitor) {
+	if v.Visit(s) == nil {
+		return
+	}
+
+	s.Declaration.Accept(v)
+}
+
+func (s *BranchStmt) Accept(v Visitor) {
+	if v.Visit(s) == nil {
+		return
+	}
+
+	s.TheBranch.Accept(v)
+}
+
+func (s *FutureStmt) Accept(v Visitor) {
+	if v.Visit(s) == nil {
+		return
+	}
+
+	s.FutureType.Accept(v)
+	s.FutureName.Accept(v)
+}
+
+func (s *ReturnStmt) Accept(v Visitor) {
+	if v.Visit(s) == nil {
+		return
+	}
+
+	s.ReturnExpr.Accept(v)
+}
