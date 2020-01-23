@@ -435,7 +435,7 @@ func (e ClockToExpr) End() *ObjectPosition {
 
 //Accept impl
 func (e *LiteralExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -443,7 +443,7 @@ func (e *LiteralExpr) Accept(v Visitor) {
 }
 
 func (e *VarExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -451,7 +451,7 @@ func (e *VarExpr) Accept(v Visitor) {
 }
 
 func (e *FieldExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -460,7 +460,7 @@ func (e *FieldExpr) Accept(v Visitor) {
 }
 
 func (e *ParensExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -468,7 +468,7 @@ func (e *ParensExpr) Accept(v Visitor) {
 }
 
 func (e *TupleExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -478,7 +478,7 @@ func (e *TupleExpr) Accept(v Visitor) {
 }
 
 func (e *ConstructorExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -488,7 +488,7 @@ func (e *ConstructorExpr) Accept(v Visitor) {
 }
 
 func (e *NewModuleExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -499,7 +499,7 @@ func (e *NewModuleExpr) Accept(v Visitor) {
 }
 
 func (e *FunctionCall) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -510,7 +510,7 @@ func (e *FunctionCall) Accept(v Visitor) {
 }
 
 func (e *LambdaExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -528,7 +528,7 @@ func (e *LambdaExpr) Accept(v Visitor) {
 }
 
 func (e *UnOp) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -536,7 +536,7 @@ func (e *UnOp) Accept(v Visitor) {
 }
 
 func (e *ConcatExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -546,7 +546,7 @@ func (e *ConcatExpr) Accept(v Visitor) {
 }
 
 func (e *BinOp) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -555,7 +555,7 @@ func (e *BinOp) Accept(v Visitor) {
 }
 
 func (e *TernaryExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -565,7 +565,7 @@ func (e *TernaryExpr) Accept(v Visitor) {
 }
 
 func (e *BranchExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -573,7 +573,7 @@ func (e *BranchExpr) Accept(v Visitor) {
 }
 
 func (e *ArrayLiteralExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
@@ -583,7 +583,7 @@ func (e *ArrayLiteralExpr) Accept(v Visitor) {
 }
 
 func (e *ClockToExpr) Accept(v Visitor) {
-	if v.Visit(e) != nil {
+	if v.Visit(e) == nil {
 		return
 	}
 
