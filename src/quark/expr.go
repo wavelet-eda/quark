@@ -159,17 +159,10 @@ func (e NewModuleExpr) End() *ObjectPosition {
 
 type FunctionCall struct {
 	FunctionExpr Expr
+	ParamArgs []*ParamArgument
 	Arguments []*CallArgument
 
-	closeParen ObjectPosition
-}
-
-func NewFunctionCall(expr Expr, args []*CallArgument, closeParen ObjectPosition) *FunctionCall {
-	return &FunctionCall{
-		FunctionExpr: expr,
-		Arguments:    args,
-		closeParen:   closeParen,
-	}
+	CloseParen ObjectPosition
 }
 
 func (e *FunctionCall) exprNode() {}
@@ -177,12 +170,13 @@ func (e *FunctionCall) Start() *ObjectPosition {
 	return e.FunctionExpr.Start()
 }
 func (e *FunctionCall) End() *ObjectPosition {
-	return &e.closeParen
+	return &e.CloseParen
 }
 
 
 //An in line lambda.
 type LambdaExpr struct {
+	ParamArgs []*ParamArgument
 	Arguments []*ArgumentDef
 
 	Body      []Stmt
@@ -192,8 +186,9 @@ type LambdaExpr struct {
 	closeCurly ObjectPosition
 }
 
-func NewLambdaExpr(arguments []*ArgumentDef, body []Stmt, finalExpr Expr, lambdaPos ObjectPosition, closeCurly ObjectPosition) *LambdaExpr {
+func NewLambdaExpr(paramArgs []*ParamArgument, arguments []*ArgumentDef, body []Stmt, finalExpr Expr, lambdaPos ObjectPosition, closeCurly ObjectPosition) *LambdaExpr {
 	return &LambdaExpr{
+		ParamArgs: paramArgs,
 		Arguments:  arguments,
 		Body:       body,
 		FinalExpr:  finalExpr,
@@ -455,6 +450,11 @@ func (e *FunctionCall) Accept(v Visitor) {
 	}
 
 	e.FunctionExpr.Accept(v)
+
+	for _, arg := range e.ParamArgs {
+		arg.Accept(v)
+	}
+
 	for _, arg := range e.Arguments {
 		arg.Accept(v)
 	}
@@ -463,6 +463,10 @@ func (e *FunctionCall) Accept(v Visitor) {
 func (e *LambdaExpr) Accept(v Visitor) {
 	if v.Visit(e) == nil {
 		return
+	}
+
+	for _, arg := range e.ParamArgs {
+		arg.Accept(v)
 	}
 
 	for _, arg := range e.Arguments {

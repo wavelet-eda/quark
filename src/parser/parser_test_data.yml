@@ -94,3 +94,19 @@ cases:
         return b;
       }
     expect: valid
+
+  - name: function-call
+    note: Tests function call expr
+    quark: |
+      def foobar(): Bit {
+        return someOtherFunction<32>(0);
+      }
+    expect: valid
+
+  - name: lambda-def
+    note: Tests in-line function lambdas
+    quark: |
+      def foobar() {
+        a = lambda <Bit A> (Bit<32> b) {a + b}
+      }
+    expected: valid

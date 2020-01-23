@@ -298,6 +298,32 @@ func (ptc *ParseTreeConverter) VisitVariableDefinition(ctx *VariableDefinitionCo
 	return quark.NewVariableDefAssignment(isMut, varType, name, mutPos)
 }
 
+func (ptc *ParseTreeConverter) VisitFunctionCall(ctx *FunctionCallContext) interface{} {
+	funcExpr := ptc.visitExpr(ctx.Expr())
+	var paramArgs []*quark.ParamArgument
+	var callArgs []*quark.CallArgument
+	if ctx.Paramarglist() != nil {
+		paramArgs = ptc.visitParamArgList(ctx.Paramarglist())
+	} else {
+		paramArgs = make([]*quark.ParamArgument, 0)
+	}
+
+	if ctx.Callarglist() != nil {
+		callArgs = ptc.visitCallArgList(ctx.Callarglist())
+	} else {
+		callArgs = make([]*quark.CallArgument, 0)
+	}
+
+	closeParen := ptc.terminalPosition(ctx.RPAREN())
+
+	return &quark.FunctionCall{
+		FunctionExpr: funcExpr,
+		ParamArgs:    paramArgs,
+		Arguments:    callArgs,
+		CloseParen:   closeParen,
+	}
+}
+
 func (ptc *ParseTreeConverter) VisitTupleDestructer(ctx *TupleDestructerContext) interface{} {
 	assignables := make([]quark.Assignable, len(ctx.AllAssignable()))
 	for index, node := range ctx.AllAssignable() {
@@ -383,6 +409,12 @@ func (ptc *ParseTreeConverter) VisitBranchExpr(ctx *BranchExprContext) interface
 func (ptc *ParseTreeConverter) VisitLambdaExpr(ctx *LambdaExprContext) interface{} {
 	lambdaPos := ptc.terminalPosition(ctx.KW_LAMBDA())
 	args := ptc.visitArgumentList(ctx.Argumentlist())
+	var params []*quark.ParamArgument
+	if ctx.Paramarglist() != nil {
+		params = ptc.visitParamArgList(ctx.Paramarglist())
+	} else {
+		params = make([]*quark.ParamArgument, 0)
+	}
 	body := ptc.visitBlock(ctx.Block())
 	var endExpr quark.Expr = nil
 	if ctx.Expr() != nil {
@@ -390,7 +422,7 @@ func (ptc *ParseTreeConverter) VisitLambdaExpr(ctx *LambdaExprContext) interface
 	}
 	rCurly := ptc.terminalPosition(ctx.RCURLY())
 
-	return quark.NewLambdaExpr(args, body, endExpr, lambdaPos, rCurly)
+	return quark.NewLambdaExpr(params, args, body, endExpr, lambdaPos, rCurly)
 }
 
 func (ptc *ParseTreeConverter) VisitConstructorExpr(ctx *ConstructorExprContext) interface{} {
