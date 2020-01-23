@@ -88,3 +88,70 @@ func (s *ModuleDecl) End() *ObjectPosition {
 func (s *StructDecl) declNode() {}
 func (s *FunctionDecl) declNode() {}
 func (s *ModuleDecl) declNode() {}
+
+//Accept impls
+
+func (s *StructDecl) Accept(v Visitor) {
+	if v.Visit(s) != nil {
+		return
+	}
+
+	s.StructName.Accept(v)
+	for _, params := range s.Parameters {
+		params.Accept(v)
+	}
+
+	for _, trait := range s.TraitImpls {
+		trait.Accept(v)
+	}
+
+	for _, field := range s.Fields {
+		field.Accept(v)
+	}
+}
+
+func (s *FunctionDecl) Accept(v Visitor) {
+	if v.Visit(s) != nil {
+		return
+	}
+
+	s.SymbolName.Accept(v)
+	for _, param := range s.Parameters {
+		param.Accept(v)
+	}
+
+	for _, arg := range s.Arguments {
+		arg.Accept(v)
+	}
+
+	if s.Returns != nil {
+		s.Returns.Accept(v)
+	}
+
+	for _, stmt := range s.Body {
+		stmt.Accept(v)
+	}
+}
+
+func (s *ModuleDecl) Accept(v Visitor) {
+	if v.Visit(s) != nil {
+		return
+	}
+
+	s.SymbolName.Accept(v)
+	for _, param := range s.Parameters {
+		param.Accept(v)
+	}
+
+	for _, arg := range s.Arguments {
+		arg.Accept(v)
+	}
+
+	if s.Returns != nil {
+		s.Returns.Accept(v)
+	}
+
+	for _, stmt := range s.Body {
+		stmt.Accept(v)
+	}
+}

@@ -438,34 +438,154 @@ func (e *LiteralExpr) Accept(v Visitor) {
 	if v.Visit(e) != nil {
 		return
 	}
+
+	e.Value.Accept(v)
 }
 
 func (e *VarExpr) Accept(v Visitor) {
 	if v.Visit(e) != nil {
 		return
 	}
+
+	e.VarName.Accept(v)
 }
 
 func (e *FieldExpr) Accept(v Visitor) {
 	if v.Visit(e) != nil {
 		return
 	}
+
+	e.Selectable.Accept(v)
+	e.FieldName.Accept(v)
 }
 
 func (e *ParensExpr) Accept(v Visitor) {
 	if v.Visit(e) != nil {
 		return
 	}
+
+	e.SubExpr.Accept(v)
 }
 
 func (e *TupleExpr) Accept(v Visitor) {
 	if v.Visit(e) != nil {
 		return
 	}
+
+	for _, expr := range e.Exprs {
+		expr.Accept(v)
+	}
 }
 
-func (e *LiteralExpr) Accept(v Visitor) {
+func (e *ConstructorExpr) Accept(v Visitor) {
 	if v.Visit(e) != nil {
 		return
 	}
+
+	for _, assignments := range e.FieldAssignments {
+		assignments.Accept(v)
+	}
+}
+
+func (e *NewModuleExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	e.ModuleType.Accept(v)
+	for _, arg := range e.Arguments {
+		arg.Accept(v)
+	}
+}
+
+func (e *FunctionCall) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	e.FunctionExpr.Accept(v)
+	for _, arg := range e.Arguments {
+		arg.Accept(v)
+	}
+}
+
+func (e *LambdaExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	for _, arg := range e.Arguments {
+		arg.Accept(v)
+	}
+
+	for _, stmt := range e.Body {
+		stmt.Accept(v)
+	}
+
+	if e.FinalExpr != nil {
+		e.FinalExpr.Accept(v)
+	}
+}
+
+func (e *UnOp) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	e.Expr.Accept(v)
+}
+
+func (e *ConcatExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	for _, piece := range e.ConcatPieces {
+		piece.Accept(v)
+	}
+}
+
+func (e *BinOp) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	e.Left.Accept(v)
+	e.Right.Accept(v)
+}
+
+func (e *TernaryExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	e.IfExpr.Accept(v)
+	e.Cond.Accept(v)
+	e.ElseExpr.Accept(v)
+}
+
+func (e *BranchExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	e.X.Accept(v)
+}
+
+func (e *ArrayLiteralExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	for _, value := range e.Values {
+		value.Accept(v)
+	}
+}
+
+func (e *ClockToExpr) Accept(v Visitor) {
+	if v.Visit(e) != nil {
+		return
+	}
+
+	e.Clock.Accept(v)
 }
