@@ -12,7 +12,7 @@ type (
 		closeBrace ObjectPosition
 	}
 
-	//An array index. Can appear as expression or assignable.
+//An array index. Can appear as expression or assignable.
 	ArrayIndex struct {
 		ArrayExpr Expr
 		Indices   []Expr
@@ -61,4 +61,36 @@ func (e *ArrayIndex) Start() *ObjectPosition {
 
 func (e *ArrayIndex) End() *ObjectPosition {
 	return e.closeBrace.Next()
+}
+
+//Accept impls
+
+func (e *Slice) Accept(v Visitor) {
+	if v.Visit(e) == nil {
+		return
+	}
+
+	e.ArrayExpr.Accept(v)
+
+	if e.Msb != nil {
+		e.Msb.Accept(v)
+	}
+	if e.Lsb != nil {
+		e.Lsb.Accept(v)
+	}
+	if e.Step != nil {
+		e.Step.Accept(v)
+	}
+}
+
+func (e *ArrayIndex) Accept(v Visitor) {
+	if v.Visit(e) == nil {
+		return
+	}
+
+	e.ArrayExpr.Accept(v)
+
+	for _, index := range e.Indices {
+		index.Accept(v)
+	}
 }

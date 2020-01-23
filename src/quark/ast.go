@@ -10,6 +10,10 @@ type (
 
 		//End returns the position the first character after this AST node.
 		End() *ObjectPosition
+
+		//Accepts a visitor and calls visit on its children iff
+		//visitor.Visit(this) does not return nil.
+		Accept(visitor Visitor)
 	}
 
 	//Package is a single Quark file.
@@ -171,7 +175,7 @@ func (a *ArgumentDef) End() *ObjectPosition {
 }
 
 func (a *Annotation) End() *ObjectPosition {
-	return a.End()
+	return a.AnnotationName.End()
 }
 
 func (l *Literal) Start() *ObjectPosition {
@@ -184,4 +188,52 @@ func (l *Literal) End() *ObjectPosition {
 
 func NewLiteral(text string, pos ObjectPosition) *Literal {
 	return &Literal{text, pos}
+}
+
+//Accept impls
+func (p *Package) Accept(v Visitor) {
+	if v.Visit(p) == nil {
+		return
+	}
+
+	for _, importDecl := range p.Imports {
+		importDecl.Accept(v)
+	}
+
+	for _, symbolDecl := range p.Symbols {
+		symbolDecl.Accept(v)
+	}
+}
+
+func (p *ParameterDef) Accept(v Visitor) {
+	if v.Visit(p) == nil {
+		return
+	}
+
+	if p.TypeVal != nil {
+		p.TypeVal.Accept(v)
+	}
+
+	p.ParamName.Accept(v)
+}
+
+func (a *ArgumentDef) Accept(v Visitor) {
+	if v.Visit(a) != nil {
+		return
+	}
+
+	a.ArgType.Accept(v)
+	a.ArgName.Accept(v)
+}
+
+func (a *Annotation) Accept(v Visitor) {
+	if v.Visit(a) != nil {
+		return
+	}
+
+	a.AnnotationName.Accept(v)
+}
+
+func (l *Literal) Accept(v Visitor) {
+	v.Visit(l)
 }
