@@ -65,15 +65,13 @@ clockexpr
 
 expr
     : literal #LiteralExpr
-    | name #VarExpr
-    | expr DOT realname #FieldExpr
+    | realname #VarExpr
+    | expr DOT realname #SelectorExpr
     | LPAREN expr RPAREN #ParensExpr
     | LPAREN expr (COMMA expr)+ RPAREN #TupleExpr
-    | LCURLY callarglist RCURLY #ConstructorExpr
+    | typeexpr LCURLY callarglist RCURLY #ConstructorExpr
     | KW_NEW typeexpr LPAREN callarglist RPAREN #NewModuleExpr
-    | KW_OPEN typeexpr LPAREN callarglist RPAREN #OpenExpr
-    | KW_CLOSE expr LPAREN callarglist RPAREN #CloseExpr
-    | expr LPAREN callarglist RPAREN #FunctionCall
+    | expr LANGLE paramarglist LPAREN callarglist RPAREN #FunctionCall
     | KW_LAMBDA argumentlist OP_ARROW LCURLY block expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
     | OP_LNOT expr # NotExpr
@@ -98,6 +96,13 @@ callarg
     | expr #UnamedCallArg
     ;
 
+paramarglist: paramarg (COMMA paramarg)*;
+paramarg
+    : realname OP_ASSIGN (expr | typeexpr)
+    | expr
+    | typeexpr
+    ;
+
 concat : LCURLY innerconcat (COMMA innerconcat)+ RCURLY;
 
 innerconcat
@@ -107,7 +112,7 @@ innerconcat
 
 typeexpr
     : name #CompleteType
-    | typeexpr LBRACE typeparam (COMMA typeparam)* RBRACE #ParameterizedType
+    | typeexpr LANGLE typeparam (COMMA typeparam)* RANGLE #ParameterizedType
     ;
 
 typeparam
@@ -129,7 +134,7 @@ pattern
     ;
 
 
-parameterlist: LBRACE parameterdef (COMMA parameterdef)* RBRACE;
+parameterlist: LANGLE parameterdef (COMMA parameterdef)* RANGLE;
 
 parameterdef
     : KW_TYPE typeexpr #TypeParameter
