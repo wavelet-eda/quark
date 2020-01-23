@@ -31,18 +31,18 @@ func (e VarExpr) End() *ObjectPosition {
 }
 
 //Struct, enum, or interface field access expression.
-type FieldExpr struct {
+type SelectorExpr struct {
 	Selectable Expr
 	FieldName  *RealName
 }
 
-func (e FieldExpr) exprNode() {}
+func (e SelectorExpr) exprNode() {}
 
-func (e FieldExpr) Start() *ObjectPosition {
+func (e SelectorExpr) Start() *ObjectPosition {
 	return e.Selectable.Start()
 }
 
-func (e FieldExpr) End() *ObjectPosition {
+func (e SelectorExpr) End() *ObjectPosition {
 	return e.FieldName.End()
 }
 
@@ -450,7 +450,7 @@ func (e *VarExpr) Accept(v Visitor) {
 	e.VarName.Accept(v)
 }
 
-func (e *FieldExpr) Accept(v Visitor) {
+func (e *SelectorExpr) Accept(v Visitor) {
 	if v.Visit(e) == nil {
 		return
 	}

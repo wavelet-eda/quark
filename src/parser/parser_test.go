@@ -58,6 +58,7 @@ func TestParsePackage(t *testing.T) {
 		t.Run(testname, func(t *testing.T) {
 			defer func() {
 				if r := recover(); r != nil && testCase.Expect == "valid" {
+					fmt.Println(r)
 					t.Errorf("expected no errors but got parser panic")
 				}
 			}()

@@ -71,8 +71,8 @@ expr
     | LPAREN expr (COMMA expr)+ RPAREN #TupleExpr
     | typeexpr LCURLY callarglist RCURLY #ConstructorExpr
     | KW_NEW typeexpr LPAREN callarglist RPAREN #NewModuleExpr
-    | expr LANGLE paramarglist LPAREN callarglist RPAREN #FunctionCall
-    | KW_LAMBDA argumentlist OP_ARROW LCURLY block expr? RCURLY #LambdaExpr
+    | expr paramarglist? LPAREN callarglist RPAREN #FunctionCall
+    | KW_LAMBDA paramarglist? argumentlist OP_ARROW LCURLY block expr? RCURLY #LambdaExpr
     | OP_COMPLIMENT expr # ComplimentExpr
     | OP_LNOT expr # NotExpr
     | concat #ConcatExpr
@@ -96,12 +96,7 @@ callarg
     | expr #UnamedCallArg
     ;
 
-paramarglist: paramarg (COMMA paramarg)*;
-paramarg
-    : realname OP_ASSIGN (expr | typeexpr)
-    | expr
-    | typeexpr
-    ;
+paramarglist: LANGLE paramarg (COMMA paramarg)* RANGLE;
 
 concat : LCURLY innerconcat (COMMA innerconcat)+ RCURLY;
 
@@ -112,12 +107,13 @@ innerconcat
 
 typeexpr
     : name #CompleteType
-    | typeexpr LANGLE typeparam (COMMA typeparam)* RANGLE #ParameterizedType
+    | typeexpr paramarglist #ParameterizedType
     ;
 
-typeparam
+paramarg
     : KW_TYPE typeexpr
     | expr
+    | realname OP_ASSIGN (expr | KW_TYPE typeexpr)
     ;
 
 branch

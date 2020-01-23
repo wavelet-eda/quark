@@ -153,83 +153,11 @@ func (s *BaseQuarkParserListener) EnterAtomicClock(ctx *AtomicClockContext) {}
 // ExitAtomicClock is called when production AtomicClock is exited.
 func (s *BaseQuarkParserListener) ExitAtomicClock(ctx *AtomicClockContext) {}
 
-// EnterOpenExpr is called when production OpenExpr is entered.
-func (s *BaseQuarkParserListener) EnterOpenExpr(ctx *OpenExprContext) {}
-
-// ExitOpenExpr is called when production OpenExpr is exited.
-func (s *BaseQuarkParserListener) ExitOpenExpr(ctx *OpenExprContext) {}
-
 // EnterArrayIndexExpr is called when production ArrayIndexExpr is entered.
 func (s *BaseQuarkParserListener) EnterArrayIndexExpr(ctx *ArrayIndexExprContext) {}
 
 // ExitArrayIndexExpr is called when production ArrayIndexExpr is exited.
 func (s *BaseQuarkParserListener) ExitArrayIndexExpr(ctx *ArrayIndexExprContext) {}
-
-// EnterCloseExpr is called when production CloseExpr is entered.
-func (s *BaseQuarkParserListener) EnterCloseExpr(ctx *CloseExprContext) {}
-
-// ExitCloseExpr is called when production CloseExpr is exited.
-func (s *BaseQuarkParserListener) ExitCloseExpr(ctx *CloseExprContext) {}
-
-// EnterComplimentExpr is called when production ComplimentExpr is entered.
-func (s *BaseQuarkParserListener) EnterComplimentExpr(ctx *ComplimentExprContext) {}
-
-// ExitComplimentExpr is called when production ComplimentExpr is exited.
-func (s *BaseQuarkParserListener) ExitComplimentExpr(ctx *ComplimentExprContext) {}
-
-// EnterArrayLiteralExpr is called when production ArrayLiteralExpr is entered.
-func (s *BaseQuarkParserListener) EnterArrayLiteralExpr(ctx *ArrayLiteralExprContext) {}
-
-// ExitArrayLiteralExpr is called when production ArrayLiteralExpr is exited.
-func (s *BaseQuarkParserListener) ExitArrayLiteralExpr(ctx *ArrayLiteralExprContext) {}
-
-// EnterLiteralExpr is called when production LiteralExpr is entered.
-func (s *BaseQuarkParserListener) EnterLiteralExpr(ctx *LiteralExprContext) {}
-
-// ExitLiteralExpr is called when production LiteralExpr is exited.
-func (s *BaseQuarkParserListener) ExitLiteralExpr(ctx *LiteralExprContext) {}
-
-// EnterVarExpr is called when production VarExpr is entered.
-func (s *BaseQuarkParserListener) EnterVarExpr(ctx *VarExprContext) {}
-
-// ExitVarExpr is called when production VarExpr is exited.
-func (s *BaseQuarkParserListener) ExitVarExpr(ctx *VarExprContext) {}
-
-// EnterBitwiseBinopExpr is called when production BitwiseBinopExpr is entered.
-func (s *BaseQuarkParserListener) EnterBitwiseBinopExpr(ctx *BitwiseBinopExprContext) {}
-
-// ExitBitwiseBinopExpr is called when production BitwiseBinopExpr is exited.
-func (s *BaseQuarkParserListener) ExitBitwiseBinopExpr(ctx *BitwiseBinopExprContext) {}
-
-// EnterNotExpr is called when production NotExpr is entered.
-func (s *BaseQuarkParserListener) EnterNotExpr(ctx *NotExprContext) {}
-
-// ExitNotExpr is called when production NotExpr is exited.
-func (s *BaseQuarkParserListener) ExitNotExpr(ctx *NotExprContext) {}
-
-// EnterFunctionCall is called when production FunctionCall is entered.
-func (s *BaseQuarkParserListener) EnterFunctionCall(ctx *FunctionCallContext) {}
-
-// ExitFunctionCall is called when production FunctionCall is exited.
-func (s *BaseQuarkParserListener) ExitFunctionCall(ctx *FunctionCallContext) {}
-
-// EnterShiftExpr is called when production ShiftExpr is entered.
-func (s *BaseQuarkParserListener) EnterShiftExpr(ctx *ShiftExprContext) {}
-
-// ExitShiftExpr is called when production ShiftExpr is exited.
-func (s *BaseQuarkParserListener) ExitShiftExpr(ctx *ShiftExprContext) {}
-
-// EnterTernaryExpr is called when production TernaryExpr is entered.
-func (s *BaseQuarkParserListener) EnterTernaryExpr(ctx *TernaryExprContext) {}
-
-// ExitTernaryExpr is called when production TernaryExpr is exited.
-func (s *BaseQuarkParserListener) ExitTernaryExpr(ctx *TernaryExprContext) {}
-
-// EnterNewModuleExpr is called when production NewModuleExpr is entered.
-func (s *BaseQuarkParserListener) EnterNewModuleExpr(ctx *NewModuleExprContext) {}
-
-// ExitNewModuleExpr is called when production NewModuleExpr is exited.
-func (s *BaseQuarkParserListener) ExitNewModuleExpr(ctx *NewModuleExprContext) {}
 
 // EnterBranchExpr is called when production BranchExpr is entered.
 func (s *BaseQuarkParserListener) EnterBranchExpr(ctx *BranchExprContext) {}
@@ -267,11 +195,29 @@ func (s *BaseQuarkParserListener) EnterConcatExpr(ctx *ConcatExprContext) {}
 // ExitConcatExpr is called when production ConcatExpr is exited.
 func (s *BaseQuarkParserListener) ExitConcatExpr(ctx *ConcatExprContext) {}
 
+// EnterSelectorExpr is called when production SelectorExpr is entered.
+func (s *BaseQuarkParserListener) EnterSelectorExpr(ctx *SelectorExprContext) {}
+
+// ExitSelectorExpr is called when production SelectorExpr is exited.
+func (s *BaseQuarkParserListener) ExitSelectorExpr(ctx *SelectorExprContext) {}
+
 // EnterMulDivModExpr is called when production MulDivModExpr is entered.
 func (s *BaseQuarkParserListener) EnterMulDivModExpr(ctx *MulDivModExprContext) {}
 
 // ExitMulDivModExpr is called when production MulDivModExpr is exited.
 func (s *BaseQuarkParserListener) ExitMulDivModExpr(ctx *MulDivModExprContext) {}
+
+// EnterComplimentExpr is called when production ComplimentExpr is entered.
+func (s *BaseQuarkParserListener) EnterComplimentExpr(ctx *ComplimentExprContext) {}
+
+// ExitComplimentExpr is called when production ComplimentExpr is exited.
+func (s *BaseQuarkParserListener) ExitComplimentExpr(ctx *ComplimentExprContext) {}
+
+// EnterArrayLiteralExpr is called when production ArrayLiteralExpr is entered.
+func (s *BaseQuarkParserListener) EnterArrayLiteralExpr(ctx *ArrayLiteralExprContext) {}
+
+// ExitArrayLiteralExpr is called when production ArrayLiteralExpr is exited.
+func (s *BaseQuarkParserListener) ExitArrayLiteralExpr(ctx *ArrayLiteralExprContext) {}
 
 // EnterClockToExpr is called when production ClockToExpr is entered.
 func (s *BaseQuarkParserListener) EnterClockToExpr(ctx *ClockToExprContext) {}
@@ -279,11 +225,29 @@ func (s *BaseQuarkParserListener) EnterClockToExpr(ctx *ClockToExprContext) {}
 // ExitClockToExpr is called when production ClockToExpr is exited.
 func (s *BaseQuarkParserListener) ExitClockToExpr(ctx *ClockToExprContext) {}
 
+// EnterLiteralExpr is called when production LiteralExpr is entered.
+func (s *BaseQuarkParserListener) EnterLiteralExpr(ctx *LiteralExprContext) {}
+
+// ExitLiteralExpr is called when production LiteralExpr is exited.
+func (s *BaseQuarkParserListener) ExitLiteralExpr(ctx *LiteralExprContext) {}
+
+// EnterVarExpr is called when production VarExpr is entered.
+func (s *BaseQuarkParserListener) EnterVarExpr(ctx *VarExprContext) {}
+
+// ExitVarExpr is called when production VarExpr is exited.
+func (s *BaseQuarkParserListener) ExitVarExpr(ctx *VarExprContext) {}
+
 // EnterParensExpr is called when production ParensExpr is entered.
 func (s *BaseQuarkParserListener) EnterParensExpr(ctx *ParensExprContext) {}
 
 // ExitParensExpr is called when production ParensExpr is exited.
 func (s *BaseQuarkParserListener) ExitParensExpr(ctx *ParensExprContext) {}
+
+// EnterBitwiseBinopExpr is called when production BitwiseBinopExpr is entered.
+func (s *BaseQuarkParserListener) EnterBitwiseBinopExpr(ctx *BitwiseBinopExprContext) {}
+
+// ExitBitwiseBinopExpr is called when production BitwiseBinopExpr is exited.
+func (s *BaseQuarkParserListener) ExitBitwiseBinopExpr(ctx *BitwiseBinopExprContext) {}
 
 // EnterSliceExpr is called when production SliceExpr is entered.
 func (s *BaseQuarkParserListener) EnterSliceExpr(ctx *SliceExprContext) {}
@@ -291,17 +255,41 @@ func (s *BaseQuarkParserListener) EnterSliceExpr(ctx *SliceExprContext) {}
 // ExitSliceExpr is called when production SliceExpr is exited.
 func (s *BaseQuarkParserListener) ExitSliceExpr(ctx *SliceExprContext) {}
 
-// EnterFieldExpr is called when production FieldExpr is entered.
-func (s *BaseQuarkParserListener) EnterFieldExpr(ctx *FieldExprContext) {}
+// EnterNotExpr is called when production NotExpr is entered.
+func (s *BaseQuarkParserListener) EnterNotExpr(ctx *NotExprContext) {}
 
-// ExitFieldExpr is called when production FieldExpr is exited.
-func (s *BaseQuarkParserListener) ExitFieldExpr(ctx *FieldExprContext) {}
+// ExitNotExpr is called when production NotExpr is exited.
+func (s *BaseQuarkParserListener) ExitNotExpr(ctx *NotExprContext) {}
+
+// EnterFunctionCall is called when production FunctionCall is entered.
+func (s *BaseQuarkParserListener) EnterFunctionCall(ctx *FunctionCallContext) {}
+
+// ExitFunctionCall is called when production FunctionCall is exited.
+func (s *BaseQuarkParserListener) ExitFunctionCall(ctx *FunctionCallContext) {}
 
 // EnterAddSubExpr is called when production AddSubExpr is entered.
 func (s *BaseQuarkParserListener) EnterAddSubExpr(ctx *AddSubExprContext) {}
 
 // ExitAddSubExpr is called when production AddSubExpr is exited.
 func (s *BaseQuarkParserListener) ExitAddSubExpr(ctx *AddSubExprContext) {}
+
+// EnterShiftExpr is called when production ShiftExpr is entered.
+func (s *BaseQuarkParserListener) EnterShiftExpr(ctx *ShiftExprContext) {}
+
+// ExitShiftExpr is called when production ShiftExpr is exited.
+func (s *BaseQuarkParserListener) ExitShiftExpr(ctx *ShiftExprContext) {}
+
+// EnterTernaryExpr is called when production TernaryExpr is entered.
+func (s *BaseQuarkParserListener) EnterTernaryExpr(ctx *TernaryExprContext) {}
+
+// ExitTernaryExpr is called when production TernaryExpr is exited.
+func (s *BaseQuarkParserListener) ExitTernaryExpr(ctx *TernaryExprContext) {}
+
+// EnterNewModuleExpr is called when production NewModuleExpr is entered.
+func (s *BaseQuarkParserListener) EnterNewModuleExpr(ctx *NewModuleExprContext) {}
+
+// ExitNewModuleExpr is called when production NewModuleExpr is exited.
+func (s *BaseQuarkParserListener) ExitNewModuleExpr(ctx *NewModuleExprContext) {}
 
 // EnterCallarglist is called when production callarglist is entered.
 func (s *BaseQuarkParserListener) EnterCallarglist(ctx *CallarglistContext) {}
@@ -320,6 +308,12 @@ func (s *BaseQuarkParserListener) EnterUnamedCallArg(ctx *UnamedCallArgContext) 
 
 // ExitUnamedCallArg is called when production UnamedCallArg is exited.
 func (s *BaseQuarkParserListener) ExitUnamedCallArg(ctx *UnamedCallArgContext) {}
+
+// EnterParamarglist is called when production paramarglist is entered.
+func (s *BaseQuarkParserListener) EnterParamarglist(ctx *ParamarglistContext) {}
+
+// ExitParamarglist is called when production paramarglist is exited.
+func (s *BaseQuarkParserListener) ExitParamarglist(ctx *ParamarglistContext) {}
 
 // EnterConcat is called when production concat is entered.
 func (s *BaseQuarkParserListener) EnterConcat(ctx *ConcatContext) {}
@@ -345,11 +339,11 @@ func (s *BaseQuarkParserListener) EnterCompleteType(ctx *CompleteTypeContext) {}
 // ExitCompleteType is called when production CompleteType is exited.
 func (s *BaseQuarkParserListener) ExitCompleteType(ctx *CompleteTypeContext) {}
 
-// EnterTypeparam is called when production typeparam is entered.
-func (s *BaseQuarkParserListener) EnterTypeparam(ctx *TypeparamContext) {}
+// EnterParamarg is called when production paramarg is entered.
+func (s *BaseQuarkParserListener) EnterParamarg(ctx *ParamargContext) {}
 
-// ExitTypeparam is called when production typeparam is exited.
-func (s *BaseQuarkParserListener) ExitTypeparam(ctx *TypeparamContext) {}
+// ExitParamarg is called when production paramarg is exited.
+func (s *BaseQuarkParserListener) ExitParamarg(ctx *ParamargContext) {}
 
 // EnterIfBranch is called when production IfBranch is entered.
 func (s *BaseQuarkParserListener) EnterIfBranch(ctx *IfBranchContext) {}
