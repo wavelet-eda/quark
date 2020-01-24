@@ -35,6 +35,15 @@ func (ptc *ParseTreeConverter) visitTypeExpr(ctx ITypeexprContext) quark.TypeExp
 	return ptc.Visit(ctx).(quark.TypeExpr)
 }
 
+func (ptc *ParseTreeConverter) visitParamArgList(ctx IParamarglistContext) []*quark.ParamArgument {
+	realCtx := ctx.(*ParamarglistContext)
+	result := make([]*quark.ParamArgument, len(realCtx.AllParamarg()))
+	for i, node := range realCtx.AllParamarg() {
+		result[i] = ptc.VisitParamarg(node.(*ParamargContext)).(*quark.ParamArgument)
+	}
+	return result
+}
+
 func (ptc *ParseTreeConverter) visitAssignment(ctx IAssignmentContext) quark.AssignmentOp {
 	switch ctx.GetStart().GetTokenType() {
 	case QuarkLexerOP_ASSIGN: 			  		return quark.OpAssign
@@ -289,6 +298,32 @@ func (ptc *ParseTreeConverter) VisitVariableDefinition(ctx *VariableDefinitionCo
 	return quark.NewVariableDefAssignment(isMut, varType, name, mutPos)
 }
 
+func (ptc *ParseTreeConverter) VisitFunctionCall(ctx *FunctionCallContext) interface{} {
+	funcExpr := ptc.visitExpr(ctx.Expr())
+	var paramArgs []*quark.ParamArgument
+	var callArgs []*quark.CallArgument
+	if ctx.Paramarglist() != nil {
+		paramArgs = ptc.visitParamArgList(ctx.Paramarglist())
+	} else {
+		paramArgs = make([]*quark.ParamArgument, 0)
+	}
+
+	if ctx.Callarglist() != nil {
+		callArgs = ptc.visitCallArgList(ctx.Callarglist())
+	} else {
+		callArgs = make([]*quark.CallArgument, 0)
+	}
+
+	closeParen := ptc.terminalPosition(ctx.RPAREN())
+
+	return &quark.FunctionCall{
+		FunctionExpr: funcExpr,
+		ParamArgs:    paramArgs,
+		Arguments:    callArgs,
+		CloseParen:   closeParen,
+	}
+}
+
 func (ptc *ParseTreeConverter) VisitTupleDestructer(ctx *TupleDestructerContext) interface{} {
 	assignables := make([]quark.Assignable, len(ctx.AllAssignable()))
 	for index, node := range ctx.AllAssignable() {
@@ -374,6 +409,12 @@ func (ptc *ParseTreeConverter) VisitBranchExpr(ctx *BranchExprContext) interface
 func (ptc *ParseTreeConverter) VisitLambdaExpr(ctx *LambdaExprContext) interface{} {
 	lambdaPos := ptc.terminalPosition(ctx.KW_LAMBDA())
 	args := ptc.visitArgumentList(ctx.Argumentlist())
+	var params []*quark.ParameterDef
+	if ctx.Parameterlist() != nil {
+		params = ptc.visitParameterList(ctx.Parameterlist())
+	} else {
+		params = make([]*quark.ParameterDef, 0)
+	}
 	body := ptc.visitBlock(ctx.Block())
 	var endExpr quark.Expr = nil
 	if ctx.Expr() != nil {
@@ -381,7 +422,7 @@ func (ptc *ParseTreeConverter) VisitLambdaExpr(ctx *LambdaExprContext) interface
 	}
 	rCurly := ptc.terminalPosition(ctx.RCURLY())
 
-	return quark.NewLambdaExpr(args, body, endExpr, lambdaPos, rCurly)
+	return quark.NewLambdaExpr(params, args, body, endExpr, lambdaPos, rCurly)
 }
 
 func (ptc *ParseTreeConverter) VisitConstructorExpr(ctx *ConstructorExprContext) interface{} {
@@ -460,7 +501,7 @@ func (ptc *ParseTreeConverter) VisitLiteralExpr(ctx *LiteralExprContext) interfa
 }
 
 func (ptc *ParseTreeConverter) VisitVarExpr(ctx *VarExprContext) interface{} {
-	name := ptc.visitName(ctx.Name())
+	name := ptc.visitRealname(ctx.Realname())
 	return &quark.VarExpr{VarName:name}
 }
 
@@ -506,10 +547,10 @@ func (ptc *ParseTreeConverter) VisitNotExpr(ctx *NotExprContext) interface{} {
 	return quark.NewUnOp(expr, op, opPos)
 }
 
-func (ptc *ParseTreeConverter) VisitFieldExpr(ctx *FieldExprContext) interface{} {
+func (ptc *ParseTreeConverter) VisitSelectorExpr(ctx *SelectorExprContext) interface{} {
 	name := ptc.visitExpr(ctx.Expr())
 	fieldName := ptc.visitRealname(ctx.Realname())
-	return &quark.FieldExpr{
+	return &quark.SelectorExpr{
 		Selectable: name,
 		FieldName:  fieldName,
 	}
@@ -580,32 +621,53 @@ func (ptc *ParseTreeConverter) VisitInnerconcat(_ *InnerconcatContext) interface
 
 func (ptc *ParseTreeConverter) VisitParameterizedType(ctx *ParameterizedTypeContext) interface{} {
 	mainType := ptc.visitTypeExpr(ctx.Typeexpr())
-	typeParams := make([]*quark.TypeParameter, len(ctx.AllTypeparam()))
-	for i, node := range ctx.AllTypeparam() {
-		param := node.(*TypeparamContext)
-		var expr quark.Expr = nil
-		var typeExpr quark.TypeExpr = nil
-		var kwType quark.ObjectPosition
-		if param.Expr() != nil {
-			expr = ptc.visitExpr(param.Expr())
-		} else {
-			kwType = ptc.terminalPosition(param.KW_TYPE())
-			typeExpr = ptc.visitTypeExpr(param.Typeexpr())
-		}
-		typeParams[i] = &quark.TypeParameter{
-			XExpr: expr,
-			XType: typeExpr,
-			KwType: kwType,
-		}
+	typeParams := ptc.visitParamArgList(ctx.Paramarglist())
+
+	closeBrace := ptc.terminalPosition(ctx.Paramarglist().(*ParamarglistContext).RANGLE())
+	return quark.NewParameterizedType(mainType, typeParams, closeBrace)
+}
+
+func (ptc *ParseTreeConverter) VisitParamarg(ctx *ParamargContext) interface{} {
+	var expr quark.Expr = nil
+	var typeExpr quark.TypeExpr = nil
+	var kwType quark.ObjectPosition
+	var name *quark.RealName = nil
+
+	if ctx.Expr() != nil {
+		expr = ptc.visitExpr(ctx.Expr())
+	} else {
+		kwType = ptc.terminalPosition(ctx.KW_TYPE())
+		typeExpr = ptc.visitTypeExpr(ctx.Typeexpr())
 	}
 
-	closeBrace := ptc.terminalPosition(ctx.RBRACE())
-	return quark.NewParameterizedType(mainType, typeParams, closeBrace)
+	if ctx.Realname() != nil {
+		name = ptc.visitRealname(ctx.Realname())
+	}
+	
+	return &quark.ParamArgument{
+		XExpr:     expr,
+		XType:     typeExpr,
+		ParamName: name,
+		KwType:    kwType,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitCompleteType(ctx *CompleteTypeContext) interface{} {
 	name := ptc.visitName(ctx.Name())
 	return &quark.CompleteType{X:name}
+}
+
+func (ptc *ParseTreeConverter) VisitArrayType(ctx *ArrayTypeContext) interface{} {
+	baseType := ptc.visitTypeExpr(ctx.Typeexpr())
+	sizes := make([]quark.Expr, len(ctx.AllExpr()))
+	for i, sizeExpr := range ctx.AllExpr() {
+		sizes[i] = ptc.visitExpr(sizeExpr)
+	}
+	return &quark.ArrayType{
+		BaseType:   baseType,
+		Sizes:      sizes,
+		CloseBrace: ptc.terminalPosition(ctx.RBRACE()),
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitIfBranch(ctx *IfBranchContext) interface{} {
@@ -813,7 +875,11 @@ func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
 		params = make([]*quark.ParameterDef, 0)
 	}
 	args := ptc.visitArgumentList(ctx.Argumentlist())
-	returns := ptc.visitReturnList(ctx.Returnlist())
+
+	var returns quark.ReturnList = nil
+	if ctx.Returnlist() != nil {
+		returns = ptc.visitReturnList(ctx.Returnlist())
+	}
 	body := ptc.visitBlock(ctx.Block())
 
 	kwFunction := ptc.terminalPosition(ctx.KW_DEF())

@@ -74,44 +74,8 @@ type QuarkParserListener interface {
 	// EnterAtomicClock is called when entering the AtomicClock production.
 	EnterAtomicClock(c *AtomicClockContext)
 
-	// EnterOpenExpr is called when entering the OpenExpr production.
-	EnterOpenExpr(c *OpenExprContext)
-
 	// EnterArrayIndexExpr is called when entering the ArrayIndexExpr production.
 	EnterArrayIndexExpr(c *ArrayIndexExprContext)
-
-	// EnterCloseExpr is called when entering the CloseExpr production.
-	EnterCloseExpr(c *CloseExprContext)
-
-	// EnterComplimentExpr is called when entering the ComplimentExpr production.
-	EnterComplimentExpr(c *ComplimentExprContext)
-
-	// EnterArrayLiteralExpr is called when entering the ArrayLiteralExpr production.
-	EnterArrayLiteralExpr(c *ArrayLiteralExprContext)
-
-	// EnterLiteralExpr is called when entering the LiteralExpr production.
-	EnterLiteralExpr(c *LiteralExprContext)
-
-	// EnterVarExpr is called when entering the VarExpr production.
-	EnterVarExpr(c *VarExprContext)
-
-	// EnterBitwiseBinopExpr is called when entering the BitwiseBinopExpr production.
-	EnterBitwiseBinopExpr(c *BitwiseBinopExprContext)
-
-	// EnterNotExpr is called when entering the NotExpr production.
-	EnterNotExpr(c *NotExprContext)
-
-	// EnterFunctionCall is called when entering the FunctionCall production.
-	EnterFunctionCall(c *FunctionCallContext)
-
-	// EnterShiftExpr is called when entering the ShiftExpr production.
-	EnterShiftExpr(c *ShiftExprContext)
-
-	// EnterTernaryExpr is called when entering the TernaryExpr production.
-	EnterTernaryExpr(c *TernaryExprContext)
-
-	// EnterNewModuleExpr is called when entering the NewModuleExpr production.
-	EnterNewModuleExpr(c *NewModuleExprContext)
 
 	// EnterBranchExpr is called when entering the BranchExpr production.
 	EnterBranchExpr(c *BranchExprContext)
@@ -131,23 +95,53 @@ type QuarkParserListener interface {
 	// EnterConcatExpr is called when entering the ConcatExpr production.
 	EnterConcatExpr(c *ConcatExprContext)
 
+	// EnterSelectorExpr is called when entering the SelectorExpr production.
+	EnterSelectorExpr(c *SelectorExprContext)
+
 	// EnterMulDivModExpr is called when entering the MulDivModExpr production.
 	EnterMulDivModExpr(c *MulDivModExprContext)
+
+	// EnterComplimentExpr is called when entering the ComplimentExpr production.
+	EnterComplimentExpr(c *ComplimentExprContext)
+
+	// EnterArrayLiteralExpr is called when entering the ArrayLiteralExpr production.
+	EnterArrayLiteralExpr(c *ArrayLiteralExprContext)
 
 	// EnterClockToExpr is called when entering the ClockToExpr production.
 	EnterClockToExpr(c *ClockToExprContext)
 
+	// EnterLiteralExpr is called when entering the LiteralExpr production.
+	EnterLiteralExpr(c *LiteralExprContext)
+
+	// EnterVarExpr is called when entering the VarExpr production.
+	EnterVarExpr(c *VarExprContext)
+
 	// EnterParensExpr is called when entering the ParensExpr production.
 	EnterParensExpr(c *ParensExprContext)
+
+	// EnterBitwiseBinopExpr is called when entering the BitwiseBinopExpr production.
+	EnterBitwiseBinopExpr(c *BitwiseBinopExprContext)
 
 	// EnterSliceExpr is called when entering the SliceExpr production.
 	EnterSliceExpr(c *SliceExprContext)
 
-	// EnterFieldExpr is called when entering the FieldExpr production.
-	EnterFieldExpr(c *FieldExprContext)
+	// EnterNotExpr is called when entering the NotExpr production.
+	EnterNotExpr(c *NotExprContext)
+
+	// EnterFunctionCall is called when entering the FunctionCall production.
+	EnterFunctionCall(c *FunctionCallContext)
 
 	// EnterAddSubExpr is called when entering the AddSubExpr production.
 	EnterAddSubExpr(c *AddSubExprContext)
+
+	// EnterShiftExpr is called when entering the ShiftExpr production.
+	EnterShiftExpr(c *ShiftExprContext)
+
+	// EnterTernaryExpr is called when entering the TernaryExpr production.
+	EnterTernaryExpr(c *TernaryExprContext)
+
+	// EnterNewModuleExpr is called when entering the NewModuleExpr production.
+	EnterNewModuleExpr(c *NewModuleExprContext)
 
 	// EnterCallarglist is called when entering the callarglist production.
 	EnterCallarglist(c *CallarglistContext)
@@ -158,6 +152,9 @@ type QuarkParserListener interface {
 	// EnterUnamedCallArg is called when entering the UnamedCallArg production.
 	EnterUnamedCallArg(c *UnamedCallArgContext)
 
+	// EnterParamarglist is called when entering the paramarglist production.
+	EnterParamarglist(c *ParamarglistContext)
+
 	// EnterConcat is called when entering the concat production.
 	EnterConcat(c *ConcatContext)
 
@@ -167,11 +164,14 @@ type QuarkParserListener interface {
 	// EnterParameterizedType is called when entering the ParameterizedType production.
 	EnterParameterizedType(c *ParameterizedTypeContext)
 
+	// EnterArrayType is called when entering the ArrayType production.
+	EnterArrayType(c *ArrayTypeContext)
+
 	// EnterCompleteType is called when entering the CompleteType production.
 	EnterCompleteType(c *CompleteTypeContext)
 
-	// EnterTypeparam is called when entering the typeparam production.
-	EnterTypeparam(c *TypeparamContext)
+	// EnterParamarg is called when entering the paramarg production.
+	EnterParamarg(c *ParamargContext)
 
 	// EnterIfBranch is called when entering the IfBranch production.
 	EnterIfBranch(c *IfBranchContext)
@@ -299,44 +299,8 @@ type QuarkParserListener interface {
 	// ExitAtomicClock is called when exiting the AtomicClock production.
 	ExitAtomicClock(c *AtomicClockContext)
 
-	// ExitOpenExpr is called when exiting the OpenExpr production.
-	ExitOpenExpr(c *OpenExprContext)
-
 	// ExitArrayIndexExpr is called when exiting the ArrayIndexExpr production.
 	ExitArrayIndexExpr(c *ArrayIndexExprContext)
-
-	// ExitCloseExpr is called when exiting the CloseExpr production.
-	ExitCloseExpr(c *CloseExprContext)
-
-	// ExitComplimentExpr is called when exiting the ComplimentExpr production.
-	ExitComplimentExpr(c *ComplimentExprContext)
-
-	// ExitArrayLiteralExpr is called when exiting the ArrayLiteralExpr production.
-	ExitArrayLiteralExpr(c *ArrayLiteralExprContext)
-
-	// ExitLiteralExpr is called when exiting the LiteralExpr production.
-	ExitLiteralExpr(c *LiteralExprContext)
-
-	// ExitVarExpr is called when exiting the VarExpr production.
-	ExitVarExpr(c *VarExprContext)
-
-	// ExitBitwiseBinopExpr is called when exiting the BitwiseBinopExpr production.
-	ExitBitwiseBinopExpr(c *BitwiseBinopExprContext)
-
-	// ExitNotExpr is called when exiting the NotExpr production.
-	ExitNotExpr(c *NotExprContext)
-
-	// ExitFunctionCall is called when exiting the FunctionCall production.
-	ExitFunctionCall(c *FunctionCallContext)
-
-	// ExitShiftExpr is called when exiting the ShiftExpr production.
-	ExitShiftExpr(c *ShiftExprContext)
-
-	// ExitTernaryExpr is called when exiting the TernaryExpr production.
-	ExitTernaryExpr(c *TernaryExprContext)
-
-	// ExitNewModuleExpr is called when exiting the NewModuleExpr production.
-	ExitNewModuleExpr(c *NewModuleExprContext)
 
 	// ExitBranchExpr is called when exiting the BranchExpr production.
 	ExitBranchExpr(c *BranchExprContext)
@@ -356,23 +320,53 @@ type QuarkParserListener interface {
 	// ExitConcatExpr is called when exiting the ConcatExpr production.
 	ExitConcatExpr(c *ConcatExprContext)
 
+	// ExitSelectorExpr is called when exiting the SelectorExpr production.
+	ExitSelectorExpr(c *SelectorExprContext)
+
 	// ExitMulDivModExpr is called when exiting the MulDivModExpr production.
 	ExitMulDivModExpr(c *MulDivModExprContext)
+
+	// ExitComplimentExpr is called when exiting the ComplimentExpr production.
+	ExitComplimentExpr(c *ComplimentExprContext)
+
+	// ExitArrayLiteralExpr is called when exiting the ArrayLiteralExpr production.
+	ExitArrayLiteralExpr(c *ArrayLiteralExprContext)
 
 	// ExitClockToExpr is called when exiting the ClockToExpr production.
 	ExitClockToExpr(c *ClockToExprContext)
 
+	// ExitLiteralExpr is called when exiting the LiteralExpr production.
+	ExitLiteralExpr(c *LiteralExprContext)
+
+	// ExitVarExpr is called when exiting the VarExpr production.
+	ExitVarExpr(c *VarExprContext)
+
 	// ExitParensExpr is called when exiting the ParensExpr production.
 	ExitParensExpr(c *ParensExprContext)
+
+	// ExitBitwiseBinopExpr is called when exiting the BitwiseBinopExpr production.
+	ExitBitwiseBinopExpr(c *BitwiseBinopExprContext)
 
 	// ExitSliceExpr is called when exiting the SliceExpr production.
 	ExitSliceExpr(c *SliceExprContext)
 
-	// ExitFieldExpr is called when exiting the FieldExpr production.
-	ExitFieldExpr(c *FieldExprContext)
+	// ExitNotExpr is called when exiting the NotExpr production.
+	ExitNotExpr(c *NotExprContext)
+
+	// ExitFunctionCall is called when exiting the FunctionCall production.
+	ExitFunctionCall(c *FunctionCallContext)
 
 	// ExitAddSubExpr is called when exiting the AddSubExpr production.
 	ExitAddSubExpr(c *AddSubExprContext)
+
+	// ExitShiftExpr is called when exiting the ShiftExpr production.
+	ExitShiftExpr(c *ShiftExprContext)
+
+	// ExitTernaryExpr is called when exiting the TernaryExpr production.
+	ExitTernaryExpr(c *TernaryExprContext)
+
+	// ExitNewModuleExpr is called when exiting the NewModuleExpr production.
+	ExitNewModuleExpr(c *NewModuleExprContext)
 
 	// ExitCallarglist is called when exiting the callarglist production.
 	ExitCallarglist(c *CallarglistContext)
@@ -383,6 +377,9 @@ type QuarkParserListener interface {
 	// ExitUnamedCallArg is called when exiting the UnamedCallArg production.
 	ExitUnamedCallArg(c *UnamedCallArgContext)
 
+	// ExitParamarglist is called when exiting the paramarglist production.
+	ExitParamarglist(c *ParamarglistContext)
+
 	// ExitConcat is called when exiting the concat production.
 	ExitConcat(c *ConcatContext)
 
@@ -392,11 +389,14 @@ type QuarkParserListener interface {
 	// ExitParameterizedType is called when exiting the ParameterizedType production.
 	ExitParameterizedType(c *ParameterizedTypeContext)
 
+	// ExitArrayType is called when exiting the ArrayType production.
+	ExitArrayType(c *ArrayTypeContext)
+
 	// ExitCompleteType is called when exiting the CompleteType production.
 	ExitCompleteType(c *CompleteTypeContext)
 
-	// ExitTypeparam is called when exiting the typeparam production.
-	ExitTypeparam(c *TypeparamContext)
+	// ExitParamarg is called when exiting the paramarg production.
+	ExitParamarg(c *ParamargContext)
 
 	// ExitIfBranch is called when exiting the IfBranch production.
 	ExitIfBranch(c *IfBranchContext)

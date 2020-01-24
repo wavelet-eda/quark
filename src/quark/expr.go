@@ -31,18 +31,18 @@ func (e VarExpr) End() *ObjectPosition {
 }
 
 //Struct, enum, or interface field access expression.
-type FieldExpr struct {
+type SelectorExpr struct {
 	Selectable Expr
 	FieldName  *RealName
 }
 
-func (e FieldExpr) exprNode() {}
+func (e SelectorExpr) exprNode() {}
 
-func (e FieldExpr) Start() *ObjectPosition {
+func (e SelectorExpr) Start() *ObjectPosition {
 	return e.Selectable.Start()
 }
 
-func (e FieldExpr) End() *ObjectPosition {
+func (e SelectorExpr) End() *ObjectPosition {
 	return e.FieldName.End()
 }
 
@@ -156,69 +156,13 @@ func (e NewModuleExpr) End() *ObjectPosition {
 	return e.closeParen.Next()
 }
 
-//An expression where an interface is opened
-type OpenExpr struct {
-	InterfaceType TypeExpr
-	Arguments []*CallArgument
-
-	closeParen ObjectPosition
-}
-
-func NewOpenExpr(interfaceType TypeExpr, args []*CallArgument, closeParen ObjectPosition) *OpenExpr {
-	return &OpenExpr{
-		InterfaceType: interfaceType,
-		Arguments:     args,
-		closeParen:    closeParen,
-	}
-}
-
-func (e *OpenExpr) exprNode() {}
-func (e *OpenExpr) Start() *ObjectPosition {
-	return e.InterfaceType.Start()
-}
-func (e *OpenExpr) End() *ObjectPosition {
-	return &e.closeParen
-}
-
-
-//An expression where an interface is closed
-type CloseExpr struct {
-	InterfaceExpr Expr
-	Arguments []*CallArgument
-
-	closeParen ObjectPosition
-}
-
-func NewCloseExpr(expr Expr, args []*CallArgument, closeParens ObjectPosition) *CloseExpr {
-	return &CloseExpr{
-		InterfaceExpr: expr,
-		Arguments: args,
-		closeParen: closeParens,
-	}
-}
-//A function invocation expression.
-func (e *CloseExpr) exprNode() {}
-func (e *CloseExpr) Start() *ObjectPosition {
-	return e.InterfaceExpr.Start()
-}
-func (e *CloseExpr) End() *ObjectPosition {
-	return &e.closeParen
-}
-
 
 type FunctionCall struct {
 	FunctionExpr Expr
+	ParamArgs []*ParamArgument
 	Arguments []*CallArgument
 
-	closeParen ObjectPosition
-}
-
-func NewFunctionCall(expr Expr, args []*CallArgument, closeParen ObjectPosition) *FunctionCall {
-	return &FunctionCall{
-		FunctionExpr: expr,
-		Arguments:    args,
-		closeParen:   closeParen,
-	}
+	CloseParen ObjectPosition
 }
 
 func (e *FunctionCall) exprNode() {}
@@ -226,12 +170,13 @@ func (e *FunctionCall) Start() *ObjectPosition {
 	return e.FunctionExpr.Start()
 }
 func (e *FunctionCall) End() *ObjectPosition {
-	return &e.closeParen
+	return &e.CloseParen
 }
 
 
 //An in line lambda.
 type LambdaExpr struct {
+	Parameters []*ParameterDef
 	Arguments []*ArgumentDef
 
 	Body      []Stmt
@@ -241,8 +186,9 @@ type LambdaExpr struct {
 	closeCurly ObjectPosition
 }
 
-func NewLambdaExpr(arguments []*ArgumentDef, body []Stmt, finalExpr Expr, lambdaPos ObjectPosition, closeCurly ObjectPosition) *LambdaExpr {
+func NewLambdaExpr(paramArgs []*ParameterDef, arguments []*ArgumentDef, body []Stmt, finalExpr Expr, lambdaPos ObjectPosition, closeCurly ObjectPosition) *LambdaExpr {
 	return &LambdaExpr{
+		Parameters: paramArgs,
 		Arguments:  arguments,
 		Body:       body,
 		FinalExpr:  finalExpr,
@@ -450,7 +396,7 @@ func (e *VarExpr) Accept(v Visitor) {
 	e.VarName.Accept(v)
 }
 
-func (e *FieldExpr) Accept(v Visitor) {
+func (e *SelectorExpr) Accept(v Visitor) {
 	if v.Visit(e) == nil {
 		return
 	}
@@ -504,6 +450,11 @@ func (e *FunctionCall) Accept(v Visitor) {
 	}
 
 	e.FunctionExpr.Accept(v)
+
+	for _, arg := range e.ParamArgs {
+		arg.Accept(v)
+	}
+
 	for _, arg := range e.Arguments {
 		arg.Accept(v)
 	}
@@ -512,6 +463,10 @@ func (e *FunctionCall) Accept(v Visitor) {
 func (e *LambdaExpr) Accept(v Visitor) {
 	if v.Visit(e) == nil {
 		return
+	}
+
+	for _, arg := range e.Parameters {
+		arg.Accept(v)
 	}
 
 	for _, arg := range e.Arguments {

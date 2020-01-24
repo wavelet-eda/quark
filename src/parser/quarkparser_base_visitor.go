@@ -96,55 +96,7 @@ func (v *BaseQuarkParserVisitor) VisitAtomicClock(ctx *AtomicClockContext) inter
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitOpenExpr(ctx *OpenExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseQuarkParserVisitor) VisitArrayIndexExpr(ctx *ArrayIndexExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitCloseExpr(ctx *CloseExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitComplimentExpr(ctx *ComplimentExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitArrayLiteralExpr(ctx *ArrayLiteralExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitLiteralExpr(ctx *LiteralExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitVarExpr(ctx *VarExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitBitwiseBinopExpr(ctx *BitwiseBinopExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitNotExpr(ctx *NotExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitFunctionCall(ctx *FunctionCallContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitShiftExpr(ctx *ShiftExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitTernaryExpr(ctx *TernaryExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseQuarkParserVisitor) VisitNewModuleExpr(ctx *NewModuleExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -172,7 +124,19 @@ func (v *BaseQuarkParserVisitor) VisitConcatExpr(ctx *ConcatExprContext) interfa
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitSelectorExpr(ctx *SelectorExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitMulDivModExpr(ctx *MulDivModExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitComplimentExpr(ctx *ComplimentExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitArrayLiteralExpr(ctx *ArrayLiteralExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -180,7 +144,19 @@ func (v *BaseQuarkParserVisitor) VisitClockToExpr(ctx *ClockToExprContext) inter
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitLiteralExpr(ctx *LiteralExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitVarExpr(ctx *VarExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitParensExpr(ctx *ParensExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitBitwiseBinopExpr(ctx *BitwiseBinopExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -188,11 +164,27 @@ func (v *BaseQuarkParserVisitor) VisitSliceExpr(ctx *SliceExprContext) interface
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitFieldExpr(ctx *FieldExprContext) interface{} {
+func (v *BaseQuarkParserVisitor) VisitNotExpr(ctx *NotExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitFunctionCall(ctx *FunctionCallContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BaseQuarkParserVisitor) VisitAddSubExpr(ctx *AddSubExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitShiftExpr(ctx *ShiftExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitTernaryExpr(ctx *TernaryExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitNewModuleExpr(ctx *NewModuleExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -208,6 +200,10 @@ func (v *BaseQuarkParserVisitor) VisitUnamedCallArg(ctx *UnamedCallArgContext) i
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitParamarglist(ctx *ParamarglistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitConcat(ctx *ConcatContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -220,11 +216,15 @@ func (v *BaseQuarkParserVisitor) VisitParameterizedType(ctx *ParameterizedTypeCo
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitArrayType(ctx *ArrayTypeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitCompleteType(ctx *CompleteTypeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitTypeparam(ctx *TypeparamContext) interface{} {
+func (v *BaseQuarkParserVisitor) VisitParamarg(ctx *ParamargContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
