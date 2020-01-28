@@ -101,6 +101,9 @@ type QuarkParserListener interface {
 	// EnterMulDivModExpr is called when entering the MulDivModExpr production.
 	EnterMulDivModExpr(c *MulDivModExprContext)
 
+	// EnterCompareExpr is called when entering the CompareExpr production.
+	EnterCompareExpr(c *CompareExprContext)
+
 	// EnterComplimentExpr is called when entering the ComplimentExpr production.
 	EnterComplimentExpr(c *ComplimentExprContext)
 
@@ -221,11 +224,17 @@ type QuarkParserListener interface {
 	// EnterFielddecl is called when entering the fielddecl production.
 	EnterFielddecl(c *FielddeclContext)
 
+	// EnterFuncsig is called when entering the funcsig production.
+	EnterFuncsig(c *FuncsigContext)
+
 	// EnterFuncdecl is called when entering the funcdecl production.
 	EnterFuncdecl(c *FuncdeclContext)
 
 	// EnterModuledecl is called when entering the moduledecl production.
 	EnterModuledecl(c *ModuledeclContext)
+
+	// EnterTraitdecl is called when entering the traitdecl production.
+	EnterTraitdecl(c *TraitdeclContext)
 
 	// EnterAnnotation is called when entering the annotation production.
 	EnterAnnotation(c *AnnotationContext)
@@ -325,6 +334,9 @@ type QuarkParserListener interface {
 
 	// ExitMulDivModExpr is called when exiting the MulDivModExpr production.
 	ExitMulDivModExpr(c *MulDivModExprContext)
+
+	// ExitCompareExpr is called when exiting the CompareExpr production.
+	ExitCompareExpr(c *CompareExprContext)
 
 	// ExitComplimentExpr is called when exiting the ComplimentExpr production.
 	ExitComplimentExpr(c *ComplimentExprContext)
@@ -446,11 +458,17 @@ type QuarkParserListener interface {
 	// ExitFielddecl is called when exiting the fielddecl production.
 	ExitFielddecl(c *FielddeclContext)
 
+	// ExitFuncsig is called when exiting the funcsig production.
+	ExitFuncsig(c *FuncsigContext)
+
 	// ExitFuncdecl is called when exiting the funcdecl production.
 	ExitFuncdecl(c *FuncdeclContext)
 
 	// ExitModuledecl is called when exiting the moduledecl production.
 	ExitModuledecl(c *ModuledeclContext)
+
+	// ExitTraitdecl is called when exiting the traitdecl production.
+	ExitTraitdecl(c *TraitdeclContext)
 
 	// ExitAnnotation is called when exiting the annotation production.
 	ExitAnnotation(c *AnnotationContext)

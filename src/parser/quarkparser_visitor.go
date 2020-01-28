@@ -101,6 +101,9 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#MulDivModExpr.
 	VisitMulDivModExpr(ctx *MulDivModExprContext) interface{}
 
+	// Visit a parse tree produced by QuarkParser#CompareExpr.
+	VisitCompareExpr(ctx *CompareExprContext) interface{}
+
 	// Visit a parse tree produced by QuarkParser#ComplimentExpr.
 	VisitComplimentExpr(ctx *ComplimentExprContext) interface{}
 
@@ -221,11 +224,17 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#fielddecl.
 	VisitFielddecl(ctx *FielddeclContext) interface{}
 
+	// Visit a parse tree produced by QuarkParser#funcsig.
+	VisitFuncsig(ctx *FuncsigContext) interface{}
+
 	// Visit a parse tree produced by QuarkParser#funcdecl.
 	VisitFuncdecl(ctx *FuncdeclContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#moduledecl.
 	VisitModuledecl(ctx *ModuledeclContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#traitdecl.
+	VisitTraitdecl(ctx *TraitdeclContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#annotation.
 	VisitAnnotation(ctx *AnnotationContext) interface{}

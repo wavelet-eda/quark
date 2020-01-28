@@ -5,7 +5,7 @@ cases:
   - name: simple-if-else
     note: Tests the most basic branching case.
     quark: |
-      def test<Bit<32> A>(Bit<32> stuff): Bit<32> {
+      def test!(Bit!(32) A)(Bit!(32) stuff): Bit!(32) {
           if A {
               return stuff;
           } else {
@@ -20,21 +20,25 @@ cases:
       import foo.bar;
 
       //this is a single line comment. The next line can be code
-      def someFunction<Size WIDTH>(Bit<WIDTH> a): Bit<16> {
+      def someFunction!(Size WIDTH)(Bit!(WIDTH) a): Bit!(16) {
           //comments can appear anywhere, even in blocks
           /* this comment ends when it reaches the terminator symbol.
           that means it can go on multiple lines.
           */
-         /*or be short */ Bit<32> q = 'b1;
+         /*or be short */ Bit!(32) q = 'b1;
       }
     expect: valid
 
   - name: interface-decl
     quark: |
-      struct Stream<type T> {
+      struct Stream!(type T) has Addable {
           T   data;
           Bit valid;
           future Bit ready;
+
+          def add(Stream!(type T) x, Stream!(type T) y): Stream!(type T) {
+            return x.data + y.data;
+          }
       }
     expect: valid
 
@@ -42,7 +46,7 @@ cases:
     note: This snippit should not parse as the param for a is not a type.
     quark: |
       def someFunction(Bit a): Bit {
-        Bit<type 1 + 1> a = 5;
+        Bit!(type 1 + 1) a = 5;
         return a;
       }
     expect: invalid
@@ -50,8 +54,8 @@ cases:
   - name: type-param-check
     note: This snippit should be fine since the type kw prevents ambigious params.
     quark: |
-      def someFunction(Bit<32> a): Foo<type Bar> {
-        Foo<type Bar> a = 5;
+      def someFunction(Bit!(32) a): Foo!(type Bar) {
+        Foo!(type Bar) a = 5;
         return a;
       }
     expect: valid
@@ -59,9 +63,9 @@ cases:
   - name: signed-literals
     note: Tests explicit signed literals
     quark: |
-      module MyModule<Bit<32> PARAM>(Bit<32> stuff): (Bit<32> test) {
-          Bit<32> temp = test + 4'sh13; //signed
-          Bit<16> another = 4'h13; //unsigned
+      module MyModule!(Bit!(32) PARAM)(Bit!(32) stuff): (Bit!(32) test) {
+          Bit!(32) temp = test + 4'sh13; //signed
+          Bit!(16) another = 4'h13; //unsigned
           return temp;
       }
     expect: valid
@@ -79,8 +83,8 @@ cases:
     quark: |
       import OtherTest.SubTest;
 
-      struct MyStruct<Bit<32> WIDTH> {
-          MyOtherStruct<WIDTH> internalStuff;
+      struct MyStruct!(Bit!(32) WIDTH) {
+          MyOtherStruct!(WIDTH) internalStuff;
       }
     expect: valid
 
@@ -99,7 +103,7 @@ cases:
     note: Tests function call expr
     quark: |
       def foobar(): Bit {
-        return someOtherFunction<32>(0);
+        return someOtherFunction!(32)(0);
       }
     expect: valid
 
@@ -107,7 +111,7 @@ cases:
     note: Tests in-line function lambdas
     quark: |
       def foobar() {
-        a = lambda <Bit A> (Bit<32> b) => {a + b};
+        a = lambda !(Bit A) (Bit!(32) b) => {a + b};
       }
     expect: valid
 
@@ -117,6 +121,27 @@ cases:
       def foobar() {
         Bit[32] array_1d;
         Bit[32, 16] array_2d;
-        Stream<type Bit>[32] param_array;
+        Stream!(type Bit)[32] param_array;
       }
     expect: valid
+
+  - name: trait-decl
+    note: Tests trait declaration
+    quark: |
+      trait Addable!(type T) {
+        def add(T x, LHS y): RET;
+      }
+    expect: valid
+
+  - name: comparison-ops
+    note: Test comparison expressions
+    quark: |
+      def foobar(): Bit {
+        if 1 > 2 {
+          return 0;
+        } elif 1 < 2 {
+          return 1;
+        } else {
+          return 0;
+        }
+      }

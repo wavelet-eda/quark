@@ -132,6 +132,10 @@ func (v *BaseQuarkParserVisitor) VisitMulDivModExpr(ctx *MulDivModExprContext) i
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitCompareExpr(ctx *CompareExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitComplimentExpr(ctx *ComplimentExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -292,11 +296,19 @@ func (v *BaseQuarkParserVisitor) VisitFielddecl(ctx *FielddeclContext) interface
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitFuncsig(ctx *FuncsigContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BaseQuarkParserVisitor) VisitModuledecl(ctx *ModuledeclContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitTraitdecl(ctx *TraitdeclContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

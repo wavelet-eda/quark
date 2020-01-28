@@ -5,6 +5,7 @@ fragment LOWERCASE : [a-z];
 fragment CHARACTER: [A-Za-z];
 fragment NAME_FRAGMENT: [A-Za-z0-9_];
 fragment DIGIT : [0-9];
+fragment HEX_CHARS: [a-fA-F];
 fragment TICK: '\'';
 fragment LITERAL_TYPE: ('h' | 'o' | 'd' | 'b');
 
@@ -20,14 +21,13 @@ RPAREN: ')';
 LBRACE: '[';
 RBRACE: ']';
 
-LANGLE: '<';
-RANGLE: '>';
-
 LCURLY: '{';
 RCURLY: '}';
 
-OP_ASSIGN: '=';
+PARAM_OPEN: '!(';
+
 OP_ARROW: '=>';
+OP_ASSIGN: '=';
 
 OP_ADD: '+';
 OP_ADD_ASSIGN: '+=';
@@ -57,6 +57,9 @@ OP_ARITH_LEFT_SHIFT: '<<<';
 OP_ARITH_LEFT_SHIFT_ASSIGN: '<<<=';
 OP_ARITH_RIGHT_SHFIT: '>>>';
 OP_ARITH_RIGHT_SHIFT_ASSIGN: '>>>=';
+
+LANGLE: '<';
+RANGLE: '>';
 
 OP_COMPLIMENT: '~';
 
@@ -105,15 +108,14 @@ KW_OPEN: 'open';
 KW_CLOSE: 'close';
 KW_MUT: 'mut';
 KW_SIGNAL: 'signal';
-KW_INTERFACE: 'interface';
-KW_FORWARD: 'forward';
-KW_REVERSE: 'reverse';
+KW_TRAIT: 'trait';
 
 //user constructs
 COMMENT_START: '//' -> skip, mode(SINGLE_LINE_COMMENT);
 BLOCK_COMMENT_START: '/*' -> skip, mode(BLOCK_COMMENT);
 
-INTEGRAL: ((DIGIT+)? TICK 's'? LITERAL_TYPE)?  DIGIT+;
+DECIMAL: DIGIT+;
+INTEGRAL: (DIGIT+)? TICK 's'? LITERAL_TYPE (DIGIT | HEX_CHARS)+;
 
 REAL_NAME: CHARACTER NAME_FRAGMENT*;
 ANNOTATION_START: '@'; //Annotation names are @camelCase

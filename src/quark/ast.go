@@ -96,6 +96,9 @@ type (
 	ArgumentDef struct {
 		ArgType TypeExpr
 		ArgName *RealName
+		IsFuture bool
+
+		KwFuture ObjectPosition
 	}
 
 	//ReturnList nodes are single or multi returns from functions and modules.
@@ -145,6 +148,9 @@ func (p *ParameterDef) Start() *ObjectPosition {
 }
 
 func (a *ArgumentDef) Start() *ObjectPosition {
+	if a.IsFuture {
+		return &a.KwFuture
+	}
 	return a.ArgType.Start()
 }
 
