@@ -144,7 +144,7 @@ returnlist
     | LPAREN typeexpr realname (COMMA typeexpr realname)* RPAREN #NamedReturn
     ;
 
-argumentdef: typeexpr realname;
+argumentdef: KW_FUTURE? typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 

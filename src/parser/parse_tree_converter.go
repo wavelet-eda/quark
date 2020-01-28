@@ -798,9 +798,18 @@ func (ptc *ParseTreeConverter) VisitNamedReturn(ctx *NamedReturnContext) interfa
 }
 
 func (ptc *ParseTreeConverter) VisitArgumentdef(ctx *ArgumentdefContext) interface{} {
+	isFuture := false
+	var kwFuture quark.ObjectPosition
+	if ctx.KW_FUTURE() != nil {
+		kwFuture = ptc.terminalPosition(ctx.KW_FUTURE())
+		isFuture = true
+	}
+
 	return &quark.ArgumentDef{
 		ArgType: ptc.visitTypeExpr(ctx.Typeexpr()),
 		ArgName: ptc.visitRealname(ctx.Realname()),
+		IsFuture: isFuture,
+		KwFuture: kwFuture,
 	}
 }
 
