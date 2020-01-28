@@ -207,6 +207,12 @@ func (s *BaseQuarkParserListener) EnterMulDivModExpr(ctx *MulDivModExprContext) 
 // ExitMulDivModExpr is called when production MulDivModExpr is exited.
 func (s *BaseQuarkParserListener) ExitMulDivModExpr(ctx *MulDivModExprContext) {}
 
+// EnterCompareExpr is called when production CompareExpr is entered.
+func (s *BaseQuarkParserListener) EnterCompareExpr(ctx *CompareExprContext) {}
+
+// ExitCompareExpr is called when production CompareExpr is exited.
+func (s *BaseQuarkParserListener) ExitCompareExpr(ctx *CompareExprContext) {}
+
 // EnterComplimentExpr is called when production ComplimentExpr is entered.
 func (s *BaseQuarkParserListener) EnterComplimentExpr(ctx *ComplimentExprContext) {}
 

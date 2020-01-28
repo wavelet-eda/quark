@@ -101,6 +101,9 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#MulDivModExpr.
 	VisitMulDivModExpr(ctx *MulDivModExprContext) interface{}
 
+	// Visit a parse tree produced by QuarkParser#CompareExpr.
+	VisitCompareExpr(ctx *CompareExprContext) interface{}
+
 	// Visit a parse tree produced by QuarkParser#ComplimentExpr.
 	VisitComplimentExpr(ctx *ComplimentExprContext) interface{}
 

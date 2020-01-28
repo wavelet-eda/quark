@@ -132,6 +132,10 @@ func (v *BaseQuarkParserVisitor) VisitMulDivModExpr(ctx *MulDivModExprContext) i
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseQuarkParserVisitor) VisitCompareExpr(ctx *CompareExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseQuarkParserVisitor) VisitComplimentExpr(ctx *ComplimentExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }

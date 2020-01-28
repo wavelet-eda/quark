@@ -73,6 +73,10 @@ func (ptc *ParseTreeConverter) visitBinop(op antlr.Token) quark.BinaryOp {
 	case QuarkLexerOP_RIGHT_SHIFT: 			return quark.OpRightShift
 	case QuarkLexerOP_ARITH_LEFT_SHIFT: 	return quark.OpArithLeftShift
 	case QuarkLexerOP_ARITH_RIGHT_SHFIT:	return quark.OpArithRightShift
+	case QuarkLexerLANGLE:					return quark.OpLT
+	case QuarkLexerRANGLE:					return quark.OpGT
+	case QuarkLexerOP_LTE:					return quark.OpGTE
+	case QuarkLexerOP_GTE:					return quark.OpGTE
 	case QuarkLexerOP_BAND:					return quark.OpBinaryAnd
 	case QuarkLexerOP_BOR:					return quark.OpBinaryOr
 	case QuarkLexerOP_XOR:					return quark.OpBinaryXor
@@ -572,6 +576,14 @@ func (ptc *ParseTreeConverter) VisitShiftExpr(ctx *ShiftExprContext) interface{}
 	return quark.NewBinOp(left, right, op, opPos)
 }
 
+func (ptc *ParseTreeConverter) VisitCompareExpr(ctx *CompareExprContext) interface{} {
+	left := ptc.visitExpr(ctx.Expr(0))
+	right := ptc.visitExpr(ctx.Expr(1))
+	op := ptc.visitBinop(ctx.op)
+	opPos := ptc.tokenPosition(ctx.op)
+	return quark.NewBinOp(left, right, op, opPos)
+}
+
 func (ptc *ParseTreeConverter) VisitTernaryExpr(ctx *TernaryExprContext) interface{} {
 	valueExpr := ptc.visitExpr(ctx.Expr(0))
 	cond := ptc.visitExpr(ctx.Expr(1))
@@ -623,7 +635,7 @@ func (ptc *ParseTreeConverter) VisitParameterizedType(ctx *ParameterizedTypeCont
 	mainType := ptc.visitTypeExpr(ctx.Typeexpr())
 	typeParams := ptc.visitParamArgList(ctx.Paramarglist())
 
-	closeBrace := ptc.terminalPosition(ctx.Paramarglist().(*ParamarglistContext).RANGLE())
+	closeBrace := ptc.terminalPosition(ctx.Paramarglist().(*ParamarglistContext).RPAREN())
 	return quark.NewParameterizedType(mainType, typeParams, closeBrace)
 }
 

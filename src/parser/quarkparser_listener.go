@@ -101,6 +101,9 @@ type QuarkParserListener interface {
 	// EnterMulDivModExpr is called when entering the MulDivModExpr production.
 	EnterMulDivModExpr(c *MulDivModExprContext)
 
+	// EnterCompareExpr is called when entering the CompareExpr production.
+	EnterCompareExpr(c *CompareExprContext)
+
 	// EnterComplimentExpr is called when entering the ComplimentExpr production.
 	EnterComplimentExpr(c *ComplimentExprContext)
 
@@ -331,6 +334,9 @@ type QuarkParserListener interface {
 
 	// ExitMulDivModExpr is called when exiting the MulDivModExpr production.
 	ExitMulDivModExpr(c *MulDivModExprContext)
+
+	// ExitCompareExpr is called when exiting the CompareExpr production.
+	ExitCompareExpr(c *CompareExprContext)
 
 	// ExitComplimentExpr is called when exiting the ComplimentExpr production.
 	ExitComplimentExpr(c *ComplimentExprContext)

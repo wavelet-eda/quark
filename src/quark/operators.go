@@ -21,6 +21,10 @@ const (
 	OpRightShift
 	OpArithLeftShift
 	OpArithRightShift
+	OpLT
+	OpGT
+	OpLTE
+	OpGTE
 	OpBinaryAnd
 	OpBinaryOr
 	OpBinaryXor

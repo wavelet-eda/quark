@@ -21,14 +21,13 @@ RPAREN: ')';
 LBRACE: '[';
 RBRACE: ']';
 
-LANGLE: '<';
-RANGLE: '>';
-
 LCURLY: '{';
 RCURLY: '}';
 
-OP_ASSIGN: '=';
+PARAM_OPEN: '!(';
+
 OP_ARROW: '=>';
+OP_ASSIGN: '=';
 
 OP_ADD: '+';
 OP_ADD_ASSIGN: '+=';
@@ -58,6 +57,9 @@ OP_ARITH_LEFT_SHIFT: '<<<';
 OP_ARITH_LEFT_SHIFT_ASSIGN: '<<<=';
 OP_ARITH_RIGHT_SHFIT: '>>>';
 OP_ARITH_RIGHT_SHIFT_ASSIGN: '>>>=';
+
+LANGLE: '<';
+RANGLE: '>';
 
 OP_COMPLIMENT: '~';
 

@@ -80,6 +80,7 @@ expr
     | expr op=(OP_MUL | OP_DIV | OP_MOD) expr #MulDivModExpr
     | expr op=(OP_SUB | OP_ADD) expr #AddSubExpr
     | expr op=(OP_LEFT_SHIFT | OP_RIGHT_SHIFT | OP_ARITH_LEFT_SHIFT | OP_ARITH_RIGHT_SHFIT) expr #ShiftExpr
+    | expr op=(LANGLE | RANGLE | OP_LTE | OP_GTE) expr #CompareExpr
     | expr op=(OP_BAND | OP_BOR | OP_XOR | OP_BNAND | OP_BNOR | OP_XNOR) expr #BitwiseBinopExpr
     | expr op=(OP_LAND | OP_LOR | OP_IMPLICATION | OP_EQUIVALENCE) expr #LogicalBinopExpr
     | expr KW_IF expr KW_ELSE expr #TernaryExpr
@@ -97,7 +98,7 @@ callarg
     | expr #UnamedCallArg
     ;
 
-paramarglist: LANGLE paramarg (COMMA paramarg)* RANGLE;
+paramarglist: PARAM_OPEN paramarg (COMMA paramarg)* RPAREN;
 
 concat : LCURLY innerconcat (COMMA innerconcat)+ RCURLY;
 
@@ -132,7 +133,7 @@ pattern
     ;
 
 
-parameterlist: LANGLE parameterdef (COMMA parameterdef)* RANGLE;
+parameterlist: PARAM_OPEN parameterdef (COMMA parameterdef)* RPAREN;
 
 parameterdef
     : KW_TYPE typeexpr #TypeParameter
