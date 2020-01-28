@@ -245,6 +245,10 @@ func (ptc *ParseTreeConverter) VisitRegAssignStmt(ctx *RegAssignStmtContext) int
 	} else {
 		reset = nil
 	}
+	var param *quark.ParamArgument = nil
+	if ctx.Paramarglist() != nil {
+		param = ptc.visitParamArgList(ctx.Paramarglist())[0]
+	}
 	assignable := ptc.visitAssignable(ctx.Assignable())
 	assignment := ptc.visitAssignment(ctx.Assignment())
 	expr := ptc.visitExpr(ctx.Expr())
@@ -252,7 +256,7 @@ func (ptc *ParseTreeConverter) VisitRegAssignStmt(ctx *RegAssignStmtContext) int
 	reg := ptc.terminalPosition(ctx.KW_REG())
 
 	properAssign := quark.NewAssignStmt(assignable, assignment, expr, semi)
-	return quark.NewRegAssignStmt(clock, reset, properAssign, reg)
+	return quark.NewRegAssignStmt(param, clock, reset, properAssign, reg)
 }
 
 func (ptc *ParseTreeConverter) VisitDeclarationStmt(ctx *DeclarationStmtContext) interface{} {

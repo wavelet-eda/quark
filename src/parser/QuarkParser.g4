@@ -37,7 +37,7 @@ assignment
 
 stmt
     : assignable assignment expr SEMI #AssignStmt
-    | KW_REG LPAREN clk=clockexpr (COMMA rst=clockexpr)? RPAREN assignable assignment expr SEMI #RegAssignStmt
+    | KW_REG paramarglist? LPAREN clk=clockexpr (COMMA rst=clockexpr)? RPAREN assignable assignment expr SEMI #RegAssignStmt
     | KW_FUTURE typeexpr realname SEMI #FutureStmt
     | assignable SEMI #DeclarationStmt
     | branch #BranchStmt

@@ -12,6 +12,7 @@ type (
 
 	//An assignment to a clocked register.
 	RegAssignStmt struct {
+		ResetValue *ParamArgument
 		Clock ClockExpr
 		Reset ClockExpr
 
@@ -43,7 +44,6 @@ type (
 	//A function or module return statement.
 	ReturnStmt struct {
 		ReturnExpr Expr
-
 		kwReturn ObjectPosition
 		semi ObjectPosition
 	}
@@ -58,8 +58,9 @@ func NewAssignStmt(assignTo Assignable, op AssignmentOp, expr Expr, semi ObjectP
 	}
 }
 
-func NewRegAssignStmt(clock ClockExpr, reset ClockExpr, assignment *AssignStmt, regPos ObjectPosition) *RegAssignStmt {
+func NewRegAssignStmt(resetVal *ParamArgument, clock ClockExpr, reset ClockExpr, assignment *AssignStmt, regPos ObjectPosition) *RegAssignStmt {
 	return &RegAssignStmt{
+		ResetValue: resetVal,
 		Clock:      clock,
 		Reset:      reset,
 		AssignStmt: assignment,
@@ -142,6 +143,10 @@ func (s *AssignStmt) Accept(v Visitor) {
 func (s *RegAssignStmt) Accept(v Visitor) {
 	if v.Visit(s) == nil {
 		return
+	}
+
+	if s.ResetValue != nil {
+		s.ResetValue.Accept(v)
 	}
 
 	s.Clock.Accept(v)
