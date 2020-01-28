@@ -449,6 +449,12 @@ func (s *BaseQuarkParserListener) EnterFielddecl(ctx *FielddeclContext) {}
 // ExitFielddecl is called when production fielddecl is exited.
 func (s *BaseQuarkParserListener) ExitFielddecl(ctx *FielddeclContext) {}
 
+// EnterFuncsig is called when production funcsig is entered.
+func (s *BaseQuarkParserListener) EnterFuncsig(ctx *FuncsigContext) {}
+
+// ExitFuncsig is called when production funcsig is exited.
+func (s *BaseQuarkParserListener) ExitFuncsig(ctx *FuncsigContext) {}
+
 // EnterFuncdecl is called when production funcdecl is entered.
 func (s *BaseQuarkParserListener) EnterFuncdecl(ctx *FuncdeclContext) {}
 
@@ -460,6 +466,12 @@ func (s *BaseQuarkParserListener) EnterModuledecl(ctx *ModuledeclContext) {}
 
 // ExitModuledecl is called when production moduledecl is exited.
 func (s *BaseQuarkParserListener) ExitModuledecl(ctx *ModuledeclContext) {}
+
+// EnterTraitdecl is called when production traitdecl is entered.
+func (s *BaseQuarkParserListener) EnterTraitdecl(ctx *TraitdeclContext) {}
+
+// ExitTraitdecl is called when production traitdecl is exited.
+func (s *BaseQuarkParserListener) ExitTraitdecl(ctx *TraitdeclContext) {}
 
 // EnterAnnotation is called when production annotation is entered.
 func (s *BaseQuarkParserListener) EnterAnnotation(ctx *AnnotationContext) {}

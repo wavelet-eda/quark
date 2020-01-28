@@ -6,7 +6,8 @@ type Visitor interface {
 }
 
 
-//Calls visit on the visitor for the node and its children.
-func Walk(v Visitor, node AST) {
-
+func visitParamList(params []*ParameterDef, v Visitor) {
+	for _, p := range params {
+		p.Accept(v)
+	}
 }

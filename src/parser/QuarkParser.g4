@@ -158,8 +158,11 @@ funcdecl: funcsig LCURLY block RCURLY;
 
 moduledecl: annotation* KW_MODULE realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
 
-traitdecl: annotation* KW_TRAIT realname parameterlist? LCURLY funcsig* RCURLY;
+traitdecl: annotation* KW_TRAIT realname parameterlist? LCURLY (funcsig SEMI)* RCURLY;
 
 annotation: ANNOTATION_START realname;
 
-literal: INTEGRAL;
+literal
+    : INTEGRAL
+    | DECIMAL
+    ;

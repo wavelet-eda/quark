@@ -31,10 +31,14 @@ cases:
 
   - name: interface-decl
     quark: |
-      struct Stream<type T> {
+      struct Stream<type T> has Addable {
           T   data;
           Bit valid;
           future Bit ready;
+
+          def add(Stream<type T> x, Stream<type T> y): Stream<type T> {
+            return x.data + y.data;
+          }
       }
     expect: valid
 
@@ -118,5 +122,13 @@ cases:
         Bit[32] array_1d;
         Bit[32, 16] array_2d;
         Stream<type Bit>[32] param_array;
+      }
+    expect: valid
+
+  - name: trait-decl
+    note: Tests trait declaration
+    quark: |
+      trait Addable<type T> {
+        def add(T x, LHS y): RET;
       }
     expect: valid

@@ -865,8 +865,35 @@ func (ptc *ParseTreeConverter) VisitFielddecl(ctx *FielddeclContext) interface{}
 	}
 }
 
-func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
-	println("visiting funcdecl")
+func (ptc *ParseTreeConverter) VisitTraitdecl(ctx *TraitdeclContext) interface{} {
+	kwTrait := ptc.terminalPosition(ctx.KW_TRAIT())
+	rCurly := ptc.terminalPosition(ctx.RCURLY())
+
+	name := ptc.visitRealname(ctx.Realname())
+	var params []*quark.ParameterDef
+	if ctx.Parameterlist() != nil {
+		params = ptc.visitParameterList(ctx.Parameterlist())
+	} else {
+		params = make([]*quark.ParameterDef, 0)
+	}
+
+
+	functions := make([]*quark.FunctionSignature, len(ctx.AllFuncsig()))
+	for i, sig := range ctx.AllFuncsig() {
+		functions[i] = ptc.VisitFuncsig(sig.(*FuncsigContext)).(*quark.FunctionSignature)
+	}
+
+	return &quark.TraitDecl{
+		Annotations: nil,
+		TraitName:   name,
+		Parameters:  params,
+		Functions:   functions,
+		KwTrait:     kwTrait,
+		CloseCurly:  rCurly,
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitFuncsig(ctx *FuncsigContext) interface{} {
 	name := ptc.visitRealname(ctx.Realname())
 	var params []*quark.ParameterDef
 	if ctx.Parameterlist() != nil {
@@ -880,19 +907,28 @@ func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
 	if ctx.Returnlist() != nil {
 		returns = ptc.visitReturnList(ctx.Returnlist())
 	}
-	body := ptc.visitBlock(ctx.Block())
 
 	kwFunction := ptc.terminalPosition(ctx.KW_DEF())
-	end := ptc.terminalPosition(ctx.RCURLY())
 
-	return &quark.FunctionDecl{
+	return &quark.FunctionSignature{
 		Annotations: nil,
 		SymbolName:  name,
 		Parameters:  params,
 		Arguments:   args,
 		Returns:     returns,
-		Body:        body,
 		KwFunction:  kwFunction,
+		CloseParen:  quark.ObjectPosition{}, //TODO: fix
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitFuncdecl(ctx *FuncdeclContext) interface{} {
+	body := ptc.visitBlock(ctx.Block())
+	end := ptc.terminalPosition(ctx.RCURLY())
+	sig := ptc.VisitFuncsig(ctx.Funcsig().(*FuncsigContext)).(*quark.FunctionSignature)
+
+	return &quark.FunctionDecl{
+		Signature: sig,
+		Body:        body,
 		CloseCurly:  end,
 	}
 }
@@ -933,7 +969,7 @@ func (ptc *ParseTreeConverter) VisitAnnotation(ctx *AnnotationContext) interface
 
 func (ptc *ParseTreeConverter) VisitLiteral(ctx *LiteralContext) interface{} {
 	pos := quark.NewObjectPosition(ptc.file, ctx.GetStart().GetTokenIndex())
-	text := ctx.INTEGRAL().GetText()
+	text := ctx.GetText()
 	return quark.NewLiteral(text, pos)
 }
 
