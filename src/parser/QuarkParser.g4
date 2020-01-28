@@ -8,6 +8,7 @@ decl
     : structdecl
     | funcdecl
     | moduledecl
+    | traitdecl
     ;
 
 importdecl
@@ -147,13 +148,17 @@ argumentdef: typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
-structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY fielddecl* RCURLY;
+structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY (fielddecl | funcdecl)* RCURLY;
 
 fielddecl: annotation* KW_FUTURE? typeexpr realname SEMI;
 
-funcdecl: annotation* KW_DEF realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
+funcsig: annotation* KW_DEF realname parameterlist? argumentlist (COLON returnlist)?;
+
+funcdecl: funcsig LCURLY block RCURLY;
 
 moduledecl: annotation* KW_MODULE realname parameterlist? argumentlist? (COLON returnlist)? LCURLY block RCURLY;
+
+traitdecl: annotation* KW_TRAIT realname parameterlist? LCURLY funcsig* RCURLY;
 
 annotation: ANNOTATION_START realname;
 
