@@ -4,7 +4,7 @@ fragment UPPERCASE : [A-Z];
 fragment LOWERCASE : [a-z];
 fragment CHARACTER: [A-Za-z];
 fragment NAME_FRAGMENT: [A-Za-z0-9_];
-fragment DIGIT : [0-9];
+fragment DIGIT : [0-9a-fA-F];
 fragment TICK: '\'';
 fragment LITERAL_TYPE: ('h' | 'o' | 'd' | 'b');
 
