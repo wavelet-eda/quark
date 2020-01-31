@@ -1103,13 +1103,15 @@ func (ptc *ParseTreeConverter) VisitArrayPattern(ctx *ArrayPatternContext) inter
 
 	for i, node := range ctx.AllInner_array_pattern() {
 		realNode := node.(*Inner_array_patternContext)
-		inners[i].X = ptc.visitPattern(realNode.Pattern())
+		innerPattern := &quark.InnerArrayPattern{}
+		innerPattern.X = ptc.visitPattern(realNode.Pattern())
 		if realNode.DOUBLE_DOT() != nil {
-			inners[i].DoubleDot = ptc.terminalPosition(realNode.DOUBLE_DOT())
-			inners[i].ConsumesMultiple = true
+			innerPattern.DoubleDot = ptc.terminalPosition(realNode.DOUBLE_DOT())
+			innerPattern.ConsumesMultiple = true
 		} else {
-			inners[i].ConsumesMultiple = false
+			innerPattern.ConsumesMultiple = false
 		}
+		inners[i] = innerPattern
 	}
 	
 	return &quark.ArrayPattern{

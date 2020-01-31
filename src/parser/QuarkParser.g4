@@ -132,7 +132,7 @@ pattern
     | BIT_VECTOR_PATTERN_TOKEN #BitVectorPattern
     | LPAREN pattern (COMMA pattern)* RPAREN #TuplePattern
     | LBRACE (inner_array_pattern (COMMA inner_array_pattern)*) RBRACE #ArrayPattern
-    | name param_pattern? (LPAREN pattern (COMMA pattern)* RPAREN)? #EnumPattern
+    | name param_pattern? LPAREN (pattern (COMMA pattern)*)? RPAREN #EnumPattern
     ;
 
 param_pattern : PARAM_OPEN pattern (COMMA pattern)* RPAREN;

@@ -16,7 +16,7 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 101, 779,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 95, 779,
 	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
 	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
 	9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 4, 18, 9,
@@ -71,8 +71,8 @@ var parserATN = []uint16{
 	21, 3, 21, 7, 21, 496, 10, 21, 12, 21, 14, 21, 499, 11, 21, 3, 21, 3, 21,
 	3, 21, 3, 21, 3, 21, 3, 21, 7, 21, 507, 10, 21, 12, 21, 14, 21, 510, 11,
 	21, 3, 21, 3, 21, 3, 21, 3, 21, 5, 21, 516, 10, 21, 3, 21, 3, 21, 3, 21,
-	3, 21, 7, 21, 522, 10, 21, 12, 21, 14, 21, 525, 11, 21, 3, 21, 3, 21, 5,
-	21, 529, 10, 21, 5, 21, 531, 10, 21, 3, 22, 3, 22, 3, 22, 3, 22, 7, 22,
+	3, 21, 7, 21, 522, 10, 21, 12, 21, 14, 21, 525, 11, 21, 5, 21, 527, 10,
+	21, 3, 21, 3, 21, 5, 21, 531, 10, 21, 3, 22, 3, 22, 3, 22, 3, 22, 7, 22,
 	537, 10, 22, 12, 22, 14, 22, 540, 11, 22, 3, 22, 3, 22, 3, 23, 3, 23, 3,
 	23, 3, 23, 5, 23, 548, 10, 23, 3, 24, 3, 24, 3, 24, 3, 24, 7, 24, 554,
 	10, 24, 12, 24, 14, 24, 557, 11, 24, 3, 24, 3, 24, 3, 25, 3, 25, 3, 25,
@@ -107,7 +107,7 @@ var parserATN = []uint16{
 	26, 26, 28, 28, 30, 30, 33, 33, 36, 36, 39, 39, 41, 41, 43, 43, 45, 45,
 	5, 2, 23, 23, 25, 25, 27, 27, 4, 2, 19, 19, 21, 21, 6, 2, 38, 38, 40, 40,
 	42, 42, 44, 44, 4, 2, 46, 47, 54, 55, 6, 2, 29, 29, 31, 32, 34, 35, 37,
-	37, 4, 2, 49, 50, 52, 53, 3, 2, 92, 93, 2, 869, 2, 81, 3, 2, 2, 2, 4, 97,
+	37, 4, 2, 49, 50, 52, 53, 3, 2, 86, 87, 2, 869, 2, 81, 3, 2, 2, 2, 4, 97,
 	3, 2, 2, 2, 6, 123, 3, 2, 2, 2, 8, 128, 3, 2, 2, 2, 10, 131, 3, 2, 2, 2,
 	12, 167, 3, 2, 2, 2, 14, 206, 3, 2, 2, 2, 16, 220, 3, 2, 2, 2, 18, 230,
 	3, 2, 2, 2, 20, 232, 3, 2, 2, 2, 22, 298, 3, 2, 2, 2, 24, 368, 3, 2, 2,
@@ -126,10 +126,10 @@ var parserATN = []uint16{
 	62, 32, 2, 93, 98, 5, 68, 35, 2, 94, 98, 5, 70, 36, 2, 95, 98, 5, 72, 37,
 	2, 96, 98, 5, 56, 29, 2, 97, 92, 3, 2, 2, 2, 97, 93, 3, 2, 2, 2, 97, 94,
 	3, 2, 2, 2, 97, 95, 3, 2, 2, 2, 97, 96, 3, 2, 2, 2, 98, 5, 3, 2, 2, 2,
-	99, 100, 7, 72, 2, 2, 100, 101, 5, 18, 10, 2, 101, 102, 7, 4, 2, 2, 102,
-	124, 3, 2, 2, 2, 103, 104, 7, 72, 2, 2, 104, 105, 5, 18, 10, 2, 105, 106,
+	99, 100, 7, 71, 2, 2, 100, 101, 5, 18, 10, 2, 101, 102, 7, 4, 2, 2, 102,
+	124, 3, 2, 2, 2, 103, 104, 7, 71, 2, 2, 104, 105, 5, 18, 10, 2, 105, 106,
 	7, 7, 2, 2, 106, 107, 7, 23, 2, 2, 107, 108, 7, 4, 2, 2, 108, 124, 3, 2,
-	2, 2, 109, 110, 7, 72, 2, 2, 110, 111, 5, 18, 10, 2, 111, 112, 7, 7, 2,
+	2, 2, 109, 110, 7, 71, 2, 2, 110, 111, 5, 18, 10, 2, 111, 112, 7, 7, 2,
 	2, 112, 113, 7, 10, 2, 2, 113, 116, 5, 16, 9, 2, 114, 115, 7, 5, 2, 2,
 	115, 117, 5, 16, 9, 2, 116, 114, 3, 2, 2, 2, 117, 118, 3, 2, 2, 2, 118,
 	116, 3, 2, 2, 2, 118, 119, 3, 2, 2, 2, 119, 120, 3, 2, 2, 2, 120, 121,
@@ -139,15 +139,15 @@ var parserATN = []uint16{
 	3, 2, 2, 2, 128, 129, 3, 2, 2, 2, 129, 9, 3, 2, 2, 2, 130, 128, 3, 2, 2,
 	2, 131, 132, 9, 2, 2, 2, 132, 11, 3, 2, 2, 2, 133, 134, 5, 14, 8, 2, 134,
 	135, 5, 10, 6, 2, 135, 136, 5, 22, 12, 2, 136, 137, 7, 4, 2, 2, 137, 168,
-	3, 2, 2, 2, 138, 140, 7, 82, 2, 2, 139, 141, 5, 28, 15, 2, 140, 139, 3,
+	3, 2, 2, 2, 138, 140, 7, 78, 2, 2, 139, 141, 5, 28, 15, 2, 140, 139, 3,
 	2, 2, 2, 140, 141, 3, 2, 2, 2, 141, 142, 3, 2, 2, 2, 142, 143, 7, 10, 2,
 	2, 143, 146, 5, 20, 11, 2, 144, 145, 7, 5, 2, 2, 145, 147, 5, 20, 11, 2,
 	146, 144, 3, 2, 2, 2, 146, 147, 3, 2, 2, 2, 147, 148, 3, 2, 2, 2, 148,
 	149, 7, 11, 2, 2, 149, 150, 5, 14, 8, 2, 150, 151, 5, 10, 6, 2, 151, 152,
 	5, 22, 12, 2, 152, 153, 7, 4, 2, 2, 153, 168, 3, 2, 2, 2, 154, 155, 7,
-	77, 2, 2, 155, 156, 5, 34, 18, 2, 156, 157, 5, 16, 9, 2, 157, 158, 7, 4,
+	74, 2, 2, 155, 156, 5, 34, 18, 2, 156, 157, 5, 16, 9, 2, 157, 158, 7, 4,
 	2, 2, 158, 168, 3, 2, 2, 2, 159, 160, 5, 14, 8, 2, 160, 161, 7, 4, 2, 2,
-	161, 168, 3, 2, 2, 2, 162, 168, 5, 38, 20, 2, 163, 164, 7, 71, 2, 2, 164,
+	161, 168, 3, 2, 2, 2, 162, 168, 5, 38, 20, 2, 163, 164, 7, 70, 2, 2, 164,
 	165, 5, 22, 12, 2, 165, 166, 7, 4, 2, 2, 166, 168, 3, 2, 2, 2, 167, 133,
 	3, 2, 2, 2, 167, 138, 3, 2, 2, 2, 167, 154, 3, 2, 2, 2, 167, 159, 3, 2,
 	2, 2, 167, 162, 3, 2, 2, 2, 167, 163, 3, 2, 2, 2, 168, 13, 3, 2, 2, 2,
@@ -162,7 +162,7 @@ var parserATN = []uint16{
 	2, 192, 194, 5, 22, 12, 2, 193, 192, 3, 2, 2, 2, 193, 194, 3, 2, 2, 2,
 	194, 196, 3, 2, 2, 2, 195, 191, 3, 2, 2, 2, 195, 196, 3, 2, 2, 2, 196,
 	197, 3, 2, 2, 2, 197, 198, 7, 13, 2, 2, 198, 207, 3, 2, 2, 2, 199, 207,
-	5, 18, 10, 2, 200, 202, 7, 87, 2, 2, 201, 200, 3, 2, 2, 2, 201, 202, 3,
+	5, 18, 10, 2, 200, 202, 7, 81, 2, 2, 201, 200, 3, 2, 2, 2, 201, 202, 3,
 	2, 2, 2, 202, 203, 3, 2, 2, 2, 203, 204, 5, 34, 18, 2, 204, 205, 5, 16,
 	9, 2, 205, 207, 3, 2, 2, 2, 206, 169, 3, 2, 2, 2, 206, 182, 3, 2, 2, 2,
 	206, 199, 3, 2, 2, 2, 206, 201, 3, 2, 2, 2, 207, 217, 3, 2, 2, 2, 208,
@@ -170,8 +170,8 @@ var parserATN = []uint16{
 	3, 2, 2, 2, 212, 213, 3, 2, 2, 2, 213, 211, 3, 2, 2, 2, 213, 214, 3, 2,
 	2, 2, 214, 216, 3, 2, 2, 2, 215, 208, 3, 2, 2, 2, 216, 219, 3, 2, 2, 2,
 	217, 215, 3, 2, 2, 2, 217, 218, 3, 2, 2, 2, 218, 15, 3, 2, 2, 2, 219, 217,
-	3, 2, 2, 2, 220, 221, 7, 95, 2, 2, 221, 17, 3, 2, 2, 2, 222, 231, 5, 16,
-	9, 2, 223, 226, 7, 95, 2, 2, 224, 225, 7, 7, 2, 2, 225, 227, 7, 95, 2,
+	3, 2, 2, 2, 220, 221, 7, 89, 2, 2, 221, 17, 3, 2, 2, 2, 222, 231, 5, 16,
+	9, 2, 223, 226, 7, 89, 2, 2, 224, 225, 7, 7, 2, 2, 225, 227, 7, 89, 2,
 	2, 226, 224, 3, 2, 2, 2, 227, 228, 3, 2, 2, 2, 228, 226, 3, 2, 2, 2, 228,
 	229, 3, 2, 2, 2, 229, 231, 3, 2, 2, 2, 230, 222, 3, 2, 2, 2, 230, 223,
 	3, 2, 2, 2, 231, 19, 3, 2, 2, 2, 232, 233, 5, 18, 10, 2, 233, 21, 3, 2,
@@ -182,9 +182,9 @@ var parserATN = []uint16{
 	3, 2, 2, 2, 247, 245, 3, 2, 2, 2, 247, 248, 3, 2, 2, 2, 248, 249, 3, 2,
 	2, 2, 249, 250, 7, 11, 2, 2, 250, 299, 3, 2, 2, 2, 251, 252, 5, 34, 18,
 	2, 252, 253, 7, 14, 2, 2, 253, 254, 5, 24, 13, 2, 254, 255, 7, 15, 2, 2,
-	255, 299, 3, 2, 2, 2, 256, 257, 7, 84, 2, 2, 257, 258, 5, 34, 18, 2, 258,
+	255, 299, 3, 2, 2, 2, 256, 257, 7, 80, 2, 2, 257, 258, 5, 34, 18, 2, 258,
 	259, 7, 10, 2, 2, 259, 260, 5, 24, 13, 2, 260, 261, 7, 11, 2, 2, 261, 299,
-	3, 2, 2, 2, 262, 264, 7, 79, 2, 2, 263, 265, 5, 46, 24, 2, 264, 263, 3,
+	3, 2, 2, 2, 262, 264, 7, 75, 2, 2, 263, 265, 5, 46, 24, 2, 264, 263, 3,
 	2, 2, 2, 264, 265, 3, 2, 2, 2, 265, 266, 3, 2, 2, 2, 266, 267, 5, 54, 28,
 	2, 267, 268, 7, 17, 2, 2, 268, 269, 7, 14, 2, 2, 269, 271, 5, 8, 5, 2,
 	270, 272, 5, 22, 12, 2, 271, 270, 3, 2, 2, 2, 271, 272, 3, 2, 2, 2, 272,
@@ -195,7 +195,7 @@ var parserATN = []uint16{
 	22, 12, 2, 285, 283, 3, 2, 2, 2, 286, 289, 3, 2, 2, 2, 287, 285, 3, 2,
 	2, 2, 287, 288, 3, 2, 2, 2, 288, 291, 3, 2, 2, 2, 289, 287, 3, 2, 2, 2,
 	290, 282, 3, 2, 2, 2, 290, 291, 3, 2, 2, 2, 291, 292, 3, 2, 2, 2, 292,
-	299, 7, 13, 2, 2, 293, 294, 7, 88, 2, 2, 294, 295, 7, 10, 2, 2, 295, 296,
+	299, 7, 13, 2, 2, 293, 294, 7, 82, 2, 2, 294, 295, 7, 10, 2, 2, 295, 296,
 	5, 20, 11, 2, 296, 297, 7, 11, 2, 2, 297, 299, 3, 2, 2, 2, 298, 234, 3,
 	2, 2, 2, 298, 236, 3, 2, 2, 2, 298, 237, 3, 2, 2, 2, 298, 241, 3, 2, 2,
 	2, 298, 251, 3, 2, 2, 2, 298, 256, 3, 2, 2, 2, 298, 262, 3, 2, 2, 2, 298,
@@ -264,13 +264,13 @@ var parserATN = []uint16{
 	3, 2, 2, 2, 462, 460, 3, 2, 2, 2, 463, 464, 7, 61, 2, 2, 464, 465, 7, 14,
 	2, 2, 465, 466, 5, 8, 5, 2, 466, 467, 7, 15, 2, 2, 467, 469, 3, 2, 2, 2,
 	468, 463, 3, 2, 2, 2, 468, 469, 3, 2, 2, 2, 469, 486, 3, 2, 2, 2, 470,
-	471, 7, 75, 2, 2, 471, 472, 5, 22, 12, 2, 472, 479, 7, 14, 2, 2, 473, 474,
-	7, 76, 2, 2, 474, 475, 5, 40, 21, 2, 475, 476, 7, 14, 2, 2, 476, 477, 5,
+	471, 7, 72, 2, 2, 471, 472, 5, 22, 12, 2, 472, 479, 7, 14, 2, 2, 473, 474,
+	7, 73, 2, 2, 474, 475, 5, 40, 21, 2, 475, 476, 7, 14, 2, 2, 476, 477, 5,
 	8, 5, 2, 477, 478, 7, 15, 2, 2, 478, 480, 3, 2, 2, 2, 479, 473, 3, 2, 2,
 	2, 480, 481, 3, 2, 2, 2, 481, 479, 3, 2, 2, 2, 481, 482, 3, 2, 2, 2, 482,
 	483, 3, 2, 2, 2, 483, 484, 7, 15, 2, 2, 484, 486, 3, 2, 2, 2, 485, 447,
 	3, 2, 2, 2, 485, 470, 3, 2, 2, 2, 486, 39, 3, 2, 2, 2, 487, 531, 5, 76,
-	39, 2, 488, 531, 5, 16, 9, 2, 489, 531, 7, 9, 2, 2, 490, 531, 7, 94, 2,
+	39, 2, 488, 531, 5, 16, 9, 2, 489, 531, 7, 9, 2, 2, 490, 531, 7, 88, 2,
 	2, 491, 492, 7, 10, 2, 2, 492, 497, 5, 40, 21, 2, 493, 494, 7, 5, 2, 2,
 	494, 496, 5, 40, 21, 2, 495, 493, 3, 2, 2, 2, 496, 499, 3, 2, 2, 2, 497,
 	495, 3, 2, 2, 2, 497, 498, 3, 2, 2, 2, 498, 500, 3, 2, 2, 2, 499, 497,
@@ -279,12 +279,12 @@ var parserATN = []uint16{
 	2, 506, 504, 3, 2, 2, 2, 507, 510, 3, 2, 2, 2, 508, 506, 3, 2, 2, 2, 508,
 	509, 3, 2, 2, 2, 509, 511, 3, 2, 2, 2, 510, 508, 3, 2, 2, 2, 511, 512,
 	7, 13, 2, 2, 512, 531, 3, 2, 2, 2, 513, 515, 5, 18, 10, 2, 514, 516, 5,
-	42, 22, 2, 515, 514, 3, 2, 2, 2, 515, 516, 3, 2, 2, 2, 516, 528, 3, 2,
-	2, 2, 517, 518, 7, 10, 2, 2, 518, 523, 5, 40, 21, 2, 519, 520, 7, 5, 2,
+	42, 22, 2, 515, 514, 3, 2, 2, 2, 515, 516, 3, 2, 2, 2, 516, 517, 3, 2,
+	2, 2, 517, 526, 7, 10, 2, 2, 518, 523, 5, 40, 21, 2, 519, 520, 7, 5, 2,
 	2, 520, 522, 5, 40, 21, 2, 521, 519, 3, 2, 2, 2, 522, 525, 3, 2, 2, 2,
-	523, 521, 3, 2, 2, 2, 523, 524, 3, 2, 2, 2, 524, 526, 3, 2, 2, 2, 525,
-	523, 3, 2, 2, 2, 526, 527, 7, 11, 2, 2, 527, 529, 3, 2, 2, 2, 528, 517,
-	3, 2, 2, 2, 528, 529, 3, 2, 2, 2, 529, 531, 3, 2, 2, 2, 530, 487, 3, 2,
+	523, 521, 3, 2, 2, 2, 523, 524, 3, 2, 2, 2, 524, 527, 3, 2, 2, 2, 525,
+	523, 3, 2, 2, 2, 526, 518, 3, 2, 2, 2, 526, 527, 3, 2, 2, 2, 527, 528,
+	3, 2, 2, 2, 528, 529, 7, 11, 2, 2, 529, 531, 3, 2, 2, 2, 530, 487, 3, 2,
 	2, 2, 530, 488, 3, 2, 2, 2, 530, 489, 3, 2, 2, 2, 530, 490, 3, 2, 2, 2,
 	530, 491, 3, 2, 2, 2, 530, 502, 3, 2, 2, 2, 530, 513, 3, 2, 2, 2, 531,
 	41, 3, 2, 2, 2, 532, 533, 7, 16, 2, 2, 533, 538, 5, 40, 21, 2, 534, 535,
@@ -305,7 +305,7 @@ var parserATN = []uint16{
 	571, 3, 2, 2, 2, 576, 579, 3, 2, 2, 2, 577, 575, 3, 2, 2, 2, 577, 578,
 	3, 2, 2, 2, 578, 580, 3, 2, 2, 2, 579, 577, 3, 2, 2, 2, 580, 581, 7, 11,
 	2, 2, 581, 583, 3, 2, 2, 2, 582, 567, 3, 2, 2, 2, 582, 568, 3, 2, 2, 2,
-	583, 51, 3, 2, 2, 2, 584, 586, 7, 77, 2, 2, 585, 584, 3, 2, 2, 2, 585,
+	583, 51, 3, 2, 2, 2, 584, 586, 7, 74, 2, 2, 585, 584, 3, 2, 2, 2, 585,
 	586, 3, 2, 2, 2, 586, 587, 3, 2, 2, 2, 587, 588, 5, 34, 18, 2, 588, 589,
 	5, 16, 9, 2, 589, 53, 3, 2, 2, 2, 590, 599, 7, 10, 2, 2, 591, 596, 5, 52,
 	27, 2, 592, 593, 7, 5, 2, 2, 593, 595, 5, 52, 27, 2, 594, 592, 3, 2, 2,
@@ -329,9 +329,9 @@ var parserATN = []uint16{
 	60, 31, 2, 642, 640, 3, 2, 2, 2, 643, 646, 3, 2, 2, 2, 644, 642, 3, 2,
 	2, 2, 644, 645, 3, 2, 2, 2, 645, 647, 3, 2, 2, 2, 646, 644, 3, 2, 2, 2,
 	647, 648, 7, 11, 2, 2, 648, 650, 3, 2, 2, 2, 649, 638, 3, 2, 2, 2, 649,
-	650, 3, 2, 2, 2, 650, 59, 3, 2, 2, 2, 651, 653, 7, 77, 2, 2, 652, 651,
+	650, 3, 2, 2, 2, 650, 59, 3, 2, 2, 2, 651, 653, 7, 74, 2, 2, 652, 651,
 	3, 2, 2, 2, 652, 653, 3, 2, 2, 2, 653, 654, 3, 2, 2, 2, 654, 662, 5, 34,
-	18, 2, 655, 657, 7, 77, 2, 2, 656, 655, 3, 2, 2, 2, 656, 657, 3, 2, 2,
+	18, 2, 655, 657, 7, 74, 2, 2, 656, 655, 3, 2, 2, 2, 656, 657, 3, 2, 2,
 	2, 657, 658, 3, 2, 2, 2, 658, 659, 5, 34, 18, 2, 659, 660, 5, 16, 9, 2,
 	660, 662, 3, 2, 2, 2, 661, 652, 3, 2, 2, 2, 661, 656, 3, 2, 2, 2, 662,
 	61, 3, 2, 2, 2, 663, 665, 5, 74, 38, 2, 664, 663, 3, 2, 2, 2, 665, 668,
@@ -348,7 +348,7 @@ var parserATN = []uint16{
 	2, 2, 692, 690, 3, 2, 2, 2, 693, 694, 7, 15, 2, 2, 694, 63, 3, 2, 2, 2,
 	695, 697, 5, 74, 38, 2, 696, 695, 3, 2, 2, 2, 697, 700, 3, 2, 2, 2, 698,
 	696, 3, 2, 2, 2, 698, 699, 3, 2, 2, 2, 699, 702, 3, 2, 2, 2, 700, 698,
-	3, 2, 2, 2, 701, 703, 7, 77, 2, 2, 702, 701, 3, 2, 2, 2, 702, 703, 3, 2,
+	3, 2, 2, 2, 701, 703, 7, 74, 2, 2, 702, 701, 3, 2, 2, 2, 702, 703, 3, 2,
 	2, 2, 703, 704, 3, 2, 2, 2, 704, 705, 5, 34, 18, 2, 705, 706, 5, 16, 9,
 	2, 706, 707, 7, 4, 2, 2, 707, 65, 3, 2, 2, 2, 708, 710, 5, 74, 38, 2, 709,
 	708, 3, 2, 2, 2, 710, 713, 3, 2, 2, 2, 711, 709, 3, 2, 2, 2, 711, 712,
@@ -368,18 +368,18 @@ var parserATN = []uint16{
 	748, 7, 14, 2, 2, 748, 749, 5, 8, 5, 2, 749, 750, 7, 15, 2, 2, 750, 71,
 	3, 2, 2, 2, 751, 753, 5, 74, 38, 2, 752, 751, 3, 2, 2, 2, 753, 756, 3,
 	2, 2, 2, 754, 752, 3, 2, 2, 2, 754, 755, 3, 2, 2, 2, 755, 757, 3, 2, 2,
-	2, 756, 754, 3, 2, 2, 2, 757, 758, 7, 89, 2, 2, 758, 760, 5, 16, 9, 2,
+	2, 756, 754, 3, 2, 2, 2, 757, 758, 7, 83, 2, 2, 758, 760, 5, 16, 9, 2,
 	759, 761, 5, 46, 24, 2, 760, 759, 3, 2, 2, 2, 760, 761, 3, 2, 2, 2, 761,
 	762, 3, 2, 2, 2, 762, 768, 7, 14, 2, 2, 763, 764, 5, 66, 34, 2, 764, 765,
 	7, 4, 2, 2, 765, 767, 3, 2, 2, 2, 766, 763, 3, 2, 2, 2, 767, 770, 3, 2,
 	2, 2, 768, 766, 3, 2, 2, 2, 768, 769, 3, 2, 2, 2, 769, 771, 3, 2, 2, 2,
 	770, 768, 3, 2, 2, 2, 771, 772, 7, 15, 2, 2, 772, 73, 3, 2, 2, 2, 773,
-	774, 7, 96, 2, 2, 774, 775, 5, 16, 9, 2, 775, 75, 3, 2, 2, 2, 776, 777,
+	774, 7, 90, 2, 2, 774, 775, 5, 16, 9, 2, 775, 75, 3, 2, 2, 2, 776, 777,
 	9, 9, 2, 2, 777, 77, 3, 2, 2, 2, 95, 81, 87, 97, 118, 123, 128, 140, 146,
 	167, 177, 185, 189, 193, 195, 201, 206, 213, 217, 228, 230, 247, 264, 271,
 	287, 290, 298, 329, 338, 342, 345, 348, 358, 363, 365, 373, 381, 389, 400,
 	410, 424, 427, 430, 432, 443, 445, 460, 468, 481, 485, 497, 508, 515, 523,
-	528, 530, 538, 547, 555, 565, 577, 582, 585, 596, 599, 606, 612, 620, 623,
+	526, 530, 538, 547, 555, 565, 577, 582, 585, 596, 599, 606, 612, 620, 623,
 	630, 632, 644, 649, 652, 656, 661, 666, 672, 680, 683, 688, 690, 698, 702,
 	711, 717, 722, 732, 738, 741, 745, 754, 760, 768,
 }
@@ -394,10 +394,10 @@ var literalNames = []string{
 	"'<<<'", "'<<<='", "'>>>'", "'>>>='", "'<'", "'>'", "'~'", "'and'", "'or'",
 	"'not'", "'implies'", "'equates'", "'<='", "'>='", "'=='", "'!='", "'module'",
 	"'def'", "'if'", "'else'", "'elif'", "'for'", "'in'", "'has'", "'struct'",
-	"'abstract'", "'type'", "'enum'", "'value'", "'return'", "'import'", "'public'",
-	"'private'", "'match'", "'case'", "'future'", "'logic'", "'lambda'", "'clock'",
-	"'reset'", "'reg'", "'var'", "'new'", "'open'", "'close'", "'mut'", "'signal'",
-	"'trait'", "'//'", "'/*'", "", "", "", "", "'@'", "", "", "", "'*/'",
+	"'abstract'", "'type'", "'enum'", "'return'", "'import'", "'match'", "'case'",
+	"'future'", "'lambda'", "'clock'", "'reset'", "'reg'", "'var'", "'new'",
+	"'mut'", "'signal'", "'trait'", "'//'", "'/*'", "", "", "", "", "'@'",
+	"", "", "", "'*/'",
 }
 var symbolicNames = []string{
 	"", "COLON", "SEMI", "COMMA", "DOUBLE_DOT", "DOT", "UNDERSCORE", "QUESTION_MARK",
@@ -411,9 +411,8 @@ var symbolicNames = []string{
 	"OP_COMPLIMENT", "OP_LAND", "OP_LOR", "OP_LNOT", "OP_IMPLICATION", "OP_EQUIVALENCE",
 	"OP_LTE", "OP_GTE", "OP_EQ", "OP_NEQ", "KW_MODULE", "KW_DEF", "KW_IF",
 	"KW_ELSE", "KW_ELIF", "KW_FOR", "KW_IN", "KW_HAS", "KW_STRUCT", "KW_ABSTRACT",
-	"KW_TYPE", "KW_ENUM", "KW_VALUE", "KW_RETURN", "KW_IMPORT", "KW_PUBLIC",
-	"KW_PRIVATE", "KW_MATCH", "KW_CASE", "KW_FUTURE", "KW_LOGIC", "KW_LAMBDA",
-	"KW_CLOCK", "KW_RESET", "KW_REG", "KW_VAR", "KW_NEW", "KW_OPEN", "KW_CLOSE",
+	"KW_TYPE", "KW_ENUM", "KW_RETURN", "KW_IMPORT", "KW_MATCH", "KW_CASE",
+	"KW_FUTURE", "KW_LAMBDA", "KW_CLOCK", "KW_RESET", "KW_REG", "KW_VAR", "KW_NEW",
 	"KW_MUT", "KW_SIGNAL", "KW_TRAIT", "COMMENT_START", "BLOCK_COMMENT_START",
 	"DECIMAL", "INTEGRAL", "BIT_VECTOR_PATTERN_TOKEN", "REAL_NAME", "ANNOTATION_START",
 	"WS", "NEW_LINE", "ANYCHAR", "BLOCK_COMMENT_END", "BLOCK_COMMENT_CHAR",
@@ -524,38 +523,32 @@ const (
 	QuarkParserKW_ABSTRACT                 = 65
 	QuarkParserKW_TYPE                     = 66
 	QuarkParserKW_ENUM                     = 67
-	QuarkParserKW_VALUE                    = 68
-	QuarkParserKW_RETURN                   = 69
-	QuarkParserKW_IMPORT                   = 70
-	QuarkParserKW_PUBLIC                   = 71
-	QuarkParserKW_PRIVATE                  = 72
-	QuarkParserKW_MATCH                    = 73
-	QuarkParserKW_CASE                     = 74
-	QuarkParserKW_FUTURE                   = 75
-	QuarkParserKW_LOGIC                    = 76
-	QuarkParserKW_LAMBDA                   = 77
-	QuarkParserKW_CLOCK                    = 78
-	QuarkParserKW_RESET                    = 79
-	QuarkParserKW_REG                      = 80
-	QuarkParserKW_VAR                      = 81
-	QuarkParserKW_NEW                      = 82
-	QuarkParserKW_OPEN                     = 83
-	QuarkParserKW_CLOSE                    = 84
-	QuarkParserKW_MUT                      = 85
-	QuarkParserKW_SIGNAL                   = 86
-	QuarkParserKW_TRAIT                    = 87
-	QuarkParserCOMMENT_START               = 88
-	QuarkParserBLOCK_COMMENT_START         = 89
-	QuarkParserDECIMAL                     = 90
-	QuarkParserINTEGRAL                    = 91
-	QuarkParserBIT_VECTOR_PATTERN_TOKEN    = 92
-	QuarkParserREAL_NAME                   = 93
-	QuarkParserANNOTATION_START            = 94
-	QuarkParserWS                          = 95
-	QuarkParserNEW_LINE                    = 96
-	QuarkParserANYCHAR                     = 97
-	QuarkParserBLOCK_COMMENT_END           = 98
-	QuarkParserBLOCK_COMMENT_CHAR          = 99
+	QuarkParserKW_RETURN                   = 68
+	QuarkParserKW_IMPORT                   = 69
+	QuarkParserKW_MATCH                    = 70
+	QuarkParserKW_CASE                     = 71
+	QuarkParserKW_FUTURE                   = 72
+	QuarkParserKW_LAMBDA                   = 73
+	QuarkParserKW_CLOCK                    = 74
+	QuarkParserKW_RESET                    = 75
+	QuarkParserKW_REG                      = 76
+	QuarkParserKW_VAR                      = 77
+	QuarkParserKW_NEW                      = 78
+	QuarkParserKW_MUT                      = 79
+	QuarkParserKW_SIGNAL                   = 80
+	QuarkParserKW_TRAIT                    = 81
+	QuarkParserCOMMENT_START               = 82
+	QuarkParserBLOCK_COMMENT_START         = 83
+	QuarkParserDECIMAL                     = 84
+	QuarkParserINTEGRAL                    = 85
+	QuarkParserBIT_VECTOR_PATTERN_TOKEN    = 86
+	QuarkParserREAL_NAME                   = 87
+	QuarkParserANNOTATION_START            = 88
+	QuarkParserWS                          = 89
+	QuarkParserNEW_LINE                    = 90
+	QuarkParserANYCHAR                     = 91
+	QuarkParserBLOCK_COMMENT_END           = 92
+	QuarkParserBLOCK_COMMENT_CHAR          = 93
 )
 
 // QuarkParser rules.
@@ -2802,7 +2795,7 @@ func (p *QuarkParser) assignable(_p int) (localctx IAssignableContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 			{
 				p.SetState(182)
 
@@ -2820,7 +2813,7 @@ func (p *QuarkParser) assignable(_p int) (localctx IAssignableContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 			{
 				p.SetState(186)
 
@@ -2843,7 +2836,7 @@ func (p *QuarkParser) assignable(_p int) (localctx IAssignableContext) {
 			p.GetErrorHandler().Sync(p)
 			_la = p.GetTokenStream().LA(1)
 
-			if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+			if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 				{
 					p.SetState(190)
 
@@ -5351,7 +5344,7 @@ func (p *QuarkParser) expr(_p int) (localctx IExprContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 			{
 				p.SetState(268)
 				p.expr(0)
@@ -5419,7 +5412,7 @@ func (p *QuarkParser) expr(_p int) (localctx IExprContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 			{
 				p.SetState(280)
 				p.expr(0)
@@ -5761,7 +5754,7 @@ func (p *QuarkParser) expr(_p int) (localctx IExprContext) {
 				p.GetErrorHandler().Sync(p)
 				_la = p.GetTokenStream().LA(1)
 
-				if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+				if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 					{
 						p.SetState(335)
 
@@ -5804,7 +5797,7 @@ func (p *QuarkParser) expr(_p int) (localctx IExprContext) {
 				p.GetErrorHandler().Sync(p)
 				_la = p.GetTokenStream().LA(1)
 
-				if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+				if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 					{
 						p.SetState(345)
 
@@ -7046,7 +7039,7 @@ func (p *QuarkParser) typeexpr(_p int) (localctx ITypeexprContext) {
 				p.GetErrorHandler().Sync(p)
 				_la = p.GetTokenStream().LA(1)
 
-				if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-82)&-(0x1f+1)) == 0 && ((1<<uint((_la-82)))&((1<<(QuarkParserKW_NEW-82))|(1<<(QuarkParserKW_SIGNAL-82))|(1<<(QuarkParserDECIMAL-82))|(1<<(QuarkParserINTEGRAL-82))|(1<<(QuarkParserREAL_NAME-82)))) != 0) {
+				if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE)|(1<<QuarkParserLCURLY))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(QuarkParserOP_COMPLIMENT-46))|(1<<(QuarkParserOP_LNOT-46))|(1<<(QuarkParserKW_IF-46))|(1<<(QuarkParserKW_MATCH-46))|(1<<(QuarkParserKW_LAMBDA-46)))) != 0) || (((_la-78)&-(0x1f+1)) == 0 && ((1<<uint((_la-78)))&((1<<(QuarkParserKW_NEW-78))|(1<<(QuarkParserKW_SIGNAL-78))|(1<<(QuarkParserDECIMAL-78))|(1<<(QuarkParserINTEGRAL-78))|(1<<(QuarkParserREAL_NAME-78)))) != 0) {
 					{
 						p.SetState(417)
 						p.expr(0)
@@ -8013,6 +8006,14 @@ func (s *EnumPatternContext) Name() INameContext {
 	return t.(INameContext)
 }
 
+func (s *EnumPatternContext) LPAREN() antlr.TerminalNode {
+	return s.GetToken(QuarkParserLPAREN, 0)
+}
+
+func (s *EnumPatternContext) RPAREN() antlr.TerminalNode {
+	return s.GetToken(QuarkParserRPAREN, 0)
+}
+
 func (s *EnumPatternContext) Param_pattern() IParam_patternContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IParam_patternContext)(nil)).Elem(), 0)
 
@@ -8021,10 +8022,6 @@ func (s *EnumPatternContext) Param_pattern() IParam_patternContext {
 	}
 
 	return t.(IParam_patternContext)
-}
-
-func (s *EnumPatternContext) LPAREN() antlr.TerminalNode {
-	return s.GetToken(QuarkParserLPAREN, 0)
 }
 
 func (s *EnumPatternContext) AllPattern() []IPatternContext {
@@ -8048,10 +8045,6 @@ func (s *EnumPatternContext) Pattern(i int) IPatternContext {
 	}
 
 	return t.(IPatternContext)
-}
-
-func (s *EnumPatternContext) RPAREN() antlr.TerminalNode {
-	return s.GetToken(QuarkParserRPAREN, 0)
 }
 
 func (s *EnumPatternContext) AllCOMMA() []antlr.TerminalNode {
@@ -8366,15 +8359,15 @@ func (p *QuarkParser) Pattern() (localctx IPatternContext) {
 			}
 
 		}
-		p.SetState(526)
+		{
+			p.SetState(515)
+			p.Match(QuarkParserLPAREN)
+		}
+		p.SetState(524)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		if _la == QuarkParserLPAREN {
-			{
-				p.SetState(515)
-				p.Match(QuarkParserLPAREN)
-			}
+		if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QuarkParserQUESTION_MARK)|(1<<QuarkParserLPAREN)|(1<<QuarkParserLBRACE))) != 0) || (((_la-84)&-(0x1f+1)) == 0 && ((1<<uint((_la-84)))&((1<<(QuarkParserDECIMAL-84))|(1<<(QuarkParserINTEGRAL-84))|(1<<(QuarkParserBIT_VECTOR_PATTERN_TOKEN-84))|(1<<(QuarkParserREAL_NAME-84)))) != 0) {
 			{
 				p.SetState(516)
 				p.Pattern()
@@ -8397,11 +8390,11 @@ func (p *QuarkParser) Pattern() (localctx IPatternContext) {
 				p.GetErrorHandler().Sync(p)
 				_la = p.GetTokenStream().LA(1)
 			}
-			{
-				p.SetState(524)
-				p.Match(QuarkParserRPAREN)
-			}
 
+		}
+		{
+			p.SetState(526)
+			p.Match(QuarkParserRPAREN)
 		}
 
 	}
@@ -9981,7 +9974,7 @@ func (p *QuarkParser) Enumdecl() (localctx IEnumdeclContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == QuarkParserKW_DEF || _la == QuarkParserREAL_NAME || _la == QuarkParserANNOTATION_START {
+	for ((_la-57)&-(0x1f+1)) == 0 && ((1<<uint((_la-57)))&((1<<(QuarkParserKW_DEF-57))|(1<<(QuarkParserREAL_NAME-57))|(1<<(QuarkParserANNOTATION_START-57)))) != 0 {
 		p.SetState(628)
 		p.GetErrorHandler().Sync(p)
 
@@ -10663,7 +10656,7 @@ func (p *QuarkParser) Structdecl() (localctx IStructdeclContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == QuarkParserKW_DEF || _la == QuarkParserKW_FUTURE || _la == QuarkParserREAL_NAME || _la == QuarkParserANNOTATION_START {
+	for ((_la-57)&-(0x1f+1)) == 0 && ((1<<uint((_la-57)))&((1<<(QuarkParserKW_DEF-57))|(1<<(QuarkParserKW_FUTURE-57))|(1<<(QuarkParserREAL_NAME-57))|(1<<(QuarkParserANNOTATION_START-57)))) != 0 {
 		p.SetState(686)
 		p.GetErrorHandler().Sync(p)
 		switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 79, p.GetParserRuleContext()) {
