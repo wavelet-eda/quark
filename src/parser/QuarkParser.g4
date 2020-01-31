@@ -9,6 +9,7 @@ decl
     | funcdecl
     | moduledecl
     | traitdecl
+    | enumdecl
     ;
 
 importdecl
