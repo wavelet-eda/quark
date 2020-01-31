@@ -291,19 +291,48 @@ func (ptc *ParseTreeConverter) VisitReturnStmt(ctx *ReturnStmtContext) interface
 }
 
 func (ptc *ParseTreeConverter) VisitValueAssignment(ctx *ValueAssignmentContext) interface{} {
-	return &quark.ValueAssignment{Variable: ptc.visitName(ctx.Name())}
+	var name quark.Name = nil
+	if ctx.Name() != nil {
+		name = 	ptc.visitName(ctx.Name())
+	}
+
+	isWildcard := false
+	var tokenPos quark.ObjectPosition
+	if ctx.QUESTION_MARK() != nil {
+		tokenPos = ptc.terminalPosition(ctx.QUESTION_MARK())
+		isWildcard = true
+	}
+
+	return &quark.ValueAssignment{
+		Variable:     name,
+		IsWildcard:   isWildcard,
+		QuestionMark: tokenPos,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitVariableDefinition(ctx *VariableDefinitionContext) interface{} {
 	varType := ptc.visitTypeExpr(ctx.Typeexpr())
 	name := ptc.visitRealname(ctx.Realname())
 	var mutPos quark.ObjectPosition
+	var varPos quark.ObjectPosition
 	isMut := false
+	isVar := false
 	if ctx.KW_MUT() != nil {
 		mutPos = ptc.terminalPosition(ctx.KW_MUT())
 		isMut = true
 	}
-	return quark.NewVariableDefAssignment(isMut, varType, name, mutPos)
+	if ctx.KW_VAR() != nil {
+		varPos = ptc.terminalPosition(ctx.KW_VAR())
+		isVar = true
+	}
+	return &quark.VariableDefinitionAssignable{
+		IsMut:   isMut,
+		IsVar:   isVar,
+		VarType: varType,
+		VarName: name,
+		KwVar:   varPos,
+		KwMut:   mutPos,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitFunctionCall(ctx *FunctionCallContext) interface{} {

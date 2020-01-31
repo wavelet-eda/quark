@@ -176,3 +176,13 @@ cases:
         }
       }
     expect: valid
+
+  - name: wildcard-assignments
+    note: Test wildcard assignment and var inference
+    quark: |
+      def foobar() {
+        var a = 0;
+        mut var b = 12;
+        ? = b + a;
+        ?, z = (b, z);
+      }

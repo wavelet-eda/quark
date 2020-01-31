@@ -26,7 +26,7 @@ func TestVisitorVisitCount(t *testing.T) {
 					IsMut:   false,
 					VarType: &CompleteType{X:&RealName{Text:"Bit"}},
 					VarName: &RealName{Text:"x"},
-					kwMut:   ObjectPosition{},
+					KwMut:   ObjectPosition{},
 				},
 				AssignmentType: OpAssign,
 				TheExpr:        &LiteralExpr{Value:&Literal{Text:"0"}},
