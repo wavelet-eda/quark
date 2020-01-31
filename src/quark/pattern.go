@@ -2,7 +2,7 @@ package quark
 
 type (
 	LiteralPatten struct {
-		X Literal
+		X *Literal
 	}
 
 	NamedWildcardPattern struct {

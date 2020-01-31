@@ -182,20 +182,32 @@ type QuarkParserListener interface {
 	// EnterMatchBranch is called when entering the MatchBranch production.
 	EnterMatchBranch(c *MatchBranchContext)
 
-	// EnterAtomicPattern is called when entering the AtomicPattern production.
-	EnterAtomicPattern(c *AtomicPatternContext)
+	// EnterLiteralPattern is called when entering the LiteralPattern production.
+	EnterLiteralPattern(c *LiteralPatternContext)
 
-	// EnterParamerterizedTypePattern is called when entering the ParamerterizedTypePattern production.
-	EnterParamerterizedTypePattern(c *ParamerterizedTypePatternContext)
+	// EnterNamedWildcardPattern is called when entering the NamedWildcardPattern production.
+	EnterNamedWildcardPattern(c *NamedWildcardPatternContext)
+
+	// EnterWildcardPattern is called when entering the WildcardPattern production.
+	EnterWildcardPattern(c *WildcardPatternContext)
+
+	// EnterBitVectorPattern is called when entering the BitVectorPattern production.
+	EnterBitVectorPattern(c *BitVectorPatternContext)
+
+	// EnterTuplePattern is called when entering the TuplePattern production.
+	EnterTuplePattern(c *TuplePatternContext)
 
 	// EnterArrayPattern is called when entering the ArrayPattern production.
 	EnterArrayPattern(c *ArrayPatternContext)
 
-	// EnterLiteralPattern is called when entering the LiteralPattern production.
-	EnterLiteralPattern(c *LiteralPatternContext)
+	// EnterEnumPattern is called when entering the EnumPattern production.
+	EnterEnumPattern(c *EnumPatternContext)
 
-	// EnterStructPattern is called when entering the StructPattern production.
-	EnterStructPattern(c *StructPatternContext)
+	// EnterParam_pattern is called when entering the param_pattern production.
+	EnterParam_pattern(c *Param_patternContext)
+
+	// EnterInner_array_pattern is called when entering the inner_array_pattern production.
+	EnterInner_array_pattern(c *Inner_array_patternContext)
 
 	// EnterParameterlist is called when entering the parameterlist production.
 	EnterParameterlist(c *ParameterlistContext)
@@ -217,6 +229,15 @@ type QuarkParserListener interface {
 
 	// EnterArgumentlist is called when entering the argumentlist production.
 	EnterArgumentlist(c *ArgumentlistContext)
+
+	// EnterEnumdecl is called when entering the enumdecl production.
+	EnterEnumdecl(c *EnumdeclContext)
+
+	// EnterEnumconstructordecl is called when entering the enumconstructordecl production.
+	EnterEnumconstructordecl(c *EnumconstructordeclContext)
+
+	// EnterEnumargdef is called when entering the enumargdef production.
+	EnterEnumargdef(c *EnumargdefContext)
 
 	// EnterStructdecl is called when entering the structdecl production.
 	EnterStructdecl(c *StructdeclContext)
@@ -416,20 +437,32 @@ type QuarkParserListener interface {
 	// ExitMatchBranch is called when exiting the MatchBranch production.
 	ExitMatchBranch(c *MatchBranchContext)
 
-	// ExitAtomicPattern is called when exiting the AtomicPattern production.
-	ExitAtomicPattern(c *AtomicPatternContext)
+	// ExitLiteralPattern is called when exiting the LiteralPattern production.
+	ExitLiteralPattern(c *LiteralPatternContext)
 
-	// ExitParamerterizedTypePattern is called when exiting the ParamerterizedTypePattern production.
-	ExitParamerterizedTypePattern(c *ParamerterizedTypePatternContext)
+	// ExitNamedWildcardPattern is called when exiting the NamedWildcardPattern production.
+	ExitNamedWildcardPattern(c *NamedWildcardPatternContext)
+
+	// ExitWildcardPattern is called when exiting the WildcardPattern production.
+	ExitWildcardPattern(c *WildcardPatternContext)
+
+	// ExitBitVectorPattern is called when exiting the BitVectorPattern production.
+	ExitBitVectorPattern(c *BitVectorPatternContext)
+
+	// ExitTuplePattern is called when exiting the TuplePattern production.
+	ExitTuplePattern(c *TuplePatternContext)
 
 	// ExitArrayPattern is called when exiting the ArrayPattern production.
 	ExitArrayPattern(c *ArrayPatternContext)
 
-	// ExitLiteralPattern is called when exiting the LiteralPattern production.
-	ExitLiteralPattern(c *LiteralPatternContext)
+	// ExitEnumPattern is called when exiting the EnumPattern production.
+	ExitEnumPattern(c *EnumPatternContext)
 
-	// ExitStructPattern is called when exiting the StructPattern production.
-	ExitStructPattern(c *StructPatternContext)
+	// ExitParam_pattern is called when exiting the param_pattern production.
+	ExitParam_pattern(c *Param_patternContext)
+
+	// ExitInner_array_pattern is called when exiting the inner_array_pattern production.
+	ExitInner_array_pattern(c *Inner_array_patternContext)
 
 	// ExitParameterlist is called when exiting the parameterlist production.
 	ExitParameterlist(c *ParameterlistContext)
@@ -451,6 +484,15 @@ type QuarkParserListener interface {
 
 	// ExitArgumentlist is called when exiting the argumentlist production.
 	ExitArgumentlist(c *ArgumentlistContext)
+
+	// ExitEnumdecl is called when exiting the enumdecl production.
+	ExitEnumdecl(c *EnumdeclContext)
+
+	// ExitEnumconstructordecl is called when exiting the enumconstructordecl production.
+	ExitEnumconstructordecl(c *EnumconstructordeclContext)
+
+	// ExitEnumargdef is called when exiting the enumargdef production.
+	ExitEnumargdef(c *EnumargdefContext)
 
 	// ExitStructdecl is called when exiting the structdecl production.
 	ExitStructdecl(c *StructdeclContext)

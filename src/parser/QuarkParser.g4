@@ -159,13 +159,13 @@ argumentdef: KW_FUTURE? typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
 
-enumdecl: annotation* KW_ENUM realname paramarglist? (KW_HAS name (COMMA name)*)? LCURLY (enumconstructordecl SEMI | funcdecl)* RCURLY;
+enumdecl: annotation* KW_ENUM realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY (enumconstructordecl SEMI | funcdecl)* RCURLY;
 
 enumconstructordecl: realname (LPAREN enumargdef (COMMA enumargdef)* RPAREN)?;
 
 enumargdef
     : KW_FUTURE? typeexpr
-    | argumentdef
+    | KW_FUTURE? typeexpr realname
     ;
 
 structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY (fielddecl | funcdecl)* RCURLY;

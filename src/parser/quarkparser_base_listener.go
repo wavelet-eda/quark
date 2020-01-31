@@ -369,19 +369,35 @@ func (s *BaseQuarkParserListener) EnterMatchBranch(ctx *MatchBranchContext) {}
 // ExitMatchBranch is called when production MatchBranch is exited.
 func (s *BaseQuarkParserListener) ExitMatchBranch(ctx *MatchBranchContext) {}
 
-// EnterAtomicPattern is called when production AtomicPattern is entered.
-func (s *BaseQuarkParserListener) EnterAtomicPattern(ctx *AtomicPatternContext) {}
+// EnterLiteralPattern is called when production LiteralPattern is entered.
+func (s *BaseQuarkParserListener) EnterLiteralPattern(ctx *LiteralPatternContext) {}
 
-// ExitAtomicPattern is called when production AtomicPattern is exited.
-func (s *BaseQuarkParserListener) ExitAtomicPattern(ctx *AtomicPatternContext) {}
+// ExitLiteralPattern is called when production LiteralPattern is exited.
+func (s *BaseQuarkParserListener) ExitLiteralPattern(ctx *LiteralPatternContext) {}
 
-// EnterParamerterizedTypePattern is called when production ParamerterizedTypePattern is entered.
-func (s *BaseQuarkParserListener) EnterParamerterizedTypePattern(ctx *ParamerterizedTypePatternContext) {
-}
+// EnterNamedWildcardPattern is called when production NamedWildcardPattern is entered.
+func (s *BaseQuarkParserListener) EnterNamedWildcardPattern(ctx *NamedWildcardPatternContext) {}
 
-// ExitParamerterizedTypePattern is called when production ParamerterizedTypePattern is exited.
-func (s *BaseQuarkParserListener) ExitParamerterizedTypePattern(ctx *ParamerterizedTypePatternContext) {
-}
+// ExitNamedWildcardPattern is called when production NamedWildcardPattern is exited.
+func (s *BaseQuarkParserListener) ExitNamedWildcardPattern(ctx *NamedWildcardPatternContext) {}
+
+// EnterWildcardPattern is called when production WildcardPattern is entered.
+func (s *BaseQuarkParserListener) EnterWildcardPattern(ctx *WildcardPatternContext) {}
+
+// ExitWildcardPattern is called when production WildcardPattern is exited.
+func (s *BaseQuarkParserListener) ExitWildcardPattern(ctx *WildcardPatternContext) {}
+
+// EnterBitVectorPattern is called when production BitVectorPattern is entered.
+func (s *BaseQuarkParserListener) EnterBitVectorPattern(ctx *BitVectorPatternContext) {}
+
+// ExitBitVectorPattern is called when production BitVectorPattern is exited.
+func (s *BaseQuarkParserListener) ExitBitVectorPattern(ctx *BitVectorPatternContext) {}
+
+// EnterTuplePattern is called when production TuplePattern is entered.
+func (s *BaseQuarkParserListener) EnterTuplePattern(ctx *TuplePatternContext) {}
+
+// ExitTuplePattern is called when production TuplePattern is exited.
+func (s *BaseQuarkParserListener) ExitTuplePattern(ctx *TuplePatternContext) {}
 
 // EnterArrayPattern is called when production ArrayPattern is entered.
 func (s *BaseQuarkParserListener) EnterArrayPattern(ctx *ArrayPatternContext) {}
@@ -389,17 +405,23 @@ func (s *BaseQuarkParserListener) EnterArrayPattern(ctx *ArrayPatternContext) {}
 // ExitArrayPattern is called when production ArrayPattern is exited.
 func (s *BaseQuarkParserListener) ExitArrayPattern(ctx *ArrayPatternContext) {}
 
-// EnterLiteralPattern is called when production LiteralPattern is entered.
-func (s *BaseQuarkParserListener) EnterLiteralPattern(ctx *LiteralPatternContext) {}
+// EnterEnumPattern is called when production EnumPattern is entered.
+func (s *BaseQuarkParserListener) EnterEnumPattern(ctx *EnumPatternContext) {}
 
-// ExitLiteralPattern is called when production LiteralPattern is exited.
-func (s *BaseQuarkParserListener) ExitLiteralPattern(ctx *LiteralPatternContext) {}
+// ExitEnumPattern is called when production EnumPattern is exited.
+func (s *BaseQuarkParserListener) ExitEnumPattern(ctx *EnumPatternContext) {}
 
-// EnterStructPattern is called when production StructPattern is entered.
-func (s *BaseQuarkParserListener) EnterStructPattern(ctx *StructPatternContext) {}
+// EnterParam_pattern is called when production param_pattern is entered.
+func (s *BaseQuarkParserListener) EnterParam_pattern(ctx *Param_patternContext) {}
 
-// ExitStructPattern is called when production StructPattern is exited.
-func (s *BaseQuarkParserListener) ExitStructPattern(ctx *StructPatternContext) {}
+// ExitParam_pattern is called when production param_pattern is exited.
+func (s *BaseQuarkParserListener) ExitParam_pattern(ctx *Param_patternContext) {}
+
+// EnterInner_array_pattern is called when production inner_array_pattern is entered.
+func (s *BaseQuarkParserListener) EnterInner_array_pattern(ctx *Inner_array_patternContext) {}
+
+// ExitInner_array_pattern is called when production inner_array_pattern is exited.
+func (s *BaseQuarkParserListener) ExitInner_array_pattern(ctx *Inner_array_patternContext) {}
 
 // EnterParameterlist is called when production parameterlist is entered.
 func (s *BaseQuarkParserListener) EnterParameterlist(ctx *ParameterlistContext) {}
@@ -442,6 +464,24 @@ func (s *BaseQuarkParserListener) EnterArgumentlist(ctx *ArgumentlistContext) {}
 
 // ExitArgumentlist is called when production argumentlist is exited.
 func (s *BaseQuarkParserListener) ExitArgumentlist(ctx *ArgumentlistContext) {}
+
+// EnterEnumdecl is called when production enumdecl is entered.
+func (s *BaseQuarkParserListener) EnterEnumdecl(ctx *EnumdeclContext) {}
+
+// ExitEnumdecl is called when production enumdecl is exited.
+func (s *BaseQuarkParserListener) ExitEnumdecl(ctx *EnumdeclContext) {}
+
+// EnterEnumconstructordecl is called when production enumconstructordecl is entered.
+func (s *BaseQuarkParserListener) EnterEnumconstructordecl(ctx *EnumconstructordeclContext) {}
+
+// ExitEnumconstructordecl is called when production enumconstructordecl is exited.
+func (s *BaseQuarkParserListener) ExitEnumconstructordecl(ctx *EnumconstructordeclContext) {}
+
+// EnterEnumargdef is called when production enumargdef is entered.
+func (s *BaseQuarkParserListener) EnterEnumargdef(ctx *EnumargdefContext) {}
+
+// ExitEnumargdef is called when production enumargdef is exited.
+func (s *BaseQuarkParserListener) ExitEnumargdef(ctx *EnumargdefContext) {}
 
 // EnterStructdecl is called when production structdecl is entered.
 func (s *BaseQuarkParserListener) EnterStructdecl(ctx *StructdeclContext) {}
