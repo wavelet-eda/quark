@@ -240,11 +240,23 @@ func (v *BaseQuarkParserVisitor) VisitMatchBranch(ctx *MatchBranchContext) inter
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitAtomicPattern(ctx *AtomicPatternContext) interface{} {
+func (v *BaseQuarkParserVisitor) VisitLiteralPattern(ctx *LiteralPatternContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitParamerterizedTypePattern(ctx *ParamerterizedTypePatternContext) interface{} {
+func (v *BaseQuarkParserVisitor) VisitNamedWildcardPattern(ctx *NamedWildcardPatternContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitWildcardPattern(ctx *WildcardPatternContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitBitVectorPattern(ctx *BitVectorPatternContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitTuplePattern(ctx *TuplePatternContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -252,11 +264,15 @@ func (v *BaseQuarkParserVisitor) VisitArrayPattern(ctx *ArrayPatternContext) int
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitLiteralPattern(ctx *LiteralPatternContext) interface{} {
+func (v *BaseQuarkParserVisitor) VisitEnumPattern(ctx *EnumPatternContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseQuarkParserVisitor) VisitStructPattern(ctx *StructPatternContext) interface{} {
+func (v *BaseQuarkParserVisitor) VisitParam_pattern(ctx *Param_patternContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitInner_array_pattern(ctx *Inner_array_patternContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -285,6 +301,18 @@ func (v *BaseQuarkParserVisitor) VisitArgumentdef(ctx *ArgumentdefContext) inter
 }
 
 func (v *BaseQuarkParserVisitor) VisitArgumentlist(ctx *ArgumentlistContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitEnumdecl(ctx *EnumdeclContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitEnumconstructordecl(ctx *EnumconstructordeclContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseQuarkParserVisitor) VisitEnumargdef(ctx *EnumargdefContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

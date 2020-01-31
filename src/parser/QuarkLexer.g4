@@ -12,8 +12,10 @@ fragment LITERAL_TYPE: ('h' | 'o' | 'd' | 'b');
 COLON: ':';
 SEMI: ';';
 COMMA: ',';
+DOUBLE_DOT: '..';
 DOT: '.';
 UNDERSCORE: '_';
+QUESTION_MARK: '?';
 
 LPAREN: '(';
 RPAREN: ')';
@@ -89,23 +91,17 @@ KW_STRUCT: 'struct';
 KW_ABSTRACT: 'abstract';
 KW_TYPE: 'type';
 KW_ENUM: 'enum';
-KW_VALUE: 'value';
 KW_RETURN: 'return';
 KW_IMPORT: 'import';
-KW_PUBLIC: 'public';
-KW_PRIVATE: 'private';
 KW_MATCH: 'match';
 KW_CASE: 'case';
 KW_FUTURE: 'future';
-KW_LOGIC: 'logic';
 KW_LAMBDA: 'lambda';
 KW_CLOCK: 'clock';
 KW_RESET: 'reset';
 KW_REG: 'reg';
 KW_VAR: 'var';
 KW_NEW: 'new';
-KW_OPEN: 'open';
-KW_CLOSE: 'close';
 KW_MUT: 'mut';
 KW_SIGNAL: 'signal';
 KW_TRAIT: 'trait';
@@ -116,6 +112,7 @@ BLOCK_COMMENT_START: '/*' -> skip, mode(BLOCK_COMMENT);
 
 DECIMAL: DIGIT+;
 INTEGRAL: (DIGIT+)? TICK 's'? LITERAL_TYPE (DIGIT | HEX_CHARS)+;
+BIT_VECTOR_PATTERN_TOKEN: (DIGIT+)? TICK 's'? LITERAL_TYPE (DIGIT | HEX_CHARS | '?')+;
 
 REAL_NAME: CHARACTER NAME_FRAGMENT*;
 ANNOTATION_START: '@'; //Annotation names are @camelCase

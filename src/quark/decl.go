@@ -17,6 +17,34 @@ type (
 		CloseCurly ObjectPosition
 	}
 
+	EnumDecl struct {
+		Annotations []Annotation
+		EnumName *RealName
+		Parameters []*ParameterDef
+
+		TraitImpls []Name
+
+		Constructors []*EnumConstructor
+		Functions []*FunctionDecl
+
+		KwEnum ObjectPosition
+		CloseCurly ObjectPosition
+	}
+
+	EnumConstructor struct {
+		ConstructorName *RealName
+		Arguments []*EnumConstructorArgument
+		CloseParen ObjectPosition
+	}
+
+	EnumConstructorArgument struct {
+		ArgType TypeExpr
+		ArgName Name
+		IsFuture bool
+
+		KwFuture ObjectPosition
+	}
+
 	TraitDecl struct {
 		Annotations []Annotation
 		TraitName *RealName
@@ -74,6 +102,26 @@ func (s *StructDecl) Start() *ObjectPosition {
 	}
 }
 
+func (e *EnumDecl) Start() *ObjectPosition {
+	if len(e.Annotations) > 0 {
+		return e.Annotations[0].Start()
+	} else {
+		return &e.KwEnum
+	}
+}
+
+func (ec *EnumConstructor) Start() *ObjectPosition {
+	return ec.ConstructorName.Start()
+}
+
+func (arg *EnumConstructorArgument) Start() *ObjectPosition {
+	if arg.IsFuture {
+		return &arg.KwFuture
+	} else {
+		return arg.ArgType.Start()
+	}
+}
+
 func (t *TraitDecl) Start() *ObjectPosition {
 	if len(t.Annotations) > 0 {
 		return t.Annotations[0].Start()
@@ -106,6 +154,26 @@ func (s *StructDecl) End() *ObjectPosition {
 	return &s.CloseCurly
 }
 
+func (e *EnumDecl) End() *ObjectPosition {
+	return &e.CloseCurly
+}
+
+func (ec *EnumConstructor) End() *ObjectPosition {
+	if len(ec.Arguments) > 0 {
+		return &ec.CloseParen
+	} else {
+		return ec.ConstructorName.End()
+	}
+}
+
+func (arg *EnumConstructorArgument) End() *ObjectPosition {
+	if arg.ArgName != nil {
+		return arg.ArgName.End()
+	} else {
+		return arg.ArgType.End()
+	}
+}
+
 func (t *TraitDecl) End() *ObjectPosition {
 	return &t.CloseCurly
 }
@@ -127,6 +195,9 @@ func (s *ModuleDecl) End() *ObjectPosition {
 }
 
 func (s *StructDecl) declNode() {}
+func (e *EnumDecl) declNode() {}
+func (ec *EnumConstructor) declNode() {}
+func (arg *EnumConstructorArgument) declNode() {}
 func (t *TraitDecl) declNode() {}
 func (s *FunctionSignature) declNode() {}
 func (s *FunctionDecl) declNode() {}
@@ -148,6 +219,49 @@ func (s *StructDecl) Accept(v Visitor) {
 
 	for _, field := range s.Fields {
 		field.Accept(v)
+	}
+}
+
+func (e *EnumDecl) Accept(v Visitor) {
+	if v.Visit(e) == nil {
+		return
+	}
+
+	e.EnumName.Accept(v)
+	visitParamList(e.Parameters, v)
+
+	for _, name := range e.TraitImpls {
+		name.Accept(v)
+	}
+
+	for _, constructor := range e.Constructors {
+		constructor.Accept(v)
+	}
+
+	for _, function := range e.Functions {
+		function.Accept(v)
+	}
+}
+
+func (ec *EnumConstructor) Accept(v Visitor) {
+	if v.Visit(ec) == nil {
+		return
+	}
+
+	ec.ConstructorName.Accept(v)
+	for _, arg := range ec.Arguments {
+		arg.Accept(v)
+	}
+}
+
+func (arg *EnumConstructorArgument) Accept(v Visitor) {
+	if v.Visit(arg) == nil {
+		return
+	}
+
+	arg.ArgType.Accept(v)
+	if arg.ArgName != nil {
+		arg.ArgName.Accept(v)
 	}
 }
 

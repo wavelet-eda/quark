@@ -9,6 +9,7 @@ decl
     | funcdecl
     | moduledecl
     | traitdecl
+    | enumdecl
     ;
 
 importdecl
@@ -47,8 +48,8 @@ stmt
 assignable
     : expr LBRACE expr (COMMA expr)* RBRACE #ArrayIndexAssignment
     | expr LBRACE msb=expr? COLON lsb=expr? (COLON step=expr?)? RBRACE #ArraySliceAssignment
-    | name #ValueAssignment
-    | KW_MUT? typeexpr realname #VariableDefinition
+    | (name | QUESTION_MARK) #ValueAssignment
+    | KW_MUT? (typeexpr | KW_VAR) realname #VariableDefinition
     | assignable (COMMA assignable)+ #TupleDestructer
     ;
 
@@ -125,11 +126,20 @@ branch
     ;
 
 pattern
-    : realname # AtomicPattern
-    | realname LBRACE pattern (COMMA pattern)* RBRACE #ParamerterizedTypePattern
-    | LBRACE (pattern (COMMA pattern)*)? RBRACE #ArrayPattern
-    | literal #LiteralPattern
-    | LCURLY (typeexpr? pattern) (COMMA typeexpr? pattern)* RCURLY #StructPattern
+    : literal #LiteralPattern
+    | realname #NamedWildcardPattern
+    | QUESTION_MARK #WildcardPattern
+    | BIT_VECTOR_PATTERN_TOKEN #BitVectorPattern
+    | LPAREN pattern (COMMA pattern)* RPAREN #TuplePattern
+    | LBRACE (inner_array_pattern (COMMA inner_array_pattern)*) RBRACE #ArrayPattern
+    | name param_pattern? LPAREN (pattern (COMMA pattern)*)? RPAREN #EnumPattern
+    ;
+
+param_pattern : PARAM_OPEN pattern (COMMA pattern)* RPAREN;
+
+inner_array_pattern
+    : pattern
+    | pattern DOUBLE_DOT
     ;
 
 
@@ -148,6 +158,15 @@ returnlist
 argumentdef: KW_FUTURE? typeexpr realname;
 
 argumentlist: LPAREN (argumentdef (COMMA argumentdef)*)? RPAREN;
+
+enumdecl: annotation* KW_ENUM realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY (enumconstructordecl SEMI | funcdecl)* RCURLY;
+
+enumconstructordecl: realname (LPAREN enumargdef (COMMA enumargdef)* RPAREN)?;
+
+enumargdef
+    : KW_FUTURE? typeexpr
+    | KW_FUTURE? typeexpr realname
+    ;
 
 structdecl: annotation* KW_STRUCT realname parameterlist? (KW_HAS name (COMMA name)*)? LCURLY (fielddecl | funcdecl)* RCURLY;
 

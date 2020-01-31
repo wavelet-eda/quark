@@ -291,19 +291,48 @@ func (ptc *ParseTreeConverter) VisitReturnStmt(ctx *ReturnStmtContext) interface
 }
 
 func (ptc *ParseTreeConverter) VisitValueAssignment(ctx *ValueAssignmentContext) interface{} {
-	return &quark.ValueAssignment{Variable: ptc.visitName(ctx.Name())}
+	var name quark.Name = nil
+	if ctx.Name() != nil {
+		name = 	ptc.visitName(ctx.Name())
+	}
+
+	isWildcard := false
+	var tokenPos quark.ObjectPosition
+	if ctx.QUESTION_MARK() != nil {
+		tokenPos = ptc.terminalPosition(ctx.QUESTION_MARK())
+		isWildcard = true
+	}
+
+	return &quark.ValueAssignment{
+		Variable:     name,
+		IsWildcard:   isWildcard,
+		QuestionMark: tokenPos,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitVariableDefinition(ctx *VariableDefinitionContext) interface{} {
 	varType := ptc.visitTypeExpr(ctx.Typeexpr())
 	name := ptc.visitRealname(ctx.Realname())
 	var mutPos quark.ObjectPosition
+	var varPos quark.ObjectPosition
 	isMut := false
+	isVar := false
 	if ctx.KW_MUT() != nil {
 		mutPos = ptc.terminalPosition(ctx.KW_MUT())
 		isMut = true
 	}
-	return quark.NewVariableDefAssignment(isMut, varType, name, mutPos)
+	if ctx.KW_VAR() != nil {
+		varPos = ptc.terminalPosition(ctx.KW_VAR())
+		isVar = true
+	}
+	return &quark.VariableDefinitionAssignable{
+		IsMut:   isMut,
+		IsVar:   isVar,
+		VarType: varType,
+		VarName: name,
+		KwVar:   varPos,
+		KwMut:   mutPos,
+	}
 }
 
 func (ptc *ParseTreeConverter) VisitFunctionCall(ctx *FunctionCallContext) interface{} {
@@ -738,26 +767,6 @@ func (ptc *ParseTreeConverter) VisitMatchBranch(ctx *MatchBranchContext) interfa
 	return quark.NewMatchBranch(matchExpr, branchPart, match, end)
 }
 
-func (ptc *ParseTreeConverter) VisitAtomicPattern(ctx *AtomicPatternContext) interface{} {
-	panic("implement me")
-}
-
-func (ptc *ParseTreeConverter) VisitParamerterizedTypePattern(ctx *ParamerterizedTypePatternContext) interface{} {
-	panic("implement me")
-}
-
-func (ptc *ParseTreeConverter) VisitArrayPattern(ctx *ArrayPatternContext) interface{} {
-	panic("implement me")
-}
-
-func (ptc *ParseTreeConverter) VisitLiteralPattern(ctx *LiteralPatternContext) interface{} {
-	panic("implement me")
-}
-
-func (ptc *ParseTreeConverter) VisitStructPattern(ctx *StructPatternContext) interface{} {
-	panic("implement me")
-}
-
 func (ptc *ParseTreeConverter) VisitParameterlist(ctx *ParameterlistContext) interface{} {
 	params := make([]*quark.ParameterDef, len(ctx.AllParameterdef()))
 	for i, node := range ctx.AllParameterdef() {
@@ -860,11 +869,17 @@ func (ptc *ParseTreeConverter) VisitStructdecl(ctx *StructdeclContext) interface
 		fields[i] = ptc.VisitFielddecl(node.(*FielddeclContext)).(*quark.Field)
 	}
 
+	functions := make([]*quark.FunctionDecl, len(ctx.AllFuncdecl()))
+	for i, node := range ctx.AllFuncdecl() {
+		functions[i] = ptc.VisitFuncdecl(node.(*FuncdeclContext)).(*quark.FunctionDecl)
+	}
+
 	return &quark.StructDecl{
 		Annotations: nil,
 		StructName:  name,
 		Parameters:  params,
 		Fields:      fields,
+		Functions:   functions,
 		TraitImpls:  traits,
 		KwStruct:    kwStruct,
 		CloseCurly:  rCurly,
@@ -887,6 +902,79 @@ func (ptc *ParseTreeConverter) VisitFielddecl(ctx *FielddeclContext) interface{}
 		FieldName: fieldName,
 		IsFuture: isFuture,
 		KwFuture: kwFuture,
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitEnumdecl(ctx *EnumdeclContext) interface{} {
+	kwEnum := ptc.terminalPosition(ctx.KW_ENUM())
+	closeCurly := ptc.terminalPosition(ctx.RCURLY())
+
+	enumName := ptc.visitRealname(ctx.Realname())
+
+	params := ptc.visitParameterList(ctx.Parameterlist())
+
+	traitImpls := make([]quark.Name, len(ctx.AllName()))
+	for i, node := range ctx.AllName() {
+		traitImpls[i] = ptc.visitName(node)
+	}
+
+	constructors := make([]*quark.EnumConstructor, len(ctx.AllEnumconstructordecl()))
+	for i, node := range ctx.AllEnumconstructordecl() {
+		constructors[i] = ptc.VisitEnumconstructordecl(node.(*EnumconstructordeclContext)).(*quark.EnumConstructor)
+	}
+
+	functions := make([]*quark.FunctionDecl, len(ctx.AllFuncdecl()))
+	for i, node := range ctx.AllFuncdecl() {
+		functions[i] = ptc.VisitFuncdecl(node.(*FuncdeclContext)).(*quark.FunctionDecl)
+	}
+
+	return &quark.EnumDecl{
+		Annotations:  nil,
+		EnumName:     enumName,
+		Parameters:   params,
+		TraitImpls:   traitImpls,
+		Constructors: constructors,
+		Functions:    functions,
+		KwEnum:       kwEnum,
+		CloseCurly:   closeCurly,
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitEnumconstructordecl(ctx *EnumconstructordeclContext) interface{} {
+	name := ptc.visitRealname(ctx.Realname())
+	args := make([]*quark.EnumConstructorArgument, len(ctx.AllEnumargdef()))
+	for i, node := range ctx.AllEnumargdef() {
+		realNode := node.(*EnumargdefContext)
+		isFuture := false
+		var kwFuture quark.ObjectPosition
+		if realNode.KW_FUTURE() != nil {
+			isFuture = true
+			kwFuture = ptc.terminalPosition(realNode.KW_FUTURE())
+		}
+
+		argType := ptc.visitTypeExpr(realNode.Typeexpr())
+		var argName *quark.RealName = nil
+		if realNode.Realname() != nil {
+			argName = ptc.visitRealname(realNode.Realname())
+		}
+
+		args[i] = &quark.EnumConstructorArgument{
+			ArgType:  argType,
+			ArgName:  argName,
+			IsFuture: isFuture,
+			KwFuture: kwFuture,
+		}
+	}
+
+	var closeParen quark.ObjectPosition
+	if ctx.RPAREN() != nil {
+		closeParen = ptc.terminalPosition(ctx.RPAREN())
+	}
+
+	return &quark.EnumConstructor{
+		ConstructorName: name,
+		Arguments:       args,
+		CloseParen:      closeParen,
 	}
 }
 
@@ -998,13 +1086,103 @@ func (ptc *ParseTreeConverter) VisitLiteral(ctx *LiteralContext) interface{} {
 	return quark.NewLiteral(text, pos)
 }
 
+func (ptc *ParseTreeConverter) VisitLiteralPattern(ctx *LiteralPatternContext) interface{} {
+	return &quark.LiteralPatten{X:ptc.VisitLiteral(ctx.Literal().(*LiteralContext)).(*quark.Literal)}
+}
+
+func (ptc *ParseTreeConverter) VisitNamedWildcardPattern(ctx *NamedWildcardPatternContext) interface{} {
+	name := ptc.visitRealname(ctx.Realname())
+	return &quark.NamedWildcardPattern{X: name}
+}
+
+func (ptc *ParseTreeConverter) VisitWildcardPattern(ctx *WildcardPatternContext) interface{} {
+	tokenPos := ptc.terminalPosition(ctx.QUESTION_MARK())
+	return &quark.WildcardPattern{QuestionMark: tokenPos}
+}
+
+func (ptc *ParseTreeConverter) VisitBitVectorPattern(ctx *BitVectorPatternContext) interface{} {
+	text := ctx.GetText()
+	tokenPos := ptc.terminalPosition(ctx.BIT_VECTOR_PATTERN_TOKEN())
+	return &quark.BitVectorPattern{
+		Text:  text,
+		Token: tokenPos,
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitTuplePattern(ctx *TuplePatternContext) interface{} {
+	openParen := ptc.terminalPosition(ctx.LPAREN())
+	closeParen := ptc.terminalPosition(ctx.RPAREN())
+
+	fields := make([]quark.Pattern, len(ctx.AllPattern()))
+	for i, node := range ctx.AllPattern() {
+		fields[i] = ptc.visitPattern(node)
+	}
+	
+	return &quark.TuplePattern{
+		Fields:     fields,
+		OpenParen:  openParen,
+		CloseParen: closeParen,
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitArrayPattern(ctx *ArrayPatternContext) interface{} {
+	openBrace := ptc.terminalPosition(ctx.LBRACE())
+	closeBrace := ptc.terminalPosition(ctx.RBRACE())
+	inners := make([]*quark.InnerArrayPattern, len(ctx.AllInner_array_pattern()))
+
+	for i, node := range ctx.AllInner_array_pattern() {
+		realNode := node.(*Inner_array_patternContext)
+		innerPattern := &quark.InnerArrayPattern{}
+		innerPattern.X = ptc.visitPattern(realNode.Pattern())
+		if realNode.DOUBLE_DOT() != nil {
+			innerPattern.DoubleDot = ptc.terminalPosition(realNode.DOUBLE_DOT())
+			innerPattern.ConsumesMultiple = true
+		} else {
+			innerPattern.ConsumesMultiple = false
+		}
+		inners[i] = innerPattern
+	}
+	
+	return &quark.ArrayPattern{
+		InnerPatterns: inners,
+		OpenBrace:     openBrace,
+		CloseBrace:    closeBrace,
+	}
+}
+
+func (ptc *ParseTreeConverter) VisitEnumPattern(ctx *EnumPatternContext) interface{} {
+	typeName := ptc.visitName(ctx.Name())
+	var closeParens quark.ObjectPosition
+
+	var params []quark.Pattern
+	if ctx.Param_pattern() != nil {
+		paramPatterns := ctx.Param_pattern().(*Param_patternContext)
+		params = make([]quark.Pattern, len(paramPatterns.AllPattern()))
+		for i, node := range paramPatterns.AllPattern() {
+			params[i] = ptc.visitPattern(node)
+		}
+		closeParens = ptc.terminalPosition(paramPatterns.RPAREN())
+	} else {
+		params = make([]quark.Pattern, 0)
+	}
+
+	args := make([]quark.Pattern, len(ctx.AllPattern()))
+	for i, node := range ctx.AllPattern() {
+		args[i] = ptc.visitPattern(node)
+	}
+	if len(args) > 0 {
+		closeParens = ptc.terminalPosition(ctx.RPAREN())
+	}
+	
+	return &quark.EnumPattern{
+		TypeName:      typeName,
+		ParamPatterns: params,
+		ArgPatterns:   args,
+		CloseParen:    closeParens,
+	}
+}
+
 func (ptc *ParseTreeConverter) Visit(tree antlr.ParseTree) interface{} {
 	return tree.Accept(ptc)
 }
-
-
-
-//func (ptc *ParseTreeConverter) VisitChildren(tree antlr.RuleNode) interface{} {
-//	return tree.Accept(ptc)
-//}
 

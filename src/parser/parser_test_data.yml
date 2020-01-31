@@ -145,3 +145,44 @@ cases:
           return 0;
         }
       }
+    expect: valid
+
+  - name: enum-decl
+    note: Test enum declarations
+    quark: |
+      enum Maybe!(type T) has Monad {
+        Just(T);
+        Nothing;
+
+        def pure(T value): Maybe!(type T) {
+          return Just(value);
+        }
+      }
+    expect: valid
+
+  - name: pattern-match
+    note: Test pattern matching
+    quark: |
+      def foobar(Bit e) {
+        match e {
+          case 7 {} //literal pattern
+          case 'b101?0 {} //bit vector pattern
+          case (x, y) {} //tuple pattern
+          case [x, y, 4, inside.., z] {} //array pattern
+          case Just(x) {} //enum pattern
+          case SomeEnum!(X)(y) {} //enum pattern with params
+          case Nothing() {} //enum with no values
+          case x {} //name pattern
+        }
+      }
+    expect: valid
+
+  - name: wildcard-assignments
+    note: Test wildcard assignment and var inference
+    quark: |
+      def foobar() {
+        var a = 0;
+        mut var b = 12;
+        ? = b + a;
+        ?, z = (b, z);
+      }

@@ -182,20 +182,32 @@ type QuarkParserVisitor interface {
 	// Visit a parse tree produced by QuarkParser#MatchBranch.
 	VisitMatchBranch(ctx *MatchBranchContext) interface{}
 
-	// Visit a parse tree produced by QuarkParser#AtomicPattern.
-	VisitAtomicPattern(ctx *AtomicPatternContext) interface{}
+	// Visit a parse tree produced by QuarkParser#LiteralPattern.
+	VisitLiteralPattern(ctx *LiteralPatternContext) interface{}
 
-	// Visit a parse tree produced by QuarkParser#ParamerterizedTypePattern.
-	VisitParamerterizedTypePattern(ctx *ParamerterizedTypePatternContext) interface{}
+	// Visit a parse tree produced by QuarkParser#NamedWildcardPattern.
+	VisitNamedWildcardPattern(ctx *NamedWildcardPatternContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#WildcardPattern.
+	VisitWildcardPattern(ctx *WildcardPatternContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#BitVectorPattern.
+	VisitBitVectorPattern(ctx *BitVectorPatternContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#TuplePattern.
+	VisitTuplePattern(ctx *TuplePatternContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#ArrayPattern.
 	VisitArrayPattern(ctx *ArrayPatternContext) interface{}
 
-	// Visit a parse tree produced by QuarkParser#LiteralPattern.
-	VisitLiteralPattern(ctx *LiteralPatternContext) interface{}
+	// Visit a parse tree produced by QuarkParser#EnumPattern.
+	VisitEnumPattern(ctx *EnumPatternContext) interface{}
 
-	// Visit a parse tree produced by QuarkParser#StructPattern.
-	VisitStructPattern(ctx *StructPatternContext) interface{}
+	// Visit a parse tree produced by QuarkParser#param_pattern.
+	VisitParam_pattern(ctx *Param_patternContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#inner_array_pattern.
+	VisitInner_array_pattern(ctx *Inner_array_patternContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#parameterlist.
 	VisitParameterlist(ctx *ParameterlistContext) interface{}
@@ -217,6 +229,15 @@ type QuarkParserVisitor interface {
 
 	// Visit a parse tree produced by QuarkParser#argumentlist.
 	VisitArgumentlist(ctx *ArgumentlistContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#enumdecl.
+	VisitEnumdecl(ctx *EnumdeclContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#enumconstructordecl.
+	VisitEnumconstructordecl(ctx *EnumconstructordeclContext) interface{}
+
+	// Visit a parse tree produced by QuarkParser#enumargdef.
+	VisitEnumargdef(ctx *EnumargdefContext) interface{}
 
 	// Visit a parse tree produced by QuarkParser#structdecl.
 	VisitStructdecl(ctx *StructdeclContext) interface{}

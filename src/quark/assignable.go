@@ -6,15 +6,20 @@ type (
 	//The left hand side of simple variable assignments.
 	ValueAssignment struct {
 		Variable Name
+		IsWildcard bool
+
+		QuestionMark ObjectPosition
 	}
 
 	//The left hand side of variable definitions
 	VariableDefinitionAssignable struct {
 		IsMut bool
+		IsVar bool
 		VarType TypeExpr
 		VarName *RealName
 
-		kwMut ObjectPosition
+		KwVar ObjectPosition
+		KwMut ObjectPosition
 	}
 
 	//The left hand side of tuple destructing assignments
@@ -23,25 +28,19 @@ type (
 	}
 )
 
-
-
-func NewVariableDefAssignment(isMut bool, varType TypeExpr, varName *RealName, kwMut ObjectPosition) *VariableDefinitionAssignable {
-	return &VariableDefinitionAssignable{
-		IsMut:   isMut,
-		VarType: varType,
-		VarName: varName,
-		kwMut:   kwMut,
-	}
-}
-
-
 func (a *ValueAssignment) Start() *ObjectPosition {
-	return a.Variable.Start()
+	if a.IsWildcard {
+		return &a.QuestionMark
+	} else {
+		return a.Variable.Start()
+	}
 }
 
 func (a *VariableDefinitionAssignable) Start() *ObjectPosition {
 	if a.IsMut {
-		return &a.kwMut
+		return &a.KwMut
+	} else if a.IsVar {
+		return &a.KwVar
 	} else {
 		return a.VarType.Start()
 	}
@@ -53,7 +52,11 @@ func (a *TupleDestructionAssignment) Start() *ObjectPosition {
 
 
 func (a *ValueAssignment) End() *ObjectPosition {
-	return a.Variable.End()
+	if a.IsWildcard {
+		return a.QuestionMark.Next()
+	} else {
+		return a.Variable.End()
+	}
 }
 
 func (a *VariableDefinitionAssignable) End() *ObjectPosition {
@@ -74,7 +77,9 @@ func (a *ValueAssignment) Accept(v Visitor) {
 		return
 	}
 
-	a.Variable.Accept(v)
+	if a.Variable != nil {
+		a.Variable.Accept(v)
+	}
 }
 
 func (a *VariableDefinitionAssignable) Accept(v Visitor) {
@@ -82,8 +87,10 @@ func (a *VariableDefinitionAssignable) Accept(v Visitor) {
 		return
 	}
 
+	if a.VarType != nil {
+		a.VarType.Accept(v)
+	}
 	a.VarName.Accept(v)
-	a.VarType.Accept(v)
 }
 
 func (a *TupleDestructionAssignment) Accept(v Visitor) {
