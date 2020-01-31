@@ -125,11 +125,20 @@ branch
     ;
 
 pattern
-    : realname # AtomicPattern
-    | realname LBRACE pattern (COMMA pattern)* RBRACE #ParamerterizedTypePattern
-    | LBRACE (pattern (COMMA pattern)*)? RBRACE #ArrayPattern
-    | literal #LiteralPattern
-    | LCURLY (typeexpr? pattern) (COMMA typeexpr? pattern)* RCURLY #StructPattern
+    : literal #LiteralPattern
+    | realname #NamedWildcardPattern
+    | QUESTION_MARK #WildcardPattern
+    | BIT_VECTOR_PATTERN_TOKEN #BitVectorPattern
+    | LPAREN pattern (COMMA pattern)* RPAREN #TuplePattern
+    | LBRACE (inner_array_pattern (COMMA inner_array_pattern)*) RBRACE #ArrayPattern
+    | name param_pattern? (LPAREN pattern (COMMA pattern)* RPAREN)? #EnumPattern
+    ;
+
+param_pattern : PARAM_OPEN pattern (COMMA pattern)* RPAREN;
+
+inner_array_pattern
+    : pattern
+    | pattern DOUBLE_DOT
     ;
 
 

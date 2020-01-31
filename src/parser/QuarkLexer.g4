@@ -12,8 +12,10 @@ fragment LITERAL_TYPE: ('h' | 'o' | 'd' | 'b');
 COLON: ':';
 SEMI: ';';
 COMMA: ',';
+DOUBLE_DOT: '..';
 DOT: '.';
 UNDERSCORE: '_';
+QUESTION_MARK: '?';
 
 LPAREN: '(';
 RPAREN: ')';
@@ -116,6 +118,7 @@ BLOCK_COMMENT_START: '/*' -> skip, mode(BLOCK_COMMENT);
 
 DECIMAL: DIGIT+;
 INTEGRAL: (DIGIT+)? TICK 's'? LITERAL_TYPE (DIGIT | HEX_CHARS)+;
+BIT_VECTOR_PATTERN_TOKEN: (DIGIT+)? TICK 's'? LITERAL_TYPE (DIGIT | HEX_CHARS | '?')+;
 
 REAL_NAME: CHARACTER NAME_FRAGMENT*;
 ANNOTATION_START: '@'; //Annotation names are @camelCase
